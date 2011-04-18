@@ -4,21 +4,64 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-  
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.arjunsatyapal.practice.gwt1.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/gwt1/greet</url-pattern>
-  </servlet-mapping>
-  
+	<!-- Servlets -->
+
+	<servlet>
+		<servlet-name>loginServlet</servlet-name>
+		<servlet-class>com.arjunsatyapal.practice.gwt1.server.LoginServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>loginServlet</servlet-name>
+		<url-pattern>/mvpproject/login</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>worldServlet</servlet-name>
+		<servlet-class>com.arjunsatyapal.practice.gwt1.server.WorldServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>worldServlet</servlet-name>
+		<url-pattern>/mvpproject/world</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>xhrProxyServlet</servlet-name>
+		<servlet-class>com.arjunsatyapal.practice.gwt1.server.XhrProxyImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>xhrProxyServlet</servlet-name>
+		<url-pattern>/mvpproject/xhrproxy</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>fileProcess</servlet-name>
+		<servlet-class>com.arjunsatyapal.practice.gwt1.server.FileProcess</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>fileProcess</servlet-name>
+		<url-pattern>/mvpproject/fileprocess</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>fileProduce</servlet-name>
+		<servlet-class>com.arjunsatyapal.practice.gwt1.server.FileProduce</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>fileProduce</servlet-name>
+		<url-pattern>/mvpproject/fileproduce</url-pattern>
+	</servlet-mapping>
+
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>Gwt1.html</welcome-file>
+    <welcome-file>Mvpproject.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
