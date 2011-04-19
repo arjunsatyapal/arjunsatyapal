@@ -1,7 +1,9 @@
 .gitignore
+.git-log
 *.swp
 .settings
 *.cache.*
+
 
 # Ignoring the cache files
 *.cache.*
