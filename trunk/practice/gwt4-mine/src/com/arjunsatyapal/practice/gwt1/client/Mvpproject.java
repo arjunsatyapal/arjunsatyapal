@@ -1,5 +1,6 @@
 package com.arjunsatyapal.practice.gwt1.client;
 
+import com.arjunsatyapal.practice.gwt1.client.login.LoginFormPresenter;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
@@ -7,9 +8,9 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Mvpproject implements EntryPoint{
   public static native String getUserAgent() /*-{
@@ -26,25 +27,25 @@ public class Mvpproject implements EntryPoint{
     }
   }
   
+  Environment environment;
+
   public void onModuleLoad() {
     DOM.removeChild(RootPanel.getBodyElement(), DOM
         .getElementById("loading"));
-
-    GWT.log("Reaching here with History.getToken() = " + History.getToken());
-
-    showMainMenu();
+    environment = new Environment(new Model(), History.getToken());
+    environment.launch(LoginFormPresenter.PLACE);
   }
 
   
   final Grid rootDisplay = new Grid(2, 10);
-  final MenuBar runMenuBar = new MenuBar();
-  final VerticalPanel runPanel = new VerticalPanel();
+  final MenuBar runMenuBar = new MenuBar(true);
+  final HorizontalPanel runPanel = new HorizontalPanel();
 
   private void showMainMenu() {
     // TODO Use user information for menu configuration
 
     runMenuBar.clearItems();
-    runMenuBar.setWidth("100%");
+    runMenuBar.setWidth("1%");
     createMenu(runMenuBar);
 
     rootDisplay.setWidth("100%");
@@ -66,6 +67,7 @@ public class Mvpproject implements EntryPoint{
     final MenuBar mb3 = new MenuBar(true);
     mb.addItem("Cities", mb3);
     mb3.addItem("city1", sorry);
+//    mb3.addItem("Delhi", new Hyperlink("asdf", "xyz"))
   }
 
   Command sorry = new Command() {
