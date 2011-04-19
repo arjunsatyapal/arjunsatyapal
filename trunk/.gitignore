@@ -5,6 +5,7 @@
 
 # Ignoring the cache files
 *.cache.*
+*.rpc
 
 # These directories will be always ignored.
 # If there is any exception, then they should be overrided.
