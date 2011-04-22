@@ -11,16 +11,17 @@ import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
  * 
  * @author fkereki
  */
-public class SuggestionItem implements Suggestion, IsSerializable {
+public class SuggestionItem
+    implements Suggestion, IsSerializable {
   private String suggestionText;
-  
+
   /**
    * An empty constructor is required for serialization!
    */
   public SuggestionItem() {
     super();
   }
-  
+
   /**
    * Simplify the creation of a straight suggestion item
    */
@@ -28,12 +29,12 @@ public class SuggestionItem implements Suggestion, IsSerializable {
     super();
     suggestionText = text;
   }
-  
+
   @Override
   public String getDisplayString() {
     return suggestionText;
   }
-  
+
   @Override
   public String getReplacementString() {
     return suggestionText;

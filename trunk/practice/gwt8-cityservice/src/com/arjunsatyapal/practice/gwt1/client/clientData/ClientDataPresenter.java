@@ -1,9 +1,10 @@
 package com.arjunsatyapal.practice.gwt1.client.clientData;
 
-import com.arjunsatyapal.practice.gwt1.client.clientSearch.ClientSearchPresenter;
 import com.arjunsatyapal.practice.gwt1.client.Environment;
 import com.arjunsatyapal.practice.gwt1.client.Presenter;
 import com.arjunsatyapal.practice.gwt1.client.SimpleCallback;
+import com.arjunsatyapal.practice.gwt1.client.clientSearch.ClientSearchPresenter;
+import com.arjunsatyapal.practice.gwt1.client.rpc.XhrProxyAsync;
 
 public class ClientDataPresenter
     extends Presenter<ClientDataDisplay> {
@@ -15,6 +16,9 @@ public class ClientDataPresenter
       final Environment environment) {
 
     super(params, clientDisplay, environment);
+
+    final XhrProxyAsync xhrProxy = environment.getModel()
+        .getRemoteXhrProxy();
 
     // final String YAHOOID =
     // "aasJBXDV34FUcgc.WTwpYWlbhWme9l1xJtF8juZYjwZOTXEwawx5lbzAIKJtgII-";

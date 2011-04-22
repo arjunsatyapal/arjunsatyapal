@@ -6,58 +6,26 @@
 <web-app>
 	<!-- Servlets -->
 
-	<!--servlet>
-		<servlet-name>loginServlet</servlet-name>
-		<servlet-class>com.arjunsatyapal.practice.gwt1.server.LoginServiceImpl</servlet-class>
-	</servlet!-->
-
-	<!--servlet-mapping>
-		<servlet-name>loginServlet</servlet-name>
-		<url-pattern>/mvpproject/login</url-pattern>
-	</servlet-mapping!-->
-
-
-	<!-- servlet>
+	<servlet>
 		<servlet-name>worldServlet</servlet-name>
 		<servlet-class>com.arjunsatyapal.practice.gwt1.server.WorldServiceImpl</servlet-class>
-	</servlet-->
+	</servlet>
 
-	<!-- servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>worldServlet</servlet-name>
 		<url-pattern>/mvpproject/world</url-pattern>
-	</servlet-mapping-->
+	</servlet-mapping>
 
 
-	<!--servlet>
+	<servlet>
 		<servlet-name>xhrProxyServlet</servlet-name>
 		<servlet-class>com.arjunsatyapal.practice.gwt1.server.XhrProxyImpl</servlet-class>
-	</servlet!-->
+	</servlet>
 
-	<!--servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>xhrProxyServlet</servlet-name>
 		<url-pattern>/mvpproject/xhrproxy</url-pattern>
-	</servlet-mapping!-->
-
-
-	<!--servlet>
-		<servlet-name>fileProcess</servlet-name>
-		<servlet-class>com.arjunsatyapal.practice.gwt1.server.FileProcess</servlet-class>
-	</servlet!-->
-
-	<!--servlet-mapping>
-		<servlet-name>fileProcess</servlet-name>
-		<url-pattern>/mvpproject/fileprocess</url-pattern>
-	</servlet-mapping!-->
-
-	<!--servlet>
-		<servlet-name>fileProduce</servlet-name>
-		<servlet-class>com.arjunsatyapal.practice.gwt1.server.FileProduce</servlet-class>
-	</servlet!-->
-
-	<!--servlet-mapping>
-		<servlet-name>fileProduce</servlet-name>
-		<url-pattern>/mvpproject/fileproduce</url-pattern>
-	</servlet-mapping!-->
+	</servlet-mapping>
 
   <!-- Default page to serve -->
   <welcome-file-list>
