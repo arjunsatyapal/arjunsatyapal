@@ -91,6 +91,7 @@ public class Environment {
     mb3.addItem("Browsing", new HistoryCommand(CitiesBrowserPresenter.PLACE));
     mb3.addItem("Creating", new HistoryCommand(CityCreatorPresenter.PLACE));
     mb3.addItem("Updating", new HistoryCommand(CitiesUpdaterPresenter.PLACE));
+    mb3.addItem("Updating", new HistoryCommand(CitiesUpdaterPresenter.PLACE));
     
     mb.addItem("Cities", mb3);
   }
@@ -179,6 +180,9 @@ public class Environment {
         }
       });
       
+    } else if (token.equals(CitiesUpdaterPresenter.PLACE)) {
+      panel.add(new CitiesUpdaterPresenter(args, new CitiesUpdaterView(), this)
+          .getDisplay().asWidget());
     } else if (token.equals(CitiesUpdaterPresenter.PLACE)) {
       panel.add(new CitiesUpdaterPresenter(args, new CitiesUpdaterView(), this)
           .getDisplay().asWidget());
