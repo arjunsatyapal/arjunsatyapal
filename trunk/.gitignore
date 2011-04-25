@@ -4,7 +4,7 @@
 *.swp
 .settings
 *.cache.*
-
+classes/
 
 # Ignoring the cache files
 *.cache.*
