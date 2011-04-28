@@ -2,13 +2,13 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
-	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/jdom.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/rome-1.0.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/rome-fetcher-1.0.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/xercesImpl.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-lang-2.5.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-codec-1.4.jar"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/GWT"/>
+	<classpathentry kind="var" path="CommonsCodec"/>
+	<classpathentry kind="var" path="CommonsLang"/>
+	<classpathentry kind="var" path="Rome1.0"/>
+	<classpathentry kind="var" path="RomeFetcher1.0"/>
+	<classpathentry kind="var" path="XercesImpl"/>
+	<classpathentry kind="var" path="JDom"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
