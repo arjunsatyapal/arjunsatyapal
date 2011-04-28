@@ -2,7 +2,6 @@
 .git
 .git-log
 *.swp
-.settings
 *.cache.*
 .svn
 .svn/
