@@ -4,11 +4,7 @@
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/GWT"/>
-	<classpathentry kind="var" path="CommonsCodec"/>
-	<classpathentry kind="var" path="CommonsLang"/>
 	<classpathentry kind="var" path="Rome1.0"/>
 	<classpathentry kind="var" path="RomeFetcher1.0"/>
-	<classpathentry kind="var" path="XercesImpl"/>
-	<classpathentry kind="var" path="JDom"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
