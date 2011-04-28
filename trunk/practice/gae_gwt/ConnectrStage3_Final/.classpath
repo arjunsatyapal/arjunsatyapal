@@ -3,7 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/GWT"/>
 	<classpathentry kind="var" path="Rome1.0"/>
 	<classpathentry kind="var" path="RomeFetcher1.0"/>
 	<classpathentry kind="var" path="Twitter"/>
@@ -11,5 +10,6 @@
 	<classpathentry kind="var" path="JSon"/>
 	<classpathentry kind="var" path="ApacheCommonsFileUpload"/>
 	<classpathentry kind="var" path="GoogleGSon"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/GWT"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
