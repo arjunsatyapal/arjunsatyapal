@@ -43,99 +43,113 @@ import com.metadot.book.connectr.client.view.FriendListView;
 import com.metadot.book.connectr.shared.UserAccountDTO;
 
 public class ConnectrApp implements EntryPoint {
-
-  interface ConnectrAppUiBinder extends UiBinder<DockLayoutPanel, ConnectrApp> {}
-
-  SerializationStreamFactory pushServiceStreamFactory;
-
-  @UiField HeaderPanel headerPanel;
-  @UiField ScrollPanel mainPanel;
-  @UiField VerticalPanel friendListPanel;
-
-  RootLayoutPanel root;
-
-  private static ConnectrApp singleton;
-  private UserAccountDTO currentUser;
-  private final UserAccountServiceAsync userService = GWT.create(UserAccountService.class);
-  private SimpleEventBus eventBus = new SimpleEventBus();
-
-  // Presenters
-  private FriendListPresenter friendListPresenter;
-
-  /**
-   * Gets the singleton application instance.
-   */
-  public static ConnectrApp get() {
-    return singleton;
-  }
-
-  BusyIndicatorPresenter busyIndicator = new BusyIndicatorPresenter(eventBus, new BusyIndicatorView("Working hard..."));
-
-  private static final ConnectrAppUiBinder binder = GWT.create(ConnectrAppUiBinder.class);
-
-  public void onModuleLoad() {
-
-    singleton = this;
-
-    login();
-    createUI();
-  }
-  
-  private void login() {
-    userService.login("email", "password",
-        new AsyncCallback<UserAccountDTO>() {
-          public void onFailure(Throwable caught) {
-            Window.alert("An error occurred");
-          }
-
-          public void onSuccess(UserAccountDTO result) {
-            setCurrentUser(result);
-          }
-        });
-  }
-
-  private void createUI() {
-
-    DockLayoutPanel outer = binder.createAndBindUi(this);
-    root = RootLayoutPanel.get();
-    root.clear();
-    root.add(outer);
-
-    final MessagesServiceAsync messagesService = GWT.create(MessagesService.class);
-    FriendsServiceAsync friendService = GWT.create(FriendsService.class);
-
-    AppController appViewer = new AppController(friendService, eventBus);
-    appViewer.go();
-
-    friendListPresenter = new FriendListPresenter(friendService, messagesService, eventBus, new FriendListView());
-    friendListPresenter.go(friendListPanel);
-
-  }
-
-  public SimpleEventBus getEventBus() {
-    return eventBus;
-  }
-
-  void setCurrentUser(UserAccountDTO currentUser) {
-    this.currentUser = currentUser;
-  }
-
-  UserAccountDTO getCurrentUser() {
-    return currentUser;
-  }
-
-  /**
-   * @return the mainPanel
-   */
-  ScrollPanel getMainPanel() {
-    return mainPanel;
-  }
-
-  /**
-   * @return the friendList
-   */
-  VerticalPanel getFriendListPanel() {
-    return friendListPanel;
-  }
-
+    
+    interface ConnectrAppUiBinder extends
+            UiBinder<DockLayoutPanel, ConnectrApp> {
+    }
+    
+    SerializationStreamFactory pushServiceStreamFactory;
+    
+    @UiField
+    HeaderPanel headerPanel;
+    @UiField
+    ScrollPanel mainPanel;
+    @UiField
+    VerticalPanel friendListPanel;
+    
+    RootLayoutPanel root;
+    
+    private static ConnectrApp singleton;
+    private UserAccountDTO currentUser;
+    private final UserAccountServiceAsync userService = GWT
+        .create(UserAccountService.class);
+    private SimpleEventBus eventBus = new SimpleEventBus();
+    
+    // Presenters
+    private FriendListPresenter friendListPresenter;
+    
+    /**
+     * Gets the singleton application instance.
+     */
+    public static ConnectrApp get() {
+        return singleton;
+    }
+    
+    BusyIndicatorPresenter busyIndicator = new BusyIndicatorPresenter(eventBus,
+        new BusyIndicatorView("Working hard..."));
+    
+    private static final ConnectrAppUiBinder binder = GWT
+        .create(ConnectrAppUiBinder.class);
+    
+    public void onModuleLoad() {
+        
+        singleton = this;
+        
+        login();
+        createUI();
+    }
+    
+    private void login() {
+        userService.login("email", "password",
+            new AsyncCallback<UserAccountDTO>() {
+                public void onFailure(
+                    Throwable caught) {
+                    Window.alert("An error occurred");
+                }
+                
+                public void onSuccess(
+                    UserAccountDTO result) {
+                    setCurrentUser(result);
+                }
+            });
+    }
+    
+    private void createUI() {
+        
+        DockLayoutPanel outer = binder.createAndBindUi(this);
+        root = RootLayoutPanel.get();
+        root.clear();
+        root.add(outer);
+        
+        final MessagesServiceAsync messagesService =
+            GWT.create(MessagesService.class);
+        FriendsServiceAsync friendService = GWT.create(FriendsService.class);
+        
+        AppController appViewer = new AppController(friendService, eventBus);
+        appViewer.go();
+        
+        friendListPresenter =
+            new FriendListPresenter(friendService, messagesService, eventBus,
+                new FriendListView());
+        friendListPresenter.go(friendListPanel);
+        
+    }
+    
+    public SimpleEventBus getEventBus() {
+        return eventBus;
+    }
+    
+    void setCurrentUser(
+        UserAccountDTO currentUser) {
+        this.currentUser = currentUser;
+    }
+    
+    UserAccountDTO getCurrentUser() {
+        return currentUser;
+    }
+    
+    /**
+     * @return the mainPanel
+     */
+    ScrollPanel getMainPanel() {
+        return mainPanel;
+    }
+    
+    /**
+     * @return the friendList
+     */
+    VerticalPanel getFriendListPanel() {
+        return friendListPanel;
+    }
+    
 }
