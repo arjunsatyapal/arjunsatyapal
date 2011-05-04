@@ -49,143 +49,168 @@ import com.metadot.book.connectr.client.view.FriendPopupView;
 import com.metadot.book.connectr.client.view.MessageListView;
 
 public class AppController implements ValueChangeHandler<String> {
-  private final SimpleEventBus eventBus;
-  private final FriendsServiceAsync friendService;
-  private final MessagesServiceAsync messagesService = GWT.create(MessagesService.class);
-  private String currentFriendId;
-  private MessageListPresenter messageListPresenter;
-
-  public AppController(FriendsServiceAsync rpcService, SimpleEventBus eventBus) {
-    this.eventBus = eventBus;
-    this.friendService = rpcService;
-    bind();
-  }
-
-  private void bind() {
-    History.addValueChangeHandler(this);
-
-    eventBus.addHandler(ProfileEditEvent.TYPE, new ProfileEditEventHandler() {
-      @Override
-      public void onEditProfile(ProfileEditEvent event) {
-        doProfileEdit();
-      }
-    });
-
-    eventBus.addHandler(FriendAddEvent.TYPE, new FriendAddEventHandler() {
-      public void onAddFriend(FriendAddEvent event) {
-        doAddNewFriend();
-      }
-    });
-
-    eventBus.addHandler(ShowFriendPopupEvent.TYPE, new ShowFriendPopupEventHandler() {
-      public void onShowFriendPopup(ShowFriendPopupEvent event) {
-        FriendPopupPresenter friendPopupPresenter = new FriendPopupPresenter(friendService, eventBus,
-            new FriendPopupView(event.getFriend().getDisplayName(), event.getClickPoint()), event.getFriend());
-        friendPopupPresenter.go();
-      }
-    });
-
-    eventBus.addHandler(FriendEditEvent.TYPE, new FriendEditEventHandler() {
-      public void onEditFriend(FriendEditEvent event) {
-        GWT.log("AppController: Friend edit event received. Id: " + event.getId());
-        doEditFriend(event.getId());
-      }
-    });
-
-    eventBus.addHandler(FriendEditCancelledEvent.TYPE, new FriendEditCancelledEventHandler() {
-      public void onEditFriendCancelled(FriendEditCancelledEvent event) {
-        doEditFriendCancelled();
-      }
-    });
-
-    eventBus.addHandler(FriendUpdatedEvent.TYPE, new FriendUpdatedEventHandler() {
-      public void onFriendUpdated(FriendUpdatedEvent event) {
-        doFriendUpdated();
-      }
-    });
-
-    eventBus.addHandler(LogoutEvent.TYPE, new LogoutEventHandler() {
-      @Override public void onLogout(LogoutEvent event) {
-        GWT.log("AppController: Logout event received");
-        doLogout();
-      }
-    });
-  }
-
-  private void doAddNewFriend() {
-    History.newItem("add");
-  }
-
-  private void doEditFriend(String id) {
-    currentFriendId = id;
-    History.newItem("edit");
-  }
-
-  private void doEditFriendCancelled() {
-    History.newItem("list");
-  }
-  
-  private void doProfileEdit() {
-    History.newItem("HelloPlace");
-  }
-
-  private void doFriendUpdated() {
-    History.newItem("list");
-  }
-
-  private void doLogout() {
-    History.newItem("login");
-  }
-
-  public void go() {
-
-    if ("".equals(History.getToken())) {
-      History.newItem("list");
-    } else {
-      History.fireCurrentHistoryState();
+    private final SimpleEventBus eventBus;
+    private final FriendsServiceAsync friendService;
+    private final MessagesServiceAsync messagesService = GWT
+        .create(MessagesService.class);
+    private String currentFriendId;
+    private MessageListPresenter messageListPresenter;
+    
+    public AppController(FriendsServiceAsync rpcService, SimpleEventBus eventBus) {
+        this.eventBus = eventBus;
+        this.friendService = rpcService;
+        bind();
     }
-  }
-
-  public void onValueChange(ValueChangeEvent<String> event) {
-    String token = event.getValue();
-
-    if (token != null) {
-      Presenter presenter = null;
-
-      if (token.equals("list")) {
-        presenter = getMessageListPresenter();
-        presenter.go(ConnectrApp.get().getMainPanel());
+    
+    private void bind() {
+        History.addValueChangeHandler(this);
         
-        return;
-
-      } else if (token.equals("add")) {
-        presenter = new FriendEditPresenter(friendService, eventBus, new FriendEditView(), null);
-        presenter.go(ConnectrApp.get().getMainPanel());
-
-        return;
-
-      } else if (token.equals("login")) {
-        ConnectrApp.get().showLoginView();
+        eventBus.addHandler(ProfileEditEvent.TYPE,
+            new ProfileEditEventHandler() {
+                @Override
+                public void onEditProfile(
+                    ProfileEditEvent event) {
+                    doProfileEdit();
+                }
+            });
         
-        return;
-
-      } else if (token.equals("edit")) {
-        presenter = new FriendEditPresenter(friendService, eventBus, new FriendEditView(), currentFriendId);
-        presenter.go(ConnectrApp.get().getMainPanel());
-
-        return;
-      }
+        eventBus.addHandler(FriendAddEvent.TYPE, new FriendAddEventHandler() {
+            public void onAddFriend(
+                FriendAddEvent event) {
+                doAddNewFriend();
+            }
+        });
+        
+        eventBus.addHandler(ShowFriendPopupEvent.TYPE,
+            new ShowFriendPopupEventHandler() {
+                public void onShowFriendPopup(
+                    ShowFriendPopupEvent event) {
+                    FriendPopupPresenter friendPopupPresenter =
+                        new FriendPopupPresenter(friendService, eventBus,
+                            new FriendPopupView(event.getFriend()
+                                .getDisplayName(), event.getClickPoint()),
+                            event.getFriend());
+                    friendPopupPresenter.go();
+                }
+            });
+        
+        eventBus.addHandler(FriendEditEvent.TYPE, new FriendEditEventHandler() {
+            public void onEditFriend(
+                FriendEditEvent event) {
+                GWT.log("AppController: Friend edit event received. Id: "
+                    + event.getId());
+                doEditFriend(event.getId());
+            }
+        });
+        
+        eventBus.addHandler(FriendEditCancelledEvent.TYPE,
+            new FriendEditCancelledEventHandler() {
+                public void onEditFriendCancelled(
+                    FriendEditCancelledEvent event) {
+                    doEditFriendCancelled();
+                }
+            });
+        
+        eventBus.addHandler(FriendUpdatedEvent.TYPE,
+            new FriendUpdatedEventHandler() {
+                public void onFriendUpdated(
+                    FriendUpdatedEvent event) {
+                    doFriendUpdated();
+                }
+            });
+        
+        eventBus.addHandler(LogoutEvent.TYPE, new LogoutEventHandler() {
+            @Override
+            public void onLogout(
+                LogoutEvent event) {
+                GWT.log("AppController: Logout event received");
+                doLogout();
+            }
+        });
     }
-
-  }
-
-  private MessageListPresenter getMessageListPresenter() {
-    if (messageListPresenter == null){
-      GWT.log("AppController: Creating MessageListPresenter");
-      messageListPresenter = new MessageListPresenter(messagesService, eventBus, new MessageListView());
-    } 
-
-    return messageListPresenter;
-  }
-  
+    
+    private void doAddNewFriend() {
+        History.newItem("add");
+    }
+    
+    private void doEditFriend(
+        String id) {
+        currentFriendId = id;
+        History.newItem("edit");
+    }
+    
+    private void doEditFriendCancelled() {
+        History.newItem("list");
+    }
+    
+    private void doProfileEdit() {
+        History.newItem("HelloPlace");
+    }
+    
+    private void doFriendUpdated() {
+        History.newItem("list");
+    }
+    
+    private void doLogout() {
+        History.newItem("login");
+    }
+    
+    public void go() {
+        
+        if ("".equals(History.getToken())) {
+            History.newItem("list");
+        } else {
+            History.fireCurrentHistoryState();
+        }
+    }
+    
+    public void onValueChange(
+        ValueChangeEvent<String> event) {
+        String token = event.getValue();
+        
+        if (token != null) {
+            Presenter presenter = null;
+            
+            if (token.equals("list")) {
+                presenter = getMessageListPresenter();
+                presenter.go(ConnectrApp.get().getMainPanel());
+                
+                return;
+                
+            } else if (token.equals("add")) {
+                presenter =
+                    new FriendEditPresenter(friendService, eventBus,
+                        new FriendEditView(), null);
+                presenter.go(ConnectrApp.get().getMainPanel());
+                
+                return;
+                
+            } else if (token.equals("login")) {
+                ConnectrApp.get().showLoginView();
+                
+                return;
+                
+            } else if (token.equals("edit")) {
+                presenter =
+                    new FriendEditPresenter(friendService, eventBus,
+                        new FriendEditView(), currentFriendId);
+                presenter.go(ConnectrApp.get().getMainPanel());
+                
+                return;
+            }
+        }
+        
+    }
+    
+    private MessageListPresenter getMessageListPresenter() {
+        if (messageListPresenter == null) {
+            GWT.log("AppController: Creating MessageListPresenter");
+            messageListPresenter =
+                new MessageListPresenter(messagesService, eventBus,
+                    new MessageListView());
+        }
+        
+        return messageListPresenter;
+    }
+    
 }

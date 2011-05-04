@@ -1,5 +1,5 @@
 /** 
- * Copyright 2010 Daniel Guermeur and Amy Unruh
+ * Copyright 2011 Google Inc.
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -12,9 +12,8 @@
  *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
- *
- *   See http://connectrapp.appspot.com/ for a demo, and links to more information 
- *   about this app and the book that it accompanies.
+ *   
+ *   @author arjuns@google.com (Arjun Satyapal)
  */
 package com.metadot.book.connectr.client;
 
