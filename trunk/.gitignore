@@ -5,6 +5,7 @@
 *.cache.*
 .svn
 .svn/
+.DS_Store
 
 # Ignoring the cache files
 *.cache.*
