@@ -1,4 +1,4 @@
-/** 
+/**
  * Copyright 2010 Daniel Guermeur and Amy Unruh
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +13,7 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  *
- *   See http://connectrapp.appspot.com/ for a demo, and links to more information 
+ *   See http://connectrapp.appspot.com/ for a demo, and links to more information
  *   about this app and the book that it accompanies.
  */
 package com.metadot.book.connectr.client.presenter;
@@ -48,14 +48,14 @@ public class CountdownPresenter implements Presenter {
   public void bind() {
 
   }
-  
+
   /**
    * Tell the backend to start update the potentially old news feeds.
    * @param messagesService
    */
   public void initiateFeedUpdate() {
     GWT.log("Requesting news feed update");
-    
+
     new RPCCall<Boolean>() {
       @Override
       protected void callService(AsyncCallback<Boolean> cb) {
@@ -64,7 +64,7 @@ public class CountdownPresenter implements Presenter {
 
       @Override
       public void onSuccess(Boolean result) {
-    
+
       }
 
       @Override
@@ -73,8 +73,8 @@ public class CountdownPresenter implements Presenter {
       }
     }.retry(3);
   }
-  
-  
+
+
   public void go(final HasWidgets container) {
     bind();
     container.clear();
