@@ -28,17 +28,7 @@
     
     .provider-button {
       float: left;
-      padding: 0 20px;
-    }
-    
-    .sidebox {
-      float: right;
-      background-color: #444;
-      font-size: 1.3em;
-      color: #eee;
-      width: 222px;
-      margin-left: 20px;
-      padding: 20px;
+      margin : 120px 40px;
     }
     
     .pushbutton {
@@ -50,7 +40,6 @@
     <div class='{style.logo}' />
     <div class='{style.what-to-do}'>Login with one of the following providers.</div>
 
-    <div class='{style.providers}'>
       <div class='{style.provider-button}'>
         <g:PushButton ui:field='aolButton' width='120px' height='40px'>
           <g:upFace image='{aol_logo}' />
@@ -84,12 +73,10 @@
         </g:PushButton>
       </div>
 
-
       <div class='{style.provider-button}'>
         <g:PushButton ui:field='yahooButton' width='120px' height='40px'>
           <g:upFace image='{yahoo_logo}' />
         </g:PushButton>
       </div>
-    </div>
   </g:HTMLPanel>
 </ui:UiBinder> 
