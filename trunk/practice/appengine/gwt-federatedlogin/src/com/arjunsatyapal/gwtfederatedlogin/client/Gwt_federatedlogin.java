@@ -1,9 +1,10 @@
-package com.google.lantern.client;
+package com.arjunsatyapal.gwtfederatedlogin.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.google.lantern.client.login.LoginPresenter;
-import com.google.lantern.client.login.LoginView;
+
+import com.arjunsatyapal.gwtfederatedlogin.client.login.LoginPresenter;
+import com.arjunsatyapal.gwtfederatedlogin.client.login.LoginView;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.

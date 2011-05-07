@@ -1,4 +1,4 @@
-package com.google.lantern.shared;
+package com.arjunsatyapal.gwtfederatedlogin.shared;
 
 /**
  * <p>
