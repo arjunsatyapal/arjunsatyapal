@@ -41,39 +41,6 @@
     <url-pattern>/logingooglecallback</url-pattern>
   </servlet-mapping>
   
-  <!-- ===================== Login Twitter Servlet ===================== -->
-
-  <servlet>
-    <servlet-name>logintwitter</servlet-name>
-    <servlet-class>com.metadot.book.connectr.server.servlets.LoginTwitterServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>logintwitter</servlet-name>
-    <url-pattern>/logintwitter</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>logintwittercallback</servlet-name>
-    <servlet-class>com.metadot.book.connectr.server.servlets.LoginTwitterCallbackServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>logintwittercallback</servlet-name>
-    <url-pattern>/logintwittercallback</url-pattern>
-  </servlet-mapping>
-
-  <!-- ===================== Login Facebook Servlet ===================== -->
-
-  <servlet>
-    <servlet-name>loginfacebook</servlet-name>
-    <servlet-class>com.metadot.book.connectr.server.servlets.LoginFacebookServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>loginfacebook</servlet-name>
-    <url-pattern>/loginfacebook</url-pattern>
-  </servlet-mapping>
 
 
   <!-- filter: this filter ensures users are logged in before accessing those 
@@ -82,16 +49,6 @@
     <filter-name>loginfilter</filter-name>
     <filter-class>com.metadot.book.connectr.server.servlets.LoginFilter</filter-class>
   </filter>
-
-  <filter-mapping>
-    <filter-name>loginfilter</filter-name>
-    <url-pattern>/connectr/friendsService</url-pattern>
-  </filter-mapping>
-
-  <filter-mapping>
-    <filter-name>loginfilter</filter-name>
-    <url-pattern>/connectr/messagesService</url-pattern>
-  </filter-mapping>
 
   <!-- Default page to serve -->
   <welcome-file-list>

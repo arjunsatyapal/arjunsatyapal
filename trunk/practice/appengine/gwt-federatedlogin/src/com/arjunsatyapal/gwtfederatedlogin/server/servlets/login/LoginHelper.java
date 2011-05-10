@@ -69,9 +69,11 @@ public class LoginHelper extends RemoteServiceServlet {
   }
 
   public UserAccount loginStarts(HttpSession session, UserAccount user) {
-    long currentTimeInMillis = System.currentTimeMillis();
-    user.setId(currentTimeInMillis);
-    hashMap.put(currentTimeInMillis, user);
+    long id = new Long(user.getAuthenticationProvider().getProviderId());
+    user.setId(id);
+    session.setAttribute("userId", String.valueOf(user.getId()));
+    session.setAttribute("loggedin", true);
+    hashMap.put(id, user);
     return user;
   }
 }

@@ -12,6 +12,7 @@ public class UserAccount {
   private Long id;
   private String name;
   private String emailAddress;
+  private AuthenticationProvider loginProvider;
 
   public UserAccount() {
   }
@@ -19,6 +20,7 @@ public class UserAccount {
   public UserAccount(String loginId, AuthenticationProvider google) {
     this();
     this.setName(loginId);
+    loginProvider = google;
   }
 
   public void setBasicInfo(String name, String emailAddress, String uniqueId) {
@@ -48,6 +50,10 @@ public class UserAccount {
 
   public void setEmailAddress(String emailAddress) {
     this.emailAddress = emailAddress;
+  }
+
+  public AuthenticationProvider getAuthenticationProvider() {
+    return loginProvider;
   }
 
   public static UserAccountDTO toDTO(UserAccount user) {
