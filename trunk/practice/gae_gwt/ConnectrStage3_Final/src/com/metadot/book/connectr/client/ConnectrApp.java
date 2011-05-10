@@ -128,7 +128,6 @@ public class ConnectrApp implements EntryPoint {
         Window.alert("Error: " + caught.getMessage());
       }
     }.retry(3);
-
   }
 
   public void showLoginView() {

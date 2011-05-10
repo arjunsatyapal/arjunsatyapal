@@ -1,4 +1,4 @@
-/** 
+/**
  * Copyright 2010 Daniel Guermeur and Amy Unruh
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +13,7 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  *
- *   See http://connectrapp.appspot.com/ for a demo, and links to more information 
+ *   See http://connectrapp.appspot.com/ for a demo, and links to more information
  *   about this app and the book that it accompanies.
  */
 package com.metadot.book.connectr.server.domain;
@@ -54,7 +54,7 @@ public class UserAccount implements Serializable, Cacheable {
 
   private static final Logger log = Logger.getLogger(Utils.class.getName());
   private static final int NUM_RETRIES = 5;
-  
+
 
   @PrimaryKey
   @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
@@ -71,16 +71,16 @@ public class UserAccount implements Serializable, Cacheable {
 
   @Persistent
   private Date lastActive;
-  
+
   @Persistent
   private Date lastReported;
-  
+
   @Persistent
   private String channelId;
 
 
   /**
-   * loginId and loginProvider form a unique key. 
+   * loginId and loginProvider form a unique key.
    * E.g.: loginId = supercobra, loginProvider = LoginProvider.TWITTER
    */
   @Persistent
@@ -97,7 +97,6 @@ public class UserAccount implements Serializable, Cacheable {
     this();
     this.setUniqueId(loginId + "-" + loginProvider);
     this.setName(loginId);
-    
   }
 
 
@@ -134,7 +133,7 @@ public class UserAccount implements Serializable, Cacheable {
   public Set<Friend> getFriends() {
     return friends;
   }
-  
+
   public static UserAccount findOrCreateUser(UserAccount user) {
 
     PersistenceManager pm = PMF.getTxnPm();
@@ -167,15 +166,15 @@ public class UserAccount implements Serializable, Cacheable {
           break;
         }
         catch (JDOCanRetryException e1) {
-          if (i == (NUM_RETRIES - 1)) { 
+          if (i == (NUM_RETRIES - 1)) {
             throw e1;
           }
         }
       } // end for
-    } 
+    }
     catch (Exception e) {
       e.printStackTrace();
-    } 
+    }
     finally {
       if (tx.isActive()) {
         tx.rollback();
@@ -183,7 +182,7 @@ public class UserAccount implements Serializable, Cacheable {
       pm.close();
       q.closeAll();
     }
-    
+
     return detached;
   }
 
@@ -229,7 +228,7 @@ public class UserAccount implements Serializable, Cacheable {
   public Date getLastActive() {
     return lastActive;
   }
-  
+
   public void setLastReported(Date lastReported) {
     this.lastReported = lastReported;
   }
@@ -245,6 +244,4 @@ public class UserAccount implements Serializable, Cacheable {
   public String getChannelId() {
     return channelId;
   }
-
-
 }

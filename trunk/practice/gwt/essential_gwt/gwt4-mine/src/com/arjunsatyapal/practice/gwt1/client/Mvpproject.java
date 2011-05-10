@@ -1,8 +1,6 @@
 package com.arjunsatyapal.practice.gwt1.client;
 
-import com.arjunsatyapal.practice.gwt1.client.login.LoginFormPresenter;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
@@ -11,6 +9,8 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.RootPanel;
+
+import com.arjunsatyapal.practice.gwt1.client.login.LoginFormPresenter;
 
 public class Mvpproject implements EntryPoint{
   public static native String getUserAgent() /*-{
@@ -26,7 +26,7 @@ public class Mvpproject implements EntryPoint{
       showAlert("unknown browser");
     }
   }
-  
+
   Environment environment;
 
   public void onModuleLoad() {
@@ -36,7 +36,7 @@ public class Mvpproject implements EntryPoint{
     environment.launch(LoginFormPresenter.PLACE);
   }
 
-  
+
   final Grid rootDisplay = new Grid(2, 10);
   final MenuBar runMenuBar = new MenuBar(true);
   final HorizontalPanel runPanel = new HorizontalPanel();
@@ -55,7 +55,7 @@ public class Mvpproject implements EntryPoint{
     RootPanel.get().clear();
     RootPanel.get().add(rootDisplay);
   }
-  
+
   private void createMenu(final MenuBar mb) {
     final MenuBar mb2 = new MenuBar(true);
     mb2.addItem("subitem1", sorry);
@@ -76,7 +76,7 @@ public class Mvpproject implements EntryPoint{
       showAlert("Sorry, this isn't ready yet.");
     }
   };
-  
+
   public void showAlert(final String alertText) {
     Window.alert(alertText);
   }

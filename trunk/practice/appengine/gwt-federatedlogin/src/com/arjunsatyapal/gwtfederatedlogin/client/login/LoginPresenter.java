@@ -10,6 +10,7 @@ import com.arjunsatyapal.gwtfederatedlogin.client.common.Presenter;
 public class LoginPresenter implements Presenter {
   private final LoginDisplay loginDisplay;
 
+
   public LoginPresenter(LoginDisplay display) {
     this.loginDisplay = display;
   }

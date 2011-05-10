@@ -4,12 +4,46 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-  
+
   <!-- Servlets -->
-  
+
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Gwt_federatedlogin.html</welcome-file>
   </welcome-file-list>
+
+  <!-- ===================== Login Google Servlet ===================== -->
+
+  <servlet>
+    <servlet-name>logingoogle</servlet-name>
+    <servlet-class>com.arjunsatyapal.gwtfederatedlogin.server.servlets.login.LoginGoogleServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>logingoogle</servlet-name>
+    <url-pattern>/logingoogle</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>logingooglecallback</servlet-name>
+    <servlet-class>com.arjunsatyapal.gwtfederatedlogin.server.servlets.login.LoginGoogleCallbackServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>logingooglecallback</servlet-name>
+    <url-pattern>/logingooglecallback</url-pattern>
+  </servlet-mapping>
+
+  <!-- ===================== Login Service ===================== -->
+  <servlet>
+    <servlet-name>loginService</servlet-name>
+    <servlet-class>com.arjunsatyapal.gwtfederatedlogin.server.service.LoginServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>loginService</servlet-name>
+    <url-pattern>/gwt_federatedlogin/loginService</url-pattern>
+  </servlet-mapping>
+
 
 </web-app>
