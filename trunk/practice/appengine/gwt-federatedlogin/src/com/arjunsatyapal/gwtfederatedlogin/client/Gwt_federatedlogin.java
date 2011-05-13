@@ -26,7 +26,10 @@ public class Gwt_federatedlogin implements EntryPoint {
           Window.alert("OnSuccess wth null.");
           showLoginView();
         } else {
-          Window.alert("OnSuccess");
+          StringBuilder builder = new StringBuilder();
+          builder.append("\nemail = ").append(result.getEmailAddress());
+          builder.append("\nname = ").append(result.getName());
+          Window.alert("OnSuccess : " + builder.toString());
         }
       }
 

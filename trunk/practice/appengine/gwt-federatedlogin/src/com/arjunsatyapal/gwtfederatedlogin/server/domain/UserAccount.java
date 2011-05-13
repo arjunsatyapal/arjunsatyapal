@@ -17,10 +17,23 @@ public class UserAccount {
   public UserAccount() {
   }
 
-  public UserAccount(String loginId, AuthenticationProvider google) {
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder("UserAccountDetails : ");
+    builder.append("id:").append(id);
+    builder.append(", name:").append(name);
+    builder.append(", emailAddress:").append(emailAddress);
+    builder.append(", loginProvider:").append(loginProvider);
+
+    return builder.toString();
+  }
+
+  public UserAccount(String name, String emailAddress,
+      AuthenticationProvider authenticationProvider) {
     this();
-    this.setName(loginId);
-    loginProvider = google;
+    this.setName(name);
+    this.setEmailAddress(emailAddress);
+    loginProvider = authenticationProvider;
   }
 
   public void setBasicInfo(String name, String emailAddress, String uniqueId) {

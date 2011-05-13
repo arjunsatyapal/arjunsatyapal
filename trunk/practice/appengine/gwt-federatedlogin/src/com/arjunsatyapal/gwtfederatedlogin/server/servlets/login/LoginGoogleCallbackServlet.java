@@ -1,9 +1,12 @@
 package com.arjunsatyapal.gwtfederatedlogin.server.servlets.login;
 
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+
 import com.arjunsatyapal.gwtfederatedlogin.server.domain.UserAccount;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServlet;
@@ -16,15 +19,15 @@ public class LoginGoogleCallbackServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Principal googleUser = request.getUserPrincipal();
-    if (googleUser != null) {
+    UserService userService = UserServiceFactory.getUserService();
+    User user = userService.getCurrentUser();
+    if (user != null) {
       // update or create user
-      UserAccount u = new UserAccount(googleUser.getName(), AuthenticationProvider.GOOGLE);
-      u.setName(googleUser.getName());
+
+      UserAccount u = new UserAccount(user.getNickname(), user.getEmail(), AuthenticationProvider.GOOGLE);
       UserAccount connectr = new LoginHelper().loginStarts(request.getSession(), u);
 
-      log.warning("User id:" + connectr.getId().toString() + " "
-          + request.getUserPrincipal().getName());
+      log.warning(u.toString());
     }
     response.sendRedirect(LoginHelper.getApplitionURL(request));
   }

@@ -1,7 +1,8 @@
 package com.arjunsatyapal.gwtfederatedlogin.server.servlets.login;
 
 public enum AuthenticationProvider {
-  GOOGLE(1);
+  GOOGLE(1),
+  YAHOO(2);
 
   private int providerId;
 
