@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class LoginGoogleServlet extends LoginSuperServlet {
-  private static final long serialVersionUID = -4565961422877273742L;
+  private static final long serialVersionUID = -5708611292779495446L;
   private static Logger log = Logger.getLogger(LoginGoogleServlet.class.getName());
 
   @Override

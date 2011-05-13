@@ -13,11 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class LoginHelper extends RemoteServiceServlet {
+  private static final long serialVersionUID = 6690557021950311538L;
   private static Logger logger = Logger.getLogger(LoginHelper.class.getName());
-
   private static HashMap<Long, UserAccount> hashMap = new HashMap<Long, UserAccount>();
-
-  private static final long serialVersionUID = 2888983680310646846L;
 
   static public String getApplitionURL(HttpServletRequest request) {
 

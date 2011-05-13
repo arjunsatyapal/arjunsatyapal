@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class LoginYahooServlet extends LoginSuperServlet {
-  private static final long serialVersionUID = -4565961422877273742L;
+  private static final long serialVersionUID = -8560562656711735362L;
   private static Logger log = Logger.getLogger(LoginYahooServlet.class.getName());
 
   @Override

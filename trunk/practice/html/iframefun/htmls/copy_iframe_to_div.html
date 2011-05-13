@@ -1,0 +1,17 @@
+<html>
+<body>
+
+<script> 
+function changeContent() 
+{ 
+document.getElementById('contentDIV').innerHTML = window.frames['contentFRAME'].document.getElementsByTagName('html')[0].innerHTML; 
+} 
+</script>
+
+<div id="contentDIV"><br>
+</div>
+<iframe id="contentFRAME" name="contentFRAME"
+	src="https://docs.google.com/a/google.com/document/pub?id=1fNqPtdjUSA8P6AvY2NktZzbWw1VEOZnYZ1xCbIPf9k4&amp;embedded=true"
+	onLoad="changeContent()" style="height: 0; width: 0; border-width: 0;"></iframe>
+</body>
+</html>
