@@ -6,7 +6,6 @@ import com.arjunsatyapal.gwtfederatedlogin.shared.dto.UserAccountDTO;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 
-@SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION, detachable = "true")
 public class UserAccount {
   private Long id;

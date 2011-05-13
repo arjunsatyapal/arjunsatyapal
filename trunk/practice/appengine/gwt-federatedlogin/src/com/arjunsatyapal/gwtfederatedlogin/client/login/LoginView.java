@@ -37,6 +37,11 @@ public class LoginView extends Composite implements LoginDisplay {
   }
 
   @Override
+  public HasClickHandlers getAolButton() {
+    return aolButton;
+  }
+
+  @Override
   public HasClickHandlers getFacebookButton() {
     return facebookButton;
   }
@@ -47,7 +52,18 @@ public class LoginView extends Composite implements LoginDisplay {
   }
 
   @Override
+  public HasClickHandlers getMyOpenIdButton() {
+    return myopenidButton;
+  }
+
+
+  @Override
   public HasClickHandlers getTwitterButton() {
     return twitterButton;
+  }
+  
+  @Override
+  public HasClickHandlers getYahooButton() {
+    return yahooButton;
   }
 }
