@@ -6,6 +6,7 @@
 .svn
 .svn/
 .DS_Store
+temp/
 
 # Ignoring the cache files
 *.cache.*
