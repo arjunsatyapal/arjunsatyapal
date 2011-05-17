@@ -2,9 +2,16 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/svn/java_prerequisites/java-jars/gdata1.45/gdata-docs-3.0.jar"/>
-	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/svn/java_prerequisites/java-jars/gdata1.45/gdata-docs-meta-3.0.jar"/>
-	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/svn/java_prerequisites/java-jars/httpcomponents-client-4.1.1/httpclient-4.1.1.jar"/>
-	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/svn/java_prerequisites/java-jars/httpcomponents-client-4.1.1/httpcore-4.1.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/svn/practice/gdata/gdoc-list/lib/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/svn/practice/gdata/gdoc-list/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/svn/practice/gdata/gdoc-list/lib/gdata-docs-3.0.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/svn/practice/gdata/gdoc-list/lib/gdata-docs-meta-3.0.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/svn/practice/gdata/gdoc-list/lib/httpclient-4.1.1.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/svn/practice/gdata/gdoc-list/lib/httpclient-cache-4.1.1.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/svn/practice/gdata/gdoc-list/lib/httpcore-4.1.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/svn/practice/gdata/gdoc-list/lib/httpmime-4.1.1.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/svn/practice/gdata/gdoc-list/lib/gdata-core-1.0.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/svn/practice/gdata/gdoc-list/lib/gdata-media-1.0.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/svn/practice/gdata/gdoc-list/lib/gdata-client-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
