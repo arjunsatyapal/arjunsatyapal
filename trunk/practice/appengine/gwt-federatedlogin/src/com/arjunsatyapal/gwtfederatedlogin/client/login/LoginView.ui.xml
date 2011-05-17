@@ -14,7 +14,7 @@
       position: absolute;
       clear: both;
       height: 35%;
-      width: 35;
+      width: 35%;
     }
     
     .what-to-do {
