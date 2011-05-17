@@ -8,6 +8,8 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.Widget;
 
+import com.arjunsatyapal.gwtfederatedlogin.client.login.LoginDisplay;
+
 public class LoginView extends Composite implements LoginDisplay {
   @UiField
   PushButton aolButton;
@@ -22,10 +24,11 @@ public class LoginView extends Composite implements LoginDisplay {
   @UiField
   PushButton yahooButton;
 
-  private static UserBadgeUiBinder uiBinder = GWT.create(UserBadgeUiBinder.class);
-
   interface UserBadgeUiBinder extends UiBinder<Widget, LoginView> {
   }
+
+  private static UserBadgeUiBinder uiBinder = GWT.create(UserBadgeUiBinder.class);
+
 
   public LoginView() {
     initWidget(uiBinder.createAndBindUi(this));
@@ -61,7 +64,7 @@ public class LoginView extends Composite implements LoginDisplay {
   public HasClickHandlers getTwitterButton() {
     return twitterButton;
   }
-  
+
   @Override
   public HasClickHandlers getYahooButton() {
     return yahooButton;

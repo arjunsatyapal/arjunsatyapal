@@ -16,8 +16,8 @@ public class HeaderPanel implements EntryPoint {
   public void onModuleLoad() {
     root = RootLayoutPanel.get();
     root.clear();
-    HeaderPanelPresenter headerPanelPresenter = new HeaderPanelPresenter(
-        new HeaderPanelView());
-    headerPanelPresenter.go(root);
+     HeaderPanelPresenter headerPanelPresenter = new HeaderPanelPresenter(
+     new HeaderPanelView());
+     headerPanelPresenter.go(root);
   }
 }
