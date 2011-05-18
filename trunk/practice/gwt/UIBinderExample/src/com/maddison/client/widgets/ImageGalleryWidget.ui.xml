@@ -1,0 +1,31 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' 
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+  <ui:style>
+  	.caption {font-weight:bold;width:100%}
+  	.button {color:red}
+  	.image {width:375px; height:500px}
+  </ui:style>
+  
+  <g:VerticalPanel spacing="3">
+  	<g:Cell horizontalAlign="CENTER" cellSpacing="40" width="100%">
+  		<g:Label ui:field="title"/>
+  	</g:Cell>
+  	<g:Cell>
+  		<g:Image styleName="{style.image}" ui:field="image"/>
+	</g:Cell>
+	<g:Cell width="500px">
+  		<g:HorizontalPanel spacing="5" width="100%">
+  			<g:Cell>
+  				<g:Button styleName="{style.button}" text="Prev" ui:field="btnPrev"/>
+  			</g:Cell>
+  			<g:Cell>
+  				<g:Label styleName="{style.caption}" ui:field="caption"/>
+  			</g:Cell>  			
+  			<g:Cell>
+  				<g:Button  styleName="{style.button}" text="Next" ui:field="btnNext"/>
+  			</g:Cell>
+  		</g:HorizontalPanel>
+	</g:Cell>		
+  </g:VerticalPanel>
+</ui:UiBinder>

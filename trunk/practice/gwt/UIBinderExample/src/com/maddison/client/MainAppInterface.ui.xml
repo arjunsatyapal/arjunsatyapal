@@ -1,0 +1,13 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' 
+			 xmlns:g='urn:import:com.google.gwt.user.client.ui'
+			 xmlns:d='urn:import:com.maddison.client.widgets'>
+			 
+	<g:HorizontalPanel spacing="5" width="100%">
+		<g:Cell>
+			<d:ImageGalleryWidget title="Gallery One" ui:field="galleryOne"/>
+		</g:Cell>
+		<g:Cell>
+			<d:ImageGalleryWidget title="Gallery Two" ui:field="galleryTwo"/>
+		</g:Cell>
+	</g:HorizontalPanel>			 
+</ui:UiBinder>
