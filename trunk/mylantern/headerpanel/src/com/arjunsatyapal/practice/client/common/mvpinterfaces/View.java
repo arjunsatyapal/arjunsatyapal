@@ -1,4 +1,4 @@
-package com.arjunsatyapal.practice.client.common;
+package com.arjunsatyapal.practice.client.common.mvpinterfaces;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;

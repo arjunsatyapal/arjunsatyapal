@@ -1,11 +1,12 @@
 // Copyright 2011 Google Inc. All Rights Reserved.
 
-package com.arjunsatyapal.practice.client.headerpanel;
+package com.arjunsatyapal.practice.client.common.mainpanel;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -13,21 +14,29 @@ import com.google.gwt.user.client.ui.Widget;
  * @author arjuns@google.com (Arjun Satyapal)
  *
  */
-public class HeaderPanelView extends Composite implements HeaderPanelDisplay {
+public class MainPanelView extends Composite implements MainPanelDisplay {
 
   @UiField
   MenuItem menuItemAdmin;
+
+  @UiField
+  LayoutPanel workspace;
 
   @Override
   public MenuItem getMenuItemAdmin() {
     return menuItemAdmin;
   }
 
+  @Override
+  public LayoutPanel getWorkspace() {
+    return workspace;
+  }
 
-  private static HeaderPanelUiBinder uiBinder = GWT
-      .create(HeaderPanelUiBinder.class);
 
-  interface HeaderPanelUiBinder extends UiBinder<Widget, HeaderPanelView> {
+  private static MainPanelUiBinder uiBinder = GWT
+      .create(MainPanelUiBinder.class);
+
+  interface MainPanelUiBinder extends UiBinder<Widget, MainPanelView> {
   }
 
   /**
@@ -39,7 +48,7 @@ public class HeaderPanelView extends Composite implements HeaderPanelDisplay {
    * depending on the widget that is used, it may be necessary to implement
    * HasHTML instead of HasText.
    */
-  public HeaderPanelView() {
+  public MainPanelView() {
     initWidget(uiBinder.createAndBindUi(this));
   }
 }
