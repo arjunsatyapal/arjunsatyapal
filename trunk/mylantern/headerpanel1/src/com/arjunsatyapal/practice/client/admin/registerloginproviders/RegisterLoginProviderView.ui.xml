@@ -1,0 +1,47 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
+  xmlns:hp="urn:import:com.arjunsatyapal.practice.client.common.lanternheaderpanel">
+  <ui:style>
+    /* Add CSS here. See the GWT docs on UI Binder for more details */
+    .important {
+      font-weight: bold;
+    }
+  </ui:style>
+  <g:LayoutPanel width="100%" height="100%">
+    <g:layer left="0px" width="100%" top="0px" height="66px">
+      <hp:LanternHeaderPanelView ui:field="lanternHeaderPanel" />
+    </g:layer>
+
+    <!-- Labels. -->
+    <g:layer left="10px" width="100px" top="72px" height="30px">
+      <g:Label text="OAuth Provider" width="150" />
+    </g:layer>
+
+    <g:layer left="10px" width="150px" top="112px" height="30px">
+      <g:Label text="Consumer Key" />
+    </g:layer>
+
+    <g:layer left="10px" width="100px" top="152px" height="30px">
+      <g:Label text="Consumer Secret" />
+    </g:layer>
+
+
+    <!-- Fields for taking user Inputs. -->
+    <g:layer left="160px" width="160px" top="72px" height="30px">
+      <g:ListBox width="90%" ui:field="listBoxOauthProvider" />
+    </g:layer>
+
+    <g:layer left="160px" width="50%" top="112px" height="30px">
+      <g:TextBox width="90%" ui:field="textBoxConsumerKey" />
+    </g:layer>
+
+    <g:layer left="160px" width="50%" top="152px" height="30px">
+      <g:TextBox width="90%" ui:field="textBoxConsumerSecret" />
+    </g:layer>
+
+
+    <g:layer left="160px" width="90px" top="192px" height="30px">
+      <g:Button text="Save" ui:field="buttonSave" />
+    </g:layer>
+  </g:LayoutPanel>
+</ui:UiBinder> 

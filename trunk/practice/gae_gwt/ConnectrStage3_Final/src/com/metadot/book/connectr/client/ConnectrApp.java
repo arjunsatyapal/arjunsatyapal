@@ -76,7 +76,7 @@ public class ConnectrApp implements EntryPoint {
 
   private static ConnectrApp singleton;
   private UserAccountDTO currentUser;
-  private SimpleEventBus eventBus = new SimpleEventBus();
+  private SimpleEventBus x = new SimpleEventBus();
   BusyIndicatorPresenter busyIndicator = new BusyIndicatorPresenter(eventBus,
       new BusyIndicatorView("Working hard..."));
 

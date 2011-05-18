@@ -1,8 +1,6 @@
 package com.arjunsatyapal.practice.client.common.mainpanel;
 
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasWidgets;
 
 import com.arjunsatyapal.practice.client.admin.registerloginproviders.RegisterLoginPresenter;
@@ -27,10 +25,6 @@ public class MainPanelPresenter implements Presenter {
         RegisterLoginPresenter registerLoginPresenter = new RegisterLoginPresenter(
             new RegisterLoginProviderView());
         registerLoginPresenter.go(display.getWorkspace());
-//        long test = System.currentTimeMillis();
-//        Button button = new Button("Click Me : " + test);
-//        display.getWorkspace().clear();
-//        display.getWorkspace().add(button);
       }
     });
     container.clear();
