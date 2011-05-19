@@ -7,7 +7,6 @@
 .svn/
 .DS_Store
 temp/
-.settings
 *.nocache.js
 
 # Ignoring the cache files
