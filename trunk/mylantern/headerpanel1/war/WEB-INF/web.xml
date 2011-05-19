@@ -4,18 +4,18 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-  
+
   <!-- Servlets -->
-<!--   <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.arjunsatyapal.practice.server.GreetingServiceImpl</servlet-class>
+  <servlet>
+    <servlet-name>loginProviderService</servlet-name>
+    <servlet-class>com.arjunsatyapal.practice.server.servlets.LoginProviderServiceImpl</servlet-class>
   </servlet>
-  
+
   <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/headerpanel/greet</url-pattern>
+    <servlet-name>loginProviderService</servlet-name>
+    <url-pattern>/headerpanel/loginProviderService</url-pattern>
   </servlet-mapping>
- -->  
+
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Headerpanel.html</welcome-file>

@@ -3,10 +3,13 @@ package com.arjunsatyapal.practice.client.admin.registerloginproviders;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 
+import com.arjunsatyapal.practice.client.ServiceProvider;
 import com.arjunsatyapal.practice.client.common.mvpinterfaces.Presenter;
 import com.arjunsatyapal.practice.shared.OAuthProvider;
+import com.arjunsatyapal.practice.shared.dtos.LoginProviderDto;
 
 public class RegisterLoginPresenter extends Presenter {
   private final RegisterLoginDisplay display;
@@ -43,6 +46,25 @@ public class RegisterLoginPresenter extends Presenter {
           builder.append("\nConsumerSecret: ").append(
               display.getTextBoxConsumerSecret().getText());
           Window.alert(builder.toString());
+
+          AsyncCallback<LoginProviderDto> callback = new AsyncCallback<LoginProviderDto>() {
+            @Override
+            public void onSuccess(LoginProviderDto result) {
+              Window.alert("Received from server : " + result.toString());
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+              Window.alert("Got exception : " + caught.getLocalizedMessage());
+
+            }
+          };
+          LoginProviderDto dto = new LoginProviderDto.Builder()
+              .setLoginProvider(selectedProvider.name())
+              .setConsumerKey(display.getTextBoxConsumerKey().getText())
+              .setConsumerSecret(display.getTextBoxConsumerSecret().getText())
+              .build();
+          ServiceProvider.getLoginProviderService().addLoginProvider(dto, callback);
         }
       }
     });
