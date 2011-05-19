@@ -1,0 +1,71 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
+  xmlns:hp="urn:import:com.arjunsatyapal.practice.client.gwtui.lanternheaderpanel">
+  <ui:image field='aol_logo' src='resources/aol_logo.png' />
+  <ui:image field='facebook_logo' src='resources/facebook_logo.jpg' />
+  <ui:image field='google_logo' src='resources/google_logo.png' />
+  <ui:image field='myopenid_logo' src='resources/myopenid_logo.png' />
+  <ui:image field='twitter_logo' src='resources/twitter_logo.png' />
+  <ui:image field='yahoo_logo' src='resources/yahoo_logo.png' />
+
+  <ui:style>
+    .what-to-do {
+      margin-top: 200px;
+      font-size: 1.8em;
+    }
+    
+    .providers {
+      margin: 50px 20px;
+    }
+    
+    .provider-button {
+      float: left;
+      margin: 120px 40px;
+    }
+    
+    .pushbutton {
+      
+    }
+  </ui:style>
+
+  <g:LayoutPanel width="100%" height="100%">
+    <g:layer left="0px" width="100%" top="0px" height="66px">
+      <hp:LanternHeaderPanelView ui:field="lanternHeaderPanel"
+        height="54px" />
+    </g:layer>
+
+    <!-- <g:layer> <div class='{style.what-to-do}'>Login with one of the following 
+      providers.</div> </g:layer> -->
+    <g:layer left="54px" width="132px" top="129px" height="48px">
+      <g:PushButton ui:field='aolButton'>
+        <g:upFace image='{aol_logo}' />
+      </g:PushButton>
+    </g:layer>
+
+    <g:layer left="54px" width="161px" top="199px" height="83px">
+      <g:PushButton ui:field='facebookButton'>
+        <g:upFace image='{facebook_logo}' />
+      </g:PushButton>
+    </g:layer>
+    <g:layer left="54px" width="218px" top="317px" height="31px">
+      <g:PushButton ui:field='googleButton'>
+        <g:upFace image='{google_logo}' />
+      </g:PushButton>
+    </g:layer>
+    <g:layer left="315px" width="132px" top="129px" height="48px">
+      <g:PushButton ui:field='myopenidButton'>
+        <g:upFace image='{myopenid_logo}' />
+      </g:PushButton>
+    </g:layer>
+    <g:layer left="315px" width="161px" top="317px" height="31px">
+      <g:PushButton ui:field='twitterButton'>
+        <g:upFace image='{twitter_logo}' />
+      </g:PushButton>
+    </g:layer>
+    <g:layer left="315px" width="224px" top="221px" height="48px">
+      <g:PushButton ui:field='yahooButton'>
+        <g:upFace image='{yahoo_logo}' />
+      </g:PushButton>
+    </g:layer>
+  </g:LayoutPanel>
+</ui:UiBinder> 

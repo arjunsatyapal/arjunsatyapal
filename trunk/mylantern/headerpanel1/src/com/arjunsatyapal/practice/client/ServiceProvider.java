@@ -2,17 +2,27 @@ package com.arjunsatyapal.practice.client;
 
 import com.google.gwt.core.client.GWT;
 
-import com.arjunsatyapal.practice.client.rpc.LoginProviderService;
-import com.arjunsatyapal.practice.client.rpc.LoginProviderServiceAsync;
+import com.arjunsatyapal.practice.client.rpc.LoginService;
+import com.arjunsatyapal.practice.client.rpc.LoginServiceAsync;
+import com.arjunsatyapal.practice.client.rpc.OAuthProviderService;
+import com.arjunsatyapal.practice.client.rpc.OAuthProviderServiceAsync;
 
 public class ServiceProvider {
-  private static LoginProviderServiceAsync loginProviderServiceAsync;
+  private static LoginServiceAsync loginService;
+  private static OAuthProviderServiceAsync oAuthProviderServiceAsync;
 
-  public static LoginProviderServiceAsync getLoginProviderService() {
-    if (loginProviderServiceAsync == null) {
-      loginProviderServiceAsync = GWT.create(LoginProviderService.class);
+
+  public static OAuthProviderServiceAsync getOAuthProviderService() {
+    if (oAuthProviderServiceAsync == null) {
+      oAuthProviderServiceAsync = GWT.create(OAuthProviderService.class);
     }
+    return oAuthProviderServiceAsync;
+  }
 
-    return loginProviderServiceAsync;
+  public static LoginServiceAsync getLoginService() {
+    if (loginService == null) {
+      loginService = GWT.create(LoginService.class);
+    }
+    return loginService;
   }
 }

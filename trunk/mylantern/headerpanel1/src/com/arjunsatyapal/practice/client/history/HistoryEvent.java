@@ -2,6 +2,7 @@ package com.arjunsatyapal.practice.client.history;
 
 public enum HistoryEvent {
   HOME("home"),
+  LOGIN("login"),
   REGISTER_OAUTH_PROVIDER("register_oauth_provider"),
   RELOAD("reload");
 
