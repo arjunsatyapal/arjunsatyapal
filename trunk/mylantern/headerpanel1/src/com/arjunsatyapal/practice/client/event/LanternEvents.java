@@ -1,6 +1,6 @@
-package com.arjunsatyapal.practice.client.history;
+package com.arjunsatyapal.practice.client.event;
 
-public enum HistoryEvent {
+public enum LanternEvents {
   HOME("home"),
   LOGIN("login"),
   REGISTER_OAUTH_PROVIDER("register_oauth_provider"),
@@ -12,9 +12,9 @@ public enum HistoryEvent {
     return token;
   }
 
-  public static HistoryEvent getHistoryEventByToken(String token) {
+  public static LanternEvents getHistoryEventByToken(String token) {
     // Check for Login.
-    for (HistoryEvent currEvent : HistoryEvent.values()) {
+    for (LanternEvents currEvent : LanternEvents.values()) {
       if (currEvent.token.equalsIgnoreCase(token)) {
         return currEvent;
       }
@@ -23,7 +23,7 @@ public enum HistoryEvent {
     return null;
   }
 
-  private HistoryEvent(String token) {
+  private LanternEvents(String token) {
     this.token = token;
   }
 }

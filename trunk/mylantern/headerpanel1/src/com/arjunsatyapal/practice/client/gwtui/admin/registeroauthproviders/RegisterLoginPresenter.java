@@ -1,13 +1,15 @@
 package com.arjunsatyapal.practice.client.gwtui.admin.registeroauthproviders;
 
+import static com.arjunsatyapal.practice.client.rpc.ServiceProvider.getServiceProvider;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 
-import com.arjunsatyapal.practice.client.ServiceProvider;
 import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Presenter;
+import com.arjunsatyapal.practice.client.rpc.ServiceProvider;
 import com.arjunsatyapal.practice.shared.OAuthProviderEnum;
 import com.arjunsatyapal.practice.shared.dtos.OAuthProviderDto;
 
@@ -64,7 +66,7 @@ public class RegisterLoginPresenter extends Presenter {
               .setConsumerKey(display.getTextBoxConsumerKey().getText())
               .setConsumerSecret(display.getTextBoxConsumerSecret().getText())
               .build();
-          ServiceProvider.getOAuthProviderService().addOAuthProvider(dto, callback);
+          getServiceProvider().getOAuthProviderService().addOAuthProvider(dto, callback);
         }
       }
     });

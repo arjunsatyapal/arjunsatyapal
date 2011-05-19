@@ -5,8 +5,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
 
+import com.arjunsatyapal.practice.client.event.LanternEvents;
 import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Presenter;
-import com.arjunsatyapal.practice.client.history.HistoryEvent;
 import com.arjunsatyapal.practice.shared.StringConstants;
 
 public class LoginPresenter extends Presenter {
