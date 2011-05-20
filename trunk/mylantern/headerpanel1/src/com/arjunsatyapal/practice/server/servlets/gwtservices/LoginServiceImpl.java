@@ -2,7 +2,7 @@ package com.arjunsatyapal.practice.server.servlets.gwtservices;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import com.arjunsatyapal.practice.client.rpc.LoginService;
-import com.arjunsatyapal.practice.server.domain.UserAccount;
+import com.arjunsatyapal.practice.server.domain.UserAccountDso;
 import com.arjunsatyapal.practice.server.servlets.login.LoginHelper;
 import com.arjunsatyapal.practice.shared.dtos.UserAccountDTO;
 
@@ -15,9 +15,9 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
     UserAccountDTO userDTO;
     HttpSession session = getThreadLocalRequest().getSession();
 
-    UserAccount u = LoginHelper.getLoggedInUser(session);
+    UserAccountDso u = LoginHelper.getLoggedInUser(session);
     if (u == null) return null;
-    userDTO = UserAccount.toDTO(u);
+    userDTO = UserAccountDso.toDTO(u);
     return userDTO;
   }
 }

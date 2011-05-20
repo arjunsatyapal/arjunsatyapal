@@ -8,6 +8,8 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 
+import com.arjunsatyapal.practice.client.event.HistoryHandler;
+import com.arjunsatyapal.practice.client.event.LanternEventCategory;
 import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Presenter;
 import com.arjunsatyapal.practice.shared.OAuthProviderEnum;
 import com.arjunsatyapal.practice.shared.dtos.OAuthProviderDto;
@@ -17,9 +19,9 @@ import java.util.ArrayList;
 public class RegisterLoginPresenter extends Presenter {
   private final RegisterLoginDisplay display;
 
-  public RegisterLoginPresenter(RegisterLoginDisplay registerLoginDisplay, String historyToken) {
-    super(registerLoginDisplay.getLanternHeaderPanel(), historyToken);
-    this.display = registerLoginDisplay;
+  public RegisterLoginPresenter(RegisterLoginDisplay display, String historyToken) {
+    super(display.getLanternHeaderPanel(), historyToken);
+    this.display = display;
   }
 
   @Override
@@ -81,6 +83,13 @@ public class RegisterLoginPresenter extends Presenter {
               .build();
           getServiceProvider().getOAuthProviderService().addOAuthProvider(dto, callback);
         }
+      }
+    });
+
+    display.getButtonCancel().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(ClickEvent event) {
+        HistoryHandler.handleNewToken(LanternEventCategory.ADMIN_UI.getToken());
       }
     });
   }

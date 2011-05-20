@@ -18,8 +18,8 @@ public class OAuthProviderServiceImpl extends RemoteServiceServlet implements
         .setConsumerKey("key").setConsumerSecret("secret").build();
   }
 
-  // TODO : See if unauthorized exception can be thrown as exception and handled on client side.
-  // TODO : see if servlet persists data across calls.
+  // TODO(arjuns) : See if unauthorized exception can be thrown as exception and handled on client side.
+  // TODO(arjuns) : see if servlet persists data across calls.
   @Override
   public ArrayList<String> getOAuthProviderList() {
     ArrayList<String> list = new ArrayList<String>();

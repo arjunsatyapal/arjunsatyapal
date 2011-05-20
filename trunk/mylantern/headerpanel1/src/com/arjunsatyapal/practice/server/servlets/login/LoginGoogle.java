@@ -6,7 +6,7 @@ import static com.arjunsatyapal.practice.shared.ValidParams.CLIENT_CALLBACK_TOKE
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
-import com.arjunsatyapal.practice.client.event.LanternToken;
+import com.arjunsatyapal.practice.client.event.LanternEventCategory;
 import com.arjunsatyapal.practice.shared.OAuthProviderEnum;
 import com.arjunsatyapal.practice.shared.ValidParams;
 import com.arjunsatyapal.practice.shared.Utils.RedirectionUtils;
@@ -30,15 +30,15 @@ public class LoginGoogle extends HttpServlet {
     throws IOException {
     Set<String> attributes = new HashSet<String>();
     // Point to LoginGoogleCallback.
-    // TODO : improve this. May be put in properties.
+    // TODO(arjuns) : improve this. May be put in properties.
 
     String callbackURL = request.getRequestURL().toString() + "Callback";
     String clientCallbackToken = request.getParameter(CLIENT_CALLBACK_TOKEN.getParamKey());
 
     if (clientCallbackToken != null) {
       try {
-        LanternToken token =
-            LanternToken.getHistoryEventCategoryByToken(clientCallbackToken);
+        LanternEventCategory token =
+            LanternEventCategory.getHistoryEventCategoryByToken(clientCallbackToken);
         callbackURL += "?" + generateValidParamsToAttach(CLIENT_CALLBACK_TOKEN, token);
       } catch (InvalidURLParamsException e) {
         response.sendRedirect("/invalidUrl?"

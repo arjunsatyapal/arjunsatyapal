@@ -1,15 +1,17 @@
 package com.arjunsatyapal.practice.server.domain;
 
+import com.arjunsatyapal.practice.shared.LoginCategory;
 import com.arjunsatyapal.practice.shared.OAuthProviderEnum;
 import com.arjunsatyapal.practice.shared.dtos.UserAccountDTO;
 
-public class UserAccount {
+public class UserAccountDso {
   private Long id;
   private String name;
   private String emailAddress;
+  private LoginCategory loginCategory;
   private OAuthProviderEnum oAuthProvider;
 
-  public UserAccount() {
+  public UserAccountDso() {
   }
 
   @Override
@@ -18,16 +20,18 @@ public class UserAccount {
     builder.append("id:").append(id);
     builder.append(", name:").append(name);
     builder.append(", emailAddress:").append(emailAddress);
+    builder.append(", loginCategory:").append(loginCategory);
     builder.append(", oAuthProvider:").append(oAuthProvider);
 
     return builder.toString();
   }
 
-  public UserAccount(String name, String emailAddress,
-      OAuthProviderEnum oAuthProvider) {
+  public UserAccountDso(String name, String emailAddress,
+      LoginCategory loginCategory, OAuthProviderEnum oAuthProvider) {
     this();
-    this.setName(name);
-    this.setEmailAddress(emailAddress);
+    this.name = name;
+    this.emailAddress = emailAddress;
+    this.loginCategory = loginCategory;
     this.oAuthProvider = oAuthProvider;
   }
 
@@ -64,11 +68,17 @@ public class UserAccount {
     return oAuthProvider;
   }
 
-  public static UserAccountDTO toDTO(UserAccount user) {
+  public LoginCategory getLoginCategory() {
+    return loginCategory;
+  }
+
+  public static UserAccountDTO toDTO(UserAccountDso user) {
     if (user == null) {
       return null;
     }
-    UserAccountDTO accountDTO = new UserAccountDTO(user.getEmailAddress(), user.getName());
+
+    UserAccountDTO accountDTO = new UserAccountDTO(user.getName(),
+        user.getEmailAddress(), user.getLoginCategory());
     return accountDTO;
   }
 }

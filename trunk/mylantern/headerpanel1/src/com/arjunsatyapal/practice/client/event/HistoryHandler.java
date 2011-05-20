@@ -1,21 +1,24 @@
 package com.arjunsatyapal.practice.client.event;
 
-import static com.arjunsatyapal.practice.client.rpc.ServiceProvider.getServiceProvider;
 import static com.arjunsatyapal.practice.shared.Utils.RedirectionUtils.generateValidParamsToAttach;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.Location;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 
+import com.arjunsatyapal.practice.client.gwtui.admin.adminlinks.AdminUiPresenter;
+import com.arjunsatyapal.practice.client.gwtui.admin.adminlinks.AdminUiView;
 import com.arjunsatyapal.practice.client.gwtui.admin.registeroauthproviders.RegisterLoginPresenter;
 import com.arjunsatyapal.practice.client.gwtui.admin.registeroauthproviders.RegisterOAuthProviderView;
 import com.arjunsatyapal.practice.client.gwtui.login.LoginPresenter;
 import com.arjunsatyapal.practice.client.gwtui.login.LoginView;
 import com.arjunsatyapal.practice.client.gwtui.mainpanel.MainPanelPresenter;
 import com.arjunsatyapal.practice.client.gwtui.mainpanel.MainPanelView;
+import com.arjunsatyapal.practice.client.rpc.ServiceProvider;
 import com.arjunsatyapal.practice.shared.ValidParams;
 import com.arjunsatyapal.practice.shared.dtos.UserAccountDTO;
 import com.arjunsatyapal.practice.shared.exceptions.InvalidURLParamsException;
@@ -34,13 +37,15 @@ public class HistoryHandler implements ValueChangeHandler<String> {
   private HistoryHandler() {
   }
 
+  // Since history tokens can have parameters, so not using LanternEventCategory
+  // enum
+  // directly.
   public static void handleNewToken(String newToken) {
     String historyToken = History.getToken();
-    Map<String, List<String>> map =
-        com.google.gwt.user.client.Window.Location.getParameterMap();
+    Map<String, List<String>> map = Location.getParameterMap();
 
     if (historyToken.isEmpty()) {
-      newToken = LanternToken.HOME.getToken();
+      newToken = LanternEventCategory.HOME.getToken();
       History.newItem(newToken);
       History.fireCurrentHistoryState();
       return;
@@ -55,60 +60,83 @@ public class HistoryHandler implements ValueChangeHandler<String> {
 
   @Override
   public void onValueChange(final ValueChangeEvent<String> event) {
-    LanternToken historyEventCategory = null;
+    LanternEventCategory historyEventCategory = null;
 
     try {
-      historyEventCategory =
-          LanternToken.getHistoryEventCategoryByToken(event.getValue());
+      historyEventCategory = LanternEventCategory
+          .getHistoryEventCategoryByToken(event.getValue());
     } catch (InvalidURLParamsException e) {
+      // TODO(arjuns) : Add timere here and then do auto redirect.
       Window.alert("Invalid URL. Redirecting to homepage..");
-      historyEventCategory = LanternToken.HOME;
+      historyEventCategory = LanternEventCategory.HOME;
     }
 
+    //TODO(arjuns) : See if the category of login is Admin.
+    // If Category requires login, then validate that user is logged in. If not, then redirect
+    // the user to login with currentToken as clientCallbackToken.
+    // If not, then proceed as normal.
+    if (historyEventCategory.requiresLogin()) {
+      final LanternEventCategory categoryToBeHandled = historyEventCategory;
+      AsyncCallback<UserAccountDTO> callback = new AsyncCallback<UserAccountDTO>() {
+        @Override
+        public void onFailure(Throwable caught) {
+          // Redirect the user to Login Screen with current even as
+          // callbackToken.
+          handleNewToken(createTokenWithParams(
+              LanternEventCategory.LOGIN_UI,
+              generateValidParamsToAttach(ValidParams.CLIENT_CALLBACK_TOKEN,
+                  categoryToBeHandled)));
 
+        }
+
+        @Override
+        public void onSuccess(UserAccountDTO result) {
+          // Successfully got the result for UserAccountDto.
+          if (result == null) {
+            // User is not signed in.
+            //TODO(arjuns) : Find better way to handle this as user has not logged in.
+            onFailure(null);
+          } else {
+            //TODO(arjuns) :  Validate that current category is correct.
+            // e.g. for Admin only pages, see that user is Admin.
+            handleEventCategory(categoryToBeHandled, event.getValue());
+          }
+        }
+      };
+      ServiceProvider.getServiceProvider().getLoginService()
+          .getLoggedInUserDTO(callback);
+    } else {
+      handleEventCategory(historyEventCategory, event.getValue());
+    }
+  }
+
+  public void handleEventCategory(LanternEventCategory historyEventCategory,
+      final String historyToken) {
     switch (historyEventCategory) {
       case HOME:
-        // TODO : see if we should truncate the parameters. Not sure if there is
+        // TODO(arjuns) : see if we should truncate the parameters. Not sure if there is
         // any benefit.
-        MainPanelPresenter mainPanelPresenter =
-            new MainPanelPresenter(new MainPanelView(), event.getValue());
+        MainPanelPresenter mainPanelPresenter = new MainPanelPresenter(
+            new MainPanelView(), historyToken);
         mainPanelPresenter.go(RootLayoutPanel.get());
         break;
 
-      case LOGIN:
-        LoginPresenter loginPresenter =
-            new LoginPresenter(new LoginView(), event.getValue());
+      case LOGIN_UI:
+        LoginPresenter loginPresenter = new LoginPresenter(new LoginView(),
+            historyToken);
         loginPresenter.go(RootLayoutPanel.get());
         break;
+
+      case ADMIN_UI:
+        AdminUiPresenter adminUiPresenter = new AdminUiPresenter(
+            new AdminUiView(), historyToken);
+        adminUiPresenter.go(RootLayoutPanel.get());
+        break;
+
       case REGISTER_OAUTH_PROVIDER:
-        // TODO : See how code splitting can make this better. And see if there is any way
-        // that admin pages are not downloaded on client till the time he has validated that yes.
-        // Probably a dedicated servlet with a different module to handle that.
-        AsyncCallback<UserAccountDTO> callback =
-            new AsyncCallback<UserAccountDTO>() {
-
-              @Override
-              public void onSuccess(UserAccountDTO result) {
-                if (result != null) {
-                  RegisterLoginPresenter registerLoginPresenter =
-                      new RegisterLoginPresenter(
-                          new RegisterOAuthProviderView(), event.getValue());
-                  registerLoginPresenter.go(RootLayoutPanel.get());
-                } else {
-                  handleNewToken(createTokenWithParams(
-                      LanternToken.LOGIN,
-                      generateValidParamsToAttach(ValidParams.CLIENT_CALLBACK_TOKEN,
-                          LanternToken.REGISTER_OAUTH_PROVIDER)));
-                }
-              }
-
-              @Override
-              public void onFailure(Throwable caught) {
-                Window.alert("Failed to do login.");
-              }
-            };
-
-        getServiceProvider().getLoginService().getLoggedInUserDTO(callback);
+        RegisterLoginPresenter registerLoginPresenter = new RegisterLoginPresenter(
+            new RegisterOAuthProviderView(), historyToken);
+        registerLoginPresenter.go(RootLayoutPanel.get());
         break;
       default:
         Window.alert("Invalid event : " + historyEventCategory);
@@ -116,7 +144,7 @@ public class HistoryHandler implements ValueChangeHandler<String> {
     }
   }
 
-  private String createTokenWithParams(LanternToken token, String params) {
-    return LanternToken.LOGIN.getToken() + "?" + params;
+  private String createTokenWithParams(LanternEventCategory token, String params) {
+    return LanternEventCategory.LOGIN_UI.getToken() + "?" + params;
   }
 }

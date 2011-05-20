@@ -2,7 +2,7 @@ package com.arjunsatyapal.practice.server.servlets.login;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import com.arjunsatyapal.practice.server.domain.UserAccount;
+import com.arjunsatyapal.practice.server.domain.UserAccountDso;
 import com.arjunsatyapal.practice.server.servlets.utils.ServletHelper;
 import com.arjunsatyapal.practice.server.servlets.utils.ServletUtils;
 
@@ -15,20 +15,20 @@ import javax.servlet.http.HttpSession;
 public class LoginHelper extends RemoteServiceServlet {
   private static final long serialVersionUID = 6690557021950311538L;
   private static Logger logger = Logger.getLogger(LoginHelper.class.getName());
-  private static HashMap<Long, UserAccount> hashMap =
-    new HashMap<Long, UserAccount>();
+  private static HashMap<Long, UserAccountDso> hashMap =
+    new HashMap<Long, UserAccountDso>();
 
   static public String getApplicationURL(HttpServletRequest request) {
 
     if (ServletHelper.isDevelopment(request)) {
       return "http://127.0.0.1:8888/Headerpanel.html?gwt.codesvr=127.0.0.1:9997";
     } else {
-      // todo(arjun) : Fix this.
+      // TODO(arjuns) : Fix this.
       return ServletUtils.getBaseUrl(request);
     }
   }
 
-  static public UserAccount getLoggedInUser(HttpSession session) {
+  static public UserAccountDso getLoggedInUser(HttpSession session) {
     boolean localPM = false;
 
     if (session == null)
@@ -40,7 +40,7 @@ public class LoginHelper extends RemoteServiceServlet {
 
     Long id = Long.parseLong(userId.trim());
 
-    UserAccount u = hashMap.get(id);
+    UserAccountDso u = hashMap.get(id);
     return u;
   }
 
@@ -69,7 +69,7 @@ public class LoginHelper extends RemoteServiceServlet {
     }
   }
 
-  public UserAccount loginStarts(HttpSession session, UserAccount user) {
+  public UserAccountDso loginStarts(HttpSession session, UserAccountDso user) {
     long id = new Long(user.getOAuthProviderEnum().getProviderId());
     user.setId(id);
     session.setAttribute("userId", String.valueOf(user.getId()));

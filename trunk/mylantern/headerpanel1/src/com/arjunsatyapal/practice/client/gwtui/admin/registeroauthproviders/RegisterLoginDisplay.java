@@ -14,4 +14,6 @@ public interface RegisterLoginDisplay extends Display {
   TextBox getTextBoxConsumerKey();
 
   Button getButtonSave();
+
+  Button getButtonCancel();
 }

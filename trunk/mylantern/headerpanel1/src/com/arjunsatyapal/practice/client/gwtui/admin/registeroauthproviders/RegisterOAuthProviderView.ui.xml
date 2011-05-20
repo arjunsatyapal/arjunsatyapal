@@ -43,5 +43,8 @@
     <g:layer left="160px" width="90px" top="192px" height="30px">
       <g:Button text="Save" ui:field="buttonSave" />
     </g:layer>
+    <g:layer left="269px" width="90px" top="192px" height="30px">
+    	<g:Button text="Cancel" ui:field="buttonCancel"/>
+    </g:layer>
   </g:LayoutPanel>
 </ui:UiBinder> 

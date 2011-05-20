@@ -23,6 +23,9 @@ public class RegisterOAuthProviderView extends View implements RegisterLoginDisp
   TextBox textBoxConsumerSecret;
   @UiField
   Button buttonSave;
+  @UiField
+  Button buttonCancel;
+
 
   @Override
   public ListBox getListBoxOauthProvider() {
@@ -42,6 +45,11 @@ public class RegisterOAuthProviderView extends View implements RegisterLoginDisp
   @Override
   public Button getButtonSave() {
     return buttonSave;
+  }
+
+  @Override
+  public Button getButtonCancel() {
+    return buttonCancel;
   }
 
   private static RegisterOAuthProviderUiBinder uiBinder = GWT

@@ -1,5 +1,7 @@
 package com.arjunsatyapal.practice.shared.dtos;
 
+import com.arjunsatyapal.practice.shared.LoginCategory;
+
 import java.io.Serializable;
 
 public class UserAccountDTO implements Serializable {
@@ -7,14 +9,16 @@ public class UserAccountDTO implements Serializable {
   private String id;
   private String name;
   private String emailAddress;
+  // This category is assigned by Server to the user.
+  private LoginCategory loginCategory;
 
   public UserAccountDTO() {
   }
 
-  public UserAccountDTO(String email, String name) {
-    this();
-    this.setEmailAddress(email);
-    this.setName(name);
+  public UserAccountDTO(String name, String emailAddress, LoginCategory loginCategory) {
+    this.name = name;
+    this.emailAddress = emailAddress;
+    this.loginCategory = loginCategory;
   }
 
   public String getId() {
@@ -33,11 +37,15 @@ public class UserAccountDTO implements Serializable {
     this.emailAddress = emailAddress;
   }
 
+  public String getName() {
+    return name;
+  }
+
   public void setName(String name) {
     this.name = name;
   }
 
-  public String getName() {
-    return name;
+  public LoginCategory getLoginCategory() {
+    return loginCategory;
   }
 }
