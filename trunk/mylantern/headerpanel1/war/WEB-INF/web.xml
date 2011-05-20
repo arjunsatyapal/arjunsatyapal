@@ -6,8 +6,8 @@
 <web-app>
 
   <!-- Servlets -->
-  
-     <!-- ===================== Login Servlet for Admins ===================== -->
+
+  <!-- ===================== Login Servlet for Admins ===================== -->
   <servlet>
     <servlet-name>loginAdmin</servlet-name>
     <servlet-class>com.arjunsatyapal.practice.server.servlets.login.LoginAdmin</servlet-class>
@@ -17,8 +17,8 @@
     <servlet-name>loginAdmin</servlet-name>
     <url-pattern>/loginAdmin</url-pattern>
   </servlet-mapping>
-  
-   <!-- ===================== Login Google Servlet ===================== -->
+
+  <!-- ===================== Login Google Servlet ===================== -->
   <servlet>
     <servlet-name>loginGoogle</servlet-name>
     <servlet-class>com.arjunsatyapal.practice.server.servlets.login.LoginGoogle</servlet-class>
@@ -38,9 +38,9 @@
     <servlet-name>loginGoogleCallback</servlet-name>
     <url-pattern>/loginGoogleCallback</url-pattern>
   </servlet-mapping>
-  
-  <!--  ======================= GWT Services. ============================ -->
-  
+
+  <!-- ======================= GWT Services. ============================ -->
+
   <servlet>
     <servlet-name>loginService</servlet-name>
     <servlet-class>com.arjunsatyapal.practice.server.servlets.gwtservices.LoginServiceImpl</servlet-class>
@@ -50,8 +50,8 @@
     <servlet-name>loginService</servlet-name>
     <url-pattern>/headerpanel/loginService</url-pattern>
   </servlet-mapping>
-  
-  
+
+
   <servlet>
     <servlet-name>oAuthProviderService</servlet-name>
     <servlet-class>com.arjunsatyapal.practice.server.servlets.gwtservices.OAuthProviderServiceImpl</servlet-class>
@@ -62,10 +62,29 @@
     <url-pattern>/headerpanel/admin/oAuthProviderService</url-pattern>
   </servlet-mapping>
 
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>Headerpanel.html</welcome-file>
-  </welcome-file-list>
+
+  <!-- ======================= Error Servlets ============================ -->
+  <servlet>
+    <servlet-name>notAuthorized</servlet-name>
+    <servlet-class>com.arjunsatyapal.practice.server.servlets.errorservlets.NotAuthorizedExceptionServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>notAuthorized</servlet-name>
+    <url-pattern>/notAuthorized</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>invalidUrl</servlet-name>
+    <servlet-class>com.arjunsatyapal.practice.server.servlets.errorservlets.InvalidUrlExceptionServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>invalidUrl</servlet-name>
+    <url-pattern>/invalidUrl</url-pattern>
+  </servlet-mapping>
+  <!-- ======================= Security Constraints. ============================ -->
+
 
   <security-constraint>
     <web-resource-collection>
@@ -75,4 +94,11 @@
       <role-name>*</role-name>
     </auth-constraint>
   </security-constraint>
+
+
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>Headerpanel.html</welcome-file>
+  </welcome-file-list>
+
 </web-app>

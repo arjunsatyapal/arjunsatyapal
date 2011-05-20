@@ -2,7 +2,8 @@ package com.arjunsatyapal.practice.shared;
 
 public enum ValidParams {
   HASH("#"),
-  REDIRECT_HASH("redirectHash");
+  CLIENT_CALLBACK_TOKEN("clientCallbackToken"),
+  INVALID_URL("invalidUrl");
 
   private String paramKey;
 

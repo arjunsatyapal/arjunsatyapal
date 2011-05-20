@@ -12,6 +12,8 @@ import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Presenter;
 import com.arjunsatyapal.practice.shared.OAuthProviderEnum;
 import com.arjunsatyapal.practice.shared.dtos.OAuthProviderDto;
 
+import java.util.ArrayList;
+
 public class RegisterLoginPresenter extends Presenter {
   private final RegisterLoginDisplay display;
 
@@ -22,12 +24,24 @@ public class RegisterLoginPresenter extends Presenter {
 
   @Override
   public void bind() {
-    for (OAuthProviderEnum curr : OAuthProviderEnum.values()) {
-      display.getListBoxOauthProvider().addItem(curr.name());
-    }
-    display.getListBoxOauthProvider().addItem("---Select Provider ---");
-    display.getListBoxOauthProvider().setSelectedIndex(
-        display.getListBoxOauthProvider().getItemCount() - 1);
+    AsyncCallback<ArrayList<String>> callback = new AsyncCallback<ArrayList<String>>() {
+
+      @Override
+      public void onFailure(Throwable caught) {
+        String errorString = "Failed to load list";
+        display.getListBoxOauthProvider().addItem(errorString);
+      }
+
+      @Override
+      public void onSuccess(ArrayList<String> result) {
+        display.getListBoxOauthProvider().addItem("---Select Provider ---");
+        for (String curr : result) {
+          display.getListBoxOauthProvider().addItem(curr);
+        }
+        display.getListBoxOauthProvider().setSelectedIndex(0);
+      }
+    };
+    getServiceProvider().getOAuthProviderService().getOAuthProviderList(callback);
 
     display.getButtonSave().addClickHandler(new ClickHandler() {
       @Override

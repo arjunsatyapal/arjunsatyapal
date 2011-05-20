@@ -37,7 +37,7 @@ public abstract class Presenter {
   }
 
   public String getEncodedRedirectHash() {
-    List<String> tempList = getParametersMap().get(ValidParams.REDIRECT_HASH.getParamKey());
+    List<String> tempList = getParametersMap().get(ValidParams.CLIENT_CALLBACK_TOKEN.getParamKey());
 
     if (tempList != null && tempList.size() != 0) {
       return URL.encode(tempList.get(0));

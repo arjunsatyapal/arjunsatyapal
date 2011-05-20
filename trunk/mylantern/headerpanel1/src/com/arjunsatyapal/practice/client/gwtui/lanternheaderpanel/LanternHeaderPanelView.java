@@ -8,7 +8,7 @@ import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.Widget;
 
 import com.arjunsatyapal.practice.client.event.HistoryHandler;
-import com.arjunsatyapal.practice.client.event.LanternEvents;
+import com.arjunsatyapal.practice.client.event.LanternToken;
 import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.View;
 
 public class LanternHeaderPanelView extends View implements
@@ -39,14 +39,14 @@ public class LanternHeaderPanelView extends View implements
     menuItemLogin.setCommand(new Command() {
       @Override
       public void execute() {
-        HistoryHandler.handleNewToken(LanternEvents.LOGIN.getToken());
+        HistoryHandler.handleNewToken(LanternToken.LOGIN.getToken());
       }
     });
 
     menuItemAdmin.setCommand(new Command() {
       @Override
       public void execute() {
-        HistoryHandler.handleNewToken(LanternEvents.REGISTER_OAUTH_PROVIDER.getToken());
+        HistoryHandler.handleNewToken(LanternToken.REGISTER_OAUTH_PROVIDER.getToken());
       }
     });
   }

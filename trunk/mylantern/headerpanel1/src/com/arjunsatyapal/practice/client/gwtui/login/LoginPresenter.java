@@ -89,9 +89,9 @@ public class LoginPresenter extends Presenter {
 
   private void doLoginGoogle() {
     String loginUrl = "/loginGoogle";
-    String redirectHash = getEncodedRedirectHash();
-    if (redirectHash != null) {
-      loginUrl += "?" + ValidParams.REDIRECT_HASH.getParamKey() + "=" + redirectHash;
+    String redirectToken = getEncodedRedirectHash();
+    if (redirectToken != null) {
+      loginUrl += "?" + ValidParams.CLIENT_CALLBACK_TOKEN.getParamKey() + "=" + redirectToken;
     }
 
     Window.Location.assign(loginUrl);

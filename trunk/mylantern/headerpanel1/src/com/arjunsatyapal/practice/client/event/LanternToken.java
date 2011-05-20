@@ -2,7 +2,7 @@ package com.arjunsatyapal.practice.client.event;
 
 import com.arjunsatyapal.practice.shared.exceptions.InvalidURLParamsException;
 
-public enum LanternEvents {
+public enum LanternToken {
   HOME("home"), LOGIN("login"), REGISTER_OAUTH_PROVIDER(
       "register_oauth_provider"), RELOAD("reload");
 
@@ -12,22 +12,22 @@ public enum LanternEvents {
     return token;
   }
 
-  public static LanternEvents getHistoryEventCategoryByToken(String historyToken)
+  public static LanternToken getHistoryEventCategoryByToken(String token)
     throws InvalidURLParamsException {
-    String[] params = historyToken.split("\\?");
+    String[] params = token.split("\\?");
 
     // Check for Login.
-    for (LanternEvents currEvent : LanternEvents.values()) {
+    for (LanternToken currEvent : LanternToken.values()) {
       if (currEvent.token.equalsIgnoreCase(params[0])) {
         return currEvent;
       }
     }
 
     throw new InvalidURLParamsException("Invalid History Token : "
-        + historyToken);
+        + token);
   }
 
-  private LanternEvents(String token) {
+  private LanternToken(String token) {
     this.token = token;
   }
 }

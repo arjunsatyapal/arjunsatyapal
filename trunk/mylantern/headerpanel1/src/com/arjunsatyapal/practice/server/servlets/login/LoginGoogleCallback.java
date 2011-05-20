@@ -36,9 +36,9 @@ public class LoginGoogleCallback extends HttpServlet{
       log.warning(connectr.toString());
     }
     String redirectURL = LoginHelper.getApplicationURL(request);
-    String redirectHash = request.getParameter(ValidParams.REDIRECT_HASH.getParamKey());
-    if (redirectHash != null) {
-      redirectURL += "" + ValidParams.HASH.getParamKey() + redirectHash;
+    String redirectToken = request.getParameter(ValidParams.CLIENT_CALLBACK_TOKEN.getParamKey());
+    if (redirectToken != null) {
+      redirectURL += "" + ValidParams.HASH.getParamKey() + redirectToken;
     }
 
     response.sendRedirect(redirectURL);
