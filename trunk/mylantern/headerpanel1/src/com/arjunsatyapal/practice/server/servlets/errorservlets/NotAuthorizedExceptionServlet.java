@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * User is redirected here if he reached to an unauthorized zone.
  */
+@SuppressWarnings("serial")
 public class NotAuthorizedExceptionServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp)

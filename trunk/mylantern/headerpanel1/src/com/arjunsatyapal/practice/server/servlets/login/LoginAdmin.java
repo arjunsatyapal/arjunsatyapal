@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet to allow admins to Login.
  */
+@SuppressWarnings("serial")
 public class LoginAdmin extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp)

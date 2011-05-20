@@ -3,6 +3,7 @@ package com.arjunsatyapal.practice.shared.dtos;
 import java.io.Serializable;
 
 public class UserAccountDTO implements Serializable {
+  private static final long serialVersionUID = 7211918275846841369L;
   private String id;
   private String name;
   private String emailAddress;

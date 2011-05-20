@@ -1,15 +1,15 @@
 package com.arjunsatyapal.practice.server.servlets.gwtservices;
 
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import java.util.ArrayList;
 
 import com.arjunsatyapal.practice.client.rpc.OAuthProviderService;
 import com.arjunsatyapal.practice.shared.OAuthProviderEnum;
 import com.arjunsatyapal.practice.shared.dtos.OAuthProviderDto;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import java.util.ArrayList;
-
+@SuppressWarnings("serial")
 public class OAuthProviderServiceImpl extends RemoteServiceServlet implements
     OAuthProviderService {
   @Override

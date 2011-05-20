@@ -12,13 +12,8 @@ public class OAuthProviderDso extends OAuthProviderDto implements IsSerializable
   }
 
   public static class Builder {
-    @SuppressWarnings("hiding")
     private String oAuthProvider;
-
-    @SuppressWarnings("hiding")
     private String consumerKey;
-
-    @SuppressWarnings("hiding")
     private String consumerSecret;
 
     public Builder setOAuthProvider(String oAuthProvider) {

@@ -50,21 +50,12 @@ public class OAuthProviderDto implements IsSerializable {
 
     return builder.toString();
   }
-  /*
-   * Default constructor for GWT Serialization.
-   */
-  @SuppressWarnings("unused")
   protected OAuthProviderDto() {
   }
 
   public static class Builder {
-    @SuppressWarnings("hiding")
     private String oAuthProvider;
-
-    @SuppressWarnings("hiding")
     private String consumerKey;
-
-    @SuppressWarnings("hiding")
     private String consumerSecret;
 
     public Builder setOAuthProvider(String oAuthProvider) {
