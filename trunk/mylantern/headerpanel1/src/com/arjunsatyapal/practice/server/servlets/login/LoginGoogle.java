@@ -4,6 +4,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
 import com.arjunsatyapal.practice.shared.OAuthProviderEnum;
+import com.arjunsatyapal.practice.shared.ValidParams;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -22,10 +23,16 @@ public class LoginGoogle extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws IOException {
-    Set<String> attributes = new HashSet();
+    Set<String> attributes = new HashSet<String>();
     // Point to LoginGoogleCallback.
     // TODO : improve this. May be put in properties.
+
     String callbackURL = request.getRequestURL().toString() + "Callback";
+    String redirectHash = request.getParameter(ValidParams.REDIRECT_HASH.getParamKey());
+    if (redirectHash != null) {
+      callbackURL += "?" + ValidParams.REDIRECT_HASH.getParamKey() + "=" + redirectHash;
+    }
+
     UserService userService = UserServiceFactory.getUserService();
     String loginUrl =
       userService.createLoginURL(callbackURL, null, OAuthProviderEnum.GOOGLE.getProviderUrl(), attributes);

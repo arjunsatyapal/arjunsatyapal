@@ -6,6 +6,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 
 import com.arjunsatyapal.practice.server.domain.UserAccount;
 import com.arjunsatyapal.practice.shared.OAuthProviderEnum;
+import com.arjunsatyapal.practice.shared.ValidParams;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -21,6 +22,8 @@ public class LoginGoogleCallback extends HttpServlet{
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws IOException {
+
+
     UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser();
     if (user != null) {
@@ -33,6 +36,11 @@ public class LoginGoogleCallback extends HttpServlet{
       log.warning(connectr.toString());
     }
     String redirectURL = LoginHelper.getApplicationURL(request);
+    String redirectHash = request.getParameter(ValidParams.REDIRECT_HASH.getParamKey());
+    if (redirectHash != null) {
+      redirectURL += "" + ValidParams.HASH.getParamKey() + redirectHash;
+    }
+
     response.sendRedirect(redirectURL);
   }
 }

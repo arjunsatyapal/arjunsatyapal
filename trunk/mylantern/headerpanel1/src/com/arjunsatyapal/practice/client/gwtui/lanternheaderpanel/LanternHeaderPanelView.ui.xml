@@ -10,8 +10,9 @@
     <g:layer left="0px" width="275px" top="0px" height="66px">
         <g:Image url="lantern_logo.png"/>
     </g:layer>
-    <g:layer width="186px" top="0px" height="33px" right="0px">
+    <g:layer width="262px" top="0px" height="33px" right="0px">
       <g:MenuBar ui:field="menuBar">
+      	<g:MenuItem text="Login" ui:field="menuItemLogin"/>
         <g:MenuItem text="Student" ui:field="menuStudent">
           <g:MenuBar vertical="true">
             <g:MenuItem text="Login" />

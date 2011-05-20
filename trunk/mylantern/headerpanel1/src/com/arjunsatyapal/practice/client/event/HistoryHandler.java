@@ -6,10 +6,14 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 
-import com.arjunsatyapal.practice.client.gwtui.admin.registeroauthproviders.RegisterLoginPresenter;
-import com.arjunsatyapal.practice.client.gwtui.admin.registeroauthproviders.RegisterOAuthProviderView;
+import com.arjunsatyapal.practice.client.gwtui.login.LoginPresenter;
+import com.arjunsatyapal.practice.client.gwtui.login.LoginView;
 import com.arjunsatyapal.practice.client.gwtui.mainpanel.MainPanelPresenter;
 import com.arjunsatyapal.practice.client.gwtui.mainpanel.MainPanelView;
+import com.arjunsatyapal.practice.shared.exceptions.InvalidURLParamsException;
+
+import java.util.List;
+import java.util.Map;
 
 public class HistoryHandler implements ValueChangeHandler<String> {
   private static HistoryHandler instance = new HistoryHandler();
@@ -24,8 +28,8 @@ public class HistoryHandler implements ValueChangeHandler<String> {
 
   public static void handleNewToken(String newToken) {
     String historyToken = History.getToken();
+    Map<String, List<String>> map = com.google.gwt.user.client.Window.Location.getParameterMap();
 
-    // Special handling to redirect to #home when user comes to main site from anywhere.
     if (historyToken.isEmpty()) {
       newToken = LanternEvents.HOME.getToken();
       History.newItem(newToken);
@@ -42,23 +46,37 @@ public class HistoryHandler implements ValueChangeHandler<String> {
 
   @Override
   public void onValueChange(final ValueChangeEvent<String> event) {
-    LanternEvents historyEvent = LanternEvents.getHistoryEventByToken(event.getValue());
+    LanternEvents historyEventCategory = null;
 
-    // TODO : replace this with event bus.
-    switch (historyEvent) {
+    try {
+      historyEventCategory = LanternEvents.getHistoryEventCategoryByToken(event.getValue());
+    } catch (InvalidURLParamsException e) {
+      Window.alert("Invalid URL. Redirecting to homepage..");
+      historyEventCategory = LanternEvents.HOME;
+    }
+
+
+    switch (historyEventCategory) {
       case HOME:
+        //TODO : see if we should truncate the parameters. Not sure if there is any benefit.
         MainPanelPresenter mainPanelPresenter =
-            new MainPanelPresenter(new MainPanelView());
+            new MainPanelPresenter(new MainPanelView(), event.getValue());
         mainPanelPresenter.go(RootLayoutPanel.get());
         break;
 
+      case LOGIN :
+        // TODO : See if event can have redirection parameters.
+        LoginPresenter loginPresenter = new LoginPresenter(new LoginView(), event.getValue());
+        loginPresenter.go(RootLayoutPanel.get());
+        break;
       case REGISTER_OAUTH_PROVIDER:
-        RegisterLoginPresenter registerLoginPresenter =
-            new RegisterLoginPresenter(new RegisterOAuthProviderView());
-        registerLoginPresenter.go(RootLayoutPanel.get());
+//        RegisterLoginPresenter registerLoginPresenter =
+//            new RegisterLoginPresenter(new RegisterOAuthProviderView());
+//        registerLoginPresenter.go(RootLayoutPanel.get());
+        Window.Location.assign("/loginAdmin");
         break;
       default:
-        Window.alert("Invalid event : " + historyEvent);
+        Window.alert("Invalid event : " + historyEventCategory);
         break;
     }  }
 }

@@ -1,19 +1,19 @@
 package com.arjunsatyapal.practice.client.gwtui.login;
 
-import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.ui.PushButton;
 
 import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Display;
 
 public interface LoginDisplay extends Display {
-  HasClickHandlers getAolButton();
+  PushButton getAolButton();
 
-  HasClickHandlers getFacebookButton();
+  PushButton getFacebookButton();
 
-  HasClickHandlers getGoogleButton();
+  PushButton getGoogleButton();
 
-  HasClickHandlers getMyOpenIdButton();
+  PushButton getMyOpenIdButton();
 
-  HasClickHandlers getTwitterButton();
+  PushButton getTwitterButton();
 
-  HasClickHandlers getYahooButton();
+  PushButton getYahooButton();
 }

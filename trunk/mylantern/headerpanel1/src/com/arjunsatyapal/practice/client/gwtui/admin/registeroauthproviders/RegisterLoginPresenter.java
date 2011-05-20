@@ -9,15 +9,14 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 
 import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Presenter;
-import com.arjunsatyapal.practice.client.rpc.ServiceProvider;
 import com.arjunsatyapal.practice.shared.OAuthProviderEnum;
 import com.arjunsatyapal.practice.shared.dtos.OAuthProviderDto;
 
 public class RegisterLoginPresenter extends Presenter {
   private final RegisterLoginDisplay display;
 
-  public RegisterLoginPresenter(RegisterLoginDisplay registerLoginDisplay) {
-    super(registerLoginDisplay.getLanternHeaderPanel());
+  public RegisterLoginPresenter(RegisterLoginDisplay registerLoginDisplay, String historyToken) {
+    super(registerLoginDisplay.getLanternHeaderPanel(), historyToken);
     this.display = registerLoginDisplay;
   }
 

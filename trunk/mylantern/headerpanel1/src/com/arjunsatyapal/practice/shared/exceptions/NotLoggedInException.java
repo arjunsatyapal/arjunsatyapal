@@ -2,9 +2,6 @@ package com.arjunsatyapal.practice.shared.exceptions;
 
 import java.io.Serializable;
 
-/**
- * @author arjuns@google.com (Arjun Satyapal)
- */
 @SuppressWarnings("serial")
 public class NotLoggedInException extends Exception implements Serializable {
   public NotLoggedInException() {

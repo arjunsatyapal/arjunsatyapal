@@ -7,6 +7,17 @@
 
   <!-- Servlets -->
   
+     <!-- ===================== Login Servlet for Admins ===================== -->
+  <servlet>
+    <servlet-name>loginAdmin</servlet-name>
+    <servlet-class>com.arjunsatyapal.practice.server.servlets.login.LoginAdmin</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>loginAdmin</servlet-name>
+    <url-pattern>/loginAdmin</url-pattern>
+  </servlet-mapping>
+  
    <!-- ===================== Login Google Servlet ===================== -->
   <servlet>
     <servlet-name>loginGoogle</servlet-name>

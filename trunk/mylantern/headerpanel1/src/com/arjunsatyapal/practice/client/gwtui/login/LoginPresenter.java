@@ -4,21 +4,25 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.PushButton;
 
-import com.arjunsatyapal.practice.client.event.LanternEvents;
 import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Presenter;
-import com.arjunsatyapal.practice.shared.StringConstants;
+import com.arjunsatyapal.practice.shared.ValidParams;
+
+import java.util.HashMap;
 
 public class LoginPresenter extends Presenter {
   private final LoginDisplay loginDisplay;
+  private HashMap<PushButton, String> loginUrlMap = new HashMap<PushButton, String>();
 
-  public LoginPresenter(LoginDisplay loginDisplay) {
-    super(loginDisplay.getLanternHeaderPanel());
+  public LoginPresenter(LoginDisplay loginDisplay, String historyToken) {
+    super(loginDisplay.getLanternHeaderPanel(), historyToken);
     this.loginDisplay = loginDisplay;
   }
 
   @Override
   public void bind() {
+    loginUrlMap.put(this.loginDisplay.getAolButton(), "/loginAol");
     this.loginDisplay.getAolButton().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(ClickEvent event) {
@@ -26,6 +30,7 @@ public class LoginPresenter extends Presenter {
       }
     });
 
+    loginUrlMap.put(this.loginDisplay.getFacebookButton(), "/loginFacebook");
     this.loginDisplay.getFacebookButton().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(ClickEvent event) {
@@ -33,6 +38,7 @@ public class LoginPresenter extends Presenter {
       }
     });
 
+    loginUrlMap.put(this.loginDisplay.getGoogleButton(), "/loginGoogle");
     this.loginDisplay.getGoogleButton().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(ClickEvent event) {
@@ -40,6 +46,7 @@ public class LoginPresenter extends Presenter {
       }
     });
 
+    loginUrlMap.put(this.loginDisplay.getMyOpenIdButton(), "/loginMyOpenId");
     this.loginDisplay.getMyOpenIdButton().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(ClickEvent event) {
@@ -47,6 +54,7 @@ public class LoginPresenter extends Presenter {
       }
     });
 
+    loginUrlMap.put(this.loginDisplay.getTwitterButton(), "/loginTwitter");
     this.loginDisplay.getTwitterButton().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(ClickEvent event) {
@@ -54,6 +62,7 @@ public class LoginPresenter extends Presenter {
       }
     });
 
+    loginUrlMap.put(this.loginDisplay.getYahooButton(), "/loginYahoo");
     this.loginDisplay.getYahooButton().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(ClickEvent event) {
@@ -79,7 +88,13 @@ public class LoginPresenter extends Presenter {
   }
 
   private void doLoginGoogle() {
-    Window.Location.assign("/loginGoogle");
+    String loginUrl = "/loginGoogle";
+    String redirectHash = getEncodedRedirectHash();
+    if (redirectHash != null) {
+      loginUrl += "?" + ValidParams.REDIRECT_HASH.getParamKey() + "=" + redirectHash;
+    }
+
+    Window.Location.assign(loginUrl);
   }
 
   private void doLoginMyOpenId() {

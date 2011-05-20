@@ -1,17 +1,16 @@
 package com.arjunsatyapal.practice.client.gwtui.login;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.Widget;
 
 import com.arjunsatyapal.practice.client.gwtui.lanternheaderpanel.LanternHeaderPanelDisplay;
 import com.arjunsatyapal.practice.client.gwtui.lanternheaderpanel.LanternHeaderPanelView;
+import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.View;
 
-public class LoginView extends Composite implements LoginDisplay {
+public class LoginView extends View implements LoginDisplay {
   @UiField
   LanternHeaderPanelView lanternHeaderPanel;
   @UiField
@@ -38,44 +37,36 @@ public class LoginView extends Composite implements LoginDisplay {
   }
 
   @Override
-  public Widget asWidget() {
-    return this;
-  }
-
-  @Override
-  public HasClickHandlers getAolButton() {
+  public PushButton getAolButton() {
     return aolButton;
   }
 
   @Override
-  public HasClickHandlers getFacebookButton() {
+  public PushButton getFacebookButton() {
     return facebookButton;
   }
 
   @Override
-  public HasClickHandlers getGoogleButton() {
+  public PushButton getGoogleButton() {
     return googleButton;
   }
 
   @Override
-  public HasClickHandlers getMyOpenIdButton() {
+  public PushButton getMyOpenIdButton() {
     return myopenidButton;
   }
 
 
   @Override
-  public HasClickHandlers getTwitterButton() {
+  public PushButton getTwitterButton() {
     return twitterButton;
   }
 
   @Override
-  public HasClickHandlers getYahooButton() {
+  public PushButton getYahooButton() {
     return yahooButton;
   }
 
-  /* (non-Javadoc)
-   * @see com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Display#getLanternHeaderPanel()
-   */
   @Override
   public LanternHeaderPanelDisplay getLanternHeaderPanel() {
     return lanternHeaderPanel;

@@ -7,5 +7,7 @@ import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Display;
 public interface LanternHeaderPanelDisplay extends Display {
   void bind();
 
+  MenuItem getMenuItemLogin();
+
   MenuItem getMenuItemAdmin();
 }

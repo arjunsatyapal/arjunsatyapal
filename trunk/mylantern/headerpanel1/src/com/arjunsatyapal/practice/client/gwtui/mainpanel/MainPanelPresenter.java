@@ -7,8 +7,8 @@ import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Presenter;
 public class MainPanelPresenter extends Presenter {
   private final MainPanelDisplay display;
 
-  public MainPanelPresenter(MainPanelDisplay mainPanelDisplay) {
-    super(mainPanelDisplay.getLanternHeaderPanel());
+  public MainPanelPresenter(MainPanelDisplay mainPanelDisplay, String historyToken) {
+    super(mainPanelDisplay.getLanternHeaderPanel(), historyToken);
     this.display = mainPanelDisplay;
   }
 
