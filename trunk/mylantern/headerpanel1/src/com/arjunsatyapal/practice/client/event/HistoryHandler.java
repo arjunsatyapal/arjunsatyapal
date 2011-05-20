@@ -19,6 +19,8 @@ import com.arjunsatyapal.practice.client.gwtui.login.LoginView;
 import com.arjunsatyapal.practice.client.gwtui.mainpanel.MainPanelPresenter;
 import com.arjunsatyapal.practice.client.gwtui.mainpanel.MainPanelView;
 import com.arjunsatyapal.practice.client.rpc.ServiceProvider;
+import com.arjunsatyapal.practice.shared.LoginCategory;
+import com.arjunsatyapal.practice.shared.ServletPaths;
 import com.arjunsatyapal.practice.shared.ValidParams;
 import com.arjunsatyapal.practice.shared.dtos.UserAccountDTO;
 import com.arjunsatyapal.practice.shared.exceptions.InvalidURLParamsException;
@@ -71,76 +73,96 @@ public class HistoryHandler implements ValueChangeHandler<String> {
       historyEventCategory = LanternEventCategory.HOME;
     }
 
-    //TODO(arjuns) : See if the category of login is Admin.
-    // If Category requires login, then validate that user is logged in. If not, then redirect
-    // the user to login with currentToken as clientCallbackToken.
+    // TODO(arjuns) : See if the category of login is Admin.
+    // If Category requires login, then validate that user is logged in. If not,
+    // then force user to login with currentToken as clientCallbackToken.
     // If not, then proceed as normal.
     if (historyEventCategory.requiresLogin()) {
-      final LanternEventCategory categoryToBeHandled = historyEventCategory;
-      AsyncCallback<UserAccountDTO> callback = new AsyncCallback<UserAccountDTO>() {
-        @Override
-        public void onFailure(Throwable caught) {
-          // Redirect the user to Login Screen with current even as
-          // callbackToken.
-          handleNewToken(createTokenWithParams(
-              LanternEventCategory.LOGIN_UI,
-              generateValidParamsToAttach(ValidParams.CLIENT_CALLBACK_TOKEN,
-                  categoryToBeHandled)));
-
-        }
-
-        @Override
-        public void onSuccess(UserAccountDTO result) {
-          // Successfully got the result for UserAccountDto.
-          if (result == null) {
-            // User is not signed in.
-            //TODO(arjuns) : Find better way to handle this as user has not logged in.
-            onFailure(null);
-          } else {
-            //TODO(arjuns) :  Validate that current category is correct.
-            // e.g. for Admin only pages, see that user is Admin.
-            handleEventCategory(categoryToBeHandled, event.getValue());
-          }
-        }
-      };
-      ServiceProvider.getServiceProvider().getLoginService()
-          .getLoggedInUserDTO(callback);
+      forceLoginIfNotAlreadyLoggedIn(historyEventCategory, event.getValue());
     } else {
-      handleEventCategory(historyEventCategory, event.getValue());
+      // User does not require login.
+      handleEventCategory(historyEventCategory, event.getValue(), null /* userAccountDto */);
     }
   }
 
+  private void forceLoginIfNotAlreadyLoggedIn(
+      final LanternEventCategory historyEventCategory, final String historyToken) {
+    AsyncCallback<UserAccountDTO> callback = new AsyncCallback<UserAccountDTO>() {
+      @Override
+      public void onFailure(Throwable caught) {
+        // Redirect the user to Login Screen with current even as
+        // callbackToken.
+        handleNewToken(createTokenWithParams(
+            LanternEventCategory.LOGIN_UI,
+            generateValidParamsToAttach(ValidParams.CLIENT_CALLBACK_TOKEN,
+                historyEventCategory)));
+      }
+
+      @Override
+      public void onSuccess(UserAccountDTO result) {
+        // Successfully got the result for UserAccountDto.
+        if (result == null) {
+          // User is not signed in.
+          // TODO(arjuns) : Find better way to handle this as user has not
+          // logged in.
+          onFailure(null);
+        } else {
+          // TODO(arjuns) : Validate that current category is correct.
+          // e.g. for Admin only pages, see that user is Admin.
+          handleEventCategory(historyEventCategory, historyToken, result);
+        }
+      }
+    };
+    ServiceProvider.getServiceProvider().getLoginService()
+        .getLoggedInUserDTO(callback);
+  }
+
   public void handleEventCategory(LanternEventCategory historyEventCategory,
-      final String historyToken) {
-    switch (historyEventCategory) {
-      case HOME:
-        // TODO(arjuns) : see if we should truncate the parameters. Not sure if there is
-        // any benefit.
-        MainPanelPresenter mainPanelPresenter = new MainPanelPresenter(
-            new MainPanelView(), historyToken);
-        mainPanelPresenter.go(RootLayoutPanel.get());
-        break;
+      final String historyToken, final UserAccountDTO userAccountDTO) {
+    LoginCategory currUserLoginCategory = null;
+    if (userAccountDTO == null) {
+      currUserLoginCategory = LoginCategory.GUEST;
+    } else {
+      currUserLoginCategory = userAccountDTO.getLoginCategory();
+    }
 
-      case LOGIN_UI:
-        LoginPresenter loginPresenter = new LoginPresenter(new LoginView(),
-            historyToken);
-        loginPresenter.go(RootLayoutPanel.get());
-        break;
+    if (historyEventCategory.isUserAllowed(currUserLoginCategory)) {
+      switch (historyEventCategory) {
+        case HOME:
+          // TODO(arjuns) : see if we should truncate the parameters. Not sure
+          // if
+          // there is
+          // any benefit.
+          MainPanelPresenter mainPanelPresenter = new MainPanelPresenter(
+              new MainPanelView(), historyToken);
+          mainPanelPresenter.go(RootLayoutPanel.get());
+          break;
 
-      case ADMIN_UI:
-        AdminUiPresenter adminUiPresenter = new AdminUiPresenter(
-            new AdminUiView(), historyToken);
-        adminUiPresenter.go(RootLayoutPanel.get());
-        break;
+        case LOGIN_UI:
+          LoginPresenter loginPresenter = new LoginPresenter(new LoginView(),
+              historyToken);
+          loginPresenter.go(RootLayoutPanel.get());
+          break;
 
-      case REGISTER_OAUTH_PROVIDER:
-        RegisterLoginPresenter registerLoginPresenter = new RegisterLoginPresenter(
-            new RegisterOAuthProviderView(), historyToken);
-        registerLoginPresenter.go(RootLayoutPanel.get());
-        break;
-      default:
-        Window.alert("Invalid event : " + historyEventCategory);
-        break;
+        case ADMIN_UI:
+          AdminUiPresenter adminUiPresenter = new AdminUiPresenter(
+              new AdminUiView(), historyToken);
+          adminUiPresenter.go(RootLayoutPanel.get());
+          break;
+
+        case REGISTER_OAUTH_PROVIDER:
+          RegisterLoginPresenter registerLoginPresenter = new RegisterLoginPresenter(
+              new RegisterOAuthProviderView(), historyToken);
+          registerLoginPresenter.go(RootLayoutPanel.get());
+          break;
+
+        default:
+          Window.alert("Invalid event : " + historyEventCategory);
+          break;
+      }
+    } else {
+      // User is not authorized. So redirecting to error page.
+      Window.Location.assign(ServletPaths.NOT_AUTHORIZED.getRelativePath());
     }
   }
 

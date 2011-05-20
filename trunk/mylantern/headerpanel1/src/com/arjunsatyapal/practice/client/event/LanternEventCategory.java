@@ -33,6 +33,19 @@ public enum LanternEventCategory {
     return true;
   }
 
+  public boolean isUserAllowed(LoginCategory loginCategory) {
+    if (restrictedToLoginCategories == null) {
+      // All users are allowed.
+      return true;
+    }
+
+    if (restrictedToLoginCategories.contains(loginCategory)) {
+      return true;
+    }
+
+    return false;
+  }
+
   public static LanternEventCategory getHistoryEventCategoryByToken(String token)
       throws InvalidURLParamsException {
     String[] params = token.split("\\?");
