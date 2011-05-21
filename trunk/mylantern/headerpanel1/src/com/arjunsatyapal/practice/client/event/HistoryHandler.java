@@ -22,7 +22,7 @@ import com.arjunsatyapal.practice.client.rpc.ServiceProvider;
 import com.arjunsatyapal.practice.shared.LoginCategory;
 import com.arjunsatyapal.practice.shared.ServletPaths;
 import com.arjunsatyapal.practice.shared.ValidParams;
-import com.arjunsatyapal.practice.shared.dtos.UserAccountDTO;
+import com.arjunsatyapal.practice.shared.dtos.UserAccountDto;
 import com.arjunsatyapal.practice.shared.exceptions.InvalidURLParamsException;
 
 import java.util.List;
@@ -87,7 +87,7 @@ public class HistoryHandler implements ValueChangeHandler<String> {
 
   private void forceLoginIfNotAlreadyLoggedIn(
       final LanternEventCategory historyEventCategory, final String historyToken) {
-    AsyncCallback<UserAccountDTO> callback = new AsyncCallback<UserAccountDTO>() {
+    AsyncCallback<UserAccountDto> callback = new AsyncCallback<UserAccountDto>() {
       @Override
       public void onFailure(Throwable caught) {
         // Redirect the user to Login Screen with current even as
@@ -99,7 +99,7 @@ public class HistoryHandler implements ValueChangeHandler<String> {
       }
 
       @Override
-      public void onSuccess(UserAccountDTO result) {
+      public void onSuccess(UserAccountDto result) {
         // Successfully got the result for UserAccountDto.
         if (result == null) {
           // User is not signed in.
@@ -118,7 +118,7 @@ public class HistoryHandler implements ValueChangeHandler<String> {
   }
 
   public void handleEventCategory(LanternEventCategory historyEventCategory,
-      final String historyToken, final UserAccountDTO userAccountDTO) {
+      final String historyToken, final UserAccountDto userAccountDTO) {
     LoginCategory currUserLoginCategory = null;
     if (userAccountDTO == null) {
       currUserLoginCategory = LoginCategory.GUEST;

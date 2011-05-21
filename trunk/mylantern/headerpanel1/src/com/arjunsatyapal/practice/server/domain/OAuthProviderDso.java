@@ -1,10 +1,8 @@
 package com.arjunsatyapal.practice.server.domain;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
-
 import com.arjunsatyapal.practice.shared.dtos.OAuthProviderDto;
 
-public class OAuthProviderDso extends OAuthProviderDto implements IsSerializable {
+public class OAuthProviderDso extends OAuthProviderDto implements AbstractDso {
 
   @Override
   public String validate() {
@@ -17,7 +15,6 @@ public class OAuthProviderDso extends OAuthProviderDto implements IsSerializable
     private String consumerSecret;
 
     public Builder setOAuthProvider(String oAuthProvider) {
-
       this.oAuthProvider = oAuthProvider;
       return this;
     }

@@ -1,24 +1,44 @@
 package com.arjunsatyapal.practice.shared.dtos;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class OAuthProviderDto implements IsSerializable {
-
+public class OAuthProviderDto implements AbstractDto {
   protected String oAuthProvider;
   protected String consumerKey;
   protected String consumerSecret;
 
   @Override
-  public String toString() {
+  public StringBuilder getStringBuilder() {
     StringBuilder builder = new StringBuilder();
-    builder.append("OAuthProvider[")
-        .append(oAuthProvider)
-        .append("], consumerKey[")
-        .append(consumerKey)
-        .append("], consumerSecret[")
-        .append(consumerSecret)
-        .append("].");
+    builder.append("OAuthProvider[").append(oAuthProvider);
+    builder.append("], consumerKey[").append(consumerKey);
+    builder.append("], consumerSecret[").append(consumerSecret);
+    builder.append("].");
+
+    return builder;
+  }
+
+  @Override
+  public String toString() {
+   return getStringBuilder().toString();
+  }
+
+  @Override
+  public String validate() {
+    StringBuilder builder = new StringBuilder("");
+
+    if (oAuthProvider.isEmpty()) {
+      builder.append("oAuthProvider is empty.\n");
+    }
+    if (consumerKey.isEmpty()) {
+      builder.append("consumerKey is empty.\n");
+    }
+    if (consumerSecret.isEmpty()) {
+      builder.append("consumerSecret is empty.\n");
+    }
     return builder.toString();
+  }
+
+  protected OAuthProviderDto() {
   }
 
   public String getOAuthProvider() {
@@ -33,33 +53,17 @@ public class OAuthProviderDto implements IsSerializable {
     return consumerSecret;
   }
 
-  public String validate() {
-    StringBuilder builder = new StringBuilder("");
-
-    if (oAuthProvider.isEmpty()) {
-      builder.append("oAuthProvider is empty.\n");
-    }
-
-    if (consumerKey.isEmpty()) {
-      builder.append("consumerKey is empty.\n");
-    }
-
-    if (consumerSecret.isEmpty()) {
-      builder.append("consumerSecret is empty.\n");
-    }
-
-    return builder.toString();
-  }
-  protected OAuthProviderDto() {
-  }
-
   public static class Builder {
     private String oAuthProvider;
     private String consumerKey;
     private String consumerSecret;
 
+    /*
+     * TODO(arjuns) : Make error handling more friendly. Probably as part of the set,
+     * pass the widget, and then within the Builder, store a list of Pair, which will
+     * tell for what widget, what is the error string.
+     */
     public Builder setOAuthProvider(String oAuthProvider) {
-
       this.oAuthProvider = oAuthProvider;
       return this;
     }

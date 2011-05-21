@@ -11,11 +11,5 @@
     <g:layer left="0px" width="100%" top="0px" height="66px">
       <hp:LanternHeaderPanelView ui:field="lanternHeaderPanel" />
     </g:layer>
-    <g:layer left="10px" width="129px" top="85px" height="44px">
-      <g:Button text="Add OAuth Provider" ui:field="buttonAddOAuthProvider" />
-    </g:layer>
-    <g:layer left="10px" width="129px" top="150px" height="44px">
-    	<g:Button text="Register School"ui:field="buttonRegisterSchool"/>
-    </g:layer>
   </g:LayoutPanel>
 </ui:UiBinder> 

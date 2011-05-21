@@ -18,11 +18,18 @@ public class AdminUiPresenter extends Presenter {
 
   @Override
   public void bind() {
-
     display.getButtonAddOAuthProvider().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(ClickEvent event) {
         HistoryHandler.handleNewToken(LanternEventCategory.REGISTER_OAUTH_PROVIDER.getToken());
+      }
+    });
+
+    display.getButtonRegisterSchool().addClickHandler(new ClickHandler() {
+
+      @Override
+      public void onClick(ClickEvent event) {
+        HistoryHandler.handleNewToken(LanternEventCategory.REGISTER_SCHOOL.getToken());
       }
     });
   }

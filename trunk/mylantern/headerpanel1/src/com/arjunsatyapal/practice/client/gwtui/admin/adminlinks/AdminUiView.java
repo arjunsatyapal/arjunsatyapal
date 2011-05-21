@@ -15,6 +15,8 @@ public class AdminUiView extends View implements AdminUiDisplay {
   LanternHeaderPanelView lanternHeaderPanel;
   @UiField
   Button buttonAddOAuthProvider;
+  @UiField
+  Button buttonRegisterSchool;
 
   private static AdminUiUiBinder uiBinder = GWT.create(AdminUiUiBinder.class);
 
@@ -33,5 +35,10 @@ public class AdminUiView extends View implements AdminUiDisplay {
   @Override
   public Button getButtonAddOAuthProvider() {
     return buttonAddOAuthProvider;
+  }
+
+  @Override
+  public Button getButtonRegisterSchool() {
+    return buttonRegisterSchool;
   }
 }

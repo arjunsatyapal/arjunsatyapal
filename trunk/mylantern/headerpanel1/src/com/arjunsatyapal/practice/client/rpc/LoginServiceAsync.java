@@ -2,8 +2,8 @@ package com.arjunsatyapal.practice.client.rpc;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-import com.arjunsatyapal.practice.shared.dtos.UserAccountDTO;
+import com.arjunsatyapal.practice.shared.dtos.UserAccountDto;
 
 public interface LoginServiceAsync {
-  void getLoggedInUserDTO(AsyncCallback<UserAccountDTO> callback);
+  void getLoggedInUserDTO(AsyncCallback<UserAccountDto> callback);
 }

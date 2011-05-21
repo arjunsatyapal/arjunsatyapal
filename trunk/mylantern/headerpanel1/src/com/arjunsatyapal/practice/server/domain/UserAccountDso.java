@@ -2,9 +2,9 @@ package com.arjunsatyapal.practice.server.domain;
 
 import com.arjunsatyapal.practice.shared.LoginCategory;
 import com.arjunsatyapal.practice.shared.OAuthProviderEnum;
-import com.arjunsatyapal.practice.shared.dtos.UserAccountDTO;
+import com.arjunsatyapal.practice.shared.dtos.UserAccountDto;
 
-public class UserAccountDso {
+public class UserAccountDso extends UserAccountDto implements AbstractDso {
   private Long id;
   private String name;
   private String emailAddress;
@@ -72,12 +72,12 @@ public class UserAccountDso {
     return loginCategory;
   }
 
-  public static UserAccountDTO toDTO(UserAccountDso user) {
+  public static UserAccountDto toDTO(UserAccountDso user) {
     if (user == null) {
       return null;
     }
 
-    UserAccountDTO accountDTO = new UserAccountDTO(user.getName(),
+    UserAccountDto accountDTO = new UserAccountDto(user.getName(),
         user.getEmailAddress(), user.getLoginCategory());
     return accountDTO;
   }

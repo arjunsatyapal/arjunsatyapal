@@ -9,5 +9,9 @@ public interface LanternHeaderPanelDisplay extends Display {
 
   MenuItem getMenuItemLogin();
 
+  // Menu Items for Student.
+  MenuItem getMenuItemStudentRegister();
+
+  // Menu Items for NonStudent
   MenuItem getMenuItemAdmin();
 }

@@ -14,9 +14,15 @@ import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.View;
 public class LanternHeaderPanelView extends View implements
     LanternHeaderPanelDisplay {
   @UiField
-  MenuItem menuItemAdmin;
-  @UiField
   MenuItem menuItemLogin;
+
+  // Menu Items for Student.
+  @UiField
+  MenuItem menuItemStudentRegister;
+
+  // Menu Items for NonStudent.
+  @UiField
+  MenuItem menuItemAdmin;
 
   @Override
   public MenuItem getMenuItemAdmin() {
@@ -43,6 +49,15 @@ public class LanternHeaderPanelView extends View implements
       }
     });
 
+    // Handlers for MenuItems in Student.
+    menuItemStudentRegister.setCommand(new Command() {
+      @Override
+      public void execute() {
+        HistoryHandler.handleNewToken(LanternEventCategory.ADMIN_UI.getToken());
+      }
+    });
+
+    // Handlers for MenuItems in NonStudent.
     menuItemAdmin.setCommand(new Command() {
       @Override
       public void execute() {
@@ -59,5 +74,10 @@ public class LanternHeaderPanelView extends View implements
   @Override
   public MenuItem getMenuItemLogin() {
     return menuItemLogin;
+  }
+
+  @Override
+  public MenuItem getMenuItemStudentRegister() {
+    return menuItemStudentRegister;
   }
 }
