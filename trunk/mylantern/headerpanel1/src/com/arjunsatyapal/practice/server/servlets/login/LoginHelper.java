@@ -69,12 +69,14 @@ public class LoginHelper extends RemoteServiceServlet {
     }
   }
 
-  public UserAccountDso loginStarts(HttpSession session, UserAccountDso user) {
-    long id = new Long(user.getOAuthProviderEnum().getProviderId());
-    user.setId(id);
-    session.setAttribute("userId", String.valueOf(user.getId()));
+  public UserAccountDso loginStarts(HttpSession session, UserAccountDso userAccountDso) {
+    //TODO(arjuns) : See more here for the session management. Now doing hack with puging long as hashId of email.
+//    long id = new Long(user.getOAuthProviderEnum().getProviderId());
+    long id = new Long(userAccountDso.getEmailAddress().hashCode());
+    userAccountDso.setId(Long.toString(id));
+    session.setAttribute("userId", String.valueOf(userAccountDso.getId()));
     session.setAttribute("loggedin", true);
-    hashMap.put(id, user);
-    return user;
+    hashMap.put(id, userAccountDso);
+    return userAccountDso;
   }
 }

@@ -1,84 +1,99 @@
 package com.arjunsatyapal.practice.server.domain;
 
 import com.arjunsatyapal.practice.shared.LoginCategory;
-import com.arjunsatyapal.practice.shared.OAuthProviderEnum;
 import com.arjunsatyapal.practice.shared.dtos.UserAccountDto;
+import com.arjunsatyapal.practice.shared.exceptions.InvalidClientInputException;
 
-public class UserAccountDso extends UserAccountDto implements AbstractDso {
-  private Long id;
+public class UserAccountDso implements AbstractDso {
+  private static final long serialVersionUID = 7211918275846841369L;
+  private String id;
   private String name;
   private String emailAddress;
   private LoginCategory loginCategory;
-  private OAuthProviderEnum oAuthProvider;
 
-  public UserAccountDso() {
+  @Override
+  public StringBuilder getStringBuilder() {
+    StringBuilder builder = new StringBuilder("UserAccountDso[");
+    builder.append("id:").append(id);
+    builder.append(", name:").append(name);
+    builder.append(", emailAddress:").append(emailAddress);
+    return builder;
   }
 
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder("UserAccountDetails : ");
-    builder.append("id:").append(id);
-    builder.append(", name:").append(name);
-    builder.append(", emailAddress:").append(emailAddress);
-    builder.append(", loginCategory:").append(loginCategory);
-    builder.append(", oAuthProvider:").append(oAuthProvider);
+    return getStringBuilder().toString();
+  }
 
+  private UserAccountDso() {
+  }
+
+  @Override
+  public String validate() {
+    StringBuilder builder = new StringBuilder("");
+
+    // id will be set only by server. So not checking it.
+
+    if (name.isEmpty()) {
+      builder.append("name is empty.\n");
+    }
+    if (emailAddress.isEmpty()) {
+      builder.append("emailAddress is empty.\n");
+    }
+    if (loginCategory == null) {
+      builder.append("loginCategory is null.\n");
+    }
     return builder.toString();
   }
 
-  public UserAccountDso(String name, String emailAddress,
-      LoginCategory loginCategory, OAuthProviderEnum oAuthProvider) {
-    this();
-    this.name = name;
-    this.emailAddress = emailAddress;
-    this.loginCategory = loginCategory;
-    this.oAuthProvider = oAuthProvider;
-  }
-
-  public void setBasicInfo(String name, String emailAddress, String uniqueId) {
-    this.name = name;
-    this.emailAddress = emailAddress;
-  }
-
-  public Long getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  // TODO(arjuns) : This should be probably temporary. See if it can be removed.
+  public void setId(String id) {
     this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
   }
 
   public String getEmailAddress() {
     return emailAddress;
   }
 
-  public void setEmailAddress(String emailAddress) {
-    this.emailAddress = emailAddress;
-  }
-
-  public OAuthProviderEnum getOAuthProviderEnum() {
-    return oAuthProvider;
+  public String getName() {
+    return name;
   }
 
   public LoginCategory getLoginCategory() {
     return loginCategory;
   }
 
-  public static UserAccountDto toDTO(UserAccountDso user) {
-    if (user == null) {
-      return null;
+  public static UserAccountDso fromUserAccountDto(UserAccountDto dto) {
+    UserAccountDso userAccountDso = new UserAccountDso();
+
+    if (!dto.validate().isEmpty()) {
+      throw new InvalidClientInputException(
+          "Invalid UserAccountDto with Error : [" + dto.validate() + "].");
+    }
+    if (dto.getId() != null) {
+      throw new InvalidClientInputException(
+          "Invalid Id[" + dto.getId() + "]. Only server is allowed to set the id.");
+    }
+    if (dto.getLoginCategory() != null) {
+      throw new InvalidClientInputException("Invalid LoginCategory[" + dto.getLoginCategory()
+          + "]. Only server is allowed to set the loginCategory.");
     }
 
-    UserAccountDto accountDTO = new UserAccountDto(user.getName(),
-        user.getEmailAddress(), user.getLoginCategory());
-    return accountDTO;
+    userAccountDso.name = dto.getName();
+    userAccountDso.emailAddress = dto.getEmailAddress();
+    return userAccountDso;
+  }
+
+  public UserAccountDto toUserAccountDto() {
+    return new UserAccountDto.Builder()
+        .setId(id)
+        .setName(name)
+        .setEmailAddress(emailAddress)
+        .setLoginCategory(loginCategory)
+        .build();
   }
 }

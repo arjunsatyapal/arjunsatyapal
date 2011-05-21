@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.arjunsatyapal.practice.client.event.HistoryHandler;
 import com.arjunsatyapal.practice.client.event.LanternEventCategory;
 import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Presenter;
-import com.arjunsatyapal.practice.shared.OAuthProviderEnum;
+import com.arjunsatyapal.practice.server.OAuthProviderEnum;
 import com.arjunsatyapal.practice.shared.dtos.OAuthProviderDto;
 
 import java.util.ArrayList;

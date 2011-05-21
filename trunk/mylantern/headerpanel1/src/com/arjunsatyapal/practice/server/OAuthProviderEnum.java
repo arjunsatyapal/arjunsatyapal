@@ -1,4 +1,4 @@
-package com.arjunsatyapal.practice.shared;
+package com.arjunsatyapal.practice.server;
 
 public enum OAuthProviderEnum {
   AOL(1, "aol.com"),

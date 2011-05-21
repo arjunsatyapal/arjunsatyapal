@@ -12,12 +12,12 @@ import javax.servlet.http.HttpSession;
 public class LoginServiceImpl extends RemoteServiceServlet implements LoginService {
   @Override
   public UserAccountDto getLoggedInUserDTO() {
-    UserAccountDto userDTO;
+    UserAccountDto userAccountDto;
     HttpSession session = getThreadLocalRequest().getSession();
 
-    UserAccountDso u = LoginHelper.getLoggedInUser(session);
-    if (u == null) return null;
-    userDTO = UserAccountDso.toDTO(u);
-    return userDTO;
+    UserAccountDso userAccountDso = LoginHelper.getLoggedInUser(session);
+    if (userAccountDso == null) return null;
+    userAccountDto = userAccountDso.toUserAccountDto();
+    return userAccountDto;
   }
 }

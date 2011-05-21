@@ -38,7 +38,7 @@ public class OAuthProviderDto implements AbstractDto {
     return builder.toString();
   }
 
-  protected OAuthProviderDto() {
+  private OAuthProviderDto() {
   }
 
   public String getOAuthProvider() {

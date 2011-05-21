@@ -7,7 +7,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
 import com.arjunsatyapal.practice.client.event.LanternEventCategory;
-import com.arjunsatyapal.practice.shared.OAuthProviderEnum;
+import com.arjunsatyapal.practice.server.OAuthProviderEnum;
 import com.arjunsatyapal.practice.shared.ValidParams;
 import com.arjunsatyapal.practice.shared.Utils.RedirectionUtils;
 import com.arjunsatyapal.practice.shared.exceptions.InvalidURLParamsException;

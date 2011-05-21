@@ -1,7 +1,10 @@
-package com.arjunsatyapal.practice.shared.dtos;
+package com.arjunsatyapal.practice.server.domain;
+
+import com.arjunsatyapal.practice.shared.dtos.SchoolDto;
+import com.arjunsatyapal.practice.shared.exceptions.InvalidClientInputException;
 
 
-public class SchoolDto implements AbstractDto {
+public class SchoolDso implements AbstractDso {
   private String id;
   private String schoolName;
   private String address1;
@@ -13,7 +16,7 @@ public class SchoolDto implements AbstractDto {
 
   @Override
   public StringBuilder getStringBuilder() {
-    StringBuilder builder = new StringBuilder("SchoolDto[");
+    StringBuilder builder = new StringBuilder("SchoolDso[");
     builder.append("id:").append(id);
     builder.append(", schoolName:").append(schoolName);
     builder.append(", address1:").append(address1);
@@ -32,7 +35,7 @@ public class SchoolDto implements AbstractDto {
     return getStringBuilder().toString();
   }
 
-  private SchoolDto() {
+  private SchoolDso() {
   }
 
   @Override
@@ -69,6 +72,12 @@ public class SchoolDto implements AbstractDto {
     return id;
   }
 
+  // TODO(arjuns) : This should be probably temporary. See if it can be removed.
+  public void setId(String id) {
+    this.id = id;
+  }
+
+
   public String getSchoolName() {
     return schoolName;
   }
@@ -97,68 +106,38 @@ public class SchoolDto implements AbstractDto {
     return adminEmail;
   }
 
-  public static class Builder {
-    private String id;
-    private String schoolName;
-    private String address1;
-    private String address2;
-    private String city;
-    private String state;
-    private String zip;
-    private String adminEmail;
-
-    public Builder setId(String id) {
-      this.id = id;
-      return this;
+  public static SchoolDso fromDto(SchoolDto dto) {
+    if (!dto.validate().isEmpty()) {
+      throw new InvalidClientInputException(
+          "Invalid SchoolDso with Error : [" + dto.validate() + "].");
+    }
+    if (dto.getId() != null) {
+      throw new InvalidClientInputException(
+          "Invalid Id[" + dto.getId() + "]. Only server is allowed to set the id.");
     }
 
-    public Builder setSchoolName(String schoolName) {
-      this.schoolName = schoolName;
-      return this;
-    }
+    SchoolDso schoolDso = new SchoolDso();
+    schoolDso.schoolName = dto.getSchoolName();
+    schoolDso.address1 = dto.getAddress1();
+    schoolDso.address2 = dto.getAddress2();
+    schoolDso.city = dto.getCity();
+    schoolDso.state = dto.getState();
+    schoolDso.zip = dto.getZip();
+    schoolDso.adminEmail= dto.getAdminEmail();
 
-    public Builder setAddress1(String address1) {
-      this.address1 = address1;
-      return this;
-    }
+    return schoolDso;
+  }
 
-    public Builder setAddress2(String address2) {
-      this.address2 = address2;
-      return this;
-    }
-
-    public Builder setCity(String city) {
-      this.city = city;
-      return this;
-    }
-
-    public Builder setState(String state) {
-      this.state = state;
-      return this;
-    }
-
-    public Builder setZip(String zip) {
-      this.zip = zip;
-      return this;
-    }
-
-    public Builder setAdminEmail(String adminEmail) {
-      this.adminEmail = adminEmail;
-      return this;
-    }
-
-    public SchoolDto build() {
-      SchoolDto dto = new SchoolDto();
-      dto.id = this.id;
-      dto.schoolName = this.schoolName;
-      dto.address1 = this.address1;
-      dto.address2 = this.address2;
-      dto.city = this.city;
-      dto.state = this.state;
-      dto.zip = this.zip;
-      dto.adminEmail = this.adminEmail;
-      dto.validate();
-      return dto;
-    }
+  public SchoolDto toDto() {
+    return new SchoolDto.Builder()
+        .setId(id)
+        .setSchoolName(schoolName)
+        .setAddress1(address1)
+        .setAddress2(address2)
+        .setCity(city)
+        .setState(state)
+        .setZip(zip)
+        .setAdminEmail(adminEmail)
+        .build();
   }
 }

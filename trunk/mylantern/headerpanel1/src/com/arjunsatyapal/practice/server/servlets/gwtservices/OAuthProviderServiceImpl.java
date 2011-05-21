@@ -3,7 +3,7 @@ package com.arjunsatyapal.practice.server.servlets.gwtservices;
 import java.util.ArrayList;
 
 import com.arjunsatyapal.practice.client.rpc.OAuthProviderService;
-import com.arjunsatyapal.practice.shared.OAuthProviderEnum;
+import com.arjunsatyapal.practice.server.OAuthProviderEnum;
 import com.arjunsatyapal.practice.shared.dtos.OAuthProviderDto;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;

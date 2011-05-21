@@ -4,6 +4,7 @@ import com.arjunsatyapal.practice.shared.LoginCategory;
 
 public class UserAccountDto implements AbstractDto {
   private static final long serialVersionUID = 7211918275846841369L;
+  // Id is assigned by Server, so should not be set by client.
   private String id;
   private String name;
   private String emailAddress;
@@ -12,10 +13,12 @@ public class UserAccountDto implements AbstractDto {
 
   @Override
   public StringBuilder getStringBuilder() {
-    StringBuilder builder = new StringBuilder("UserAccountDto[");
-    builder.append("id:").append(id);
-    builder.append(", name:").append(name);
-    builder.append(", emailAddress:").append(emailAddress);
+    StringBuilder builder = new StringBuilder("UserAccountDto[")
+        .append("id:").append(id)
+        .append(", name:").append(name)
+        .append(", emailAddress:").append(emailAddress)
+        .append(", loginCategory:").append("*filled by server*")
+        .append("].");
     return builder;
   }
 
@@ -24,7 +27,7 @@ public class UserAccountDto implements AbstractDto {
     return getStringBuilder().toString();
   }
 
-  protected UserAccountDto() {
+  private UserAccountDto() {
   }
 
   @Override

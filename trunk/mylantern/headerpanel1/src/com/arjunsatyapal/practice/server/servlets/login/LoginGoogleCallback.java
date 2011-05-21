@@ -4,10 +4,11 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+import com.arjunsatyapal.practice.server.OAuthProviderEnum;
 import com.arjunsatyapal.practice.server.domain.UserAccountDso;
 import com.arjunsatyapal.practice.shared.LoginCategory;
-import com.arjunsatyapal.practice.shared.OAuthProviderEnum;
 import com.arjunsatyapal.practice.shared.ValidParams;
+import com.arjunsatyapal.practice.shared.dtos.UserAccountDto;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -31,11 +32,18 @@ public class LoginGoogleCallback extends HttpServlet {
     if (user != null) {
       // update or create user
 
+      // TODO(arjuns) : See how session has to be managed.
+
       LoginCategory loginCategory = userService.isUserAdmin() ? LoginCategory.ADMIN : LoginCategory.OAUTH_LOGIN;
-      UserAccountDso u = new UserAccountDso(user.getNickname(),
-          user.getEmail(), loginCategory, OAuthProviderEnum.GOOGLE);
+
+      UserAccountDto userAccountDto = new UserAccountDto.Builder()
+          .setName(user.getNickname()).setEmailAddress(user.getEmail()).build();
+
+      UserAccountDso userAccountDso = UserAccountDso
+          .fromUserAccountDto(userAccountDto);
+
       UserAccountDso connectr = new LoginHelper().loginStarts(
-          request.getSession(), u);
+          request.getSession(), userAccountDso);
 
       log.warning(connectr.toString());
     }
