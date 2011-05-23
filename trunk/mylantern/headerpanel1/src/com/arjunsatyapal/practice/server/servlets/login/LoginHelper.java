@@ -1,22 +1,21 @@
 package com.arjunsatyapal.practice.server.servlets.login;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-
-import com.arjunsatyapal.practice.server.domain.UserAccountDso;
-import com.arjunsatyapal.practice.server.servlets.utils.ServletHelper;
-import com.arjunsatyapal.practice.server.servlets.utils.ServletUtils;
-
 import java.util.HashMap;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.arjunsatyapal.practice.server.domain.UserAccountDao;
+import com.arjunsatyapal.practice.server.servlets.utils.ServletHelper;
+import com.arjunsatyapal.practice.server.servlets.utils.ServletUtils;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
 public class LoginHelper extends RemoteServiceServlet {
   private static final long serialVersionUID = 6690557021950311538L;
   private static Logger logger = Logger.getLogger(LoginHelper.class.getName());
-  private static HashMap<Long, UserAccountDso> hashMap =
-    new HashMap<Long, UserAccountDso>();
+  private static HashMap<Long, UserAccountDao> hashMap =
+    new HashMap<Long, UserAccountDao>();
   
   static public String getApplicationURL(HttpServletRequest request) {
     
@@ -28,7 +27,7 @@ public class LoginHelper extends RemoteServiceServlet {
     }
   }
   
-  static public UserAccountDso getLoggedInUser(HttpSession session) {
+  static public UserAccountDao getLoggedInUser(HttpSession session) {
     if (session == null)
       return null; // user not logged in
       
@@ -38,7 +37,7 @@ public class LoginHelper extends RemoteServiceServlet {
       
     Long id = Long.parseLong(userId.trim());
     
-    UserAccountDso u = hashMap.get(id);
+    UserAccountDao u = hashMap.get(id);
     return u;
   }
   
@@ -67,16 +66,16 @@ public class LoginHelper extends RemoteServiceServlet {
     }
   }
   
-  public UserAccountDso loginStarts(HttpSession session,
-    UserAccountDso userAccountDso) {
+  public UserAccountDao loginStarts(HttpSession session,
+    UserAccountDao userAccountDao) {
     // TODO(arjuns) : See more here for the session management. Now doing hack
     // with putting long as hashId of email.
     // long id = new Long(user.getOAuthProviderEnum().getProviderId());
-    long id = new Long(userAccountDso.getEmailAddress().hashCode());
-    userAccountDso.setId(Long.toString(id));
-    session.setAttribute("userId", String.valueOf(userAccountDso.getId()));
+    long id = new Long(userAccountDao.getEmailAddress().hashCode());
+    userAccountDao.setId(Long.toString(id));
+    session.setAttribute("userId", String.valueOf(userAccountDao.getId()));
     session.setAttribute("loggedin", true);
-    hashMap.put(id, userAccountDso);
-    return userAccountDso;
+    hashMap.put(id, userAccountDao);
+    return userAccountDao;
   }
 }

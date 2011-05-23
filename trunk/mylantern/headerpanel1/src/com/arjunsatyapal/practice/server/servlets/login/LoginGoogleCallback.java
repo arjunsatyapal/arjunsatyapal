@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.arjunsatyapal.practice.server.domain.UserAccountDso;
+import com.arjunsatyapal.practice.server.domain.UserAccountDao;
 import com.arjunsatyapal.practice.shared.LoginCategory;
 import com.arjunsatyapal.practice.shared.ValidParams;
 import com.arjunsatyapal.practice.shared.dtos.UserAccountDto;
@@ -33,17 +33,17 @@ public class LoginGoogleCallback extends HttpServlet {
         new UserAccountDto.Builder().setName(user.getNickname())
           .setEmailAddress(user.getEmail()).build();
       
-      UserAccountDso userAccountDso =
-        UserAccountDso.fromUserAccountDto(userAccountDto, false /*isCreate*/);
+      UserAccountDao userAccountDao =
+        UserAccountDao.fromUserAccountDto(userAccountDto, false /*isCreate*/);
       // TODO(arjuns) : Update this value properly and generalize for all
       // logins.
       LoginCategory loginCategory =
         userService.isUserAdmin() ? LoginCategory.ADMIN
           : LoginCategory.OAUTH_LOGIN;
-      userAccountDso.setLoginCategory(loginCategory);
+      userAccountDao.setLoginCategory(loginCategory);
       
-      UserAccountDso connectr =
-        new LoginHelper().loginStarts(request.getSession(), userAccountDso);
+      UserAccountDao connectr =
+        new LoginHelper().loginStarts(request.getSession(), userAccountDao);
       
       log.warning(connectr.toString());
     }

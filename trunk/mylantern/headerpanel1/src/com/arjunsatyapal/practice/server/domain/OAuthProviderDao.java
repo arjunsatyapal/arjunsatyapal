@@ -5,7 +5,7 @@ import com.arjunsatyapal.practice.shared.dtos.OAuthProviderDto;
 import com.arjunsatyapal.practice.shared.exceptions.InvalidClientInputException;
 
 
-public class OAuthProviderDso implements AbstractDso {
+public class OAuthProviderDao implements AbstractDao {
   protected OAuthProviderEnum oAuthProvider;
   protected String consumerKey;
   protected String consumerSecret;
@@ -42,7 +42,7 @@ public class OAuthProviderDso implements AbstractDso {
     return builder.toString();
   }
 
-  private OAuthProviderDso() {
+  private OAuthProviderDao() {
   }
 
   public OAuthProviderEnum getOAuthProvider() {
@@ -57,8 +57,8 @@ public class OAuthProviderDso implements AbstractDso {
     return consumerSecret;
   }
 
-  public static OAuthProviderDso fromOAuthProviderDto(OAuthProviderDto dto) {
-    OAuthProviderDso oAuthProviderDso = new OAuthProviderDso();
+  public static OAuthProviderDao fromOAuthProviderDto(OAuthProviderDto dto) {
+    OAuthProviderDao oAuthProviderDao = new OAuthProviderDao();
 
     if (!dto.validate().isEmpty()) {
       throw new InvalidClientInputException(
@@ -72,10 +72,10 @@ public class OAuthProviderDso implements AbstractDso {
       throw new InvalidClientInputException("Invalid OAuthProvider[" + dto.getOAuthProvider() + "].");
     }
 
-    oAuthProviderDso.oAuthProvider = oauthProviderEnum;
-    oAuthProviderDso.consumerKey = dto.getConsumerKey();
-    oAuthProviderDso.consumerSecret = dto.getConsumerSecret();
-    return oAuthProviderDso;
+    oAuthProviderDao.oAuthProvider = oauthProviderEnum;
+    oAuthProviderDao.consumerKey = dto.getConsumerKey();
+    oAuthProviderDao.consumerSecret = dto.getConsumerSecret();
+    return oAuthProviderDao;
   }
 
   //TODO(arjuns) : This is not implemented as all the values should be checked from AppConsole.

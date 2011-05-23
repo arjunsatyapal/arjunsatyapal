@@ -1,7 +1,6 @@
 package com.arjunsatyapal.practice.server.domain;
 
-
-public interface AbstractDso {
+public interface AbstractDao {
   abstract StringBuilder getStringBuilder();
 
   abstract String validate();

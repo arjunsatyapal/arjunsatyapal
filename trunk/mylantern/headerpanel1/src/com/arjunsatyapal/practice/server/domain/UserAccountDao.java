@@ -4,7 +4,7 @@ import com.arjunsatyapal.practice.shared.LoginCategory;
 import com.arjunsatyapal.practice.shared.dtos.UserAccountDto;
 import com.arjunsatyapal.practice.shared.exceptions.InvalidClientInputException;
 
-public class UserAccountDso implements AbstractDso {
+public class UserAccountDao implements AbstractDao {
   private static final long serialVersionUID = 7211918275846841369L;
   private String id;
   private String name;
@@ -13,7 +13,7 @@ public class UserAccountDso implements AbstractDso {
 
   @Override
   public StringBuilder getStringBuilder() {
-    StringBuilder builder = new StringBuilder("UserAccountDso[");
+    StringBuilder builder = new StringBuilder("UserAccountDao[");
     builder.append("id:").append(id);
     builder.append(", name:").append(name);
     builder.append(", emailAddress:").append(emailAddress);
@@ -25,7 +25,7 @@ public class UserAccountDso implements AbstractDso {
     return getStringBuilder().toString();
   }
 
-  private UserAccountDso() {
+  private UserAccountDao() {
   }
 
   @Override
@@ -71,8 +71,8 @@ public class UserAccountDso implements AbstractDso {
     this.loginCategory = loginCategory;
   }
 
-  public static UserAccountDso fromUserAccountDto(UserAccountDto dto, boolean isCreate) {
-    UserAccountDso userAccountDso = new UserAccountDso();
+  public static UserAccountDao fromUserAccountDto(UserAccountDto dto, boolean isCreate) {
+    UserAccountDao userAccountDao = new UserAccountDao();
 
     if (!dto.validate().isEmpty()) {
       throw new InvalidClientInputException(
@@ -87,9 +87,9 @@ public class UserAccountDso implements AbstractDso {
           + "]. Only server is allowed to set the loginCategory.");
     }
 
-    userAccountDso.name = dto.getName();
-    userAccountDso.emailAddress = dto.getEmailAddress();
-    return userAccountDso;
+    userAccountDao.name = dto.getName();
+    userAccountDao.emailAddress = dto.getEmailAddress();
+    return userAccountDao;
   }
 
   public UserAccountDto toUserAccountDto() {

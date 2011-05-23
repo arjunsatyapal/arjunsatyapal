@@ -11,7 +11,7 @@ import com.arjunsatyapal.practice.shared.exceptions.InvalidClientInputException;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION,
   detachable = "true")
-public class SchoolDso implements AbstractDso {
+public class SchoolDao implements AbstractDao {
   @PrimaryKey
   @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
   private Long id;
@@ -32,7 +32,7 @@ public class SchoolDso implements AbstractDso {
   
   @Override
   public StringBuilder getStringBuilder() {
-    StringBuilder builder = new StringBuilder("SchoolDso[");
+    StringBuilder builder = new StringBuilder("SchoolDao[");
     builder.append("id:").append(id);
     builder.append(", schoolName:").append(schoolName);
     builder.append(", address1:").append(address1);
@@ -51,7 +51,7 @@ public class SchoolDso implements AbstractDso {
     return getStringBuilder().toString();
   }
   
-  private SchoolDso() {
+  private SchoolDao() {
   }
   
   @Override
@@ -121,9 +121,9 @@ public class SchoolDso implements AbstractDso {
     return adminEmail;
   }
   
-  public static SchoolDso fromDto(SchoolDto dto, boolean isCreate) {
+  public static SchoolDao fromDto(SchoolDto dto, boolean isCreate) {
     if (!dto.validate().isEmpty()) {
-      throw new InvalidClientInputException("Invalid SchoolDso with Error : ["
+      throw new InvalidClientInputException("Invalid SchoolDao with Error : ["
         + dto.validate() + "].");
     }
     if (isCreate && dto.getId() != 0) {
@@ -131,16 +131,16 @@ public class SchoolDso implements AbstractDso {
         + "]. Only server is allowed to set the id. Clients should not set it.");
     }
     
-    SchoolDso schoolDso = new SchoolDso();
-    schoolDso.schoolName = dto.getSchoolName();
-    schoolDso.address1 = dto.getAddress1();
-    schoolDso.address2 = dto.getAddress2();
-    schoolDso.city = dto.getCity();
-    schoolDso.state = dto.getState();
-    schoolDso.zip = dto.getZip();
-    schoolDso.adminEmail = dto.getAdminEmail();
+    SchoolDao schoolDao = new SchoolDao();
+    schoolDao.schoolName = dto.getSchoolName();
+    schoolDao.address1 = dto.getAddress1();
+    schoolDao.address2 = dto.getAddress2();
+    schoolDao.city = dto.getCity();
+    schoolDao.state = dto.getState();
+    schoolDao.zip = dto.getZip();
+    schoolDao.adminEmail = dto.getAdminEmail();
     
-    return schoolDso;
+    return schoolDao;
   }
   
   public SchoolDto toDto() {
