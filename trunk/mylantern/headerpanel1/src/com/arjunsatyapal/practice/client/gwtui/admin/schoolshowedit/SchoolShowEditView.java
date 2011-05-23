@@ -6,6 +6,7 @@ import com.arjunsatyapal.practice.client.gwtui.widgets.usaddress.UsAddressDispla
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -16,6 +17,10 @@ public class SchoolShowEditView extends View implements SchoolShowEditDisplay {
   ListBox listBoxSchoolList;
   @UiField
   UsAddressDisplay widgetUsAddress;
+  @UiField 
+  Button buttonEditSave;
+  @UiField
+  Button buttonCancel;
 
   private static ShowSchoolViewUiBinder uiBinder = GWT
       .create(ShowSchoolViewUiBinder.class);
@@ -41,5 +46,15 @@ public class SchoolShowEditView extends View implements SchoolShowEditDisplay {
   @Override
   public ListBox getListBoxSchoolList() {
     return listBoxSchoolList;
+  }
+
+  @Override
+  public Button getButtonEditSave() {
+    return buttonEditSave;
+  }
+
+  @Override
+  public Button getButtonCancel() {
+    return buttonCancel;
   }
 }

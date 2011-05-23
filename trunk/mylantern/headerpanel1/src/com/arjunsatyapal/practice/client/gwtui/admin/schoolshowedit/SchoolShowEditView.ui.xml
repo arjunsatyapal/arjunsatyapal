@@ -13,11 +13,17 @@
     <g:layer left="0px" width="100%" top="0px" height="66px">
       <hp:LanternHeaderPanelView ui:field="lanternHeaderPanel" />
     </g:layer>
-    <g:layer left="19px" width="232px" top="72px" height="514px">
+    <g:layer left="19px" width="232px" top="72px" height="419px">
         <g:ListBox visibleItemCount="5" ui:field="listBoxSchoolList"/>
     </g:layer>
     <g:layer left="358px" width="411px" top="72px" height="515px">
       <ua:UsAddressView ui:field="widgetUsAddress" />
+    </g:layer>
+    <g:layer left="19px" width="83px" top="516px" height="28px">
+    	<g:Button text="Edit" ui:field="buttonEditSave"/>
+    </g:layer>
+    <g:layer left="139px" width="83px" top="516px" height="28px">
+    	<g:Button text="Cancel" ui:field="buttonCancel"/>
     </g:layer>
   </g:LayoutPanel>
 </ui:UiBinder> 
