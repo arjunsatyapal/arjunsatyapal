@@ -1,18 +1,14 @@
-package com.arjunsatyapal.practice.client.gwtui.admin.registerschool;
+package com.arjunsatyapal.practice.client.gwtui.widgets.usaddress;
 
+import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.View;
+import com.arjunsatyapal.practice.client.gwtui.widgets.lanternheaderpanel.LanternHeaderPanelDisplay;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-import com.arjunsatyapal.practice.client.gwtui.lanternheaderpanel.LanternHeaderPanelDisplay;
-import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.View;
-
-public class RegisterSchoolView extends View implements RegisterSchoolDisplay {
-  @UiField
-  LanternHeaderPanelDisplay lanternHeaderPanel;
+public class UsAddressView extends View implements UsAddressDisplay {
   @UiField
   TextBox textBoxSchoolName;
   @UiField
@@ -27,25 +23,22 @@ public class RegisterSchoolView extends View implements RegisterSchoolDisplay {
   TextBox textBoxZip;
   @UiField
   TextBox textBoxAdminEmail;
-  @UiField
-  Button buttonSave;
-  @UiField
-  Button buttonCancel;
 
   private static RegisterSchoolViewUiBinder uiBinder = GWT
       .create(RegisterSchoolViewUiBinder.class);
 
   interface RegisterSchoolViewUiBinder extends
-      UiBinder<Widget, RegisterSchoolView> {
+      UiBinder<Widget, UsAddressView> {
   }
 
-  public RegisterSchoolView() {
+  public UsAddressView() {
     initWidget(uiBinder.createAndBindUi(this));
   }
 
   @Override
   public LanternHeaderPanelDisplay getLanternHeaderPanel() {
-    return lanternHeaderPanel;
+    // TODO(arjuns) : See if this problem can be eliminated.
+    throw new UnsupportedOperationException("Widgets do not support this.");
   }
 
   @Override
@@ -81,15 +74,5 @@ public class RegisterSchoolView extends View implements RegisterSchoolDisplay {
   @Override
   public TextBox getTextBoxAdminEmail() {
     return textBoxAdminEmail;
-  }
-
-  @Override
-  public Button getButtonSave() {
-    return buttonSave;
-  }
-
-  @Override
-  public Button getButtonCancel() {
-    return buttonCancel;
   }
 }

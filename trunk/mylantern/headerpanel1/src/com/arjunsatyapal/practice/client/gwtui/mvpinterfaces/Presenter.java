@@ -1,16 +1,15 @@
 package com.arjunsatyapal.practice.client.gwtui.mvpinterfaces;
 
-import com.google.gwt.http.client.URL;
-import com.google.gwt.user.client.ui.HasWidgets;
-
-import com.arjunsatyapal.practice.client.gwtui.lanternheaderpanel.LanternHeaderPanelDisplay;
-import com.arjunsatyapal.practice.shared.ValidParams;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.arjunsatyapal.practice.client.gwtui.widgets.lanternheaderpanel.LanternHeaderPanelDisplay;
+import com.arjunsatyapal.practice.shared.ValidParams;
+import com.google.gwt.http.client.URL;
+import com.google.gwt.user.client.ui.HasWidgets;
 
 public abstract class Presenter {
   protected final String historyToken;

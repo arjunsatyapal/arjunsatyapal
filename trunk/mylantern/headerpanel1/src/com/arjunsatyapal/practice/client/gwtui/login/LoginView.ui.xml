@@ -1,6 +1,6 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
-  xmlns:hp="urn:import:com.arjunsatyapal.practice.client.gwtui.lanternheaderpanel">
+  xmlns:hp="urn:import:com.arjunsatyapal.practice.client.gwtui.widgets.lanternheaderpanel">
   <ui:image field='aol_logo' src='resources/aol_logo.png' />
   <ui:image field='facebook_logo' src='resources/facebook_logo.jpg' />
   <ui:image field='google_logo' src='resources/google_logo.png' />

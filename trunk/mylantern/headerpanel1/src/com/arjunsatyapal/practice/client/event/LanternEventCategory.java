@@ -12,7 +12,8 @@ public enum LanternEventCategory {
   // Admin only Tokens.
   ADMIN_UI("adminui", EnumSet.of(LoginCategory.ADMIN)),
   REGISTER_OAUTH_PROVIDER("register_oauth_provider", EnumSet.of(LoginCategory.ADMIN)),
-  REGISTER_SCHOOL("register_school", EnumSet.of(LoginCategory.ADMIN));
+  SCHOOL_REGISTER("school_register", EnumSet.of(LoginCategory.ADMIN)),
+  SCHOOL_SHOW_EDIT("school_show_edit", EnumSet.of(LoginCategory.ADMIN));
 
   private String token;
   private EnumSet<LoginCategory> restrictedToLoginCategories;

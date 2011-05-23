@@ -1,4 +1,4 @@
-package com.arjunsatyapal.practice.client.gwtui.admin.registerschool;
+package com.arjunsatyapal.practice.client.gwtui.admin.schoolregister;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -12,10 +12,10 @@ import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Presenter;
 import com.arjunsatyapal.practice.client.rpc.ServiceProvider;
 import com.arjunsatyapal.practice.shared.dtos.SchoolDto;
 
-public class RegisterSchoolPresenter extends Presenter {
-  private RegisterSchoolView display;
-  public RegisterSchoolPresenter(
-      RegisterSchoolView display, String historyToken) {
+public class SchoolRegisterPresenter extends Presenter {
+  private SchoolRegisterView display;
+  public SchoolRegisterPresenter(
+      SchoolRegisterView display, String historyToken) {
     super(display.getLanternHeaderPanel(), historyToken);
     this.display = display;
   }
@@ -33,13 +33,13 @@ public class RegisterSchoolPresenter extends Presenter {
       @Override
       public void onClick(ClickEvent event) {
         SchoolDto schoolDto = new SchoolDto.Builder()
-            .setSchoolName(display.getTextBoxSchoolName().getText())
-            .setAddress1(display.getTextBoxAddress1().getText())
-            .setAddress2(display.getTextBoxAddress2().getText())
-            .setCity(display.getTextBoxCity().getText())
-            .setState(display.getTextBoxState().getText())
-            .setZip(display.getTextBoxZip().getText())
-            .setAdminEmail(display.getTextBoxAdminEmail().getText())
+            .setSchoolName(display.getWidgetUsAddress().getTextBoxSchoolName().getText())
+            .setAddress1(display.getWidgetUsAddress().getTextBoxAddress1().getText())
+            .setAddress2(display.getWidgetUsAddress().getTextBoxAddress2().getText())
+            .setCity(display.getWidgetUsAddress().getTextBoxCity().getText())
+            .setState(display.getWidgetUsAddress().getTextBoxState().getText())
+            .setZip(display.getWidgetUsAddress().getTextBoxZip().getText())
+            .setAdminEmail(display.getWidgetUsAddress().getTextBoxAdminEmail().getText())
             .build();
 
         AsyncCallback<SchoolDto> callback = new AsyncCallback<SchoolDto>() {

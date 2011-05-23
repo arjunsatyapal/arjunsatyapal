@@ -7,6 +7,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.arjunsatyapal.practice.shared.dtos.SchoolDto;
+import com.arjunsatyapal.practice.shared.dtos.SchoolSummaryDto;
 import com.arjunsatyapal.practice.shared.exceptions.InvalidClientInputException;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION,
@@ -147,5 +148,9 @@ public class SchoolDao implements AbstractDao {
     return new SchoolDto.Builder().setId(id).setSchoolName(schoolName)
       .setAddress1(address1).setAddress2(address2).setCity(city)
       .setState(state).setZip(zip).setAdminEmail(adminEmail).build();
+  }
+  
+  public SchoolSummaryDto toSummaryDto() {
+    return new SchoolSummaryDto.Builder().setId(id).setSchoolName(schoolName).build();
   }
 }

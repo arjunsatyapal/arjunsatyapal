@@ -6,5 +6,8 @@ import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Display;
 
 public interface AdminUiDisplay extends Display {
   Button getButtonAddOAuthProvider();
+  
   Button getButtonRegisterSchool();
+  
+  Button getButtonShowEditSchool();
 }

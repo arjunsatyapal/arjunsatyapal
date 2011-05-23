@@ -1,4 +1,4 @@
-package com.arjunsatyapal.practice.client.gwtui.lanternheaderpanel;
+package com.arjunsatyapal.practice.client.gwtui.widgets.lanternheaderpanel;
 
 import com.google.gwt.user.client.ui.MenuItem;
 

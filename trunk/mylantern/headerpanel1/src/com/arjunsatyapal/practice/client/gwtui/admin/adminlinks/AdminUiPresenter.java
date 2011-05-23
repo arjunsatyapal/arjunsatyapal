@@ -29,7 +29,14 @@ public class AdminUiPresenter extends Presenter {
 
       @Override
       public void onClick(ClickEvent event) {
-        HistoryHandler.handleNewToken(LanternEventCategory.REGISTER_SCHOOL.getToken());
+        HistoryHandler.handleNewToken(LanternEventCategory.SCHOOL_REGISTER.getToken());
+      }
+    });
+    
+    display.getButtonShowEditSchool().addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(ClickEvent event) {
+        HistoryHandler.handleNewToken(LanternEventCategory.SCHOOL_SHOW_EDIT.getToken());
       }
     });
   }

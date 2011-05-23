@@ -1,11 +1,9 @@
-package com.arjunsatyapal.practice.client.gwtui.admin.registerschool;
-
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.TextBox;
+package com.arjunsatyapal.practice.client.gwtui.widgets.usaddress;
 
 import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Display;
+import com.google.gwt.user.client.ui.TextBox;
 
-public interface RegisterSchoolDisplay extends Display {
+public interface UsAddressDisplay extends Display {
   TextBox getTextBoxSchoolName();
 
   TextBox getTextBoxAddress1();
@@ -19,8 +17,4 @@ public interface RegisterSchoolDisplay extends Display {
   TextBox getTextBoxZip();
 
   TextBox getTextBoxAdminEmail();
-
-  Button getButtonSave();
-
-  Button getButtonCancel();
 }

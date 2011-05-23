@@ -1,16 +1,16 @@
 package com.arjunsatyapal.practice.client.gwtui.signup.student;
 
-import com.arjunsatyapal.practice.client.gwtui.admin.registerschool.RegisterSchoolDisplay;
+import com.arjunsatyapal.practice.client.gwtui.admin.schoolregister.SchoolRegisterDisplay;
 import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Presenter;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HasWidgets;
 
 public class StudentSignupPresenter extends Presenter {
-  private RegisterSchoolDisplay display;
+  private SchoolRegisterDisplay display;
 
   public StudentSignupPresenter(
-    RegisterSchoolDisplay display, String historyToken) {
+    SchoolRegisterDisplay display, String historyToken) {
     super(display.getLanternHeaderPanel(), historyToken);
     this.display = display;
   }

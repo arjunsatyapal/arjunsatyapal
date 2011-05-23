@@ -2,13 +2,14 @@ package com.arjunsatyapal.practice.client.event;
 
 import static com.arjunsatyapal.practice.shared.Utils.RedirectionUtils.generateValidParamsToAttach;
 
-import com.arjunsatyapal.practice.client.event.LanternEventCategory;
 import com.arjunsatyapal.practice.client.gwtui.admin.adminlinks.AdminUiPresenter;
 import com.arjunsatyapal.practice.client.gwtui.admin.adminlinks.AdminUiView;
 import com.arjunsatyapal.practice.client.gwtui.admin.registeroauthproviders.RegisterLoginPresenter;
 import com.arjunsatyapal.practice.client.gwtui.admin.registeroauthproviders.RegisterOAuthProviderView;
-import com.arjunsatyapal.practice.client.gwtui.admin.registerschool.RegisterSchoolPresenter;
-import com.arjunsatyapal.practice.client.gwtui.admin.registerschool.RegisterSchoolView;
+import com.arjunsatyapal.practice.client.gwtui.admin.schoolregister.SchoolRegisterPresenter;
+import com.arjunsatyapal.practice.client.gwtui.admin.schoolregister.SchoolRegisterView;
+import com.arjunsatyapal.practice.client.gwtui.admin.schoolshowedit.SchoolShowEditPresenter;
+import com.arjunsatyapal.practice.client.gwtui.admin.schoolshowedit.SchoolShowEditView;
 import com.arjunsatyapal.practice.client.gwtui.login.LoginPresenter;
 import com.arjunsatyapal.practice.client.gwtui.login.LoginView;
 import com.arjunsatyapal.practice.client.gwtui.mainpanel.MainPanelPresenter;
@@ -38,8 +39,7 @@ public class HistoryHandler implements ValueChangeHandler<String> {
   }
   
   // Since history tokens can have parameters, so not using LanternEventCategory
-  // enum
-  // directly.
+  // enum directly.
   public static void handleNewToken(String newToken) {
     String historyToken = History.getToken();
     
@@ -151,10 +151,15 @@ public class HistoryHandler implements ValueChangeHandler<String> {
               historyToken);
           registerLoginPresenter.go(RootLayoutPanel.get());
           break;
-        case REGISTER_SCHOOL:
-          RegisterSchoolPresenter registerSchoolPresenter =
-            new RegisterSchoolPresenter(new RegisterSchoolView(), historyToken);
-          registerSchoolPresenter.go(RootLayoutPanel.get());
+        case SCHOOL_REGISTER:
+          SchoolRegisterPresenter schoolRegisterPresenter =
+            new SchoolRegisterPresenter(new SchoolRegisterView(), historyToken);
+          schoolRegisterPresenter.go(RootLayoutPanel.get());
+          break;
+        case SCHOOL_SHOW_EDIT:
+          SchoolShowEditPresenter schoolShowEditPresenter =
+            new SchoolShowEditPresenter(new SchoolShowEditView(), historyToken);
+          schoolShowEditPresenter.go(RootLayoutPanel.get());
           break;
         default:
           Window.alert("Invalid event : " + historyEventCategory);
