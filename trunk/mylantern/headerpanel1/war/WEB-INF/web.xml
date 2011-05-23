@@ -62,6 +62,17 @@
     <url-pattern>/headerpanel/admin/oAuthProviderService</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>schoolService</servlet-name>
+    <servlet-class>com.arjunsatyapal.practice.server.servlets.gwtservices.SchoolServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>schoolService</servlet-name>
+    <url-pattern>/headerpanel/admin/schoolService</url-pattern>
+  </servlet-mapping>
+
+
 
   <!-- ======================= Error Servlets ============================ -->
   <servlet>

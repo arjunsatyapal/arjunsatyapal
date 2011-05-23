@@ -2,7 +2,7 @@ package com.arjunsatyapal.practice.shared.dtos;
 
 
 public class SchoolDto implements AbstractDto {
-  private String id;
+  private long id;
   private String schoolName;
   private String address1;
   private String address2;
@@ -65,7 +65,7 @@ public class SchoolDto implements AbstractDto {
     return builder.toString();
   }
 
-  public String getId() {
+  public long getId() {
     return id;
   }
 
@@ -98,7 +98,7 @@ public class SchoolDto implements AbstractDto {
   }
 
   public static class Builder {
-    private String id;
+    private long id;
     private String schoolName;
     private String address1;
     private String address2;
@@ -107,7 +107,7 @@ public class SchoolDto implements AbstractDto {
     private String zip;
     private String adminEmail;
 
-    public Builder setId(String id) {
+    public Builder setId(long id) {
       this.id = id;
       return this;
     }

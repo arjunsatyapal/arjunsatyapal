@@ -2,19 +2,17 @@ package com.arjunsatyapal.practice.client.gwtui.admin.registeroauthproviders;
 
 import static com.arjunsatyapal.practice.client.rpc.ServiceProvider.getServiceProvider;
 
+import java.util.ArrayList;
+
+import com.arjunsatyapal.practice.client.event.HistoryHandler;
+import com.arjunsatyapal.practice.client.event.LanternEventCategory;
+import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Presenter;
+import com.arjunsatyapal.practice.shared.dtos.OAuthProviderDto;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
-
-import com.arjunsatyapal.practice.client.event.HistoryHandler;
-import com.arjunsatyapal.practice.client.event.LanternEventCategory;
-import com.arjunsatyapal.practice.client.gwtui.mvpinterfaces.Presenter;
-import com.arjunsatyapal.practice.server.OAuthProviderEnum;
-import com.arjunsatyapal.practice.shared.dtos.OAuthProviderDto;
-
-import java.util.ArrayList;
 
 public class RegisterLoginPresenter extends Presenter {
   private final RegisterLoginDisplay display;
@@ -52,12 +50,11 @@ public class RegisterLoginPresenter extends Presenter {
         int selectedIndex = display.getListBoxOauthProvider()
             .getSelectedIndex();
 
-        if (selectedIndex == display.getListBoxOauthProvider().getItemCount() - 1) {
+        if (selectedIndex == 0) {
           Window.alert("Please Select a OAuthProvider.");
         } else {
-          OAuthProviderEnum selectedProvider = OAuthProviderEnum
-              .getByOrdinalId(selectedIndex);
-          builder.append("OAuthProvider : ").append(selectedProvider.name());
+          String selectedProvider = display.getListBoxOauthProvider().getItemText(selectedIndex);
+          builder.append("OAuthProvider : ").append(selectedProvider);
           builder.append("\nConsumerKey : ").append(
               display.getTextBoxConsumerKey().getText());
           builder.append("\nConsumerSecret: ").append(
@@ -77,7 +74,7 @@ public class RegisterLoginPresenter extends Presenter {
             }
           };
           OAuthProviderDto dto = new OAuthProviderDto.Builder()
-              .setOAuthProvider(selectedProvider.name())
+              .setOAuthProvider(selectedProvider)
               .setConsumerKey(display.getTextBoxConsumerKey().getText())
               .setConsumerSecret(display.getTextBoxConsumerSecret().getText())
               .build();

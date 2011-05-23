@@ -18,9 +18,9 @@ public class AdminUiView extends View implements AdminUiDisplay {
   @UiField
   Button buttonRegisterSchool;
 
-  private static AdminUiUiBinder uiBinder = GWT.create(AdminUiUiBinder.class);
+  private static AdminViewUiBinder uiBinder = GWT.create(AdminViewUiBinder.class);
 
-  interface AdminUiUiBinder extends UiBinder<Widget, AdminUiView> {
+  interface AdminViewUiBinder extends UiBinder<Widget, AdminUiView> {
   }
 
   public AdminUiView() {

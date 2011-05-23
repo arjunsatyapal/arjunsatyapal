@@ -66,15 +66,19 @@ public class UserAccountDso implements AbstractDso {
   public LoginCategory getLoginCategory() {
     return loginCategory;
   }
+  
+  public void setLoginCategory(LoginCategory loginCategory) {
+    this.loginCategory = loginCategory;
+  }
 
-  public static UserAccountDso fromUserAccountDto(UserAccountDto dto) {
+  public static UserAccountDso fromUserAccountDto(UserAccountDto dto, boolean isCreate) {
     UserAccountDso userAccountDso = new UserAccountDso();
 
     if (!dto.validate().isEmpty()) {
       throw new InvalidClientInputException(
           "Invalid UserAccountDto with Error : [" + dto.validate() + "].");
     }
-    if (dto.getId() != null) {
+    if (isCreate && dto.getId() != null) {
       throw new InvalidClientInputException(
           "Invalid Id[" + dto.getId() + "]. Only server is allowed to set the id.");
     }

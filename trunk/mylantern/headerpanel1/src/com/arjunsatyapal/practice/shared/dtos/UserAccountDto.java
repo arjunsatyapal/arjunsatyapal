@@ -42,9 +42,6 @@ public class UserAccountDto implements AbstractDto {
     if (emailAddress.isEmpty()) {
       builder.append("emailAddress is empty.\n");
     }
-    if (loginCategory == null) {
-      builder.append("loginCategory is null.\n");
-    }
 
     return builder.toString();
   }

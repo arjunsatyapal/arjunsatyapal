@@ -4,24 +4,30 @@ import com.google.gwt.core.client.GWT;
 
 
 public class ServiceProvider {
-  private LoginServiceAsync loginServiceProxy;
-  private OAuthProviderServiceAsync oAuthProviderServiceAsync;
   private static ServiceProvider instance = new ServiceProvider();
-
+  private LoginServiceAsync loginService;
+  private OAuthProviderServiceAsync oAuthProviderService;
+  private SchoolServiceAsync schoolService;
+  
   private ServiceProvider() {
-    loginServiceProxy = GWT.create(LoginService.class);
-    oAuthProviderServiceAsync = GWT.create(OAuthProviderService.class);
-  }
-
-  public OAuthProviderServiceAsync getOAuthProviderService() {
-    return oAuthProviderServiceAsync;
-  }
-
-  public LoginServiceAsync getLoginService() {
-    return loginServiceProxy;
+    loginService = GWT.create(LoginService.class);
+    oAuthProviderService = GWT.create(OAuthProviderService.class);
+    schoolService = GWT.create(SchoolService.class);
   }
 
   public static ServiceProvider getServiceProvider() {
     return instance;
   }
+  public OAuthProviderServiceAsync getOAuthProviderService() {
+    return oAuthProviderService;
+  }
+
+  public LoginServiceAsync getLoginService() {
+    return loginService;
+  }
+
+  public SchoolServiceAsync getSchoolService() {
+    return schoolService;
+  }
+  
 }

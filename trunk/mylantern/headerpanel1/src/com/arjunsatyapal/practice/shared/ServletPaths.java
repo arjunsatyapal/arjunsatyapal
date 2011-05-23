@@ -6,7 +6,8 @@ public enum ServletPaths {
   LOGIN_GOOGLE("loginGoogle"),
   LOGIN_GOOGLE_CALLBACK("loginGoogleCallback"),
   LOGIN_SERVICE("loginService"),
-  NOT_AUTHORIZED("notAuthorized");
+  NOT_AUTHORIZED("notAuthorized"),
+  SCHOOL_SERVICE("schoolService");
 
   public final String relativePath;
 

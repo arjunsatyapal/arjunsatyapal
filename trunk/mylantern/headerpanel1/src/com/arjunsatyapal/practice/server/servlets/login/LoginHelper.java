@@ -17,9 +17,9 @@ public class LoginHelper extends RemoteServiceServlet {
   private static Logger logger = Logger.getLogger(LoginHelper.class.getName());
   private static HashMap<Long, UserAccountDso> hashMap =
     new HashMap<Long, UserAccountDso>();
-
+  
   static public String getApplicationURL(HttpServletRequest request) {
-
+    
     if (ServletHelper.isDevelopment(request)) {
       return "http://127.0.0.1:8888/Headerpanel.html?gwt.codesvr=127.0.0.1:9997";
     } else {
@@ -27,23 +27,21 @@ public class LoginHelper extends RemoteServiceServlet {
       return ServletUtils.getBaseUrl(request);
     }
   }
-
+  
   static public UserAccountDso getLoggedInUser(HttpSession session) {
-    boolean localPM = false;
-
     if (session == null)
       return null; // user not logged in
-
+      
     String userId = (String) session.getAttribute("userId");
     if (userId == null)
       return null; // user not logged in
-
+      
     Long id = Long.parseLong(userId.trim());
-
+    
     UserAccountDso u = hashMap.get(id);
     return u;
   }
-
+  
   static public boolean isLoggedIn(HttpServletRequest req) {
     if (req == null)
       return false;
@@ -68,10 +66,12 @@ public class LoginHelper extends RemoteServiceServlet {
       }
     }
   }
-
-  public UserAccountDso loginStarts(HttpSession session, UserAccountDso userAccountDso) {
-    //TODO(arjuns) : See more here for the session management. Now doing hack with puging long as hashId of email.
-//    long id = new Long(user.getOAuthProviderEnum().getProviderId());
+  
+  public UserAccountDso loginStarts(HttpSession session,
+    UserAccountDso userAccountDso) {
+    // TODO(arjuns) : See more here for the session management. Now doing hack
+    // with putting long as hashId of email.
+    // long id = new Long(user.getOAuthProviderEnum().getProviderId());
     long id = new Long(userAccountDso.getEmailAddress().hashCode());
     userAccountDso.setId(Long.toString(id));
     session.setAttribute("userId", String.valueOf(userAccountDso.getId()));
