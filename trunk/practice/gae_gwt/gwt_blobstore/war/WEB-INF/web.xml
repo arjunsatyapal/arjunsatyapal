@@ -12,19 +12,9 @@
     <servlet-class>com.example.myproject.server.BlobServiceImpl</servlet-class>
   </servlet>
 
-  <servlet>
-    <servlet-name>uploadServlet</servlet-name>
-    <servlet-class>com.example.myproject.server.UploadServiceImpl</servlet-class>
-  </servlet>
-
   <servlet-mapping>
     <servlet-name>blobServlet</servlet-name>
     <url-pattern>/gwt_blobstore/blobservice</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>uploadServlet</servlet-name>
-    <url-pattern>/gwt_blobstore/uploadservice</url-pattern>
   </servlet-mapping>
 
   <!-- Default page to serve -->
