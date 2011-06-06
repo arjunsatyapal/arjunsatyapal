@@ -11,6 +11,7 @@ import com.google.gwt.user.client.Window;
 public enum TagDocumentAttribute {
   XMLNS("xmlns", "Primary Name Space"),
   MDML("xmlns:md", "MDML Name Space"),
+  MATHML("xmlns:m", "MathML"),
   BIBLIOGRAPY("xmlns:bib", "Bibliography Name Space"),
   QML("xmlns:q", "QML"),
   ID("id", "ID"),

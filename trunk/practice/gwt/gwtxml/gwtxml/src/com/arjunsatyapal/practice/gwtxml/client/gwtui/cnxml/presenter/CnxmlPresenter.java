@@ -8,7 +8,9 @@ import static com.arjunsatyapal.practice.gwtxml.client.gwtui.cnxml.presenter.Htm
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagContent.getTagContentByXmlTag;
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata.ABSTRACT;
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata.CREATED;
+import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata.KEYWORD_LIST;
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata.REVISED;
+import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata.SUBJECT_LIST;
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata.VERSION;
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagPersonCategory.getTagPersonCategoryByXmlTag;
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagTypeSetting.getTagTypeSettingByXmlTag;
@@ -274,7 +276,11 @@ public class CnxmlPresenter extends Presenter {
           break;
 
         case KEYWORD_LIST:
-          handleKeyWordList(panel, childNode);
+          handleGenericList(panel, childNode, KEYWORD_LIST.getPublicString());
+          break;
+
+        case SUBJECT_LIST:
+          handleGenericList(panel, childNode, SUBJECT_LIST.getPublicString());
           break;
 
         case ABSTRACT:
@@ -291,8 +297,8 @@ public class CnxmlPresenter extends Presenter {
     panel.add(metaDataPanel);
   }
 
-  private void handleKeyWordList(Panel panel, Node node) {
-    StringBuilder builder = new StringBuilder(getBoldString("Keywords : "));
+  private void handleGenericList(Panel panel, Node node, String typeOfList) {
+    StringBuilder builder = new StringBuilder(getBoldString(typeOfList + " : "));
     NodeList childList = node.getChildNodes();
     for (int childIndedx = 0; childIndedx < childList.getLength(); childIndedx++) {
       Node childNode = childList.item(childIndedx);
