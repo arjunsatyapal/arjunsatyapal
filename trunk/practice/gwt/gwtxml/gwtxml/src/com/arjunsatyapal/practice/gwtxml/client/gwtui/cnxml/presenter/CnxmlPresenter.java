@@ -168,6 +168,10 @@ public class CnxmlPresenter extends Presenter {
               case PARA:
                 quoteStringBuilder.append(handlePara(childNode));
                 break;
+              case TEXT:
+              case PREFORMAT:
+                // do nothing;
+                break;
               default:
                 String errMsg = "Unexpected tag : " + tagContent + " inside quote.";
                 Window.alert(errMsg);

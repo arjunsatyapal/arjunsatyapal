@@ -16,6 +16,7 @@ public enum TagContent {
   // TODO(arjuns) : Probably combine text and comment in parent enum.
   TEXT("#text", "Text"),
   COMMENT("#comment", "Comment"),
+  PREFORMAT("preformat", "Preformat"),
   QUOTE("quote", "Quote");
 
   private String xmlTag;
