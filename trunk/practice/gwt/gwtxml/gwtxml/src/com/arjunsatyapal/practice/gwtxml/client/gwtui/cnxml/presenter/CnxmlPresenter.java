@@ -2,16 +2,20 @@
 
 package com.arjunsatyapal.practice.gwtxml.client.gwtui.cnxml.presenter;
 
+import static com.arjunsatyapal.practice.gwtxml.client.gwtui.cnxml.presenter.HtmlUtils.getBlockQuoteString;
 import static com.arjunsatyapal.practice.gwtxml.client.gwtui.cnxml.presenter.HtmlUtils.getBoldString;
+import static com.arjunsatyapal.practice.gwtxml.client.gwtui.cnxml.presenter.HtmlUtils.getH1String;
+import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagContent.getTagContentByXmlTag;
+import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata.ABSTRACT;
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata.CREATED;
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata.REVISED;
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata.VERSION;
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagPersonCategory.getTagPersonCategoryByXmlTag;
+import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagTypeSetting.getTagTypeSettingByXmlTag;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.xml.client.DOMException;
@@ -24,14 +28,15 @@ import com.google.gwt.xml.client.XMLParser;
 import com.arjunsatyapal.practice.gwtxml.client.gwtui.mvpinterfaces.Presenter;
 import com.arjunsatyapal.practice.gwtxml.client.pojos.Person;
 import com.arjunsatyapal.practice.gwtxml.client.xmlenums.CnxmlTag;
+import com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagContent;
 import com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagDocumentAttribute;
 import com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata;
 import com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagPerson;
 import com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagPersonCategory;
+import com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagTypeSetting;
+import com.arjunsatyapal.practice.gwtxml.client.xmlenums.XmlNodeType;
 
 import java.util.ArrayList;
-
-import javax.jdo.metadata.Metadata;
 
 
 /**
@@ -85,10 +90,131 @@ public class CnxmlPresenter extends Presenter {
         break;
       case TITLE:
         handleTitleNode(panel, node);
+      case CONTENT:
+        handleContent(panel, node);
+        break;
       default:
         // TODO(arjuns) : Add exception later.
         break;
     }
+  }
+
+  private void handleContent(Panel panel, Node node) {
+    NodeList childNodes = node.getChildNodes();
+    for (int childIndex = 0; childIndex < childNodes.getLength(); childIndex++) {
+      handleContentChilds(panel, childNodes.item(childIndex));
+    }
+  }
+
+  private void handleContentChilds(Panel panel, Node node) {
+    TagContent tag = TagContent.getTagContentByXmlTag(node.getNodeName());
+
+    switch (tag) {
+      case TEXT:
+        // do nothing.
+        break;
+      case PARA:
+        String paraString = handlePara(node);
+        paraString += "<p>";
+        panel.add(new HTML(paraString));
+        break;
+
+      case QUOTE:
+        String quoteString = handleSection(node);
+        quoteString += "<p>";
+        panel.add(new HTML(HtmlUtils.getBlockQuoteString(quoteString)));
+        break;
+
+      case SECTION:
+        String sectionString = handleSection(node);
+        sectionString += "<p>";
+        panel.add(new HTML(sectionString));
+        break;
+    }
+  }
+
+  private String handleSection(Node node) {
+    NodeList childNodes = node.getChildNodes();
+
+    StringBuilder htmlStringBuilder = new StringBuilder();
+    for (int childIndex = 0; childIndex < childNodes.getLength(); childIndex++) {
+      Node child = childNodes.item(childIndex);
+      TagContent tag = getTagContentByXmlTag(child.getNodeName());
+
+      switch (tag) {
+        case PARA:
+          htmlStringBuilder.append(handlePara(child));
+          break;
+
+        case TITLE:
+          htmlStringBuilder.append(getH1String(child.getFirstChild()
+              .getNodeValue()));
+          htmlStringBuilder.append("<p><p>");
+          break;
+
+        case QUOTE:
+          // TODO(arjuns) : Random hack having single quote.
+          NodeList nodeList = child.getChildNodes();
+
+          StringBuilder quoteStringBuilder = new StringBuilder("<p>");
+          for (int quoteChildIndex = 0; quoteChildIndex < nodeList.getLength(); quoteChildIndex++) {
+            Node childNode = nodeList.item(quoteChildIndex);
+            TagContent tagContent = TagContent.getTagContentByXmlTag(childNode
+                .getNodeName());
+            switch (tagContent) {
+              case SECTION:
+                quoteStringBuilder.append(handleSection(childNode));
+                break;
+              case PARA:
+                quoteStringBuilder.append(handlePara(childNode));
+                break;
+              default:
+                String errMsg = "Unexpected tag : " + tagContent + " inside quote.";
+                Window.alert(errMsg);
+            }
+
+            quoteStringBuilder.append("<p>");
+
+          }
+          String quoteString = getBlockQuoteString(quoteStringBuilder
+              .toString());
+          htmlStringBuilder.append(quoteString);
+          break;
+      }
+    }
+
+    return htmlStringBuilder.toString();
+  }
+
+  private String handlePara(Node node) {
+    NodeList childNodes = node.getChildNodes();
+
+    StringBuilder htmlStringBuilder = new StringBuilder();
+    for (int childIndex = 0; childIndex < childNodes.getLength(); childIndex++) {
+      Node child = childNodes.item(childIndex);
+      TagTypeSetting tag = getTagTypeSettingByXmlTag(child.getNodeName());
+
+      switch (tag) {
+        case TEXT:
+          htmlStringBuilder.append(child.getNodeValue());
+          break;
+
+        case EMPHASIS:
+          String strToEmphasize = handlePara(child);
+          htmlStringBuilder.append(getBoldString(strToEmphasize));
+          break;
+
+        case QUOTE:
+          String quoteString = handlePara(child);
+          htmlStringBuilder.append(getBlockQuoteString(quoteString));
+
+        default:
+          // TODO(arjuns) : Add exception here;
+          break;
+      }
+    }
+
+    return htmlStringBuilder.toString();
   }
 
   private void handleMetaData(Panel panel, Node node) {
@@ -135,6 +261,23 @@ public class CnxmlPresenter extends Presenter {
         case MAINTAINER_LIST:
           handlePersonsList(panel, childNode, "Maintainer");
           break;
+        case LICENSOR_LIST:
+          handlePersonsList(panel, childNode, "Licensor");
+          break;
+
+        case LICENSE:
+          handleLicense(panel, childNode);
+          break;
+
+        case KEYWORD_LIST:
+          handleKeyWordList(panel, childNode);
+          break;
+
+        case ABSTRACT:
+          String abstractText = getBoldString(ABSTRACT.getPublicString()) + " : " + childNode
+              .getFirstChild().getNodeValue();
+          metaDataPanel.add(new HTML(abstractText));
+          break;
         default:
           // TODO(arjuns) : Add exception here.
           break;
@@ -142,6 +285,33 @@ public class CnxmlPresenter extends Presenter {
     }
 
     panel.add(metaDataPanel);
+  }
+
+  private void handleKeyWordList(Panel panel, Node node) {
+    StringBuilder builder = new StringBuilder(getBoldString("Keywords : "));
+    NodeList childList = node.getChildNodes();
+    for (int childIndedx = 0; childIndedx < childList.getLength(); childIndedx++) {
+      Node childNode = childList.item(childIndedx);
+
+      if (childNode.getNodeType() == XmlNodeType.TEXT_NODE.getXmlNodeTypeInt()) {
+        continue;
+      }
+
+      builder.append("\"").append(childNode.getFirstChild().getNodeValue())
+          .append("\" ");
+    }
+
+    panel.add(new HTML(builder.toString()));
+  }
+
+  private void handleLicense(Panel panel, Node licenseNode) {
+    // TODO(arjuns) : Taking shortcut and selecting directly first item.
+    NamedNodeMap licenseAttr = licenseNode.getAttributes();
+    Node licenseLinkNode = licenseAttr.getNamedItem("href");
+    String htmlString = getBoldString("License : ") + HtmlUtils.getHrefString(
+        licenseLinkNode.getNodeValue(), "Creative Commons License");
+
+    panel.add(new HTML(htmlString));
   }
 
   private void handlePersonsList(Panel panel, Node authorListNode,
@@ -162,13 +332,11 @@ public class CnxmlPresenter extends Presenter {
 
         case AUTHOR:
         case MAINTAINER:
+        case LICENSOR:
           // TODO(arjuns) : Taking shortcut for the Person.
           Person person = getPersonFromNode(currAuthor);
           persons.add(person);
           break;
-
-
-
       }
     }
 
