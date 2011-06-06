@@ -10,46 +10,49 @@ import com.google.gwt.user.client.Window;
  * @author arjuns@google.com (Arjun Satyapal)
  */
 public enum CnxmlTag {
-  DOCUMENT("document", false),
-  PARA("para", false),
-  RULE("rule", false),
-  SECTION("section", false),
-  SUB_FIGURE("subfigure", false),
-  MEDIA("media", false),
+  DOCUMENT("document", "Document"),
+  PARA("para", "Para"),
+  RULE("rule", "Rule"),
+  SECTION("section", "Section"),
+  SUB_FIGURE("subfigure", "Sub Figure"),
+  MEDIA("media", "Media"),
   //list (duplicate)
-  PREFORMAT("preformat", false),
-  BLOCK_CODE("block code", false),
-  FIGURE("figure", false),
-  BLOCK_NOTES("block notes", false),
+  PREFORMAT("preformat", "PreFormat"),
+  BLOCK_CODE("block code", "Block Code"),
+  FIGURE("figure", "Figure"),
+  BLOCK_NOTES("block notes", "Block Notes"),
+  BIBLIOGRAPHY("bib:file", "References"),
 
   // Additional Tags.
-  TITLE("title", false),
-  METADATA("metadata", false),
-  COMMENT("#comment", false), // for <!-- -->
-  CONTENT("content", false),
+  TITLE("title", "Title"),
+  METADATA("metadata", "Metadata"),
+  COMMENT("#comment", "Comment"), // for <!-- -->
+  CONTENT("content", "Content"),
+
+
 
   //This is a temporary hack.
-  TEXT_NO_ATTRS("#text", false);
+  TEXT_NO_ATTRS("#text", "Text");
 
-  private String tag;
-  private boolean enabled;
+  private String xmlTag;
+  private String publicString;
 
-  private CnxmlTag(String tag, boolean enabled) {
-    this.tag = tag;
-    this.enabled = enabled;
+  private CnxmlTag(String xmlTag, String publicString) {
+    this.xmlTag = xmlTag;
+    this.publicString = publicString;
   }
 
-  public String getTag() {
-    return tag;
+  public String getXmlTag() {
+    return xmlTag;
   }
 
-  public boolean isEnabled() {
-    return enabled;
+  public String getPublicString() {
+    return publicString;
   }
 
-  public static CnxmlTag getCnxmlTagByString(String tag) {
+  public static CnxmlTag getCnxmlTagByXmlTag(String tag) {
     for (CnxmlTag curr : CnxmlTag.values()) {
-      if (curr.getTag().equals(tag)) {
+      if (curr.getXmlTag().equals(tag)) {
         return curr;
       }
     }

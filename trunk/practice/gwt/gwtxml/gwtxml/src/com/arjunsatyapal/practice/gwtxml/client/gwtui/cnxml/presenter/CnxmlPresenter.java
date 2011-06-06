@@ -5,6 +5,7 @@ package com.arjunsatyapal.practice.gwtxml.client.gwtui.cnxml.presenter;
 import static com.arjunsatyapal.practice.gwtxml.client.gwtui.cnxml.presenter.HtmlUtils.getBlockQuoteString;
 import static com.arjunsatyapal.practice.gwtxml.client.gwtui.cnxml.presenter.HtmlUtils.getBoldString;
 import static com.arjunsatyapal.practice.gwtxml.client.gwtui.cnxml.presenter.HtmlUtils.getH1String;
+import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.CnxmlTag.BIBLIOGRAPHY;
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagContent.getTagContentByXmlTag;
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata.ABSTRACT;
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata.CREATED;
@@ -28,8 +29,12 @@ import com.google.gwt.xml.client.NodeList;
 import com.google.gwt.xml.client.XMLParser;
 
 import com.arjunsatyapal.practice.gwtxml.client.gwtui.mvpinterfaces.Presenter;
+import com.arjunsatyapal.practice.gwtxml.client.pojos.Book;
 import com.arjunsatyapal.practice.gwtxml.client.pojos.Person;
 import com.arjunsatyapal.practice.gwtxml.client.xmlenums.CnxmlTag;
+import com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagBibliographyEntry;
+import com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagBibliographyFile;
+import com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagBook;
 import com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagContent;
 import com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagDocumentAttribute;
 import com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata;
@@ -77,7 +82,7 @@ public class CnxmlPresenter extends Presenter {
   }
 
   private void handleCurrentNode(Panel panel, Node node) {
-    CnxmlTag tag = CnxmlTag.getCnxmlTagByString(node.getNodeName());
+    CnxmlTag tag = CnxmlTag.getCnxmlTagByXmlTag(node.getNodeName());
     String temp = node.getNodeValue();
     switch (tag) {
       case DOCUMENT:
@@ -94,6 +99,10 @@ public class CnxmlPresenter extends Presenter {
         handleTitleNode(panel, node);
       case CONTENT:
         handleContent(panel, node);
+        break;
+      case BIBLIOGRAPHY:
+        panel.add(new HTML(getH1String(BIBLIOGRAPHY.getPublicString())));
+        handleBibliographyFile(panel, node);
         break;
       default:
         // TODO(arjuns) : Add exception later.
@@ -132,7 +141,148 @@ public class CnxmlPresenter extends Presenter {
         sectionString += "<p>";
         panel.add(new HTML(sectionString));
         break;
+
+
     }
+  }
+
+  private void handleBibliographyFile(Panel panel, Node node) {
+    NodeList nodeList = node.getChildNodes();
+    for (int childIndex = 0; childIndex < nodeList.getLength(); childIndex++) {
+      Node childNode = nodeList.item(childIndex);
+      TagBibliographyFile tag = TagBibliographyFile
+          .getTagBibliographyFileByXmlTag(childNode.getNodeName());
+
+      switch (tag) {
+        case TEXT:
+          // do nothing.
+          break;
+
+        case ENTRY:
+          // TODO(arjuns) : Convert this to string Builder.
+          handleBibliographyEntry(panel, childNode);
+          break;
+
+        default:
+          String errString = "Invalid tag type[" + tag + "] for TagBibliographyFile";
+          Window.alert(errString);
+          throw new IllegalArgumentException(errString);
+      }
+    }
+  }
+
+
+  private void handleBibliographyEntry(Panel panel, Node node) {
+    NodeList nodeList = node.getChildNodes();
+
+    StringBuilder bibBuilder = new StringBuilder();
+    bibBuilder.append("<p>");
+
+    int counter = 0;
+    for (int childIndex = 0; childIndex < nodeList.getLength(); childIndex++) {
+      Node childNode = nodeList.item(childIndex);
+      TagBibliographyEntry tag = TagBibliographyEntry
+          .getTagBibliographyEntryByXmlTag(childNode.getNodeName());
+
+      switch (tag) {
+        case TEXT:
+          // do nothing.
+          break;
+
+        case BOOK:
+          // TODO(arjuns) : This will change as more bibliography nodes will be
+          // added.
+          Book book = getBookFromNode(childNode);
+          bibBuilder.append(++counter).append(".").append(book.getHtmlString());
+          break;
+      }
+    }
+
+    panel.add(new HTML(bibBuilder.toString()));
+  }
+
+  private Book getBookFromNode(Node bookNode) {
+    Book.Builder builder = new Book.Builder();
+
+    NodeList nodeList = bookNode.getChildNodes();
+    for (int childIndex = 0; childIndex < nodeList.getLength(); childIndex++) {
+      Node currNode = nodeList.item(childIndex);
+      TagBook tag = TagBook.getTagPersonByXmlTag(currNode.getNodeName());
+
+      switch (tag) {
+        case ADDRESS:
+          if (currNode.hasChildNodes()) {
+            builder.setAddress(currNode.getFirstChild().getNodeValue());
+          }
+          break;
+
+        case AUTHOR:
+          if (currNode.hasChildNodes()) {
+            builder.setAuthor(currNode.getFirstChild().getNodeValue());
+          }
+          break;
+
+        case TITLE:
+          if (currNode.hasChildNodes()) {
+            builder.setTitle(currNode.getFirstChild().getNodeValue());
+          }
+          break;
+
+        case EDITION:
+          if (currNode.hasChildNodes()) {
+            builder.setEdition(currNode.getFirstChild().getNodeValue());
+          }
+          break;
+
+        case MONTH:
+          if (currNode.hasChildNodes()) {
+            builder.setMonth(currNode.getFirstChild().getNodeValue());
+          }
+          break;
+
+        case NOTE:
+          if (currNode.hasChildNodes()) {
+            builder.setNote(currNode.getFirstChild().getNodeValue());
+          }
+          break;
+
+        case PUBLISHER:
+          if (currNode.hasChildNodes()) {
+            builder.setPublisher(currNode.getFirstChild().getNodeValue());
+          }
+          break;
+
+        case SERIES:
+          if (currNode.hasChildNodes()) {
+            builder.setSeries(currNode.getFirstChild().getNodeValue());
+          }
+          break;
+
+        case VOLUME:
+          if (currNode.hasChildNodes()) {
+            builder.setVolume(currNode.getFirstChild().getNodeValue());
+          }
+          break;
+
+        case YEAR:
+          if (currNode.hasChildNodes()) {
+            builder.setYear(currNode.getFirstChild().getNodeValue());
+          }
+          break;
+
+        case TEXT:
+        case COMMENT:
+          // do nothing.
+          break;
+
+        default:
+          String errString = "Invalid tag[" + tag + "].";
+          Window.alert(errString);
+          throw new IllegalArgumentException(errString);
+      }
+    }
+
+    return builder.build();
   }
 
   private String handleSection(Node node) {
@@ -144,6 +294,10 @@ public class CnxmlPresenter extends Presenter {
       TagContent tag = getTagContentByXmlTag(child.getNodeName());
 
       switch (tag) {
+        case SECTION:
+          htmlStringBuilder.append(handleSection(child));
+          break;
+
         case PARA:
           htmlStringBuilder.append(handlePara(child));
           break;

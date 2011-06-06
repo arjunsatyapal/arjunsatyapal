@@ -8,23 +8,17 @@ import com.google.gwt.user.client.Window;
  * @author arjuns@google.com (Arjun Satyapal)
  *
  */
-public enum TagContent {
-  PARA("para", "Para"),
-  SECTION("section", "Section"),
-  TITLE("title", "Title"),
+public enum TagBibliographyFile {
+  ENTRY("bib:entry", "Entry"),
 
   // TODO(arjuns) : Probably combine text and comment in parent enum.
   TEXT("#text", "Text"),
-  COMMENT("#comment", "Comment"),
-  PREFORMAT("preformat", "Preformat"),
-  QUOTE("quote", "Quote"),
-  FIGURE("figure", "Figure"),
-  TABLE("table", "table");
+  COMMENT("#comment", "Comment");
 
   private String xmlTag;
   private String publicString;
 
-  private TagContent(String xmlTag, String publicString) {
+  private TagBibliographyFile(String xmlTag, String publicString) {
     this.xmlTag = xmlTag;
     this.publicString = publicString;
   }
@@ -37,8 +31,8 @@ public enum TagContent {
     return publicString;
   }
 
-  public static TagContent getTagContentByXmlTag(String xmltag) {
-    for (TagContent curr : TagContent.values()) {
+  public static TagBibliographyFile getTagBibliographyFileByXmlTag(String xmltag) {
+    for (TagBibliographyFile curr : TagBibliographyFile.values()) {
       if (curr.getXmlTag().equals(xmltag)) {
         return curr;
       }

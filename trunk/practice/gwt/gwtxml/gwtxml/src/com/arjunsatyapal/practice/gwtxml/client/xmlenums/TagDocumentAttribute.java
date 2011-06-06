@@ -12,7 +12,7 @@ public enum TagDocumentAttribute {
   XMLNS("xmlns", "Primary Name Space"),
   MDML("xmlns:md", "MDML Name Space"),
   MATHML("xmlns:m", "MathML"),
-  BIBLIOGRAPY("xmlns:bib", "Bibliography Name Space"),
+  BIBLIOGRAPY_NS("xmlns:bib", "Bibliography Name Space"),
   QML("xmlns:q", "QML"),
   ID("id", "ID"),
   MODULE_ID("module-id", "Module Id"),

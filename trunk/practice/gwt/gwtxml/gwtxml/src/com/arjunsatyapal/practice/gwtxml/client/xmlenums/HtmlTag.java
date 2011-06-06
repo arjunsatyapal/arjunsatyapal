@@ -8,6 +8,7 @@ package com.arjunsatyapal.practice.gwtxml.client.xmlenums;
  */
 public enum HtmlTag {
   BOLD("<b>", "</b>"),
+  ITALIC("<i>", "</i>"),
   H1("<h1>", "</h1>"),
   BLOCKQUOTE("<blockquote>", "</blockquote>");
 

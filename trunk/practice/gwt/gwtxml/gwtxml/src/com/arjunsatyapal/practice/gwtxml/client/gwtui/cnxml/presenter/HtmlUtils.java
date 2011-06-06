@@ -4,6 +4,7 @@ package com.arjunsatyapal.practice.gwtxml.client.gwtui.cnxml.presenter;
 
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.HtmlTag.BLOCKQUOTE;
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.HtmlTag.BOLD;
+import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.HtmlTag.ITALIC;
 
 import com.google.gwt.user.client.Window;
 
@@ -20,6 +21,10 @@ public class HtmlUtils {
 
   public static String getBoldString(String string) {
     return getHtmlFormattedString(string, BOLD);
+  }
+
+  public static String getItalicString(String string) {
+    return getHtmlFormattedString(string, ITALIC);
   }
 
   public static String getBlockQuoteString(String string) {
