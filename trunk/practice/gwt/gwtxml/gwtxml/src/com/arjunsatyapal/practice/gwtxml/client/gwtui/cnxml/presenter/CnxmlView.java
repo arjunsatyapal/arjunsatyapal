@@ -3,14 +3,15 @@ package com.arjunsatyapal.practice.gwtxml.client.gwtui.cnxml.presenter;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.LayoutPanel;
+import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 import com.arjunsatyapal.practice.gwtxml.client.gwtui.mvpinterfaces.View;
 
 public class CnxmlView extends View implements CnxmlDisplay {
   @UiField
-  LayoutPanel layoutPanel;
+  ScrollPanel layoutPanel;
 
   private static CnxmlWidgetUiBinder uiBinder = GWT
       .create(CnxmlWidgetUiBinder.class);
@@ -23,7 +24,7 @@ public class CnxmlView extends View implements CnxmlDisplay {
   }
 
   @Override
-  public LayoutPanel getLayoutPanel() {
+  public Panel getLayoutPanel() {
     return layoutPanel;
   }
 
