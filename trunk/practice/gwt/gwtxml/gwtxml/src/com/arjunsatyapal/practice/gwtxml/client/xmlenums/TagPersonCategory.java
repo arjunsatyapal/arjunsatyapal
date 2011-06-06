@@ -8,23 +8,20 @@ import com.google.gwt.user.client.Window;
  * @author arjuns@google.com (Arjun Satyapal)
  *
  */
-public enum TagPerson {
-  FIRST_NAME("md:firstname", "First Name"),
-  // This maps to surname.
-  LAST_NAME("md:surname", "Last Name"),
-  FULL_NAME("md:fullname", "Full Name"),
-  OTHER_NAME("md:othername", "Other Name"),
-  EMAIL("md:email", "Email"),
+public enum TagPersonCategory {
+  AUTHOR("md:author", "Author"),
+  MAINTAINER("md:maintainer", "Maintainer"),
+  LICENSOR("md:licensor", "Licensor"),
 
+  // Text
   // TODO(arjuns) : Probably combine text and comment in parent enum.
-
   TEXT("#text", "Text"),
   COMMENT("#comment", "Comment");
 
   private String xmlTag;
   private String publicString;
 
-  private TagPerson(String xmlTag, String publicString) {
+  private TagPersonCategory(String xmlTag, String publicString) {
     this.xmlTag = xmlTag;
     this.publicString = publicString;
   }
@@ -37,10 +34,10 @@ public enum TagPerson {
     return publicString;
   }
 
-  public static TagPerson getTagPersonByXmlTag(String xmlTag) {
-    for (TagPerson currTag : TagPerson.values()) {
-      if (currTag.getXmlTag().equals(xmlTag)) {
-        return currTag;
+  public static TagPersonCategory getTagPersonCategoryByXmlTag(String xmlTag) {
+    for (TagPersonCategory curr : TagPersonCategory.values()) {
+      if (curr.getXmlTag().equals(xmlTag)) {
+        return curr;
       }
     }
 

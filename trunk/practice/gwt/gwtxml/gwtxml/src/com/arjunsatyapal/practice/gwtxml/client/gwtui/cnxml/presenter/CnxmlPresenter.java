@@ -6,6 +6,7 @@ import static com.arjunsatyapal.practice.gwtxml.client.gwtui.cnxml.presenter.Htm
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata.CREATED;
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata.REVISED;
 import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata.VERSION;
+import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagPersonCategory.getTagPersonCategoryByXmlTag;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
@@ -26,6 +27,9 @@ import com.arjunsatyapal.practice.gwtxml.client.xmlenums.CnxmlTag;
 import com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagDocumentAttribute;
 import com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagMetadata;
 import com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagPerson;
+import com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagPersonCategory;
+
+import java.util.ArrayList;
 
 import javax.jdo.metadata.Metadata;
 
@@ -125,9 +129,11 @@ public class CnxmlPresenter extends Presenter {
           break;
 
         case AUTHOR_LIST:
-          // TODO(arjuns) : Currently taking shortcut without verifying that it
-          // is author.
-          handleAuthorList(panel, childNode);
+          handlePersonsList(panel, childNode, "Author");
+          break;
+
+        case MAINTAINER_LIST:
+          handlePersonsList(panel, childNode, "Maintainer");
           break;
         default:
           // TODO(arjuns) : Add exception here.
@@ -138,52 +144,99 @@ public class CnxmlPresenter extends Presenter {
     panel.add(metaDataPanel);
   }
 
-  private void handleAuthorList(Panel panel, Node authorListNode) {
+  private void handlePersonsList(Panel panel, Node authorListNode,
+      String personCategory) {
     NodeList authorList = authorListNode.getChildNodes();
+
+    ArrayList<Person> persons = new ArrayList<Person>();
 
     for (int authorIndex = 0; authorIndex < authorList.getLength(); authorIndex++) {
       Node currAuthor = authorList.item(authorIndex);
+      TagPersonCategory category = getTagPersonCategoryByXmlTag(currAuthor
+          .getNodeName());
 
-      // TODO(arjuns) : Taking shortcut for the Person.
-      String id = currAuthor.getAttributes().item(0).getFirstChild()
-          .getNodeValue();
-      Person.Builder builder = new Person.Builder();
-      builder.setId(id);
+      switch (category) {
+        case TEXT:
+          // do nothing.
+          break;
 
-      NodeList nodeList = currAuthor.getChildNodes();
-      for (int childIndex = 0; childIndex < nodeList.getLength(); childIndex++) {
-        Node currNode = nodeList.item(childIndex);
-        TagPerson tag = TagPerson.getTagPersonByXmlTag(currNode.getNodeValue());
+        case AUTHOR:
+        case MAINTAINER:
+          // TODO(arjuns) : Taking shortcut for the Person.
+          Person person = getPersonFromNode(currAuthor);
+          persons.add(person);
+          break;
 
-        String currNodeFirstChildValue = currNode.getFirstChild()
-            .getNodeValue();
-        switch (tag) {
-          case FIRST_NAME:
-            builder.setFirstName(currNodeFirstChildValue);
-            break;
-          case LAST_NAME:
-            builder.setLastName(currNodeFirstChildValue);
-            break;
 
-          case FULL_NAME:
-            builder.setFullName(currNodeFirstChildValue);
-            break;
 
-          case EMAIL:
-            builder.setEmail(currNodeFirstChildValue);
-            break;
-
-          case OTHER_NAME:
-            builder.setOtherName(currNodeFirstChildValue);
-            break;
-
-          default:
-            Window.alert("Illegal tag : " + tag);
-        }
       }
     }
-    // Person person = builder.
+
+    StringBuilder htmlStringBuilder = new StringBuilder(
+        getBoldString(personCategory + " : "));
+
+    for (Person currAuthor : persons) {
+      htmlStringBuilder.append(
+          HtmlUtils.getEmailString(currAuthor.getEmail(),
+              currAuthor.getFirstName() + " " + currAuthor.getLastName()))
+          .append(" ");
+    }
+
+    panel.add(new HTML(htmlStringBuilder.toString()));
   }
+
+  private Person getPersonFromNode(Node personNode) {
+    String id = personNode.getAttributes().item(0).getNodeValue();
+    Person.Builder builder = new Person.Builder();
+    builder.setId(id);
+
+    NodeList nodeList = personNode.getChildNodes();
+    for (int childIndex = 0; childIndex < nodeList.getLength(); childIndex++) {
+      Node currNode = nodeList.item(childIndex);
+      TagPerson tag = TagPerson.getTagPersonByXmlTag(currNode.getNodeName());
+
+      switch (tag) {
+        case TEXT:
+          // do nothing.
+          break;
+        case FIRST_NAME:
+          if (currNode.hasChildNodes()) {
+            builder.setFirstName(currNode.getFirstChild().getNodeValue());
+          }
+          break;
+        case LAST_NAME:
+          if (currNode.hasChildNodes()) {
+            builder.setLastName(currNode.getFirstChild().getNodeValue());
+          }
+          break;
+
+        case FULL_NAME:
+          if (currNode.hasChildNodes()) {
+            builder.setFullName(currNode.getFirstChild().getNodeValue());
+          }
+          break;
+
+        case EMAIL:
+          if (currNode.hasChildNodes()) {
+            builder.setEmail(currNode.getFirstChild().getNodeValue());
+          }
+          break;
+
+        case OTHER_NAME:
+          if (currNode.hasChildNodes()) {
+            builder.setOtherName(currNode.getFirstChild().getNodeValue());
+          }
+          break;
+
+        default:
+          Window.alert("Illegal tag : " + tag);
+      }
+    }
+
+    return builder.build();
+  }
+
+  // // Person person = builder.
 
   private void handleTitleNode(Panel panel, Node node) {
     Node title = node.getFirstChild();

@@ -23,6 +23,14 @@ public class HtmlUtils {
     return getHtmlFormattedString(string, HtmlTag.H1);
   }
 
+  public static String getEmailString(String emailId, String href) {
+    if (href == null || href.isEmpty()) {
+      throw new IllegalArgumentException("href cannot be empty");
+    }
+
+    return "<a href=\"mailto:" + emailId + "\">" + href + "</a>";
+  }
+
 
   private static String getHtmlFormattedString(String string, HtmlTag htmlTag) {
     return htmlTag.getStartTag() + string + htmlTag.getEndTag();
