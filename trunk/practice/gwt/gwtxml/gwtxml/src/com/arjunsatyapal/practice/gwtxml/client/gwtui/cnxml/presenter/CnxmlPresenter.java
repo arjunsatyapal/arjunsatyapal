@@ -18,6 +18,7 @@ import static com.arjunsatyapal.practice.gwtxml.client.xmlenums.TagTypeSetting.g
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -142,8 +143,23 @@ public class CnxmlPresenter extends Presenter {
         panel.add(new HTML(sectionString));
         break;
 
+      case GDOCUMENT:
+        handleGDocument(panel, node);
+        break;
 
+      default :
+         String errString = "Invalid Tag[" + tag + "] for handleContentChilds";
+         Window.alert(errString);
+         throw new IllegalArgumentException(errString);
     }
+  }
+
+  private void handleGDocument(Panel panel, Node documentNode) {
+    NamedNodeMap documentAttributes = documentNode.getAttributes();
+    Node documentLinkNode = documentAttributes.getNamedItem("href");
+
+    String url = documentLinkNode.getNodeValue();
+    GetExample.doGet(url, panel);
   }
 
   private void handleBibliographyFile(Panel panel, Node node) {
@@ -608,45 +624,3 @@ public class CnxmlPresenter extends Presenter {
     }
   }
 }
-// private void handleCurrentLevel(int currLevel, StringBuilder builder,
-// NodeList nodeList) {
-// if (currLevel > 2) {
-// return;
-// }
-//
-// StringBuilder prefixBuilder = new StringBuilder("");
-//
-// for (int i = 0; i < currLevel; i++) {
-// prefixBuilder.append("\t");
-// }
-//
-// String spacePrefix = prefixBuilder.toString();
-// for (int nodeIndex = 0; nodeIndex < nodeList.getLength(); nodeIndex++) {
-// Node currNode = nodeList.item(nodeIndex);
-//
-// builder.append("\n").append(spacePrefix).append("Level = ")
-// .append(currLevel).append(" NodeName = ")
-// .append(currNode.getNodeName());
-// builder.append(" NodeType = ").append(currNode.getNodeType());
-// builder.append(" NodeValue = ").append(currNode.getNodeValue());
-//
-// String temp = currNode.getNodeName();
-// CnxmlTag tag = CnxmlTag.getCnxmlTagByString(currNode.getNodeName());
-// if (tag.canHaveChildAttributes() && currNode.hasAttributes()) {
-// NamedNodeMap attrs = currNode.getAttributes();
-//
-// if (attrs != null) {
-// for (int attrIndex = 0; attrIndex < attrs.getLength(); attrIndex++) {
-// Node currAttr = attrs.item(attrIndex);
-// builder.append(" attr[").append(attrIndex).append("] : ")
-// .append(currAttr.getNodeName()).append("[")
-// .append(currAttr.getNodeValue()).append("],");
-// }
-// }
-// }
-//
-// if (currNode.hasChildNodes()) {
-// handleCurrentLevel(currLevel + 1, builder, currNode.getChildNodes());
-// }
-// }
-// }

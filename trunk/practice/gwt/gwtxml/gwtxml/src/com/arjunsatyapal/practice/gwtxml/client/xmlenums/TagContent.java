@@ -19,7 +19,8 @@ public enum TagContent {
   PREFORMAT("preformat", "Preformat"),
   QUOTE("quote", "Quote"),
   FIGURE("figure", "Figure"),
-  TABLE("table", "table");
+  TABLE("table", "table"),
+  GDOCUMENT("gdocument", "Google Document");
 
   private String xmlTag;
   private String publicString;
