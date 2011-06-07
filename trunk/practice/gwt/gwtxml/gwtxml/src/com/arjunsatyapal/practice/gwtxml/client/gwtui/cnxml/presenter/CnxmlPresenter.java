@@ -97,7 +97,9 @@ public class CnxmlPresenter extends Presenter {
         handleMetaData(panel, node);
         break;
       case TITLE:
-        handleTitleNode(panel, node);
+        String titleString = handleTitleNode(node);
+        panel.add(new HTML(titleString));
+        break;
       case CONTENT:
         handleContent(panel, node);
         break;
@@ -383,6 +385,12 @@ public class CnxmlPresenter extends Presenter {
         case QUOTE:
           String quoteString = handlePara(child);
           htmlStringBuilder.append(getBlockQuoteString(quoteString));
+          break;
+
+        case TITLE:
+          String titleString = handleTitleNode(child);
+          htmlStringBuilder.append(titleString);
+          break;
 
         default:
           // TODO(arjuns) : Add exception here;
@@ -442,7 +450,7 @@ public class CnxmlPresenter extends Presenter {
           break;
 
         case LICENSE:
-          handleLicense(panel, childNode);
+          handleUrl(panel, childNode);
           break;
 
         case KEYWORD_LIST:
@@ -484,10 +492,10 @@ public class CnxmlPresenter extends Presenter {
     panel.add(new HTML(builder.toString()));
   }
 
-  private void handleLicense(Panel panel, Node licenseNode) {
+  private void handleUrl(Panel panel, Node licenseNode) {
     // TODO(arjuns) : Taking shortcut and selecting directly first item.
     NamedNodeMap licenseAttr = licenseNode.getAttributes();
-    Node licenseLinkNode = licenseAttr.getNamedItem("href");
+    Node licenseLinkNode = licenseAttr.item(0);
     String htmlString = getBoldString("License : ") + HtmlUtils.getHrefString(
         licenseLinkNode.getNodeValue(), "Creative Commons License");
 
@@ -584,12 +592,10 @@ public class CnxmlPresenter extends Presenter {
     return builder.build();
   }
 
-  // // Person person = builder.
-
-  private void handleTitleNode(Panel panel, Node node) {
+  private String handleTitleNode(Node node) {
     Node title = node.getFirstChild();
-    String htmlText = HtmlUtils.getH1String(title.getNodeValue());
-    panel.add(new HTML(htmlText));
+    return HtmlUtils.getH1String(title.getNodeValue());
+
   }
 
   private void handleTextNode(Panel panel, Node node) {

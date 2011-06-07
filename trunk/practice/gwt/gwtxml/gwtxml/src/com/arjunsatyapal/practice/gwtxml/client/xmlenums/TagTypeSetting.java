@@ -30,6 +30,7 @@ public enum TagTypeSetting {
   QUOTE("quote"),
   FOREIGN("foreign"),
   PREFORMAT("preformat"),
+  TITLE("title"),
 
   // TODO(arjuns) : Probably combine text and comment in parent enum.
   TEXT("#text"),
