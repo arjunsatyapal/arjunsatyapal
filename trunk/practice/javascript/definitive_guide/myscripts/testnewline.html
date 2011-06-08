@@ -1,0 +1,32 @@
+<html>
+<body>
+  <script language="JavaScript1.2">
+      var str = "Hello \r\n arjun";
+      alert(str);
+      document.writeln("I am new <p>" + str);
+      document.writeln("<p> len of str = " + str.length);
+      
+      var mynumber = 15
+      document.write("<p>length of number(" + mynumber + ") = " + mynumber.length);
+      document.write("<p> binary_string = " + mynumber.toString(2));
+      document.write("<p> octal_string = " + mynumber.toString(8));
+      document.write("<p> hex_string = " + mynumber.toString(16));
+      
+      mynumber = 123456.789
+      document.writeln("<p> Original number = " + mynumber);
+      document.writeln("<p> to_fixed(0) = " + mynumber.toFixed(0));
+      document.writeln("<p> toFixed(2) = " + mynumber.toFixed(2));
+      document.writeln("<p> toExponential(0) = " + mynumber.toExponential(0));
+      document.writeln("<p> toExponential(1) = " + mynumber.toExponential(1));
+      document.writeln("<p> toExponential(3) = " + mynumber.toExponential(3));
+      document.writeln("<p> toPrecision(4) = " + mynumber.toPrecision(4));
+      document.writeln("<p> toPrecision(7) = " + mynumber.toPrecision(7));
+      
+      var myinfinity = 1/0 // for infinity
+      document.write("<p> See infinity string = " + myinfinity);
+      
+      var mynan = "asdf" / 2; // for nan.
+      document.write("<p> See nan string = " + mynan);
+    </script>
+</body>
+</html>
