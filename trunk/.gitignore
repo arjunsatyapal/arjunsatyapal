@@ -30,8 +30,8 @@ appengine-generated/
 */*/war/WEB-INF/deploy/
 
 # Ignoring the jars which are part of Google Eclipse Plugin
-appengine-api-*.*.jar
-appengine-api-*.jar
+appengine-*.*.jar
+appengine-*.jar
 datanucleus-*.*.jar
 datanucleus-*.jar
 geronimo-*.*.jar
