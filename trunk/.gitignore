@@ -31,9 +31,13 @@ appengine-generated/
 
 # Ignoring the jars which are part of Google Eclipse Plugin
 appengine-api-*.*.jar
+appengine-api-*.jar
 datanucleus-*.*.jar
+datanucleus-*.jar
 geronimo-*.*.jar
+geronimo-*.jar
 geronimo-*.*.jar
+geronimo-*.jar
 gwt-servlet.jar
 jdo2-api-*.jar
 jsr107cache-*.jar
