@@ -4,18 +4,29 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-  
+
   <!-- Servlets -->
   <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.arjunsatyapal.practice.oauth.docs.server.GreetingServiceImpl</servlet-class>
+    <servlet-name>GoogleDomainKeyRegistrationServlet</servlet-name>
+    <servlet-class>com.arjunsatyapal.practice.oauth.docs.server.servlets.admin.GoogleDomainKeyRegistrationServlet</servlet-class>
   </servlet>
-  
+
   <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/oauth_docs/greet</url-pattern>
+    <servlet-name>GoogleDomainKeyRegistrationServlet</servlet-name>
+    <url-pattern>/admin/GoogleDomainKeyRegistrationServlet</url-pattern>
   </servlet-mapping>
-  
+
+
+  <!-- Security Constratints. -->
+  <!-- <security-constraint>
+    <web-resource-collection>
+      <url-pattern>/admin/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>admin</role-name>
+    </auth-constraint>
+  </security-constraint> -->
+
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Oauth_docs.html</welcome-file>
