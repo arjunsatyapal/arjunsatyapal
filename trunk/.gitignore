@@ -8,6 +8,7 @@
 .DS_Store
 temp/
 *.nocache.js
+.settings
 
 # Ignoring the cache files
 *.cache.*
