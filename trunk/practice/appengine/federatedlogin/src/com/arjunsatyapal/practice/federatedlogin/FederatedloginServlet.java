@@ -20,7 +20,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 public class FederatedloginServlet extends HttpServlet {
   private static Logger log = Logger.getLogger(FederatedloginServlet.class
     .getName());
-  
+
   private static final Map<String, String> openIdProviders;
   static {
     openIdProviders = new HashMap<String, String>();
@@ -30,17 +30,17 @@ public class FederatedloginServlet extends HttpServlet {
     openIdProviders.put("AOL", "aol.com");
     openIdProviders.put("MyOpenId.com", "myopenid.com");
   }
-  
+
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp)
     throws IOException {
     UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser(); // or req.getUserPrincipal()
-    Set<String> attributes = new HashSet();
-    
+    Set<String> attributes = new HashSet<String>();
+
     resp.setContentType("text/html");
     PrintWriter out = resp.getWriter();
-    
+
     if (user != null) {
       out.println("Hello <i>" + user.getNickname() + "</i>!");
       out
