@@ -31,7 +31,7 @@ public class ResourceServlet extends HttpServlet {
         HttpServletRequest req, HttpServletResponse res) throws IOException {
         BlobstoreService blobstoreService =
             BlobstoreServiceFactory.getBlobstoreService();
-        res.getWriter().print(
-            "url=" + blobstoreService.createUploadUrl("/uploadServlet"));
+        res.getWriter().println(
+            "url= " + blobstoreService.createUploadUrl("/uploadServlet"));
     }
 }
