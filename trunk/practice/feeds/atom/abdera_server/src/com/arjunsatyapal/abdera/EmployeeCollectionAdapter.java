@@ -17,25 +17,21 @@
  */
 package com.arjunsatyapal.abdera;
 
+import org.apache.abdera.Abdera;
+import org.apache.abdera.factory.Factory;
+import org.apache.abdera.i18n.iri.IRI;
+import org.apache.abdera.model.Content;
+import org.apache.abdera.model.Person;
+import org.apache.abdera.protocol.server.RequestContext;
+import org.apache.abdera.protocol.server.context.ResponseContextException;
+import org.apache.abdera.protocol.server.impl.AbstractEntityCollectionAdapter;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import javax.xml.namespace.QName;
-
-import org.apache.abdera.Abdera;
-import org.apache.abdera.factory.Factory;
-import org.apache.abdera.i18n.iri.IRI;
-import org.apache.abdera.model.Content;
-import org.apache.abdera.model.Element;
-import org.apache.abdera.model.Person;
-import org.apache.abdera.protocol.server.RequestContext;
-import org.apache.abdera.protocol.server.ResponseContext;
-import org.apache.abdera.protocol.server.context.ResponseContextException;
-import org.apache.abdera.protocol.server.impl.AbstractEntityCollectionAdapter;
 
 public class EmployeeCollectionAdapter extends
         AbstractEntityCollectionAdapter<Employee> {
@@ -49,6 +45,7 @@ public class EmployeeCollectionAdapter extends
     /**
      * A unique ID for this feed.
      */
+    @Override
     public String getId(RequestContext request) {
         return "tag:acme.com,2007:employee:feed";
     }
@@ -56,6 +53,7 @@ public class EmployeeCollectionAdapter extends
     /**
      * The title of our collection.
      */
+    @Override
     public String getTitle(RequestContext request) {
         return "Acme Employee Database";
     }
@@ -63,18 +61,21 @@ public class EmployeeCollectionAdapter extends
     /**
      * The author of this collection.
      */
+    @Override
     public String getAuthor(RequestContext request) {
         return "Acme Industries";
     }
 
     // END SNIPPET: feedmetadata
     // START SNIPPET: getEntries
+    @Override
     public Iterable<Employee> getEntries(RequestContext request) {
         return employees.values();
     }
 
     // END SNIPPET: getEntries
     // START SNIPPET: getEntry
+    @Override
     public Employee getEntry(String resourceName, RequestContext request)
             throws ResponseContextException {
         Integer id = getIdFromResourceName(resourceName);
@@ -90,24 +91,30 @@ public class EmployeeCollectionAdapter extends
         return new Integer(resourceName.substring(0, idx));
     }
 
+    @Override
     public String getName(Employee entry) {
         return entry.getId() + "-" + entry.getName().replaceAll(" ", "_");
     }
 
     // END SNIPPET: getEntry
     // START SNIPPET: entryMetadata
+    @Override
     public String getId(Employee entry) {
         return ID_PREFIX + entry.getId();
     }
 
+    @Override
     public String getTitle(Employee entry) {
         return entry.getName();
     }
 
+    @Override
     public Date getUpdated(Employee entry) {
         return entry.getUpdated();
     }
 
+    @SuppressWarnings("unused")
+    @Override
     public List<Person> getAuthors(Employee entry, RequestContext request)
             throws ResponseContextException {
         Person author = request.getAbdera().getFactory().newAuthor();
@@ -115,6 +122,7 @@ public class EmployeeCollectionAdapter extends
         return Arrays.asList(author);
     }
 
+    @Override
     public Object getContent(Employee entry, RequestContext request) {
         Content content = factory.newContent(Content.Type.TEXT);
         content.setText(entry.getName());
@@ -123,6 +131,8 @@ public class EmployeeCollectionAdapter extends
 
     // END SNIPPET: entryMetadata
     // START SNIPPET: methods
+    @SuppressWarnings("unused")
+    @Override
     public Employee postEntry(String title, IRI id, String summary,
             Date updated, List<Person> authors, Content content,
             RequestContext request) throws ResponseContextException {
@@ -134,12 +144,15 @@ public class EmployeeCollectionAdapter extends
         return employee;
     }
 
+    @SuppressWarnings("unused")
+    @Override
     public void putEntry(Employee employee, String title, Date updated,
             List<Person> authors, String summary, Content content,
             RequestContext request) throws ResponseContextException {
         employee.setName(content.getText().trim());
     }
 
+    @Override
     public void deleteEntry(String resourceName, RequestContext request)
             throws ResponseContextException {
         Integer id = getIdFromResourceName(resourceName);

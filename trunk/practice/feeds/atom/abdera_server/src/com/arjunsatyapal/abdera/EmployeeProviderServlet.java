@@ -24,6 +24,7 @@ import org.apache.abdera.protocol.server.servlet.AbderaServlet;
 
 // START SNIPPET: servlet
 public class EmployeeProviderServlet extends AbderaServlet {
+    @Override
     protected Provider createProvider() {
         EmployeeCollectionAdapter ca = new EmployeeCollectionAdapter();
         ca.setHref("employee");
