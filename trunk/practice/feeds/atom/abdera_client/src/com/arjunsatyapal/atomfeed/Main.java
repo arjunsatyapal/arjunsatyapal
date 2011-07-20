@@ -38,12 +38,13 @@ public class Main {
         AbderaClient abderaClient = new AbderaClient(abdera);
         Factory factory = abdera.getFactory();
 
-//        // Perform introspection. This is an optional step. If you already
-//        // know the URI of the APP collection to POST to, you can skip it.
-//        Document<Service> introspection = abderaClient.get(args[0]).getDocument();
-//        Service service = introspection.getRoot();
-//        Collection collection = service.getCollection(args[1], args[2]);
-//        report("The Collection Element", collection.toString());
+        // // Perform introspection. This is an optional step. If you already
+        // // know the URI of the APP collection to POST to, you can skip it.
+        // Document<Service> introspection =
+        // abderaClient.get(args[0]).getDocument();
+        // Service service = introspection.getRoot();
+        // Collection collection = service.getCollection(args[1], args[2]);
+        // report("The Collection Element", collection.toString());
 
         // Create the entry to post to the collection
         Entry entry = factory.newEntry();
@@ -56,8 +57,11 @@ public class Main {
 
         // Post the entry. Be sure to grab the resolved HREF of the collection
         IRI iri = new IRI("http://localhost:8888/employee");
-//        Document<Entry> doc = abderaClient.post(collection.getResolvedHref().toString(), entry).getDocument();
-      Document<Entry> doc = abderaClient.post(iri.toString(), entry).getDocument();
+        // Document<Entry> doc =
+        // abderaClient.post(collection.getResolvedHref().toString(),
+        // entry).getDocument();
+        Document<Entry> doc = abderaClient.post(iri.toString(), entry)
+                .getDocument();
 
         // In some implementations (such as Google's GData API, the entry URI is
         // distinct from it's edit URI. To be safe, we should assume it may be
@@ -75,7 +79,8 @@ public class Main {
             doc = abderaClient.get(editUri.toString()).getDocument();
 
             // Change whatever you want in the retrieved entry
-            doc.getRoot().getTitleElement().setValue("This is the changed title");
+            doc.getRoot().getTitleElement()
+                    .setValue("This is the changed title");
 
             // Put it back to the server
             abderaClient.put(editUri.toString(), doc.getRoot());
@@ -84,11 +89,13 @@ public class Main {
             doc = abderaClient.get(entryUri.toString()).getDocument();
             report("The Modified Entry", doc.getRoot().toString());
         } else {
-            // Otherwise, the entry cannot be modified (no suitable edit link was found)
+            // Otherwise, the entry cannot be modified (no suitable edit link
+            // was found)
             report("The Entry cannot be modified", null);
         }
 
-        // Delete the entry. Again, we need to make sure that we have the current
+        // Delete the entry. Again, we need to make sure that we have the
+        // current
         // edit link for the entry
         doc = abderaClient.get(entryUri.toString()).getDocument();
         editUri = getEditUri(doc.getRoot());
@@ -112,7 +119,8 @@ public class Main {
                     editUri = link.getResolvedHref();
                     break;
                 }
-            } else { // assume that an edit link with no type attribute is the right one to use
+            } else { // assume that an edit link with no type attribute is the
+                     // right one to use
                 editUri = link.getResolvedHref();
                 break;
             }
