@@ -13,24 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.arjunsatyapal.restapi.api.servicedocument.impl;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+package com.arjunsatyapal.restapi.api.servicedocument.model;
 
 /**
- * REST Resource for fetching ServiceDocument.
+ * ServiceDocument Object.
  * 
  * @author Arjun Satyapal
  */
-@Path("/servicedocument")
-public class ServiceDocumentResource {
+public class ServiceDocument {
 
-    @GET
-    @Produces("text/plain")
-    @Path("/")
-    public String getServiceDocument() {
-        return "Hello World!" + System.currentTimeMillis();
-    }
 }

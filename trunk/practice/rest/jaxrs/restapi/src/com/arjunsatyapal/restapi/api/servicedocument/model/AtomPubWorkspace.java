@@ -13,24 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.arjunsatyapal.restapi.api.servicedocument.impl;
+package com.arjunsatyapal.restapi.api.servicedocument.model;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import java.util.List;
 
 /**
- * REST Resource for fetching ServiceDocument.
+ * Workspace for AtomPub.
  * 
  * @author Arjun Satyapal
  */
-@Path("/servicedocument")
-public class ServiceDocumentResource {
+public class AtomPubWorkspace {
+    // TODO(arjuns) : missing appCommonAttributes.
 
-    @GET
-    @Produces("text/plain")
-    @Path("/")
-    public String getServiceDocument() {
-        return "Hello World!" + System.currentTimeMillis();
-    }
+    // Title is mandatory.
+    // TODO(arjuns) : Add validation.
+    private AtomTitle title;
+    List<AtomPubCollection> listOfCollections;
+
+    // TODO(arjuns) : missing extensionSansTitleElement.
 }

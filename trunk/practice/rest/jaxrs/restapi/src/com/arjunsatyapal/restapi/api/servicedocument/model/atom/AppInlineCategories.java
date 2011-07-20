@@ -13,24 +13,24 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.arjunsatyapal.restapi.api.servicedocument.impl;
+package com.arjunsatyapal.restapi.api.servicedocument.model.atom;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import com.arjunsatyapal.restapi.api.servicedocument.model.AtomUri;
+
+import javax.ws.rs.core.MediaType;
 
 /**
- * REST Resource for fetching ServiceDocument.
- * 
+ *
  * @author Arjun Satyapal
  */
-@Path("/servicedocument")
-public class ServiceDocumentResource {
-
-    @GET
-    @Produces("text/plain")
-    @Path("/")
-    public String getServiceDocument() {
-        return "Hello World!" + System.currentTimeMillis();
-    }
+public class AppInlineCategories implements AppCategoriesInterface {
+    private boolean fixed;
+    
+    private AtomUri scheme;
+    private AtomCategory category;
+    
+    private MediaType mediaType = MediaType.APPLICATION_ATOM_XML_TYPE;
+    private AtomLineType atomLineType;
+    
+    // TODO(arjuns) : missing undefinedConent;
 }

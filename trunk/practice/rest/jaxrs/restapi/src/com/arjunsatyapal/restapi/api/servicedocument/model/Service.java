@@ -13,24 +13,24 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.arjunsatyapal.restapi.api.servicedocument.impl;
+package com.arjunsatyapal.restapi.api.servicedocument.model;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import java.util.List;
 
 /**
- * REST Resource for fetching ServiceDocument.
+ * app:service Element.
  * 
  * @author Arjun Satyapal
  */
-@Path("/servicedocument")
-public class ServiceDocumentResource {
-
-    @GET
-    @Produces("text/plain")
-    @Path("/")
-    public String getServiceDocument() {
-        return "Hello World!" + System.currentTimeMillis();
-    }
+public class Service {
+    private final NameSpace nameSpace = new NameSpace("", "http://www.w3.org/2007/app");
+    private final NameSpace atomNameSpace = new NameSpace("atom", "http://www.w3.org/2005/Atom");
+    
+    // TODO(arjuns) : missing appCommonAttributes
+    
+    // There should be atleast one workspace.
+    // TODO(arjuns) : add validation.
+    private List<AtomPubWorkspace> listOfWorkSpaces;
+    
+    // TODO(arjuns) : missing extensionSansTitleElement.
 }

@@ -13,24 +13,29 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.arjunsatyapal.restapi.api.servicedocument.impl;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+package com.arjunsatyapal.restapi.api.servicedocument.model;
 
 /**
- * REST Resource for fetching ServiceDocument.
+ * Class for NameSpace.
  * 
  * @author Arjun Satyapal
  */
-@Path("/servicedocument")
-public class ServiceDocumentResource {
+public class NameSpace {
 
-    @GET
-    @Produces("text/plain")
-    @Path("/")
-    public String getServiceDocument() {
-        return "Hello World!" + System.currentTimeMillis();
+    private String nameSpace;
+    private String url;
+
+    public NameSpace(String nameSpace, String url) {
+        this.nameSpace = nameSpace;
+        this.url = url;
     }
+
+    public String getNameSpace() {
+        return nameSpace;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
 }

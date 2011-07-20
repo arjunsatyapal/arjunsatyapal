@@ -13,24 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.arjunsatyapal.restapi.api.servicedocument.impl;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+package com.arjunsatyapal.restapi.api.servicedocument;
 
 /**
- * REST Resource for fetching ServiceDocument.
- * 
+ *
  * @author Arjun Satyapal
  */
-@Path("/servicedocument")
-public class ServiceDocumentResource {
-
-    @GET
-    @Produces("text/plain")
-    @Path("/")
-    public String getServiceDocument() {
-        return "Hello World!" + System.currentTimeMillis();
+public enum MediaType {
+    CATEGORY_DOCUMENT("application/atomcat+xml");
+    
+    private String mediaType;
+    
+    private MediaType(String mediaType) {
+        this.mediaType = mediaType;
     }
 }
