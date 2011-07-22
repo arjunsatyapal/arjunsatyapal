@@ -15,6 +15,11 @@
  */
 package com.arjunsatyapal.jerseyabdera.restapi.cnxmodules.impl;
 
+import net.sf.jsr107cache.Cache;
+import net.sf.jsr107cache.CacheException;
+import net.sf.jsr107cache.CacheFactory;
+import net.sf.jsr107cache.CacheManager;
+
 import org.apache.abdera.Abdera;
 import org.apache.abdera.factory.Factory;
 import org.apache.abdera.i18n.iri.IRI;
@@ -23,10 +28,9 @@ import org.apache.abdera.model.Person;
 import org.apache.abdera.protocol.server.RequestContext;
 import org.apache.abdera.protocol.server.impl.AbstractEntityCollectionAdapter;
 
+import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -36,12 +40,24 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CnxModuleCollectionAdapter extends
         AbstractEntityCollectionAdapter<CnxModuleEntity> {
     // TODO(arjuns) : This should be replaced by datastore Ids.
-    private static AtomicInteger nextId = new AtomicInteger(1000);
-    private static Map<String, CnxModuleEntity> moduleEntityMap= new HashMap<String, CnxModuleEntity>();
-    
-    private Factory factory = new Abdera().getFactory();
-    
 
+    private static Cache cache;
+
+    static {
+        CacheFactory cacheFactory;
+        try {
+            cacheFactory = CacheManager.getInstance().getCacheFactory();
+            cache = cacheFactory.createCache(Collections.<String, CnxModuleEntity>emptyMap());
+        } catch (CacheException e) {
+            // TODO(arjuns): Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private static AtomicInteger nextId = new AtomicInteger(1000);
+//    private static Map<String, CnxModuleEntity> moduleEntityMap = new HashMap<String, CnxModuleEntity>();
+
+    private Factory factory = new Abdera().getFactory();
 
     // Title for this feed.
     @Override
@@ -58,19 +74,19 @@ public class CnxModuleCollectionAdapter extends
         entity.setTitle(title);
         entity.setSummary(summary);
         entity.setUpdated(updated);
-        entity.setAuthor(authors.get(0));
+        entity.setAuthor(authors.get(0).getName());
         // TODO(arjuns) : See if saving text is valid.
         entity.setContent(content.getText());
         String entityId = Long.toString(nextId.incrementAndGet());
         entity.setId(entityId);
-        moduleEntityMap.put(entityId, entity);
-        
+        cache.put(entityId, entity);
+
         return entity;
     }
 
     @Override
     public void deleteEntry(String resourceName, RequestContext request) {
-        moduleEntityMap.remove(resourceName);
+        cache.remove(resourceName);
     }
 
     @Override
@@ -82,12 +98,12 @@ public class CnxModuleCollectionAdapter extends
 
     @Override
     public Iterable<CnxModuleEntity> getEntries(RequestContext request) {
-        return moduleEntityMap.values();
+        return cache.values();
     }
 
     @Override
     public CnxModuleEntity getEntry(String resourceName, RequestContext request) {
-        return moduleEntityMap.get(resourceName);
+        return (CnxModuleEntity) cache.get(resourceName);
     }
 
     @Override
@@ -114,12 +130,12 @@ public class CnxModuleCollectionAdapter extends
     public void putEntry(CnxModuleEntity entry, String title, Date updated,
             List<Person> authors, String summary, Content content,
             RequestContext request) {
-        
+
         // TODO(arjuns) : This may need to query from maps.
         entry.setTitle(title);
         entry.setSummary(summary);
         entry.setUpdated(updated);
-        entry.setAuthor(authors.get(0));
+        entry.setAuthor(authors.get(0).getName());
         // TODO(arjuns) : See if saving text is valid.
         entry.setContent(content.getText());
     }

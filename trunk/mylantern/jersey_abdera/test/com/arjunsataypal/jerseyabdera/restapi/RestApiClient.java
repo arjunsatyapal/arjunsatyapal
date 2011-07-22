@@ -40,7 +40,7 @@ import java.util.logging.Logger;
  */
 public class RestApiClient {
     private static Logger log = Logger.getLogger(RestApiClient.class.getName());
-
+//    private static final String SERVER_URL = "http://100.cnx-repo.appspot.com";
     private static final String SERVER_URL = "http://127.0.0.1:8888";
     private static final String REST_SERVER_URL = SERVER_URL + "/rest";
     private static HttpClient client = new HttpClient();
@@ -142,14 +142,7 @@ public class RestApiClient {
         log.info("Body = " + getResource.getResponseBodyAsString());
         
         
-//        Entry getEntry = factory.newEntry();
-//        getEntry.setId(moduleId.toString());
-//        
-//        Document<Entry> getResponseDoc = abderaClient.post(iri.toString(), postEntry)
-//                .getDocument();
-//        log.info("IRI = " + postResponseDoc.getRoot().getId());
-//        
-//        log.info("*****Reaching here with root = " + postResponseDoc.getRoot().toString());
+        log.info("*****Reaching here with root = " + postResponseDoc.getRoot().toString());
         
         int x = 1;
     }

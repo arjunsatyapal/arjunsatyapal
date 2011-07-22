@@ -15,18 +15,16 @@
  */
 package com.arjunsatyapal.jerseyabdera.restapi.cnxmodules.impl;
 
-import org.apache.abdera.model.Person;
-
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 
  * @author Arjun Satyapal
  */
-public class CnxModuleEntity {
-    private Person author;
+public class CnxModuleEntity implements Serializable {
+    private String author;
     private String content;
-    private Person contributor;
 
     // Name and id is same for a module.
     private String id;
@@ -35,11 +33,11 @@ public class CnxModuleEntity {
     private Date updated;
     private String summary;
 
-    public Person getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(Person author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
@@ -49,14 +47,6 @@ public class CnxModuleEntity {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public Person getContributor() {
-        return contributor;
-    }
-
-    public void setContributor(Person contributor) {
-        this.contributor = contributor;
     }
 
     public String getId() {
