@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/shared/jsp/repackaged-appengine-ant-launcher-1.7.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/shared/jsp/repackaged-appengine-ant-1.7.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/shared/jsp/repackaged-appengine-jasper-el-6.0.29.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/shared/jsp/repackaged-appengine-tomcat-juli-6.0.29.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/shared/jsp/repackaged-appengine-jasper-6.0.29.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/shared/el-api.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/shared/servlet-api.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/shared/jsp-api.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/shared/appengine-local-runtime-shared.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/user/jsr107cache-1.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/user/appengine-api-labs-1.5.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/user/appengine-jsr107cache-1.5.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/user/appengine-api-1.0-sdk-1.5.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/user/orm/datanucleus-appengine-1.0.9.final.jar" sourcepath="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/src/orm/datanucleus-appengine-1.0.9.final-src.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/user/orm/jdo2-api-2.3-eb.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/user/orm/geronimo-jta_1.1_spec-1.1.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/user/orm/geronimo-jpa_3.0_spec-1.1.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/user/orm/datanucleus-core-1.1.5.jar" sourcepath="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/src/orm/datanucleus-core-1.1.5-src.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/user/orm/datanucleus-jpa-1.1.5.jar" sourcepath="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/src/orm/datanucleus-jpa-1.1.5-src.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/lib/appengine-tools-api.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/usr/local/google/users/arjuns/eclipse37/stable/plugins/com.google.appengine.eclipse.sdkbundle_1.5.1.r37v201106211634/appengine-java-sdk-1.5.1/docs/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/rome-propono-1.0.0.jar" sourcepath="war/WEB-INF/lib/rome-propono-1.0.0-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/rome.jar" sourcepath="war/WEB-INF/lib/rome-src.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jdom.jar" sourcepath="war/WEB-INF/lib/jdom-src.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-codec-1.4.jar"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>
