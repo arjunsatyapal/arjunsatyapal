@@ -15,8 +15,11 @@
  */
 package com.arjunsatyapal.rome.server.atompub;
 
+import static com.arjunsatyapal.rome.utils.PrettyXmlOutputter.prettyXmlOutput;
+
 import com.arjunsatyapal.rome.enums.CustomMediaTypes;
 import com.arjunsatyapal.rome.enums.ServletPaths;
+import com.arjunsatyapal.rome.utils.PrettyXmlOutputter;
 import com.sun.syndication.propono.atom.common.AtomService;
 import com.sun.syndication.propono.atom.server.AtomException;
 import com.sun.syndication.propono.atom.server.AtomHandler;
@@ -35,6 +38,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
 
 /**
  * REST Resource for fetching ServiceDocument.
@@ -48,15 +52,14 @@ public class ServiceDocument {
     // @Produces(CustomMediaTypes.APPLICATION_ATOMSVC_XML)
     @Produces(CustomMediaTypes.APPLICATION_ATOM_XML)
     @Path(ServletPaths.AP_SERVICE_DOCUMENT_GET_PATH)
-    public String getServiceDocument(@Context HttpServletRequest req,
+    public Response getServiceDocument(@Context HttpServletRequest req,
             @Context HttpServletResponse res) throws AtomException, IOException {
-        //TODO(arjuns) : Add exception handling.
+        // TODO(arjuns) : Add exception handling.
         AtomHandler handler = createAtomRequestHandler(req, res);
         AtomRequest areq = new AtomRequestImpl(req);
         AtomService service = handler.getAtomService(areq);
-        Document doc = service.serviceToDocument();
-
-        return new XMLOutputter().outputString(doc);
+        
+        return Response.ok().entity(prettyXmlOutput(service.serviceToDocument())).build();
     }
 
     /**

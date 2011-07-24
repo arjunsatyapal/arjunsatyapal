@@ -13,24 +13,19 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.arjunsatyapal.rome.atompubimpl;
+package com.arjunsatyapal.rome.utils;
 
-import com.sun.syndication.propono.atom.common.AtomService;
-import com.sun.syndication.propono.atom.common.Workspace;
+import org.jdom.Document;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
 
 /**
- *
+ * 
  * @author Arjun Satyapal
  */
-public class CnxAtomService extends AtomService {
-    public CnxAtomService() {
-        /*
-         *  Every API will get at max two workspaces.
-         *  1. For AtomPub reado only links.
-         *  2. If its an authenticated user, then AtomPub collection for that particular user. 
-         */
-        Workspace readOnly = new Workspace("ReadOnly", "text");
-        getWorkspaces().add(readOnly);
+public class PrettyXmlOutputter {
+    public static String prettyXmlOutput(Document doc) {
+        XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
+        return xmlOutputter.outputString(doc);
     }
-
 }
