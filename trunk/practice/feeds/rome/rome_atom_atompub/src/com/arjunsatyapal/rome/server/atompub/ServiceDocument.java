@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.arjunsatyapal.rome.server.servlets;
+package com.arjunsatyapal.rome.server.atompub;
 
 import com.arjunsatyapal.rome.enums.CustomMediaTypes;
 import com.arjunsatyapal.rome.enums.ServletPaths;
@@ -25,11 +25,9 @@ import com.sun.syndication.propono.atom.server.AtomRequest;
 import com.sun.syndication.propono.atom.server.AtomRequestImpl;
 
 import org.jdom.Document;
-import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 import java.io.IOException;
-import java.io.Writer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,7 +42,7 @@ import javax.ws.rs.core.Context;
  * @author Arjun Satyapal
  */
 @Path(ServletPaths.AP_SERVICE_DOCUMENT_PATH)
-public class ServiceDocumentResource {
+public class ServiceDocument {
 
     @GET
     // @Produces(CustomMediaTypes.APPLICATION_ATOMSVC_XML)
@@ -57,21 +55,8 @@ public class ServiceDocumentResource {
         AtomRequest areq = new AtomRequestImpl(req);
         AtomService service = handler.getAtomService(areq);
         Document doc = service.serviceToDocument();
-        
-//        res.setContentType("application/atomsvc+xml; charset=utf-8");
 
-        Writer writer = res.getWriter();
-
-        XMLOutputter outputter = new XMLOutputter();
-        outputter.setFormat(Format.getPrettyFormat());
-        StringBuilder builder = new StringBuilder();
-        builder.append(outputter.toString());
-
-//        outputter.output(doc, writer);
-//        writer.close();
-//        res.setStatus(HttpServletResponse.SC_OK);
-
-        return "Hello World!" + System.currentTimeMillis() + "\n String = " + builder.toString();
+        return new XMLOutputter().outputString(doc);
     }
 
     /**

@@ -12,7 +12,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     </servlet-class>
     <init-param>
       <param-name>com.sun.jersey.config.property.packages</param-name>
-      <param-value>com.arjunsatyapal.rome.server.servlets</param-value>
+      <param-value>com.arjunsatyapal.rome.server.atompub</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>

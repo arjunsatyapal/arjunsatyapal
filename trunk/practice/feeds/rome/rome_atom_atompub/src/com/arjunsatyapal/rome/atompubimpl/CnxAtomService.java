@@ -13,25 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.arjunsatyapal.rome.atomutils;
+package com.arjunsatyapal.rome.atompubimpl;
 
-import com.sun.syndication.propono.atom.server.AtomHandler;
-import com.sun.syndication.propono.atom.server.AtomHandlerFactory;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.sun.syndication.propono.atom.common.AtomService;
 
 /**
  *
  * @author Arjun Satyapal
  */
-public class CnxAtomHandlerFactory extends AtomHandlerFactory {
-
-    
-    @Override
-    public AtomHandler newAtomHandler(HttpServletRequest req,
-            HttpServletResponse res) {
-        return null;
-    }
+public class CnxAtomService extends AtomService {
 
 }
