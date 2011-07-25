@@ -20,7 +20,6 @@ import static com.arjunsatyapal.rome.utils.CnxAtomCollectionUtils.getCollectionF
 import static com.arjunsatyapal.rome.utils.CnxAtomCollectionUtils.getCollectionForCnxResource;
 
 import com.arjunsatyapal.rome.enums.CnxAtomPubConstants;
-import com.arjunsatyapal.rome.utils.CnxAtomCollectionUtils;
 import com.sun.syndication.propono.atom.common.AtomService;
 import com.sun.syndication.propono.atom.common.Workspace;
 

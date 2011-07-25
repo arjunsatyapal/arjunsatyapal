@@ -15,31 +15,21 @@
  */
 package com.arjunsatyapal.rome.server.atompub.resource;
 
-import static com.arjunsatyapal.rome.utils.PrettyXmlOutputter.prettyXmlOutputDocument;
-
 import com.google.common.base.Throwables;
 
-import com.arjunsatyapal.rome.atompubimpl.CnxAtomHandlerEnum;
 import com.arjunsatyapal.rome.enums.CnxAtomPubConstants;
 import com.arjunsatyapal.rome.enums.CustomMediaTypes;
 import com.arjunsatyapal.rome.utils.CnxAtomPubServices;
-import com.arjunsatyapal.rome.utils.PrettyXmlOutputter;
 import com.sun.syndication.feed.atom.Entry;
-import com.sun.syndication.feed.atom.Feed;
 import com.sun.syndication.feed.atom.Link;
 import com.sun.syndication.io.FeedException;
-import com.sun.syndication.io.WireFeedOutput;
 import com.sun.syndication.io.impl.Atom10Generator;
 import com.sun.syndication.io.impl.Atom10Parser;
-import com.sun.syndication.propono.atom.common.AtomService;
 import com.sun.syndication.propono.atom.server.AtomException;
 import com.sun.syndication.propono.atom.server.AtomRequest;
 import com.sun.syndication.propono.atom.server.AtomRequestImpl;
 
-import org.jdom.Document;
 import org.jdom.JDOMException;
-import org.jdom.output.Format;
-import org.jdom.output.XMLOutputter;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -48,7 +38,6 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.URI;
-import java.util.Iterator;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;

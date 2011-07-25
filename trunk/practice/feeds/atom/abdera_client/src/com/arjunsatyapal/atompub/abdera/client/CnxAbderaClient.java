@@ -42,7 +42,7 @@ public class CnxAbderaClient {
 
     public static void main(String[] args) throws IOException {
 
-        CnxClientConstants clientConstants = new CnxClientConstants(!false);
+        CnxClientConstants clientConstants = new CnxClientConstants(false);
 
         Abdera abdera = new Abdera();
         AbderaClient abderaClient = new AbderaClient(abdera);
@@ -68,14 +68,15 @@ public class CnxAbderaClient {
         logger.info("Posting to : " + resourceCollectionUrl);
 
         Document<Entry> doc = abderaClient.post(resourceCollectionUrl, entry).getDocument();
-        
-        if (doc != null) {
-            Writer writer = abdera.getWriterFactory().getWriter("prettyxml");
-            writer.writeTo(doc,  System.out);
-        } else {
-            logger.info("Doc is null.");
-        }
-        
+
+        Entry x = doc.getRoot();
+//        if (doc != null) {
+//            Writer writer = abdera.getWriterFactory().getWriter("prettyxml");
+//            writer.writeTo(doc, System.out);
+//        } else {
+//            logger.info("Doc is null.");
+//        }
+//        
         
         Entry postResourceResp = doc.getRoot();
         List<Link> links = postResourceResp.getLinks();

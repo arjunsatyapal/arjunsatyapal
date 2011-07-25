@@ -32,8 +32,12 @@ public class CnxAtomPubConstants {
         String url = request.getRequestURL().toString();
         if (url.startsWith("http://localhost")) {
             atomPubRestUrl = "http://localhost:8888/atompub";
-        } else {
+        } else if (url.startsWith("http://arjuns-test")){
             atomPubRestUrl = "http://arjuns-test.appspot.com/atompub";
+        } else if (url.startsWith("http://100.cnx-repo")) {
+            atomPubRestUrl = "http://100.cnx-repo.appspot.com/atompub";
+        } else {
+            throw new IllegalStateException("Deployed on unknown server.");
         }
     }
 

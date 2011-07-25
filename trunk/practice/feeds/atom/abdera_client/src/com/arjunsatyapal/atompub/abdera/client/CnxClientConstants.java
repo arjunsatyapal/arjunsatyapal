@@ -33,7 +33,7 @@ public class CnxClientConstants {
         if (isLocal) {
             this.host = "http://localhost:8888";
         } else {
-            this.host = "http://arjuns-test.appspot.com";
+            this.host = "http://100.cnx-repo.appspot.com";
         }
         
         this.serviceDocumentUrl = this.host + "/atompub/service_document";

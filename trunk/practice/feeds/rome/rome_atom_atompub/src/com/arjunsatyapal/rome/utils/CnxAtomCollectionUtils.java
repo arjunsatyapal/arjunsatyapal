@@ -25,8 +25,6 @@ import com.sun.syndication.feed.atom.Category;
 import com.sun.syndication.propono.atom.common.Categories;
 import com.sun.syndication.propono.atom.common.Collection;
 
-import javax.ws.rs.core.MediaType;
-
 /**
  * 
  * @author Arjun Satyapal
