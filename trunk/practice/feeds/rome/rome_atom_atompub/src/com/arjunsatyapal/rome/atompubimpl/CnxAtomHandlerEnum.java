@@ -15,22 +15,20 @@
  */
 package com.arjunsatyapal.rome.atompubimpl;
 
-import com.sun.syndication.propono.atom.server.AtomHandler;
-import com.sun.syndication.propono.atom.server.AtomHandlerFactory;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 /**
  *
  * @author Arjun Satyapal
  */
-public class CnxAtomHandlerFactory extends AtomHandlerFactory {
-    @Override
-    public AtomHandler newAtomHandler(HttpServletRequest req,
-            HttpServletResponse res) {
-        // TODO(arjuns) : Move propono.properties to proper location so that when it is deployed to appengine it is properly created.
-        return new CnxServiceAtomHandler(req, res);
-    }
-
+public enum CnxAtomHandlerEnum {
+    /** This will handle requests related to Resource. */
+    RESOURCE,
+    
+    /** This will handle requests related to Module. */
+    MODULE,
+    
+    /** This will handle requests related to CNX Collections. */
+    COLLECTION,
+    
+    /** This will handle all other requests. */
+    SERVICE;
 }

@@ -22,36 +22,61 @@ import org.apache.abdera.Abdera;
 import org.apache.abdera.factory.Factory;
 import org.apache.abdera.model.Collection;
 import org.apache.abdera.model.Document;
+import org.apache.abdera.model.Entry;
 import org.apache.abdera.model.Service;
 import org.apache.abdera.model.Workspace;
 import org.apache.abdera.protocol.client.AbderaClient;
 
+import java.util.Date;
+import java.util.logging.Logger;
+
 /**
- *
+ * 
  * @author Arjun Satyapal
  */
 public class CnxAbderaClient {
-    
+    private static Logger logger = Logger.getLogger(CnxAbderaClient.class.getName());
+
     public static void main(String[] args) {
-        
+
         CnxClientConstants clientConstants = new CnxClientConstants(!false);
-        
+
         Abdera abdera = new Abdera();
         AbderaClient abderaClient = new AbderaClient(abdera);
         Factory factory = abdera.getFactory();
 
         // Fetch ServiceDocuemnt
-         Document<Service> serviceDocument = abderaClient.get(clientConstants.getServiceDocumentUrl()).getDocument();
-         Service service = serviceDocument.getRoot();
-         
-         // Get Workspace.
-         Workspace workSpace = service.getWorkspace(CNX_WORKSPACE);
-         
-         // Get Resource Collection.
-         Collection collection = workSpace.getCollection(COLLECTION_CNX_RESOURCE);
-         
-         // Create a Resource.
-         
-         System.out.println("*****************done.");
+        Document<Service> serviceDocument = abderaClient.get(
+                clientConstants.getServiceDocumentUrl()).getDocument();
+        Service service = serviceDocument.getRoot();
+
+        // Get Workspace.
+        Workspace workSpace = service.getWorkspace(CNX_WORKSPACE);
+
+        // Get Resource Collection.
+        Collection collection = workSpace
+                .getCollection(COLLECTION_CNX_RESOURCE);
+
+        // Create a Resource by posting entry to Collection of Resource.
+
+        String resourceId1 = "tag:example.org,2006:foo";
+        // Create the entry to post to the collection
+        Entry entry = factory.newEntry();
+        entry.setId(resourceId1); // todo : remove.
+        entry.setTitle("This is the title"); // todo remove.
+        entry.setUpdated(new Date());
+        entry.addAuthor("James");
+        entry.setContent("This is the content"); // todo remove.
+
+        // Post the entry. Be sure to grab the resolved HREF of the collection
+        String resourceCollectionUrl = collection.getResolvedHref().toString();
+        logger.info("Posting to : " + resourceCollectionUrl);
+        Document<Entry> doc = abderaClient.post(resourceCollectionUrl, entry).getDocument();
+        
+        if (doc != null) {
+            logger.info(doc.getRoot().toString());
+        } else {
+            logger.info("Doc is null.");
+        }
     }
 }

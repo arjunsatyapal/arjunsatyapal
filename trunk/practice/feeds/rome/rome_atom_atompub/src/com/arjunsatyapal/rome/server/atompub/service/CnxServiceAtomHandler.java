@@ -13,8 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.arjunsatyapal.rome.atompubimpl;
+package com.arjunsatyapal.rome.server.atompub.service;
 
+import com.arjunsatyapal.rome.atompubimpl.CnxAtomService;
 import com.sun.syndication.feed.atom.Entry;
 import com.sun.syndication.feed.atom.Feed;
 import com.sun.syndication.propono.atom.common.AtomService;

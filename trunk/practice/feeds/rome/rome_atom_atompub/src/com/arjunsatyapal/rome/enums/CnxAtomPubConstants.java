@@ -80,6 +80,7 @@ public class CnxAtomPubConstants {
     public static final String COLLECTION_MODULE_REL_PATH = "/module";
     /** Path for GET operation relative to {@link #COLLECTION_MODULE_REL_PATH}. */
     public static final String COLLECTION_MODULE_GET_PATH = "/";
+    public static final String COLLECTION_MODULE_POST_PATH = "/";
 
     /** Get URI for AtomPub collection for CNX Modules. */
     public String getCollectionModulesAbsPath() {

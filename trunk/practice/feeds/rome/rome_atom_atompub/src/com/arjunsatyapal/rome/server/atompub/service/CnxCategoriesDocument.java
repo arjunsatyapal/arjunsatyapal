@@ -13,13 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.arjunsatyapal.rome.server.atompub;
+package com.arjunsatyapal.rome.server.atompub.service;
 
 import static com.arjunsatyapal.rome.utils.CnxAtomCategoryUtils.getCnxCollectionCategoryEle;
 import static com.arjunsatyapal.rome.utils.CnxAtomCategoryUtils.getCnxModuleCategoryEle;
 import static com.arjunsatyapal.rome.utils.CnxAtomCategoryUtils.getCnxResourceCategoryEle;
 import static com.arjunsatyapal.rome.utils.PrettyXmlOutputter.prettyXmlOutputElement;
 
+import com.arjunsatyapal.rome.atompubimpl.CnxAtomHandlerEnum;
 import com.arjunsatyapal.rome.atompubimpl.CnxAtomService;
 import com.arjunsatyapal.rome.enums.CnxAtomPubConstants;
 import com.arjunsatyapal.rome.enums.CustomMediaTypes;
@@ -46,16 +47,17 @@ public class CnxCategoriesDocument {
     @Produces(CustomMediaTypes.APPLICATION_ATOM_XML)
     @Path(CnxAtomPubConstants.CATEGORIES_DOCUMENT_GET_PATH)
     public Response getServiceDocument(@Context HttpServletRequest req,
-            @Context HttpServletResponse res) throws AtomException{
+            @Context HttpServletResponse res) throws AtomException {
         // TODO(arjuns) : Add caching and exception handling.
-        
-        CnxAtomService service = (CnxAtomService) new CnxAtomPubServices().getServiceDocumentService(req, res);
+
+        CnxAtomService service = (CnxAtomService) new CnxAtomPubServices()
+                .getServiceDocumentService(req, res, CnxAtomHandlerEnum.SERVICE);
         Categories categories = new Categories();
         categories.addCategory(getCnxResourceCategoryEle(service));
         categories.addCategory(getCnxModuleCategoryEle(service));
         categories.addCategory(getCnxCollectionCategoryEle(service));
-        
-        return Response.ok()
-                .entity(prettyXmlOutputElement(categories.categoriesToElement())).build();
+
+        return Response.ok().entity(prettyXmlOutputElement(categories.categoriesToElement()))
+                .build();
     }
 }

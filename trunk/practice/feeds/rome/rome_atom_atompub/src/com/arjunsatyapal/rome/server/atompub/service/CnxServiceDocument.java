@@ -13,10 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.arjunsatyapal.rome.server.atompub;
+package com.arjunsatyapal.rome.server.atompub.service;
 
 import static com.arjunsatyapal.rome.utils.PrettyXmlOutputter.prettyXmlOutputDocument;
 
+import com.arjunsatyapal.rome.atompubimpl.CnxAtomHandlerEnum;
 import com.arjunsatyapal.rome.enums.CnxAtomPubConstants;
 import com.arjunsatyapal.rome.enums.CustomMediaTypes;
 import com.arjunsatyapal.rome.utils.CnxAtomPubServices;
@@ -40,17 +41,15 @@ import javax.ws.rs.core.Response;
 public class CnxServiceDocument {
 
     @GET
-//    @Produces(CustomMediaTypes.APPLICATION_ATOMSVC_XML)
-  @Produces(CustomMediaTypes.APPLICATION_ATOM_XML)
+    // @Produces(CustomMediaTypes.APPLICATION_ATOMSVC_XML)
+    @Produces(CustomMediaTypes.APPLICATION_ATOM_XML)
     @Path(CnxAtomPubConstants.SERVICE_DOCUMENT_GET_PATH)
     public Response getServiceDocument(@Context HttpServletRequest req,
             @Context HttpServletResponse res) throws AtomException {
         // TODO(arjuns) : Add exception handling.
-        AtomService service = new CnxAtomPubServices()
-                .getServiceDocumentService(req, res);
+        AtomService service = new CnxAtomPubServices().getServiceDocumentService(req, res,
+                CnxAtomHandlerEnum.SERVICE);
 
-        return Response.ok()
-                .entity(prettyXmlOutputDocument(service.serviceToDocument()))
-                .build();
+        return Response.ok().entity(prettyXmlOutputDocument(service.serviceToDocument())).build();
     }
 }
