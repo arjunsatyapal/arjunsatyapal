@@ -15,6 +15,9 @@
  */
 package com.arjunsatyapal.rome.utils;
 
+import static com.arjunsatyapal.rome.utils.AtomCategoryUtils.getCnxResourceCategoryEle;
+
+import com.arjunsatyapal.rome.atompubimpl.CnxAtomService;
 import com.arjunsatyapal.rome.enums.CnxAtomPubConstants;
 import com.sun.syndication.feed.atom.Category;
 import com.sun.syndication.propono.atom.common.Categories;
@@ -31,13 +34,12 @@ public class AtomCollectionUtils {
     private AtomCollectionUtils() {
     }
 
-    public static Collection getCnxResourceCollection() {
+    public static Collection getCnxResourceCollection(CnxAtomService service) {
         Collection collection = new Collection(
                 CnxAtomPubConstants.COLLECTION_RESOURCE_NAME, MediaType.TEXT_PLAIN,
-                CnxAtomPubConstants.COLLECTION_RESOURCE_ABS_PATH);
+                service.getConstants().getCollectionResourcesAbsPath());
 
-        Category resourceCategory = AtomCategoryUtils
-                .getCnxResourceCategoryEle();
+        Category resourceCategory = getCnxResourceCategoryEle(service);
         Categories categories = new Categories();
         categories.addCategory(resourceCategory);
 

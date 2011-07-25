@@ -15,9 +15,12 @@
  */
 package com.arjunsatyapal.rome.utils;
 
-import com.arjunsatyapal.rome.enums.CnxAtomPubConstants;
+import static com.arjunsatyapal.rome.enums.CnxAtomPubConstants.COLLECTION_CNX_COLLECTION_REL_PATH;
+import static com.arjunsatyapal.rome.enums.CnxAtomPubConstants.COLLECTION_MODULE_REL_PATH;
+import static com.arjunsatyapal.rome.enums.CnxAtomPubConstants.COLLECTION_RESOURCE_REL_PATH;
+
+import com.arjunsatyapal.rome.atompubimpl.CnxAtomService;
 import com.sun.syndication.feed.atom.Category;
-import com.sun.syndication.propono.atom.common.Categories;
 
 /**
  * Utility class for AtomCategories.
@@ -29,29 +32,26 @@ public class AtomCategoryUtils {
     private AtomCategoryUtils() {
     }
     
-    public static Category getCnxResourceCategoryEle() {
-        return getCnxCategoryEle(CnxAtomPubConstants.COLLECTION_RESOURCE_REL_PATH,
-                CnxAtomPubConstants.COLLECTION_RESOURCE_ABS_PATH,
-                CnxAtomPubConstants.COLLECTION_RESOURCE_REL_PATH);
+    public static Category getCnxResourceCategoryEle(CnxAtomService service) {
+        return getCnxCategoryEle(service, COLLECTION_RESOURCE_REL_PATH,
+                COLLECTION_RESOURCE_REL_PATH);
     }
     
-    public static Category getCnxModuleCategoryEle() {
-        return getCnxCategoryEle(CnxAtomPubConstants.COLLECTION_MODULE_REL_PATH,
-                CnxAtomPubConstants.COLLECTION_MODULE_ABS_PATH,
-                CnxAtomPubConstants.COLLECTION_MODULE_REL_PATH);
+    public static Category getCnxModuleCategoryEle(CnxAtomService service) {
+        return getCnxCategoryEle(service, COLLECTION_MODULE_REL_PATH,
+                COLLECTION_MODULE_REL_PATH);
     }
     
-    public static Category getCnxCollectionCategoryEle() {
-        return getCnxCategoryEle(CnxAtomPubConstants.AP_COLLECTION_CNX_COLLECTION_REL_PATH,
-                CnxAtomPubConstants.AP_COLLECTION_CNX_COLLECTION_ABS_PATH,
-                CnxAtomPubConstants.AP_COLLECTION_CNX_COLLECTION_REL_PATH);
+    public static Category getCnxCollectionCategoryEle(CnxAtomService service) {
+        return getCnxCategoryEle(service, COLLECTION_CNX_COLLECTION_REL_PATH,
+                COLLECTION_CNX_COLLECTION_REL_PATH);
     }
     
-    public static Category getCnxCategoryEle(String label, String schemePath, String term) {
+    public static Category getCnxCategoryEle(CnxAtomService service, String label, String term) {
         Category category = new Category();
         category.setLabel(label);
-        category.setScheme(schemePath);
         category.setTerm(term);
+        category.setScheme(service.getConstants().getSchemeAbsUrl());
         
         return category;
     }

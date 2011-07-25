@@ -20,9 +20,12 @@ import static com.arjunsatyapal.rome.utils.AtomCategoryUtils.getCnxModuleCategor
 import static com.arjunsatyapal.rome.utils.AtomCategoryUtils.getCnxResourceCategoryEle;
 import static com.arjunsatyapal.rome.utils.PrettyXmlOutputter.prettyXmlOutputElement;
 
-import com.arjunsatyapal.rome.enums.CustomMediaTypes;
+import com.arjunsatyapal.rome.atompubimpl.CnxAtomService;
 import com.arjunsatyapal.rome.enums.CnxAtomPubConstants;
+import com.arjunsatyapal.rome.enums.CustomMediaTypes;
+import com.arjunsatyapal.rome.utils.Services;
 import com.sun.syndication.propono.atom.common.Categories;
+import com.sun.syndication.propono.atom.server.AtomException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,12 +46,14 @@ public class CategoriesDocument {
     @Produces(CustomMediaTypes.APPLICATION_ATOM_XML)
     @Path(CnxAtomPubConstants.CATEGORIES_DOCUMENT_GET_PATH)
     public Response getServiceDocument(@Context HttpServletRequest req,
-            @Context HttpServletResponse res){
-        // TODO(arjuns) : Add caching. 
+            @Context HttpServletResponse res) throws AtomException{
+        // TODO(arjuns) : Add caching and exception handling.
+        
+        CnxAtomService service = (CnxAtomService) new Services().getServiceDocumentService(req, res);
         Categories categories = new Categories();
-        categories.addCategory(getCnxResourceCategoryEle());
-        categories.addCategory(getCnxModuleCategoryEle());
-        categories.addCategory(getCnxCollectionCategoryEle());
+        categories.addCategory(getCnxResourceCategoryEle(service));
+        categories.addCategory(getCnxModuleCategoryEle(service));
+        categories.addCategory(getCnxCollectionCategoryEle(service));
         
         return Response.ok()
                 .entity(prettyXmlOutputElement(categories.categoriesToElement())).build();

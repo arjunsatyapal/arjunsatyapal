@@ -15,22 +15,13 @@
  */
 package com.arjunsatyapal.rome.atompubimpl;
 
-import static com.arjunsatyapal.rome.enums.CnxAtomPubConstants.ATOMPUB_URL;
-
-import com.arjunsatyapal.rome.enums.CnxAtomPubConstants;
 import com.sun.syndication.feed.atom.Entry;
 import com.sun.syndication.feed.atom.Feed;
 import com.sun.syndication.propono.atom.common.AtomService;
 import com.sun.syndication.propono.atom.common.Categories;
-import com.sun.syndication.propono.atom.server.AtomException;
 import com.sun.syndication.propono.atom.server.AtomHandler;
 import com.sun.syndication.propono.atom.server.AtomMediaResource;
 import com.sun.syndication.propono.atom.server.AtomRequest;
-import com.sun.syndication.propono.atom.server.impl.FileBasedAtomHandler;
-import com.sun.syndication.propono.atom.server.impl.FileBasedAtomService;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import java.util.logging.Logger;
 
@@ -61,7 +52,7 @@ public class CnxServiceAtomHandler implements AtomHandler {
         this.req = req;
         this.res = res;
         
-        atomService = new CnxAtomService(ATOMPUB_URL);
+        atomService = new CnxAtomService(req);
     }
 
     @Override
@@ -70,12 +61,12 @@ public class CnxServiceAtomHandler implements AtomHandler {
     }
 
     @Override
-    public AtomService getAtomService(AtomRequest req) throws AtomException {
+    public AtomService getAtomService(AtomRequest req) {
         return atomService;
     }
 
     @Override
-    public Categories getCategories(AtomRequest req) throws AtomException {
+    public Categories getCategories(AtomRequest req) {
         // TODO(arjuns) : Implement this.
         return null;
     }
@@ -85,7 +76,7 @@ public class CnxServiceAtomHandler implements AtomHandler {
      * @see com.sun.syndication.propono.atom.server.AtomHandler#getCollection(com.sun.syndication.propono.atom.server.AtomRequest)
      */
     @Override
-    public Feed getCollection(AtomRequest req) throws AtomException {
+    public Feed getCollection(AtomRequest req) {
         return null;
     }
 
@@ -93,7 +84,7 @@ public class CnxServiceAtomHandler implements AtomHandler {
      * @see com.sun.syndication.propono.atom.server.AtomHandler#postEntry(com.sun.syndication.propono.atom.server.AtomRequest, com.sun.syndication.feed.atom.Entry)
      */
     @Override
-    public Entry postEntry(AtomRequest req, Entry entry) throws AtomException {
+    public Entry postEntry(AtomRequest req, Entry entry) {
         return null;
     }
 
@@ -101,7 +92,7 @@ public class CnxServiceAtomHandler implements AtomHandler {
      * @see com.sun.syndication.propono.atom.server.AtomHandler#getEntry(com.sun.syndication.propono.atom.server.AtomRequest)
      */
     @Override
-    public Entry getEntry(AtomRequest req) throws AtomException {
+    public Entry getEntry(AtomRequest req) {
         return null;
     }
 
@@ -109,8 +100,7 @@ public class CnxServiceAtomHandler implements AtomHandler {
      * @see com.sun.syndication.propono.atom.server.AtomHandler#getMediaResource(com.sun.syndication.propono.atom.server.AtomRequest)
      */
     @Override
-    public AtomMediaResource getMediaResource(AtomRequest req)
-            throws AtomException {
+    public AtomMediaResource getMediaResource(AtomRequest req) {
         return null;
     }
 
@@ -118,21 +108,21 @@ public class CnxServiceAtomHandler implements AtomHandler {
      * @see com.sun.syndication.propono.atom.server.AtomHandler#putEntry(com.sun.syndication.propono.atom.server.AtomRequest, com.sun.syndication.feed.atom.Entry)
      */
     @Override
-    public void putEntry(AtomRequest req, Entry entry) throws AtomException {
+    public void putEntry(AtomRequest req, Entry entry) {
     }
 
     /* (non-Javadoc)
      * @see com.sun.syndication.propono.atom.server.AtomHandler#deleteEntry(com.sun.syndication.propono.atom.server.AtomRequest)
      */
     @Override
-    public void deleteEntry(AtomRequest req) throws AtomException {
+    public void deleteEntry(AtomRequest req) {
     }
 
     /* (non-Javadoc)
      * @see com.sun.syndication.propono.atom.server.AtomHandler#postMedia(com.sun.syndication.propono.atom.server.AtomRequest, com.sun.syndication.feed.atom.Entry)
      */
     @Override
-    public Entry postMedia(AtomRequest req, Entry entry) throws AtomException {
+    public Entry postMedia(AtomRequest req, Entry entry) {
         return null;
     }
 
@@ -140,7 +130,7 @@ public class CnxServiceAtomHandler implements AtomHandler {
      * @see com.sun.syndication.propono.atom.server.AtomHandler#putMedia(com.sun.syndication.propono.atom.server.AtomRequest)
      */
     @Override
-    public void putMedia(AtomRequest req) throws AtomException {
+    public void putMedia(AtomRequest req) {
     }
 
     /* (non-Javadoc)

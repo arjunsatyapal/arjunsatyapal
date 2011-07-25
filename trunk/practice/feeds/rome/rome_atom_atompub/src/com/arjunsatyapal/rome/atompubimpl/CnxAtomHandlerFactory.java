@@ -29,7 +29,7 @@ public class CnxAtomHandlerFactory extends AtomHandlerFactory {
     @Override
     public AtomHandler newAtomHandler(HttpServletRequest req,
             HttpServletResponse res) {
-        // TODO(arjuns) : Move propono.properties to proper location.
+        // TODO(arjuns) : Move propono.properties to proper location so that when it is deployed to appengine it is properly created.
         return new CnxServiceAtomHandler(req, res);
     }
 

@@ -15,28 +15,27 @@
  */
 package com.arjunsatyapal.rome.atompubimpl;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Strings.isNullOrEmpty;
-
-import com.google.common.base.Strings;
+import static com.arjunsatyapal.rome.utils.AtomCollectionUtils.getCnxResourceCollection;
 
 import com.arjunsatyapal.rome.enums.CnxAtomPubConstants;
-import com.arjunsatyapal.rome.utils.AtomCollectionUtils;
 import com.sun.syndication.propono.atom.common.AtomService;
-import com.sun.syndication.propono.atom.common.Collection;
 import com.sun.syndication.propono.atom.common.Workspace;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 
  * @author Arjun Satyapal
  */
 public class CnxAtomService extends AtomService {
-    // e.g. http://cnx-repo.appspot.com/atompub
-    private String baseUri;
+    private CnxAtomPubConstants constants;
 
-    public CnxAtomService(String baseUri) {
-        checkArgument(!isNullOrEmpty(baseUri), "baseUri cannot be empty/null.");
-        this.baseUri = baseUri;
+    public CnxAtomPubConstants getConstants() {
+        return constants;
+    }
+
+    public CnxAtomService(HttpServletRequest request) {
+        constants = new CnxAtomPubConstants(request);
 
         /*
          * For Connexions repository, there is only one workspace. Each
@@ -46,6 +45,6 @@ public class CnxAtomService extends AtomService {
         Workspace workSpace = new Workspace("Connexions Workspace", "text");
         getWorkspaces().add(workSpace);
 
-        workSpace.addCollection(AtomCollectionUtils.getCnxResourceCollection());
+        workSpace.addCollection(getCnxResourceCollection(this));
     }
 }
