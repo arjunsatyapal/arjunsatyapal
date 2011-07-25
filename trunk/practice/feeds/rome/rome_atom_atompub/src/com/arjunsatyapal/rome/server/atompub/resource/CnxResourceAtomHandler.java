@@ -35,6 +35,7 @@ import com.sun.syndication.propono.atom.server.AtomRequest;
 import net.sf.jsr107cache.Cache;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -104,20 +105,22 @@ public class CnxResourceAtomHandler implements AtomHandler {
         //TODO(arjuns) : get from cnxConstants.
         String host = "http://localhost:8888";
         resourceLink.setRel(host + "/atompub/resource/");
+        resourceLink.setTitle("Resource Link");
 
+        List<Link> listOfOtherLinks = Lists.newArrayList();
+        listOfOtherLinks.add(resourceLink);
         newEntry.setOtherLinks(Lists.newArrayList(resourceLink));
         
         
         // Now sending details about blobstore URL as content to feed.
-        Content content = new Content();
-        content.setType(Content.TEXT);
+        Link blobStoreLink = new Link();
+        blobStoreLink.setHref(host + uploadUrl);
+        blobStoreLink.setTitle("Upload Link");
+        blobStoreLink.setRel(null);
         
-        // TODO(arjuns) : fix this hardcoded value for URLs.
-        content.setValue(host + uploadUrl);
+        listOfOtherLinks.add(blobStoreLink);
+        newEntry.setOtherLinks(listOfOtherLinks);
         
-        newEntry.setContents(Lists.newArrayList(content));
-        
-        // TODO(arjuns) : Add detail for blobstore.
         return newEntry;
     }
 
