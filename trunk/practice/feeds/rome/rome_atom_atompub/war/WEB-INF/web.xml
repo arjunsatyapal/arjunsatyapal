@@ -25,18 +25,23 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <url-pattern>/atompub/*</url-pattern>
   </servlet-mapping>
 
+  <!-- Upload Servlet. -->
+  <servlet>
+    <servlet-name>uploadServlet</servlet-name>
+    <servlet-class>com.arjunsatyapal.rome.server.atompub.resource.UploadServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>uploadServlet</servlet-name>
+    <url-pattern>/uploadServlet</url-pattern>
+  </servlet-mapping>
+
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
 
-<!--   <servlet>
-    <servlet-name>Rome_atom_atompub</servlet-name>
-    <servlet-class>com.arjunsatyapal.rome.Rome_atom_atompubServlet
-    </servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Rome_atom_atompub</servlet-name>
-    <url-pattern>/rome_atom_atompub</url-pattern>
-  </servlet-mapping> -->
+  <!-- <servlet> <servlet-name>Rome_atom_atompub</servlet-name> <servlet-class>com.arjunsatyapal.rome.Rome_atom_atompubServlet 
+    </servlet-class> </servlet> <servlet-mapping> <servlet-name>Rome_atom_atompub</servlet-name> 
+    <url-pattern>/rome_atom_atompub</url-pattern> </servlet-mapping> -->
 </web-app>

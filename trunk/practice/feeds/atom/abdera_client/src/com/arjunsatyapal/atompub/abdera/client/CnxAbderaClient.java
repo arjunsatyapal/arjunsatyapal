@@ -23,8 +23,10 @@ import org.apache.abdera.factory.Factory;
 import org.apache.abdera.model.Collection;
 import org.apache.abdera.model.Document;
 import org.apache.abdera.model.Entry;
+import org.apache.abdera.model.Person;
 import org.apache.abdera.model.Service;
 import org.apache.abdera.model.Workspace;
+import org.apache.abdera.parser.stax.FOMPerson;
 import org.apache.abdera.protocol.client.AbderaClient;
 
 import java.util.Date;
@@ -58,19 +60,12 @@ public class CnxAbderaClient {
                 .getCollection(COLLECTION_CNX_RESOURCE);
 
         // Create a Resource by posting entry to Collection of Resource.
-
-        String resourceId1 = "tag:example.org,2006:foo";
-        // Create the entry to post to the collection
         Entry entry = factory.newEntry();
-        entry.setId(resourceId1); // todo : remove.
-        entry.setTitle("This is the title"); // todo remove.
-        entry.setUpdated(new Date());
-        entry.addAuthor("James");
-        entry.setContent("This is the content"); // todo remove.
+        entry.addAuthor("Arjun Satyapal", "arjuns@google.com", "http://plus.google.com/arjuns");
 
-        // Post the entry. Be sure to grab the resolved HREF of the collection
         String resourceCollectionUrl = collection.getResolvedHref().toString();
         logger.info("Posting to : " + resourceCollectionUrl);
+
         Document<Entry> doc = abderaClient.post(resourceCollectionUrl, entry).getDocument();
         
         if (doc != null) {

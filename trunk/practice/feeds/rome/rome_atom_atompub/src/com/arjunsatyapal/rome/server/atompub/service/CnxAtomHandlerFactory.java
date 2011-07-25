@@ -18,7 +18,7 @@ package com.arjunsatyapal.rome.server.atompub.service;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.arjunsatyapal.rome.atompubimpl.CnxAtomHandlerEnum;
-import com.arjunsatyapal.rome.server.atompub.resource.ResourceAtomHandler;
+import com.arjunsatyapal.rome.server.atompub.resource.CnxResourceAtomHandler;
 import com.sun.syndication.propono.atom.server.AtomHandler;
 import com.sun.syndication.propono.atom.server.AtomHandlerFactory;
 
@@ -45,7 +45,7 @@ public class CnxAtomHandlerFactory extends AtomHandlerFactory {
         // when it is deployed to appengine it is properly created.
 
         switch (handlerType) {
-        case RESOURCE: return new ResourceAtomHandler(req, res);
+        case RESOURCE: return new CnxResourceAtomHandler(req, res);
         case SERVICE:
             return new CnxServiceAtomHandler(req, res);
         default :

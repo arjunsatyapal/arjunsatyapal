@@ -15,14 +15,25 @@
  */
 package com.arjunsatyapal.rome.server.atompub.resource;
 
+import static com.arjunsatyapal.rome.enums.CnxAtomPubConstants.UPLOAD_SERVLET;
+import static com.arjunsatyapal.rome.utils.CnxAtomPubServices.getBlobStoreService;
+import static com.arjunsatyapal.rome.utils.CnxAtomPubServices.getCache;
+
+import com.google.common.collect.Lists;
+
 import com.sun.syndication.feed.atom.Entry;
 import com.sun.syndication.feed.atom.Feed;
+import com.sun.syndication.feed.atom.Link;
 import com.sun.syndication.propono.atom.common.AtomService;
 import com.sun.syndication.propono.atom.common.Categories;
 import com.sun.syndication.propono.atom.server.AtomException;
 import com.sun.syndication.propono.atom.server.AtomHandler;
 import com.sun.syndication.propono.atom.server.AtomMediaResource;
 import com.sun.syndication.propono.atom.server.AtomRequest;
+
+import net.sf.jsr107cache.Cache;
+
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,13 +42,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Arjun Satyapal
  */
-public class ResourceAtomHandler implements AtomHandler {
-
+public class CnxResourceAtomHandler implements AtomHandler {
     /**
      * @param req
      * @param res
      */
-    public ResourceAtomHandler(HttpServletRequest req, HttpServletResponse res) {
+    public CnxResourceAtomHandler(HttpServletRequest req, HttpServletResponse res) {
         // TODO(arjuns): Auto-generated constructor stub
     }
 
@@ -74,8 +84,28 @@ public class ResourceAtomHandler implements AtomHandler {
     }
 
     @Override
-    public Entry postEntry(AtomRequest req, Entry entry) throws AtomException {
-        return null;
+    public Entry postEntry(AtomRequest req, Entry entry) {
+        
+        Cache cache = getCache();
+        String uploadUrl = getBlobStoreService().createUploadUrl(UPLOAD_SERVLET);
+        String resourceId = Long.toString(System.currentTimeMillis());
+        
+        Entry newEntry = new Entry();
+        newEntry.setAuthors(entry.getAlternateLinks());
+        newEntry.setId(resourceId);
+        // TODO(arjuns) : Replace with JodaTime.
+        Date now = new Date();
+        newEntry.setCreated(now);
+        newEntry.setModified(now);
+        
+        Link resourceLink = new Link();
+        resourceLink.setHref(resourceId);
+        //TODO(arjuns) : get from cnxConstants.
+        resourceLink.setRel("http://localhost:8888/resource/");
+        newEntry.setOtherLinks(Lists.newArrayList(resourceLink));
+        
+        // TODO(arjuns) : Add detail for blobstore.
+        return newEntry;
     }
 
     /* (non-Javadoc)

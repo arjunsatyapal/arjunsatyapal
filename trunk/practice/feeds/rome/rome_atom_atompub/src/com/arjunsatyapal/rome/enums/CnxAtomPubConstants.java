@@ -107,4 +107,8 @@ public class CnxAtomPubConstants {
     public String getCollectionCnxCollectionsAbsPath() {
         return atomPubRestUrl + COLLECTION_CNX_COLLECTION_REL_PATH;
     }
+    
+    /** Redirect servlet after successful uploading of file to blobstore. */
+    public static final String UPLOAD_SERVLET = "/uploadServlet";
+    
 }

@@ -17,20 +17,39 @@ package com.arjunsatyapal.rome.server.atompub.resource;
 
 import static com.arjunsatyapal.rome.utils.PrettyXmlOutputter.prettyXmlOutputDocument;
 
+import com.google.common.base.Throwables;
+
 import com.arjunsatyapal.rome.atompubimpl.CnxAtomHandlerEnum;
 import com.arjunsatyapal.rome.enums.CnxAtomPubConstants;
 import com.arjunsatyapal.rome.enums.CustomMediaTypes;
 import com.arjunsatyapal.rome.utils.CnxAtomPubServices;
+import com.arjunsatyapal.rome.utils.PrettyXmlOutputter;
+import com.sun.syndication.feed.atom.Entry;
 import com.sun.syndication.feed.atom.Feed;
+import com.sun.syndication.feed.atom.Link;
+import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.WireFeedOutput;
+import com.sun.syndication.io.impl.Atom10Generator;
+import com.sun.syndication.io.impl.Atom10Parser;
 import com.sun.syndication.propono.atom.common.AtomService;
 import com.sun.syndication.propono.atom.server.AtomException;
+import com.sun.syndication.propono.atom.server.AtomRequest;
+import com.sun.syndication.propono.atom.server.AtomRequestImpl;
 
 import org.jdom.Document;
+import org.jdom.JDOMException;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.net.URI;
+import java.util.Iterator;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,29 +65,42 @@ import javax.ws.rs.core.Response;
  */
 @Path(CnxAtomPubConstants.COLLECTION_RESOURCE_REL_PATH)
 public class CnxResource {
+    private Logger logger = Logger.getLogger(CnxResource.class.getName());
+    
     @POST
     @Produces(CustomMediaTypes.APPLICATION_ATOM_XML)
     @Path(CnxAtomPubConstants.COLLECTION_MODULE_POST_PATH)
     public Response getServiceDocument(@Context HttpServletRequest req,
-            @Context HttpServletResponse res) throws AtomException {
+            @Context HttpServletResponse res) throws AtomException, IllegalArgumentException, UnsupportedEncodingException, JDOMException, IOException, FeedException {
         // TODO(arjuns) : Add exception handling.
-        AtomService service = new CnxAtomPubServices().getServiceDocumentService(req, res,
-                CnxAtomHandlerEnum.RESOURCE);
+        CnxAtomPubServices services = new CnxAtomPubServices();
+        CnxResourceAtomHandler handler = services.createCnxResourceAtomHandler(req,
+                res);
+        AtomRequest areq = new AtomRequestImpl(req);
 
-//        AtomHandler handler = new CnxAtomPubServices().getAtomHandler(req, res);
-//
-//        Feed col = handler.getCollection(areq);
-//        col.setFeedType(FEED_TYPE);
-//        WireFeedOutput wireFeedOutput = new WireFeedOutput();
-//        Document feedDoc = wireFeedOutput.outputJDom(col);
-//        res.setContentType("application/atom+xml; charset=utf-8");
-//        Writer writer = res.getWriter();
-//        XMLOutputter outputter = new XMLOutputter();
-//        outputter.setFormat(Format.getPrettyFormat());
-//        outputter.output(feedDoc, writer);
-//        writer.close();
-//        res.setStatus(HttpServletResponse.SC_OK);
+        // Parse incoming entry
+        Entry entry = Atom10Parser.parseEntry(
+                new BufferedReader(new InputStreamReader(req.getInputStream(), "UTF-8")), null);
+        
+        String strentry = entry.toString();
+        logger.info("Entry = " + entry.toString());
+        
+        // call handler to post it
+        Entry newEntry = handler.postEntry(areq, entry);
+        
+        // TODO(arjuns) : ADd validation for this.
+        Link createdUri = (Link) newEntry.getOtherLinks().get(0);
+        URI uri = null;
+        try {
+            String resolved = createdUri.getRel() + createdUri.getHref();
+            uri = new URI(resolved);
+        } catch (Exception e) {
+            logger.severe(Throwables.getStackTraceAsString(e));
+        }
 
-        return Response.ok().entity(prettyXmlOutputDocument(service.serviceToDocument())).build();
+        Writer writer = new BufferedWriter(res.getWriter());
+        Atom10Generator.serializeEntry(newEntry, writer);
+        
+        return Response.created(uri).build();
     }
 }
