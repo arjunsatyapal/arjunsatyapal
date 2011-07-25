@@ -21,6 +21,7 @@ import static com.arjunsatyapal.rome.utils.CnxAtomPubServices.getCache;
 
 import com.google.common.collect.Lists;
 
+import com.sun.syndication.feed.atom.Content;
 import com.sun.syndication.feed.atom.Entry;
 import com.sun.syndication.feed.atom.Feed;
 import com.sun.syndication.feed.atom.Link;
@@ -101,8 +102,20 @@ public class CnxResourceAtomHandler implements AtomHandler {
         Link resourceLink = new Link();
         resourceLink.setHref(resourceId);
         //TODO(arjuns) : get from cnxConstants.
-        resourceLink.setRel("http://localhost:8888/resource/");
+        String host = "http://localhost:8888";
+        resourceLink.setRel(host + "/atompub/resource/");
+
         newEntry.setOtherLinks(Lists.newArrayList(resourceLink));
+        
+        
+        // Now sending details about blobstore URL as content to feed.
+        Content content = new Content();
+        content.setType(Content.TEXT);
+        
+        // TODO(arjuns) : fix this hardcoded value for URLs.
+        content.setValue(host + uploadUrl);
+        
+        newEntry.setContents(Lists.newArrayList(content));
         
         // TODO(arjuns) : Add detail for blobstore.
         return newEntry;

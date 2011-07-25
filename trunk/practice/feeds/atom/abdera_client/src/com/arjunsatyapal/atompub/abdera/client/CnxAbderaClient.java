@@ -23,13 +23,12 @@ import org.apache.abdera.factory.Factory;
 import org.apache.abdera.model.Collection;
 import org.apache.abdera.model.Document;
 import org.apache.abdera.model.Entry;
-import org.apache.abdera.model.Person;
 import org.apache.abdera.model.Service;
 import org.apache.abdera.model.Workspace;
-import org.apache.abdera.parser.stax.FOMPerson;
 import org.apache.abdera.protocol.client.AbderaClient;
+import org.apache.abdera.writer.Writer;
 
-import java.util.Date;
+import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
@@ -39,7 +38,7 @@ import java.util.logging.Logger;
 public class CnxAbderaClient {
     private static Logger logger = Logger.getLogger(CnxAbderaClient.class.getName());
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         CnxClientConstants clientConstants = new CnxClientConstants(!false);
 
@@ -69,7 +68,8 @@ public class CnxAbderaClient {
         Document<Entry> doc = abderaClient.post(resourceCollectionUrl, entry).getDocument();
         
         if (doc != null) {
-            logger.info(doc.getRoot().toString());
+            Writer writer = abdera.getWriterFactory().getWriter("prettyxml");
+            writer.writeTo(doc,  System.out);
         } else {
             logger.info("Doc is null.");
         }
