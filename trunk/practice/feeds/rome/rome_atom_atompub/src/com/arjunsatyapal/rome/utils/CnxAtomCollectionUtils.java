@@ -57,7 +57,7 @@ public class CnxAtomCollectionUtils {
     private static Collection getCnxCollection(String collectionName,
             String collectionPath, Category category) {
         Collection collection = new Collection(collectionName,
-                MediaType.TEXT_PLAIN, collectionPath);
+                null, collectionPath);
 
         Categories categories = new Categories();
         categories.addCategory(category);

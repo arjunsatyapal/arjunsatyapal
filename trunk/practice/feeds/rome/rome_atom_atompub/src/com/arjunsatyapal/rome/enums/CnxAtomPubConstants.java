@@ -89,7 +89,7 @@ public class CnxAtomPubConstants {
     // Constants for Collections.
     /** Name for AtomPub collection for CnxCollections.. */
     public static final String COLLECTION_CNX_COLLECTION_NAME = 
-            "AtomPub Collection for Cnx Collections";
+            "AtomPub Collection for Cnx Collections.";
 
     /**
      * Path for CnxCollection AtomPub collection relative to

@@ -40,15 +40,17 @@ import javax.ws.rs.core.Response;
 public class CnxServiceDocument {
 
     @GET
-    // @Produces(CustomMediaTypes.APPLICATION_ATOMSVC_XML)
-    @Produces(CustomMediaTypes.APPLICATION_ATOM_XML)
+//    @Produces(CustomMediaTypes.APPLICATION_ATOMSVC_XML)
+  @Produces(CustomMediaTypes.APPLICATION_ATOM_XML)
     @Path(CnxAtomPubConstants.SERVICE_DOCUMENT_GET_PATH)
     public Response getServiceDocument(@Context HttpServletRequest req,
             @Context HttpServletResponse res) throws AtomException {
         // TODO(arjuns) : Add exception handling.
-        AtomService service = new CnxAtomPubServices().getServiceDocumentService(req, res);
+        AtomService service = new CnxAtomPubServices()
+                .getServiceDocumentService(req, res);
 
         return Response.ok()
-                .entity(prettyXmlOutputDocument(service.serviceToDocument())).build();
+                .entity(prettyXmlOutputDocument(service.serviceToDocument()))
+                .build();
     }
 }
