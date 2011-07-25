@@ -105,7 +105,7 @@ public class CnxResourceAtomHandler implements AtomHandler {
         //TODO(arjuns) : get from cnxConstants.
         String host = "http://localhost:8888";
         resourceLink.setRel(host + "/atompub/resource/");
-        resourceLink.setTitle("Resource Link");
+        resourceLink.setTitle("ResourceID");
 
         List<Link> listOfOtherLinks = Lists.newArrayList();
         listOfOtherLinks.add(resourceLink);
@@ -114,9 +114,10 @@ public class CnxResourceAtomHandler implements AtomHandler {
         
         // Now sending details about blobstore URL as content to feed.
         Link blobStoreLink = new Link();
-        blobStoreLink.setHref(host + uploadUrl);
-        blobStoreLink.setTitle("Upload Link");
-        blobStoreLink.setRel(null);
+        blobStoreLink.setHref(uploadUrl);
+        // TODO(arjuns) : Get rid of this string.
+        blobStoreLink.setTitle("UploadURL");
+        blobStoreLink.setRel(host);
         
         listOfOtherLinks.add(blobStoreLink);
         newEntry.setOtherLinks(listOfOtherLinks);

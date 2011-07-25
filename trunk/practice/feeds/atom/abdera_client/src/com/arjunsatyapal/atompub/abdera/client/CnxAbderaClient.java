@@ -23,12 +23,14 @@ import org.apache.abdera.factory.Factory;
 import org.apache.abdera.model.Collection;
 import org.apache.abdera.model.Document;
 import org.apache.abdera.model.Entry;
+import org.apache.abdera.model.Link;
 import org.apache.abdera.model.Service;
 import org.apache.abdera.model.Workspace;
 import org.apache.abdera.protocol.client.AbderaClient;
 import org.apache.abdera.writer.Writer;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -72,6 +74,18 @@ public class CnxAbderaClient {
             writer.writeTo(doc,  System.out);
         } else {
             logger.info("Doc is null.");
+        }
+        
+        
+        Entry postResourceResp = doc.getRoot();
+        List<Link> links = postResourceResp.getLinks();
+        
+        for (Link currLink : links) {
+            if (currLink.getTitle().equals("UploadURL")) {
+                logger.info("BlobStore UploadUrl = " + currLink.getRel() + currLink.getHref());
+            } else if (currLink.getTitle().equals("ResourceID")) {
+                logger.info("Resource URL = " + currLink.getRel() + currLink.getHref());
+            }
         }
     }
 }
