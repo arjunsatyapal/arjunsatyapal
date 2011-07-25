@@ -20,7 +20,8 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 
 import com.google.common.base.Strings;
 
-import com.arjunsatyapal.rome.enums.ServletPaths;
+import com.arjunsatyapal.rome.enums.CnxAtomPubConstants;
+import com.arjunsatyapal.rome.utils.AtomCollectionUtils;
 import com.sun.syndication.propono.atom.common.AtomService;
 import com.sun.syndication.propono.atom.common.Collection;
 import com.sun.syndication.propono.atom.common.Workspace;
@@ -45,15 +46,6 @@ public class CnxAtomService extends AtomService {
         Workspace workSpace = new Workspace("Connexions Workspace", "text");
         getWorkspaces().add(workSpace);
 
-        workSpace.addCollection(getCollectionForResources());
-    }
-
-    private Collection getCollectionForResources() {
-        Collection collection = new Collection("Resource Collection", "text",
-                ServletPaths.AP_COLLECTION_RESOURCE_ABS_PATH);
-        // TODO(arjuns) : ADd categories.
-//        collection.addCategories(new Categories())
-        
-        return collection;
+        workSpace.addCollection(AtomCollectionUtils.getCnxResourceCollection());
     }
 }

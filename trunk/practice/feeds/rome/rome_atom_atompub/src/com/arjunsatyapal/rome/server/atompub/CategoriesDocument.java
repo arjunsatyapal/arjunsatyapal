@@ -21,7 +21,7 @@ import static com.arjunsatyapal.rome.utils.AtomCategoryUtils.getCnxResourceCateg
 import static com.arjunsatyapal.rome.utils.PrettyXmlOutputter.prettyXmlOutputElement;
 
 import com.arjunsatyapal.rome.enums.CustomMediaTypes;
-import com.arjunsatyapal.rome.enums.ServletPaths;
+import com.arjunsatyapal.rome.enums.CnxAtomPubConstants;
 import com.sun.syndication.propono.atom.common.Categories;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,11 +37,11 @@ import javax.ws.rs.core.Response;
  * 
  * @author Arjun Satyapal
  */
-@Path(ServletPaths.AP_CATEGORIES_DOCUMENT_PATH)
+@Path(CnxAtomPubConstants.CATEGORIES_DOCUMENT_PATH)
 public class CategoriesDocument {
     @GET
     @Produces(CustomMediaTypes.APPLICATION_ATOM_XML)
-    @Path(ServletPaths.AP_CATEGORIES_DOCUMENT_GET_PATH)
+    @Path(CnxAtomPubConstants.CATEGORIES_DOCUMENT_GET_PATH)
     public Response getServiceDocument(@Context HttpServletRequest req,
             @Context HttpServletResponse res){
         // TODO(arjuns) : Add caching. 

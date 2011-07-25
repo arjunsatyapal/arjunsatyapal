@@ -15,9 +15,9 @@
  */
 package com.arjunsatyapal.rome.atompubimpl;
 
-import static com.arjunsatyapal.rome.enums.ServletPaths.ATOMPUB_URL;
+import static com.arjunsatyapal.rome.enums.CnxAtomPubConstants.ATOMPUB_URL;
 
-import com.arjunsatyapal.rome.enums.ServletPaths;
+import com.arjunsatyapal.rome.enums.CnxAtomPubConstants;
 import com.sun.syndication.feed.atom.Entry;
 import com.sun.syndication.feed.atom.Feed;
 import com.sun.syndication.propono.atom.common.AtomService;

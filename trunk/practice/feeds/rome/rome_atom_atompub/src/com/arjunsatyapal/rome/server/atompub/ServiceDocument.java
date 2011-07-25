@@ -18,7 +18,7 @@ package com.arjunsatyapal.rome.server.atompub;
 import static com.arjunsatyapal.rome.utils.PrettyXmlOutputter.prettyXmlOutputDocument;
 
 import com.arjunsatyapal.rome.enums.CustomMediaTypes;
-import com.arjunsatyapal.rome.enums.ServletPaths;
+import com.arjunsatyapal.rome.enums.CnxAtomPubConstants;
 import com.arjunsatyapal.rome.utils.Services;
 import com.sun.syndication.propono.atom.common.AtomService;
 import com.sun.syndication.propono.atom.server.AtomException;
@@ -42,13 +42,13 @@ import javax.ws.rs.core.Response;
  * 
  * @author Arjun Satyapal
  */
-@Path(ServletPaths.AP_SERVICE_DOCUMENT_PATH)
+@Path(CnxAtomPubConstants.SERVICE_DOCUMENT_PATH)
 public class ServiceDocument {
 
     @GET
     // @Produces(CustomMediaTypes.APPLICATION_ATOMSVC_XML)
     @Produces(CustomMediaTypes.APPLICATION_ATOM_XML)
-    @Path(ServletPaths.AP_SERVICE_DOCUMENT_GET_PATH)
+    @Path(CnxAtomPubConstants.SERVICE_DOCUMENT_GET_PATH)
     public Response getServiceDocument(@Context HttpServletRequest req,
             @Context HttpServletResponse res) throws AtomException, IOException {
         // TODO(arjuns) : Add exception handling.

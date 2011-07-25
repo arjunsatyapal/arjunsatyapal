@@ -15,8 +15,9 @@
  */
 package com.arjunsatyapal.rome.utils;
 
-import com.arjunsatyapal.rome.enums.ServletPaths;
+import com.arjunsatyapal.rome.enums.CnxAtomPubConstants;
 import com.sun.syndication.feed.atom.Category;
+import com.sun.syndication.propono.atom.common.Categories;
 
 /**
  * Utility class for AtomCategories.
@@ -24,22 +25,26 @@ import com.sun.syndication.feed.atom.Category;
  * @author Arjun Satyapal
  */
 public class AtomCategoryUtils {
+    // Utility class.
+    private AtomCategoryUtils() {
+    }
+    
     public static Category getCnxResourceCategoryEle() {
-        return getCnxCategoryEle(ServletPaths.AP_COLLECTION_RESOURCE_REL_PATH,
-                ServletPaths.AP_COLLECTION_RESOURCE_ABS_PATH,
-                ServletPaths.AP_COLLECTION_RESOURCE_REL_PATH);
+        return getCnxCategoryEle(CnxAtomPubConstants.COLLECTION_RESOURCE_REL_PATH,
+                CnxAtomPubConstants.COLLECTION_RESOURCE_ABS_PATH,
+                CnxAtomPubConstants.COLLECTION_RESOURCE_REL_PATH);
     }
     
     public static Category getCnxModuleCategoryEle() {
-        return getCnxCategoryEle(ServletPaths.AP_COLLECTION_MODULE_REL_PATH,
-                ServletPaths.AP_COLLECTION_MODULE_ABS_PATH,
-                ServletPaths.AP_COLLECTION_MODULE_REL_PATH);
+        return getCnxCategoryEle(CnxAtomPubConstants.COLLECTION_MODULE_REL_PATH,
+                CnxAtomPubConstants.COLLECTION_MODULE_ABS_PATH,
+                CnxAtomPubConstants.COLLECTION_MODULE_REL_PATH);
     }
     
     public static Category getCnxCollectionCategoryEle() {
-        return getCnxCategoryEle(ServletPaths.AP_COLLECTION_CNX_COLLECTION_REL_PATH,
-                ServletPaths.AP_COLLECTION_CNX_COLLECTION_ABS_PATH,
-                ServletPaths.AP_COLLECTION_CNX_COLLECTION_REL_PATH);
+        return getCnxCategoryEle(CnxAtomPubConstants.AP_COLLECTION_CNX_COLLECTION_REL_PATH,
+                CnxAtomPubConstants.AP_COLLECTION_CNX_COLLECTION_ABS_PATH,
+                CnxAtomPubConstants.AP_COLLECTION_CNX_COLLECTION_REL_PATH);
     }
     
     public static Category getCnxCategoryEle(String label, String schemePath, String term) {
