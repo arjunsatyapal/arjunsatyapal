@@ -15,17 +15,15 @@
  */
 package com.arjunsatyapal.rome.server.atompub;
 
-import static com.arjunsatyapal.rome.utils.PrettyXmlOutputter.prettyXmlOutputDocument;
+import static com.arjunsatyapal.rome.utils.PrettyXmlOutputter.prettyXmlOutputElement;
 
 import com.arjunsatyapal.rome.enums.CustomMediaTypes;
 import com.arjunsatyapal.rome.enums.ServletPaths;
 import com.arjunsatyapal.rome.utils.Services;
+import com.sun.syndication.feed.atom.Category;
 import com.sun.syndication.propono.atom.common.AtomService;
+import com.sun.syndication.propono.atom.common.Categories;
 import com.sun.syndication.propono.atom.server.AtomException;
-import com.sun.syndication.propono.atom.server.AtomHandler;
-import com.sun.syndication.propono.atom.server.AtomHandlerFactory;
-import com.sun.syndication.propono.atom.server.AtomRequest;
-import com.sun.syndication.propono.atom.server.AtomRequestImpl;
 
 import java.io.IOException;
 
@@ -42,19 +40,29 @@ import javax.ws.rs.core.Response;
  * 
  * @author Arjun Satyapal
  */
-@Path(ServletPaths.AP_SERVICE_DOCUMENT_PATH)
-public class ServiceDocument {
-
+@Path(ServletPaths.AP_CATEGORIES_DOCUMENT_PATH)
+public class CategoriesDocument {
+    private final String scheme = ServletPaths.ATOMPUB_URL; 
     @GET
     // @Produces(CustomMediaTypes.APPLICATION_ATOMSVC_XML)
     @Produces(CustomMediaTypes.APPLICATION_ATOM_XML)
-    @Path(ServletPaths.AP_SERVICE_DOCUMENT_GET_PATH)
+    @Path(ServletPaths.AP_CATEGORIES_DOCUMENT_GET_PATH)
     public Response getServiceDocument(@Context HttpServletRequest req,
             @Context HttpServletResponse res) throws AtomException, IOException {
         // TODO(arjuns) : Add exception handling.
         AtomService service = Services.getServiceDocumentService(req, res);
+        
+        Category resourceCategory = new Category();
+        resourceCategory.setLabel(ServletPaths.AP_COLLECTION_RESOURCE_REL_PATH);
+        resourceCategory.setScheme(ServletPaths.AP_COLLECTINO_RESOURCE_ABS_PATH);
+        resourceCategory.setTerm(ServletPaths.AP_COLLECTION_RESOURCE_REL_PATH);
+        
+        
+        Categories categories = new Categories();
+        categories.addCategory(resourceCategory);
 
+        
         return Response.ok()
-                .entity(prettyXmlOutputDocument(service.serviceToDocument())).build();
+                .entity(prettyXmlOutputElement(categories.categoriesToElement())).build();
     }
 }

@@ -15,22 +15,45 @@
  */
 package com.arjunsatyapal.rome.atompubimpl;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Strings.isNullOrEmpty;
+
+import com.google.common.base.Strings;
+
+import com.arjunsatyapal.rome.enums.ServletPaths;
 import com.sun.syndication.propono.atom.common.AtomService;
+import com.sun.syndication.propono.atom.common.Collection;
 import com.sun.syndication.propono.atom.common.Workspace;
 
 /**
- *
+ * 
  * @author Arjun Satyapal
  */
 public class CnxAtomService extends AtomService {
-    public CnxAtomService() {
+    // e.g. http://cnx-repo.appspot.com/atompub
+    private String baseUri;
+
+    public CnxAtomService(String baseUri) {
+        checkArgument(!isNullOrEmpty(baseUri), "baseUri cannot be empty/null.");
+        this.baseUri = baseUri;
+
         /*
-         *  Every API will get at max two workspaces.
-         *  1. For AtomPub reado only links.
-         *  2. If its an authenticated user, then AtomPub collection for that particular user. 
+         * For Connexions repository, there is only one workspace. Each
+         * workspace will have three AtomPubcollections : 1. Resources 2.
+         * Modules 3. Collections.
          */
-        Workspace readOnly = new Workspace("ReadOnly", "text");
-        getWorkspaces().add(readOnly);
+        Workspace workSpace = new Workspace("Connexions Workspace", "text");
+        getWorkspaces().add(workSpace);
+
+        workSpace.addCollection(getCollectionForResources());
     }
 
+    private Collection getCollectionForResources() {
+        Collection collection = new Collection("Resource Collection", "text",
+                ServletPaths.AP_COLLECTINO_RESOURCE_ABS_PATH);
+        // TODO(arjuns) : ADd categories.
+//        collection.addCategories(new Categories())
+        
+        return collection;
+    }
 }

@@ -15,6 +15,9 @@
  */
 package com.arjunsatyapal.rome.atompubimpl;
 
+import static com.arjunsatyapal.rome.enums.ServletPaths.ATOMPUB_URL;
+
+import com.arjunsatyapal.rome.enums.ServletPaths;
 import com.sun.syndication.feed.atom.Entry;
 import com.sun.syndication.feed.atom.Feed;
 import com.sun.syndication.propono.atom.common.AtomService;
@@ -58,7 +61,7 @@ public class CnxServiceAtomHandler implements AtomHandler {
         this.req = req;
         this.res = res;
         
-        atomService = new CnxAtomService();
+        atomService = new CnxAtomService(ATOMPUB_URL);
     }
 
     @Override

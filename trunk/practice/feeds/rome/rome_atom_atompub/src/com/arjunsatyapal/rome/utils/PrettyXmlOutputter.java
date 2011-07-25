@@ -16,6 +16,7 @@
 package com.arjunsatyapal.rome.utils;
 
 import org.jdom.Document;
+import org.jdom.Element;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
@@ -24,8 +25,14 @@ import org.jdom.output.XMLOutputter;
  * @author Arjun Satyapal
  */
 public class PrettyXmlOutputter {
-    public static String prettyXmlOutput(Document doc) {
+    public static String prettyXmlOutputDocument(Document doc) {
         XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
         return xmlOutputter.outputString(doc);
     }
+    
+    public static String prettyXmlOutputElement(Element element) {
+        XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
+        return xmlOutputter.outputString(element);
+    }
+
 }

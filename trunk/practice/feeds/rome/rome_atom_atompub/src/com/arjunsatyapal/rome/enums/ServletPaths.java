@@ -16,11 +16,27 @@
 package com.arjunsatyapal.rome.enums;
 
 /**
- *
+ * 
  * @author Arjun Satyapal
  */
 public class ServletPaths {
-    // Path for Service Document relative to /rest.
+    // TODO(arjuns) : Make figuring out parent url dynamic.
+    /** Path for REST URL for ATOMPUB API. */
+    public static final String ATOMPUB_URL = "http://cnx-repo.appspot.com/atompub";
+
+    /** Path for Service Document relative to {@link #ATOMPUB_URL}. */
     public static final String AP_SERVICE_DOCUMENT_PATH = "/servicedocument";
     public static final String AP_SERVICE_DOCUMENT_GET_PATH = "/";
+
+    /** Path for Categories Docuemnt relative to {@link #ATOMPUB_URL}. */
+    public static final String AP_CATEGORIES_DOCUMENT_PATH = "/categorydocument";
+    public static final String AP_CATEGORIES_DOCUMENT_GET_PATH = "/";
+
+    /** Path for Resource AtomPub collection relative to {@link #ATOMPUB_URL}. */
+    public static final String AP_COLLECTION_RESOURCE_REL_PATH = "/resources";
+    /** Absolute path for Resource AtomPub collection." */
+    public static final String AP_COLLECTINO_RESOURCE_ABS_PATH = ATOMPUB_URL
+            + AP_COLLECTION_RESOURCE_REL_PATH;
+
+    public static final String AP_COLLECTION_RESOURCE_GET_PATH = "/";
 }
