@@ -32,11 +32,27 @@ public class ServletPaths {
     public static final String AP_CATEGORIES_DOCUMENT_PATH = "/categorydocument";
     public static final String AP_CATEGORIES_DOCUMENT_GET_PATH = "/";
 
+    // Links for Resources.
     /** Path for Resource AtomPub collection relative to {@link #ATOMPUB_URL}. */
-    public static final String AP_COLLECTION_RESOURCE_REL_PATH = "/resources";
+    public static final String AP_COLLECTION_RESOURCE_REL_PATH = "/resource";
     /** Absolute path for Resource AtomPub collection." */
-    public static final String AP_COLLECTINO_RESOURCE_ABS_PATH = ATOMPUB_URL
+    public static final String AP_COLLECTION_RESOURCE_ABS_PATH = ATOMPUB_URL
             + AP_COLLECTION_RESOURCE_REL_PATH;
-
     public static final String AP_COLLECTION_RESOURCE_GET_PATH = "/";
+    
+    // Links for Modules.
+    /** Path for Module AtomPub Collection relative to {@link #ATOMPUB_URL}. */
+    public static final String AP_COLLECTION_MODULE_REL_PATH = "/module";
+    /** Absolute path for Module AtomPub collection. */
+    public static final String AP_COLLECTION_MODULE_ABS_PATH = ATOMPUB_URL
+            + AP_COLLECTION_MODULE_REL_PATH;
+    public static final String AP_COLLECTION_MODULE_GET_PATH = "/";
+
+    // Links for Collections.
+    /** Path for CnxCollection AtomPub collection relative to {@link #ATOMPUB_URL}. */
+    public static final String AP_COLLECTION_CNX_COLLECTION_REL_PATH = "/collection";
+    /** Absolute path for Resource AtomPub collection. */
+    public static final String AP_COLLECTION_CNX_COLLECTION_ABS_PATH = ATOMPUB_URL
+            + AP_COLLECTION_CNX_COLLECTION_REL_PATH;
+    public static final String AP_COLLECTION__CNX_COLLECTION_GET_PATH = "/";
 }

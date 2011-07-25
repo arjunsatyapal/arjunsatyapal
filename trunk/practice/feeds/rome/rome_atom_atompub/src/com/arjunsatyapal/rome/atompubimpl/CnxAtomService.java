@@ -50,7 +50,7 @@ public class CnxAtomService extends AtomService {
 
     private Collection getCollectionForResources() {
         Collection collection = new Collection("Resource Collection", "text",
-                ServletPaths.AP_COLLECTINO_RESOURCE_ABS_PATH);
+                ServletPaths.AP_COLLECTION_RESOURCE_ABS_PATH);
         // TODO(arjuns) : ADd categories.
 //        collection.addCategories(new Categories())
         
