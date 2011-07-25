@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
  * 
  * @author Arjun Satyapal
  */
-public class Services {
+public class CnxAtomPubServices {
     private CnxAtomService atomService;
     public AtomService getServiceDocumentService(HttpServletRequest req,
             HttpServletResponse res) throws AtomException {

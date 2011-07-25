@@ -15,9 +15,12 @@
  */
 package com.arjunsatyapal.rome.atompubimpl;
 
-import static com.arjunsatyapal.rome.utils.AtomCollectionUtils.getCnxResourceCollection;
+import static com.arjunsatyapal.rome.utils.CnxAtomCollectionUtils.getCollectionForCnxCollection;
+import static com.arjunsatyapal.rome.utils.CnxAtomCollectionUtils.getCollectionForCnxModule;
+import static com.arjunsatyapal.rome.utils.CnxAtomCollectionUtils.getCollectionForCnxResource;
 
 import com.arjunsatyapal.rome.enums.CnxAtomPubConstants;
+import com.arjunsatyapal.rome.utils.CnxAtomCollectionUtils;
 import com.sun.syndication.propono.atom.common.AtomService;
 import com.sun.syndication.propono.atom.common.Workspace;
 
@@ -45,6 +48,8 @@ public class CnxAtomService extends AtomService {
         Workspace workSpace = new Workspace("Connexions Workspace", "text");
         getWorkspaces().add(workSpace);
 
-        workSpace.addCollection(getCnxResourceCollection(this));
+        workSpace.addCollection(getCollectionForCnxResource(this));
+        workSpace.addCollection(getCollectionForCnxModule(this));
+        workSpace.addCollection(getCollectionForCnxCollection(this));
     }
 }

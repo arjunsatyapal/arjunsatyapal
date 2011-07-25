@@ -27,9 +27,9 @@ import com.sun.syndication.feed.atom.Category;
  * 
  * @author Arjun Satyapal
  */
-public class AtomCategoryUtils {
+public class CnxAtomCategoryUtils {
     // Utility class.
-    private AtomCategoryUtils() {
+    private CnxAtomCategoryUtils() {
     }
     
     public static Category getCnxResourceCategoryEle(CnxAtomService service) {
