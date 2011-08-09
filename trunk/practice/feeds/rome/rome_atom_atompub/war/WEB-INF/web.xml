@@ -28,7 +28,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   <!-- Upload Servlet. -->
   <servlet>
     <servlet-name>uploadServlet</servlet-name>
-    <servlet-class>com.arjunsatyapal.rome.server.atompub.resource.UploadServlet</servlet-class>
+    <servlet-class>com.arjunsatyapal.rome.server.atompub.resource.UploadServlet
+    </servlet-class>
   </servlet>
 
   <servlet-mapping>

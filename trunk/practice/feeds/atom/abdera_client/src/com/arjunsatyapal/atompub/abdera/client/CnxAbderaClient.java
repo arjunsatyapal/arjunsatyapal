@@ -27,14 +27,16 @@ import org.apache.abdera.model.Link;
 import org.apache.abdera.model.Service;
 import org.apache.abdera.model.Workspace;
 import org.apache.abdera.protocol.client.AbderaClient;
-import org.apache.abdera.writer.Writer;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.methods.MultipartPostMethod;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * 
+ *
  * @author Arjun Satyapal
  */
 public class CnxAbderaClient {
@@ -57,36 +59,45 @@ public class CnxAbderaClient {
         Workspace workSpace = service.getWorkspace(CNX_WORKSPACE);
 
         // Get Resource Collection.
-        Collection collection = workSpace
+        Collection resourceCollection = workSpace
                 .getCollection(COLLECTION_CNX_RESOURCE);
 
         // Create a Resource by posting entry to Collection of Resource.
         Entry entry = factory.newEntry();
         entry.addAuthor("Arjun Satyapal", "arjuns@google.com", "http://plus.google.com/arjuns");
 
-        String resourceCollectionUrl = collection.getResolvedHref().toString();
+        String resourceCollectionUrl = resourceCollection.getResolvedHref().toString();
         logger.info("Posting to : " + resourceCollectionUrl);
 
         Document<Entry> doc = abderaClient.post(resourceCollectionUrl, entry).getDocument();
 
-        Entry x = doc.getRoot();
-//        if (doc != null) {
-//            Writer writer = abdera.getWriterFactory().getWriter("prettyxml");
-//            writer.writeTo(doc, System.out);
-//        } else {
-//            logger.info("Doc is null.");
-//        }
-//        
-        
         Entry postResourceResp = doc.getRoot();
         List<Link> links = postResourceResp.getLinks();
-        
+
+        String blobstoreUrl = null;
         for (Link currLink : links) {
             if (currLink.getTitle().equals("UploadURL")) {
-                logger.info("BlobStore UploadUrl = " + currLink.getRel() + currLink.getHref());
+                blobstoreUrl = currLink.getRel() + currLink.getHref();
+                logger.info("BlobStore UploadUrl = " + blobstoreUrl);
             } else if (currLink.getTitle().equals("ResourceID")) {
                 logger.info("Resource URL = " + currLink.getRel() + currLink.getHref());
             }
         }
+
+        // Now posting file to Blobstore.
+        File file = new File("/home/arjuns/test_file.txt");
+        HttpClient httpClient = new HttpClient();
+        MultipartPostMethod postMethod = new MultipartPostMethod(blobstoreUrl);
+        postMethod.addParameter("test_file.txt", file);
+        httpClient.executeMethod(postMethod);
+        String response = postMethod.getResponseBodyAsString();
+        logger.info(response);
+
+        logger.info("***** Done.");
+
+
+        // Now uploading Module.
+        //
+
     }
 }

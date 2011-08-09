@@ -21,6 +21,7 @@ import com.google.common.base.Throwables;
 
 import com.arjunsatyapal.rome.atompubimpl.CnxAtomHandlerEnum;
 import com.arjunsatyapal.rome.atompubimpl.CnxAtomService;
+import com.arjunsatyapal.rome.server.atompub.module.CnxModuleAtomHandler;
 import com.arjunsatyapal.rome.server.atompub.resource.CnxResourceAtomHandler;
 import com.arjunsatyapal.rome.server.atompub.service.CnxAtomHandlerFactory;
 import com.arjunsatyapal.rome.server.atompub.service.CnxServiceAtomHandler;
@@ -85,6 +86,11 @@ public class CnxAtomPubServices {
     public CnxResourceAtomHandler createCnxResourceAtomHandler(HttpServletRequest req,
             HttpServletResponse res) {
         return (CnxResourceAtomHandler) getAtomHandler(req, res, CnxAtomHandlerEnum.RESOURCE);
+    }
+    
+    public CnxModuleAtomHandler createCnxModuleAtomHandler(HttpServletRequest req,
+            HttpServletResponse res) {
+        return (CnxModuleAtomHandler) getAtomHandler(req, res, CnxAtomHandlerEnum.MODULE);
     }
 
     private AtomHandler createAtomRequestHandler(HttpServletRequest request,
