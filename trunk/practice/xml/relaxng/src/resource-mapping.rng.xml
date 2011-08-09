@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+  <start>
+    <element name="resources">
+      <attribute name="version"> 1.0 </attribute>
+      <!-- TODO(arjuns) : See how to ensure non-empty text. -->
+      <attribute name="source-repository-id"> text </attribute>
+      <oneOrMore>
+        <element name="resource">
+          <!-- TODO(arjuns) : See how to ensure non-empty text. -->
+          <attribute name="name"> text </attribute>
+          <oneOrMore>
+            <element name="variant">
+              <!-- This is ContentType for the resource like jpg, png etc. -->
+              <attribute name="type">
+                <!-- TODO(arjuns) : See how to define enum. -->
+                text
+              </attribute>
+
+              <element name="location-information">
+                <!-- TODO(arjuns) : See what CNX has done for URL. -->
+                <element name="url">text</element>
+
+                <optional>
+                  <element name="origin-url">text</element>
+                </optional>
+
+                <oneOrMore>
+                  <optional>
+                    <!-- Location of original repository. -->
+                    <element name="repository">
+                      <!-- TODO(arjuns) : See what CNX has done for URL. -->
+                      <element name="repository-id">text</element>
+                      <element name="resource-id">text</element>
+                      <element name="origin-url">text</element>
+                    </element>
+                  </optional>
+                  <optional>
+                    <element name="internet">
+                      <!-- TODO(arjuns) : See what CNX has done for URL. -->
+                      <element name="origin-url">text</element>
+                    </element>
+                  </optional>
+                </oneOrMore>
+
+                <element name="additional-info">
+                  <oneOrMore>
+                    <element name="image">
+                      <element name="height-in-pixels"> text </element>
+                      <element name="widgth-in-pixels"> text </element>
+                    </element>
+                    <!-- element name="audio"> <element name="bitrate"> text </element> 
+                      </element> <element name="video"> <element name="frames-per-second"> text </element> 
+                      </element -->
+                  </oneOrMore>
+                </element>
+              </element>
+            </element>
+          </oneOrMore>
+        </element>
+      </oneOrMore>
+    </element>
+  </start>
+</grammar>
