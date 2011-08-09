@@ -12,48 +12,51 @@
           <oneOrMore>
             <element name="variant">
               <!-- This is ContentType for the resource like jpg, png etc. -->
-              <attribute name="type">
-                <!-- TODO(arjuns) : See how to define enum. -->
-                text
-              </attribute>
+              <choice>
+                <!-- One of the following groups should be present depending on content-type -->
+                <group>
+                  <attribute name="content-type">
+                    <value>image</value>
+                  </attribute>
+                  <element name="height-in-pixels"> text </element>
+                  <element name="widgth-in-pixels"> text </element>
+                </group>
+                <group>
+                  <attribute name="content-type">
+                    <value>video</value>
+                  </attribute>
+                  <element name="frames-per-second">text</element>
+                </group>
+              </choice>
 
               <element name="location-information">
+                <choice>
+                  <!-- One of the following groups should be present. -->
+                  <group>
+                    <attribute name="type">
+                      <value>repository</value>
+                    </attribute>
+
+                    <!-- TODO(arjuns) : See what CNX has done for URL. -->
+                    <element name="repository-id">text</element>
+                    <element name="resource-id">text</element>
+                    <!-- TODO(arjuns) : See what CNX has done for URL. -->
+                    <element name="origin-url">text</element>
+                  </group>
+
+                  <group>
+                    <attribute name="type">
+                      <value>internet</value>
+                    </attribute>
+
+                    <!-- TODO(arjuns) : See what CNX has done for URL. -->
+                    <element name="origin-url">text</element>
+                  </group>
+                </choice>
+
                 <!-- TODO(arjuns) : See what CNX has done for URL. -->
                 <element name="url">text</element>
 
-                <optional>
-                  <element name="origin-url">text</element>
-                </optional>
-
-                <oneOrMore>
-                  <optional>
-                    <!-- Location of original repository. -->
-                    <element name="repository">
-                      <!-- TODO(arjuns) : See what CNX has done for URL. -->
-                      <element name="repository-id">text</element>
-                      <element name="resource-id">text</element>
-                      <element name="origin-url">text</element>
-                    </element>
-                  </optional>
-                  <optional>
-                    <element name="internet">
-                      <!-- TODO(arjuns) : See what CNX has done for URL. -->
-                      <element name="origin-url">text</element>
-                    </element>
-                  </optional>
-                </oneOrMore>
-
-                <element name="additional-info">
-                  <oneOrMore>
-                    <element name="image">
-                      <element name="height-in-pixels"> text </element>
-                      <element name="widgth-in-pixels"> text </element>
-                    </element>
-                    <!-- element name="audio"> <element name="bitrate"> text </element> 
-                      </element> <element name="video"> <element name="frames-per-second"> text </element> 
-                      </element -->
-                  </oneOrMore>
-                </element>
               </element>
             </element>
           </oneOrMore>
