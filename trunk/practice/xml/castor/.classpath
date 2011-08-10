@@ -2,20 +2,36 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="build/gen-java"/>
-	<classpathentry kind="src" path="resource"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/castor-1.3.jar"/>
-	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/castor-1.3-anttasks.jar"/>
-	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/castor-1.3-codegen.jar"/>
-	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/castor-1.3-core.jar"/>
-	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/castor-1.3-ddlgen.jar"/>
-	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/castor-1.3-jdo.jar"/>
-	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/castor-1.3-xml.jar"/>
-	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/castor-1.3-xml-schema.jar"/>
-	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/jta1.0.1.jar"/>
-	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/commons-logging/commons-logging-1.0.4/commons-logging-1.0.4.jar"/>
-	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/xerces/xerces-2.11.0/xercesImpl.jar"/>
-	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/xml-apis/xml-apis.xerces-2.11.0/xml-apis.jar"/>
-	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/jing/jing-20091111/jing.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="lib" path="build/jars/castor-1.3-anttasks.jar"/>
+	<classpathentry kind="lib" path="build/jars/castor-1.3-codegen.jar"/>
+	<classpathentry kind="lib" path="build/jars/castor-1.3-core.jar" sourcepath="/home/arjuns/Downloads/castor-1.3/core/src/main/java"/>
+	<classpathentry kind="lib" path="build/jars/castor-1.3-ddlgen.jar"/>
+	<classpathentry kind="lib" path="build/jars/castor-1.3-jdo.jar"/>
+	<classpathentry kind="lib" path="build/jars/castor-1.3-xml-schema.jar"/>
+	<classpathentry kind="lib" path="build/jars/castor-1.3-xml.jar" sourcepath="/home/arjuns/Downloads/castor-1.3/xml/src/main/java"/>
+	<classpathentry kind="lib" path="build/jars/castor-1.3.jar"/>
+	<classpathentry kind="lib" path="build/jars/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="build/jars/datanucleus-appengine-1.0.9.final.jar"/>
+	<classpathentry kind="lib" path="build/jars/datanucleus-core-1.1.5.jar"/>
+	<classpathentry kind="lib" path="build/jars/datanucleus-jpa-1.1.5.jar"/>
+	<classpathentry kind="lib" path="build/jars/el-api.jar"/>
+	<classpathentry kind="lib" path="build/jars/geronimo-jpa_3.0_spec-1.1.1.jar"/>
+	<classpathentry kind="lib" path="build/jars/geronimo-jta_1.1_spec-1.1.1.jar"/>
+	<classpathentry kind="lib" path="build/jars/guava-r09.jar"/>
+	<classpathentry kind="lib" path="build/jars/isorelax.jar"/>
+	<classpathentry kind="lib" path="build/jars/jdo2-api-2.3-eb.jar"/>
+	<classpathentry kind="lib" path="build/jars/jing.jar"/>
+	<classpathentry kind="lib" path="build/jars/jsp-api.jar"/>
+	<classpathentry kind="lib" path="build/jars/jsr107cache-1.1.jar"/>
+	<classpathentry kind="lib" path="build/jars/jta1.0.1.jar"/>
+	<classpathentry kind="lib" path="build/jars/saxon.jar"/>
+	<classpathentry kind="lib" path="build/jars/serializer.jar"/>
+	<classpathentry kind="lib" path="build/jars/servlet-api.jar"/>
+	<classpathentry kind="lib" path="build/jars/trang-20091111.jar"/>
+	<classpathentry kind="lib" path="build/jars/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="build/jars/xml-apis.jar"/>
+	<classpathentry kind="lib" path="build/classes"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

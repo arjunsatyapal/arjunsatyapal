@@ -9,12 +9,9 @@
 	<classpathentry kind="lib" path="build/jars/jsr107cache-1.1.jar"/>
 	<classpathentry kind="lib" path="build/jars/jsr173_1.0_api.jar"/>
 	<classpathentry kind="lib" path="build/jars/jsr305.jar"/>
-	<classpathentry kind="lib" path="build/jars/resolver.jar"/>
 	<classpathentry kind="lib" path="build/jars/saxon.jar"/>
-	<classpathentry kind="lib" path="build/jars/serializer.jar"/>
 	<classpathentry kind="lib" path="build/jars/servlet-api.jar"/>
 	<classpathentry kind="lib" path="build/jars/trang-20091111.jar"/>
-	<classpathentry kind="lib" path="build/jars/xalan.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="build/gen-java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>

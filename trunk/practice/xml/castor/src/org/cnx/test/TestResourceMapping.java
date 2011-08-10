@@ -17,46 +17,32 @@
 package org.cnx.test;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.math.BigDecimal;
-import java.net.URL;
-import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import javax.xml.validation.Validator;
 
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
-import org.cnx.resourcemapping.ContentTypeImage;
+import org.castor.xml.BackwardCompatibilityContext;
+import org.cnx.resourcemapping.Jpg;
 import org.cnx.resourcemapping.LocationInformation;
-import org.cnx.resourcemapping.ObjectFactory;
+import org.cnx.resourcemapping.LocationInformationChoice;
 import org.cnx.resourcemapping.Repository;
 import org.cnx.resourcemapping.Resource;
 import org.cnx.resourcemapping.Resources;
 import org.cnx.resourcemapping.VariantCategory;
+import org.exolab.castor.xml.Marshaller;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
-import com.google.common.io.CharStreams;
-import com.thaiopensource.relaxng.jaxp.XMLSyntaxSchemaFactory;
 
 /**
  * A test servlet for initial development and experimentation.
@@ -69,79 +55,64 @@ import com.thaiopensource.relaxng.jaxp.XMLSyntaxSchemaFactory;
 public class TestResourceMapping extends HttpServlet {
 
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String packageName = "org.cnx.resourcemapping";
-        resp.setContentType("text/plain");
-        resp.getWriter().println(getServletContext().getContextPath());
-        int sdf = 2345;
-
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            ServletContext context = getServletContext();
-            JAXBContext jaxbContext = JAXBContext.newInstance(Resources.class);
-            ObjectFactory of = new ObjectFactory();
+            BackwardCompatibilityContext context = new BackwardCompatibilityContext();
+            Marshaller marshaller = new Marshaller(context);
 
-            Resources resources = of.createResources();
+
+            Resources resources = new Resources();
             resources.setSourceRepositoryId("cnx-repo");
             resources.setVersion(new BigDecimal(1.0));
 
-            List<Resource> list = resources.getResource();
+            Resource myResource = new Resource();
+            myResource.setName("myResource");
 
-            Resource resource = of.createResource();
-            list.add(resource);
+            resources.addResource(myResource);
 
-            ContentTypeImage image = new ContentTypeImage();
-            image.setHeightInPixels("100");
-            image.setWidgthInPixels("100");
-            JAXBElement<ContentTypeImage> jpg = of.createJpg(image);
+            Jpg jpg = new Jpg();
+            jpg.setHeightInPixels("100");
+            jpg.setWidgthInPixels("100");
 
-            VariantCategory jpgVariant = new VariantCategory();
-            jpgVariant.setJpg(jpg.getValue());
+            VariantCategory vCat = new VariantCategory();
+            vCat.setJpg(jpg);
+            myResource.setVariantCategory(vCat);
 
-            resource.setName("myResource");
-            resource.setVariantCategory(jpgVariant);
-
-            Repository repository = of.createRepository();
+            Repository repository = new Repository();
             repository.setOriginUrl("http://cnx-repo.appspot.com");
             repository.setRepositoryId("cnx-repo");
             repository.setResourceId("1234");
 
-            LocationInformation locationinformation = of.createLocationInformation();
-            locationinformation.setRepository(repository);
+            LocationInformationChoice locationInfoChoice = new LocationInformationChoice();
+            locationInfoChoice.setRepository(repository);
+
+            LocationInformation locationinformation = new LocationInformation();
+            locationinformation.setLocationInformationChoice(locationInfoChoice);
             locationinformation.setUrl("http://www.google.com");
-            resource.setLocationInformation(locationinformation);
+            myResource.setLocationInformation(locationinformation);
 
-            Marshaller marshaller = jaxbContext.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            String encoding = "ISO-8859-1";
+            StringWriter strWriter = new StringWriter();
 
-            String string = format(asString(jaxbContext, resources));
-            System.out.println(string);
 
-            SchemaFactory factory = new XMLSyntaxSchemaFactory();
+            marshaller.marshal(myResource);
 
-            InputStream is = context.getResourceAsStream("/static/resource-mapping.rng");
-            URL url = context.getResource("/static/resource-mapping.rng");
 
-            String schemaFromFile = CharStreams.toString(new InputStreamReader(is, "UTF-8"));
-            Schema schema = factory.newSchema(url);
-            // .newSchema(new File(
-            // "/usr/local/google/cnxclients/ruggles-green/apps/resources/resourcemapping/src/resource-mapping.rng.xml"));
+            String formattedXml = format(strWriter.toString());
 
-            Validator validator = schema.newValidator();
-            validator.validate(new StreamSource(new StringReader(string)));
-            resp.getWriter().write(string);
+//            SchemaFactory factory = new XMLSyntaxSchemaFactory();
+//            Schema schema =
+//                factory
+//                    .newSchema(new File(
+//                        "/usr/local/google/cnxclients/ruggles-green/apps/resources/resourcemapping/src/resource-mapping.rng.xml"));
+//
+//            Validator validator = schema.newValidator();
+//            validator.validate(new StreamSource(new StringReader(formattedXml)));
+
+            System.out.println(formattedXml);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private static String asString(JAXBContext pContext, Object pObject) throws JAXBException {
-        java.io.StringWriter sw = new StringWriter();
-
-        Marshaller marshaller = pContext.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-        marshaller.marshal(pObject, sw);
-
-        return sw.toString();
     }
 
     @SuppressWarnings("deprecation")
