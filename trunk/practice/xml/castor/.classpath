@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="build/gen-java"/>
+	<classpathentry kind="src" path="resource"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/castor-1.3.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/castor-1.3-anttasks.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/castor-1.3-codegen.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/castor-1.3-core.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/castor-1.3-ddlgen.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/castor-1.3-jdo.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/castor-1.3-xml.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/castor-1.3-xml-schema.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/castor/castor-1.3/jta1.0.1.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/commons-logging/commons-logging-1.0.4/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/xerces/xerces-2.11.0/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/xml-apis/xml-apis.xerces-2.11.0/xml-apis.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/cnxclients/ruggles-green/third_party/jing/jing-20091111/jing.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
