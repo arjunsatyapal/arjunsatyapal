@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <define name="location-type-repository">
+    <element name="repository">
+      <group>
+        <element name="repository-id">
+          <data type="token">
+            <param name="minLength">5</param>
+          </data>
+        </element>
+        <element name="resource-id">
+          <text />
+        </element>
+
+        <!-- TODO(arjuns) : See what CNX has done for URL. -->
+        <element name="origin-url">
+          <text />
+        </element>
+      </group>
+    </element>
+  </define>
+
+  <define name="location-type-internet">
+    <element name="internet">
+      <group>
+        <attribute name="type">
+          <value>INTERNET</value>
+        </attribute>
+
+        <!-- TODO(arjuns) : See what CNX has done for URL. -->
+        <element name="origin-url">
+          <text />
+        </element>
+      </group>
+    </element>
+  </define>
+
+  <define name="element-location-information">
+    <element name="location-information">
+      <choice>
+        <!-- One of the following groups should be present. -->
+        <ref name="location-type-repository" />
+        <ref name="location-type-internet" />
+      </choice>
+
+      <!-- TODO(arjuns) : See what CNX has done for URL. -->
+      <element name="url">
+        <text />
+      </element>
+    </element>
+  </define>
+
+
+  <define name="content-type-image">
+    <element name="height-in-pixels">
+      <text />
+    </element>
+    <element name="widgth-in-pixels">
+      <text />
+    </element>
+  </define>
+  
+  <define name="content-type-jpg">
+    <element name="jpg">
+      <ref name="content-type-image" />
+    </element>
+  </define>
+  
+  <define name="content-type-audio">
+    <element name="bitrate"><text/></element>
+  </define>
+  
+  <define name="content-type-mp3">
+    <element name="mp3">
+      <ref name="content-type-audio" />
+    </element>
+  </define>
+
+  <define name="element-variant-category">
+    <element name="variant-category">
+      <choice>
+        <ref name="content-type-jpg" />
+        <ref name="content-type-mp3" />
+        
+      </choice>
+    </element>
+  </define>
+
+  <define name="element-resource">
+    <element name="resource">
+      <!-- TODO(arjuns) : See how to ensure non-empty text. -->
+      <attribute name="name">
+        <text />
+      </attribute>
+
+      <ref name="element-variant-category" />
+      <ref name="element-location-information" />
+    </element>
+  </define>
+
+  <define name="element-resources">
+    <element name="resources">
+      <attribute name="version">
+        <data datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
+          type="decimal" />
+      </attribute>
+
+      <!-- TODO(arjuns) : See how to ensure non-empty text. -->
+      <attribute name="source-repository-id">
+        <text />
+      </attribute>
+
+      <oneOrMore>
+        <ref name="element-resource" />
+      </oneOrMore>
+    </element>
+  </define>
+
+  <start>
+    <ref name="element-resources" />
+  </start>
+</grammar>

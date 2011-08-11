@@ -76,7 +76,7 @@ public class TestResourceMapping extends HttpServlet {
         int sdf = 2345;
 
         try {
-            ServletContext context = getServletContext();
+
             JAXBContext jaxbContext = JAXBContext.newInstance(Resources.class);
             ObjectFactory of = new ObjectFactory();
 
@@ -117,7 +117,7 @@ public class TestResourceMapping extends HttpServlet {
             System.out.println(string);
 
             SchemaFactory factory = new XMLSyntaxSchemaFactory();
-
+            ServletContext context = getServletContext();
             InputStream is = context.getResourceAsStream("/static/resource-mapping.rng");
             URL url = context.getResource("/static/resource-mapping.rng");
 
