@@ -19,5 +19,5 @@
  * @author Arjun Satyapal
  */
 public class Parent {
-    private long member1 = System.currentTimeMillis();
+    private String member1 = Long.toString(System.currentTimeMillis());
 }

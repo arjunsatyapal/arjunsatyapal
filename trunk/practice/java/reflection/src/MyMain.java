@@ -20,9 +20,10 @@
  */
 public class MyMain {
 
-    public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException {
+    public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException, SecurityException, NoSuchFieldException {
         System.out.println("Hello");
-        new Child();
+        Child child = new Child();
+        child.updateMember1();
     }
 
 }

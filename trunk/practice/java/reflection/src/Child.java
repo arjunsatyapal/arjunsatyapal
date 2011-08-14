@@ -21,14 +21,30 @@ import java.lang.reflect.Field;
  * @author Arjun Satyapal
  */
 public class Child extends Parent {
-    public Child() throws IllegalArgumentException, IllegalAccessException {
-        Class testclass = Parent.class;
-        Field[] listOfFields = testclass.getDeclaredFields();
+    @SuppressWarnings("rawtypes")
+    Class parentClass = Parent.class;
 
+    public Child() throws IllegalArgumentException, IllegalAccessException  {
+        printAllFields();
+    }
+
+    public void printAllFields() throws IllegalArgumentException, IllegalAccessException {
+        Field[] listOfFields = parentClass.getDeclaredFields();
         for (Field currField : listOfFields) {
             currField.setAccessible(true);
             System.out.println(currField.getName() + " : " + currField.get(this));
+            currField.setAccessible(false);
         }
+    }
+
+    public void updateMember1() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+        Field member1Field = parentClass.getDeclaredField("member1");
+
+        member1Field.setAccessible(true);
+        String test = "1234";
+        member1Field.set(this, test);
+
+        printAllFields();
     }
 
 }
