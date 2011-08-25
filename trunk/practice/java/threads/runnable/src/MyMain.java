@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 Google Inc.
+ * Copyright The CNX Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,13 +19,7 @@
  * @author Arjun Satyapal
  */
 public class MyMain {
-
-    public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException, SecurityException, NoSuchFieldException {
-        System.out.println("Hello");
-        Child child = new Child();
-        child.updateMember1();
-
-        Parent p = new Child();
+    public static void main(String[] args) {
+        new Thread(new HelloRunnable()).start();
     }
-
 }
