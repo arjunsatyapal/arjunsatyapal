@@ -1,0 +1,692 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+      <title>SmartGWT Enterprise Edition (EE) Release Notes</title>
+
+      <style>
+         body {
+            background-color: white;
+            color: #333333;
+            font-family: arial,helvetica,sans-serif;
+            font-size: 12px;
+            margin: 20px;
+         }
+
+         li {
+            margin-bottom: 0.5em;
+         }
+
+         li div {
+            margin-top: 0.2em;
+         }
+
+         code {
+            font-size: medium;
+         }
+      </style></head>
+
+   <body>
+      <h1>SmartGWT Enterprise Edition Release Notes</h1>
+      <ul>
+            <li><a href="#upgrade">Setup and Upgrade Instructions</a></li>
+            <li><a href="#2_5">2.5</a></li>
+            <li><a href="#2_4">2.4</a></li>
+            <li><a href="#2_3">2.3</a></li>
+            <li><a href="#2_1">2.1</a></li>
+            <li><a href="#2_0">2.0</a></li>
+            <li><a href="#1_2_2">1.2.2</a></li>
+            <li><a href="#1_2_1">1.2.1</a></li>
+            <li><a href="#1_2">1.2</a></li>
+            <li><a href="#1_1">1.1</a></li>
+      </ul>
+      <hr/>
+<a name="upgrade"></a>
+      <h2>Setup and Upgrade Instructions</h2>
+For instructions on upgrading to a new version, see the
+<a href="http://www.smartclient.com/smartgwtee/javadoc/com/smartgwt/client/docs/SgwtEESetup.html">SmartGWT Project Setup and Deployment Guide</a>
+(also available under the javadoc entry com.smartgwt.client.docs.SgwtEESetup).
+      <hr/>
+
+      <a name="2_5"></a>
+            <h2>Release Notes for Smart GWT 2.5</h2>
+              <ul>
+                <li><div>Added GWT 2.3 support. Dropped support for GWT 1.5.x</div></li>
+                <li><div>IE 9 and Firefox 5 support</div></li>
+                <li><div>ARIA/Section 508 accessibility compliance</div></li>
+                <li><div>New dataPath Feature that provides a straightforward way to display or edit complex nested data</div></li>
+                <li>
+                    <div><b>ListGrid</b>
+                        <ul>
+                            <li><div>Added ListGrid allowFilterExpressions property to support use of expressions when filtering.  For example  "<50 or ==99"</div></li>
+                            <li><div>Support for multi-line summaries in groups and at the grid level</div></li>
+                            <li><div>Augment ListGrid state management such that get/setViewState also preserve hilites and grouping data, along with frozen field information</div></li>
+                            <li><div>New Group Title column feature; added new showGroupSummaryInHeader attribute</div></li>
+                            <li><div>Added ListGridField.addSummaryFunction() API to allow set up of multiple summary functions per field,
+                                which display as multiple lines in the grid summary or per group summary</div></li>
+                            <li><div>Support for ListGridField summaryTitle property and SummaryFunctionType "title" to show arbitrary text in the summary row (or group summary row) for a field in a grid without having to write any code</div></li>
+                            <li><div>New viewStateChanged event fired from grouping, sorting, fieldState changed</div></li>
+                            <li><div>New sortChanged event fired from setSort() whenever the sorting changes</div></li>
+                            <li><div>Exposed 'getEditFormItem()' to get  the live edit item currently displayed to the user during editing</div></li>
+                            <li><div>Added ListGrid autoFitWidthApproach property</div></li>
+                            <li><div>Added ListGridField dataPath property</div></li>
+                            <li><div>Exposed listGrid.getGroupByFields()</div></li>
+                            <li><div>New property 'formatOnFocusChange' If set, formatEditorValue re-runs whenever the item receives or loses focus, meaning the developer can show a prettier string while the user isn't actively editing it</div></li>
+                            <li><div>Fix for a bug where if the summary row is visible and an h-scrollbar is introduced,  a second h-scrollbar would display</div></li>
+                            <li><div>Addition of new ListGrid.saveRequestProperties, to allow for customization of the properties sent on the save Request</div></li>
+                            <li><div>Improve performance of saveAllEdits() when processing a large number of edited rows</div></li>
+                            <li><div>Enhance record summaries in grids by providing support for locally held data to be included </div></li>
+                            <li><div>Fixed issue with grid.unsort() not correctly managing a cell selected for edit after a sort</div></li>
+                            <li><div>Fix to remove performance issue with colSpanning incorrectly rendering row cells and causing unnecessary redraws</div></li>
+                            <li><div>Enhanced record double click management</div></li>
+                            <li><div>Fix to updateRollOverCanvas() to only perform necessary ListGrid canvas changes if there is an associated record or cell being rolled over</div></li>
+                            <li><div>Improved arrow key navigation with grouping by not toggling the group when a group node is selected</div></li>
+                            <li><div>Fix to ListGrid where if type-validation converted from string to number, and stored out the number value, a call to getEditValue() could replace the converted value with the original string value</div></li>
+                            <li><div>Fix to resolve an issue where using string values with setWidth(""*"" or “%”) with custom editors in FormItem or ListGrids threw an exception</div></li>
+                            <li><div>Fix for ListGrid.hasChanges() detecting a change in DateItem fields even if the user does not actually make any changes in the cell</div></li>
+                            <li><div>Fix to stop an error when calling setFields for a second time on a ListGrid but with one field less (to remove a field)</div></li>
+                            <li><div>Fix to allow disable of the "configure sort" right-click menu item (in the sorting box at the top-right of the grid) in a ListGrid when multiSort is unavailable</div></li>
+                            <li><div>New selectionUpdated event when ListGrid selections are updated</div></li>
+                            <li><div>New API ListGrid.getSelectedRecords() to return all Records that have been selected in a grid as a RecordList</div></li>
+                            <li><div>Added refreshRecordComponent() API</div></li>
+                            <li><div>New setAutoFitFieldWidths method to enable/disable autoFitFieldWidths at runtime</div></li>
+                            <li><div>Fix for bug where valueMaps were not being picked up correctly when calling 'exportClientData' on a grid</div></li>
+                            <li><div>Checkbox in selection column header correctly updates to reflect record selection state</div></li>
+                            <li><div>Performance improvement : selectAllRecords() and deselectAllRecords() now avoids calls updateRowSelection() API to refresh all rows</div></li>
+                            <li><div>When refreshing for cleared edit values on new rows, if the  body is frozen, refresh that as well</div></li>
+                            <li><div>Added showSortNumerals property</div></li>
+                            <li><div>Support for group summaries even when there are more than one groupByFields specified on the ListGrid (nested groups)</div></li>
+                            <li><div>New ListGrid boolean property editOnF2Keypress - if true, (the default) start editing on F2 keypress</div></li>
+                            <li><div>Support for sorting group headers by all fields when showGroupHeaderInSummary is true</div></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div><b>TreeGrid</b>
+                        <ul>
+                            <li><div>Added TreeGrid showDisabledSelectionCheckbox property</div></li>
+                            <li><div>Respecting fetchDelay when a FilterEditor is used with a TreeGrid</div></li>
+                            <li><div>Fix to check if canCollapseGroup is false on TreeGrids, to avoid having to check open folder state on all folders</div></li>
+                            <li><div>Fix to TreeGrid dragging of a node from root and dropping it into root (in the white space). Causing an error message about duplicate names</div></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div><b>Calendar</b>
+                        <ul>
+                            <li><div>Correction to rangeInEventRange API to prevent the use case where overlapping events within a day cause all the other events to assume they are also overlapping and render at half width</div></li>
+                            <li><div>Correction to calendar events heights where the events spans the midnight boundary</div></li>
+                            <li><div>Correction to calendar event resizing to prevent horizontal resizing when they shouldn't be</div></li>
+                            <li><div>Fix to timing of calendar refresh to avoid trying to refresh a calendar where the calendar is destroyed or is in mid-destroy</div></li>
+                            <li><div>Fix to Calendar events to correctly return the event details when adding or updating an event</div></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div><b>SectionStack</b>
+                        <ul>
+                            <li><div>Correction to bad printing of nested table components where SectionHeaders did not print correctly</div></li>
+                            <li><div>When destroying sections, if section.controls is specified but hasn't been added to the section as a descendant, explicitly destroy it</div></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div><b>TileGrid</b>
+                        <ul>
+                            <li><div>Fix issue where invalidateCache could inadvertently load all of the data for a datasource</div></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div><b>Img</b>
+                        <ul>
+                            <li><div>Added support for 'altText' to Img</div></li>
+                        </ul>
+                    </div>
+                </li>
+                 <li>
+                    <div><b>Menu and MenuButton</b>
+                        <ul>
+                            <li><div>Fix to avoid a possible crash during MenuBar draw if we have no menus</div></li>
+                            <li><div>Added MenuButton showMenuOnRollOver property</div></li>
+                        </ul>
+                    </div>
+                </li>
+
+                  <li>
+                    <div><b>FilterBuilder</b>
+                        <ul>
+                            <li><div>FilterBuilder reworked to make getValueFieldProperties() a more useful override point</div></li>
+                            <li><div>Added support for filterButtonProperties to customize the actionButton on the filterEditor</div></li>
+                            <li><div>Fixed bug with left align of  the last field in filterEditor</div></li>
+                            <li><div>Support for custom SimpleTypes</div></li>
+                            <li><div>Change to filterBuilder to  exclude all Datasource fields except the specifically required ones to improve performance</div></li>
+                            <li><div>Correction to FilterBuilder.getEditorType() for correctly attributing field type to operator when defined as using a fieldDataSource rather than a normal DataSource</div></li>
+                            <li><div>Added new Operator "iBetweenInclusive" client and server side - provides case-insensitive range searching for strings (for example:  "a...f" in a formItem allows for a case-insensitive search)</div></li>
+                            <li><div>Fix to ensure filterChanged() is fired in all cases when clauses are added and removed from filterBuilder</div></li>
+                            <li><div>Fix to ensure when using FieldValuesAreEqual in filterBuilder dates are compared by type correctly</div></li>
+                            <li><div>Correction to 'inSet' operator in FilterBuilder to handle when null or 0 criteria is returned</div></li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div><b>DynamicForm / ValuesManager</b>
+                        <ul>
+                            <li><div>Added FormItem.optionOperationId and operator</div></li>
+                            <li><div>FormItem.allowExpressions added to allow expressions in formItems when producing criteria - for example  "<50 or ==99" </div></li>
+                            <li><div>Support added for complex nested values within a ValuesManager with the saveData() callback</div></li>
+                            <li><div>Support for parse / formatEditorValue in DateItems where useTextField is true</div></li>
+                            <li><div>If an item has an explicit validator of type 'required', show the required styling using setRequiredIf</div></li>
+                            <li><div>Fix to avoid a crash if a DynamicForm with no DataSource specified is embedded in a ValuesManager with a dataSource specified, and the
+                                    form has explicit fields.</div></li>
+                            <li><div>validateOnEditorExit: For ComboBoxItems where completeOnTab is true, don't validate as part of handleEditorExit if a tab is pending completion, wait for that completion to actually fire, then validate.</div></li>
+                            <li><div>RelativeDateItem inner comboBoxItem width fixed to match that of other selectItems on the form</div></li>
+                            <li><div>Added explicit 'innerTitleOrientation' to DateRangeItem</div></li>
+                            <li><div>ComboBoxItem : On focus, record the element value. On blur, only run mapValueToDisplay and reset the element value if it has changed since focus</div></li>
+                            <li><div>Fix to focus/blur processing to avoid custom parsers firing twice on ComboBoxItems</div></li>
+                            <li><div>Fixes to RelativeDateItem to correctly use getValue()/setValue() methods</div></li>
+                            <li><div>Support for passing a RelativeDate right into setValue() at the form or item level</div></li>
+                            <li><div>Fixes to sporadic ComboBoxItem.completeOnTab failures if the user tabs before data has loaded</div></li>
+                            <li><div>Enhanced FormItem.fetchMissingValues()to also manage optionDataSource events for retrieving a displayField value or selected record. Extended functionality will also maintain updates to these optionDataSource values</div></li>
+                            <li><div>If request.willHandleError:true is passed to save method on a form or valuesManager, allow the callback to fire even if the response returned validation errors.</div></li>
+                            <li><div>Fix for an issue where DateItems wouldn't detect change and therefore wouldn't validateOnExit if the user picked the value from a picker</div></li>
+                            <li><div>Correction to ComboBoxItem.filterData() to ensure all data has been loaded before issuing the filterComplete() API.</div></li>
+                            <li><div>Fix to clear existing errors from an invalid date field in text mode (useTextField) when a valid date is then selected</div></li>
+                            <li><div>Improvements to Picklist positioning by directly looking at the data if the pickList isn't drawn yet</div></li>
+                            <li><div>Correction to remove a specific use case issue in FormItems where Focus/Blur on multiple fields caused a loop</div></li>
+                            <li><div>Correction to Values Manager managed form to remove a failure when the form contains fields that have neither a name of a dataPath reference</div></li>
+                            <li><div>Enhance DateChooser functionality to round to end of day if rangePosition is set to end</div></li>
+                            <li><div>Corrected an error when defining pickListFields to ensure that if the showIf attribute is set to false the pickList Headers for those fields are ignored </div></li>
+                            <li><div>Enhancements to relative date items by using the field type to ensure a date item serializes as a date rather than a dateTime</div></li>
+                            <li><div>Fix to a specific case on ComboBoxItems where a repeat fetch operation was triggered when a fetch was already in operation. Related to rapid data entry use</div></li>
+                            <li><div>Fix to always include times in relative date-range criteria</div></li>
+                            <li><div>Fix to correctly handle mouseOver on icons within form items</div></li>
+                            <li><div>Fix to correctly manage focus on Items within a canvas within a DynamicForm, where clickmasks are specified</div></li>
+                            <li><div>Fix to date logic to correct issue, where in some time zone(s) [seen in Brazil], DST adjustments happen at 00:00 and calling APIs to set a Date value to 00:00 on the day when the DST switch happens returns a Date one day earlier at 23:00</div></li>
+                            <li><div>Fix to setValue() to allow it to manage roundPrecision as well as roundValues</div></li>
+                            <li><div>Improvements to CanvasItems click/double click events when clicking within an embedded canvas</div></li>
+                            <li><div>Improvements to serialization of Date objects being produced by DateItem or RelativeDateItem types to exclude time unless explicitly defined in the field type</div></li>
+                            <li><div>Fix mask validators to not result in a exception if not passed a string, or specifically passed a exceptional value</div></li>
+                            <li><div>Fix of an issue where single DateItem fields in Dynamic/Search forms, can appear as double Date range fields</div></li>
+                            <li><div>Fix tabindex/tabbing behavior of the MiniDateRangeItem popup</div></li>
+                            <li><div>New date range elements improved to $weekAgo and $weekFromNow to allow the new rangePosition API to be usable for setting to beginning or end of day</div></li>
+                            <li><div>RelativeDateItem : New properties 'showPastOptions' and 'showFutureOptions' to disable past or future options if desired</div></li>
+                            <li><div>RelativeDateItem : New rangeRoundingGranularity feature - allows configuration, if  selecting N Days Ago whether that's to the nearest day, hour, second etc.</div></li>
+                            <li><div>Added support for overriding the preset options in RelativeDateItem's</div></li>
+                            <li><div>Fixed error-icons not showing up with itemLayout: "absolute"</div></li>
+                            <li><div>Improved CanvasItem focus management</div></li>
+                            <li><div>CanvasItem now has a new showValues event to support customization of display values in embedded canvasses</div></li>
+                            <li><div>Enhancement to storeValue() for CanvasItems to manage a recordList or record directly</div></li>
+                            <li><div>Enhancement to PickListItem sizing functions by using ListGrid functions autoFitData() and autoFitFieldWidths()</div></li>
+                            <li><div>Enhancements to FormItem field formatting behaviours by performing form and datasource type management</div></li>
+                            <li><div>Fix to minor LinkItem issue where, in certain circumstances, clicking to the right of the link still performed the link action</div></li>
+                            <li><div>Improvements to CanvasItems click/double click events when clicking within an embedded Canvas</div></li>
+                            <li><div>New date range elements improved $weekAgo and $weekFromNow to allow the new range position API to be usable for setting to beginning or end of day</div></li>
+                            <li><div>New handleKeyPress API introduced to allow users to override any key presses before they are mapped</div></li>
+                            <li><div>Added canTabToSectionHeaders property to DynamicForm and SectionStackSection</div></li>
+                            <li><div>If allowEmptyValue is true and multiple is true on a SelectItem, not showing the empty row at the top of the drop down</div></li>
+                            <li><div>Fixed a bug where expanding/collapsing SectionItems could cause forms embedded in scrollable / scrolled parents to jump scroll position back to zero/zero</div></li>
+                            <li><div>Support null values for TimeItems</div></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div><b>DetailViewer</b>
+                        <ul>
+                            <li><div>Added DetailViewerField.name and DetailViewerField.dataPath</div></li>
+                            <li><div>DetailViewer now respects the new field.dateFormatter, field.timeFormatter, component.dateFormatter, component.datetimeFormatter and component.timeForamtter pattern</div></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <div><b>TabSet</b>
+                        <ul>
+                            <li><div>TabSet  / Tab - added getTabCanvas() method to get the live tab canvas</div></li>
+                            <li><div>Added TabSet.useSimpleTabs allowing a simplified appearance for Tabs that doesn't require multiple images</div></li>
+                        </ul>
+                    </div>
+                </li>
+                 <li>
+                    <div><b>Canvas</b>
+                        <ul>
+                            <li><div>Added "moved" and "parentMoved" event handlers</div></li>
+                        </ul>
+                    </div>
+                </li>
+                  <li>
+                    <div><b>DataSource</b>
+                        <ul>
+                            <li><div>Enhancements to serializeFields() to handle nested DataSources</div></li>
+                            <li><div>Fix to DataSource.handleUpdate to clear last update information for ResultSets to ensure the dataChanged API fires correctly</div></li>
+                            <li><div>Correction to datasource.combineCriteria() to specifically mark the  component criteria as advanced to stop the criteria being presented as separate criteria, but as one set of advanced criteria</div></li>
+                            <li><div>Fix to ensure that if transformInput modifies an item's value while the user is typing in the field, focus ends up at the end of the field</div></li>
+                            <li><div>Support for DSField property nativeName in DataSource.getProperties() and DataSource.setProperties()</div></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+				  <div><b>Portal</b>
+					  <ul>
+						  <li><div>Add portalLayout.getDropPortlet as an override point, called from getDropComponent when dropping a Portlet into the PortalLayout</div></li>
+						  <li><div>Added API for getting and setting widths of portal columns</div></li>
+						  <li><div>Make PortalLayout.showColumnMenus updatable</div></li>
+						  <li><div>Removed option to remove the last PortalColumn in menu</div></li>
+						  <li><div>Allow portal columns and rows to be manually resized to overflow, but not underflow</div></li>
+
+					  </ul>
+				  </div>
+			    </li>
+                <li>
+				  <div><b>Visual Builder</b>
+					  <ul>
+						  <li><div>Added search box to component library and datasource tree</div></li>
+						  <li><div>Support setting icon on ButtonItem</div></li>
+						  <li><div>exportClientData/exportData have been added as supported events</div></li>
+						  <li><div>Added auto-save feature to transparently save every 30 seconds once changes  to the project are detected. Also added skin switcher: uses cookies and auto-save feature to enable reload of current UI in the new skin</div></li>
+						  <li><div>Display currently loaded/saved application name in section header above UI and changed cellPadding on grid search to 0 to get pixel perfect alignment with  grids as a header</div></li>
+						  <li><div>Added selectionAppearance option</div></li>
+						  <li><div>PortalLayout support with edit more</div></li>
+
+					  </ul>
+				  </div>
+			    </li>
+                <li>
+				  <div><b>Charting and Analytics (Power and above with Analytics Option only)</b>
+					  <ul>
+						  <li><div>Added support for changing title & showTitle of FacetChart on the fly</div></li>
+						  <li><div>Added optional gradients to each chart type</div></li>
+						  <li><div>Added "Area" as a standard ChartType</div></li>
+						  <li><div>Added Support for setFacets in FacetChart</div></li>
+						  <li><div>Fixed an issue where Scatter plots allowed too much room for horizontal axis labels</div></li>
+						  <li><div>Implementation of bitmap pan and zoom Addition of  rotation in Draw&lt;Shapes&gt;. DrawItem.setGradient API</div></li>
+						  <li><div>Addition of Pie charts, including multi-series stacked (concentric rings) or clustered (multiple pies with auto-layout)</div></li>
+						  <li><div>Fixed radial label placement when angle >= 360</div></li>
+						  <li><div>Fixed issues with selectors not tracking chartType or reverting to default chartType</div></li>
+						  <li><div>Fixed off-by-one when trying to rearrange pies to make best use of space</div></li>
+						  <li><div>Line Charts improvements using shadows and bigger lineWidth</div></li>
+						  <li><div>Added "Bar" chartType</div></li>
+						  <li><div>Improved support CubeGrid.fetchOperation</div></li>
+					  </ul>
+				  </div>
+			    </li>
+                <li>
+				  <div><b>Server Feature and Fixes</b>
+					  <ul>
+						  <li><div>Support for JPA 2.0</div></li>
+						  <li><div>Support for DataSource generation for JPA (1.0 and 2.0)</div></li>
+						  <li><div>Complete AdvancedCriteria support has been added for JPA DataSources (Power Editon and above)</div></li>
+						  <li><div>New Real-time Messaging module, with grid and chart samples (Power Edition and above with Messaging Option)</div></li>
+						  <li><div>Server-side AdvancedCriteria classes for ease of traversing, creating and modifying AdvancedCriteria in server code</div></li>
+						  <li><div>Binary field handling (upload/download) for Hibernate</div></li>
+						  <li><div>Added support for substring filtering on numeric fields in PostgreSQL</div></li>
+						  <li><div>Added absolutePathToWebRoot, relativePathToWebRoot attributes</div></li>
+						  <li><div>Changed DataTools.convertType to support InputStream conversion into String, byte[], Byte[] and OutputStream. Added all conversion between byte[], Byte[], String variants.</div></li>
+						  <li><div>When generating URL to download a file, encode the filename to correctly manage  special URL characters such as #</div></li>
+						  <li><div>Use a special encoding for null values when passing to the server to distinguish them from empty string, and handle this server side.</div></li>
+						  <li><div>DataTools.convertType: added conversion to arrays (object and primitive) support. Converts Collection, Array, Map (values only) as arrays, any other object is converted as array of 1 element.</div></li>
+						  <li><div>Support added for any BigDecimal compatible value conversion to requested type if it fits exactly, i.e. without any data loss.</div></li>
+						  <li><div>Fix for issue with JNDI-based auto-configuration of JDBC connections when used with autoDeriveSchema datasources</div></li>
+						  <li><div>Addition of RPCManager startQueue/sendQueue server validation management to improve performance when more than field has a server-side validator</div></li>
+						  <li><div>Changes to the proxy servlet to allow it to relay Isomorphic-style requests to a remote SmartClient server</div></li>
+						  <li><div>Enhanced auto-derivation logic when auto-deriving from 'schemaBean'. Now if a derived data source does not have 'beanClassName' specified then 'schemaBean' from super DataSource is used; If hibernate mapped class fails to get meta-data it will now fall back to inspect POJO and dynamically load hibernate mapping for that file</div></li>
+						  <li><div>Enhancement to SQL DataSource management to allow for “between” operator to be processed, for returning values within a range (Power Edition and above)</div></li>
+						  <li><div>Fix to Spring configured Hibernate session factory to ensure a local Hibernate session factory is created</div></li>
+						  <li><div>Fixed file descriptor leak issue in Weblogic implementations caused by the Weblogic implementation of getLastModified. Implemented a configurable cache staleness check</div></li>
+						  <li><div>For a ListGrid, where data is being stored locally a new feature to check for remote validators has been added to ensure if server side validation is required a DataSource.validateData() is performed on the ListGrid record</div></li>
+						  <li><div>Fixed issue where connections re-pooled too early could cause failures with text fields over 4000 charts on Oracle</div></li>
+						  <li><div>Fix to remove two additional empty lines inserted at the end of the csv file created using the exportData feature</div></li>
+						  <li><div>New feature to allow a callback to be added to RPCManager.sendQueue</div></li>
+						  <li><div>New API to allow transformRequest/transformResponse handlers for server-based DataSources</div></li>
+						  <li><div>New Hibernate DataSource support to JXPath function to lazily load sub-objects when loading XPath</div></li>
+						  <li><div>Added defaultDelimiter/defaultQuoteString attributes to BatchUploader</div></li>
+                          </li>
+					  </ul>
+				  </div>
+			    </li>
+                <li>
+                    <div><b>Selenium Support</b>
+                        <ul>
+                            <li><div>Drag and Drop recording / playback support for Selenium</div></li>
+                            <li><div>Double Click handling support for Selenium</div></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div><b>Other</b>
+                        <ul>
+                            <li><div>Various timezone conversion, date-time formatting fixes</div></li>
+                            <li><div>i18n enhancements</div></li>
+                            <li><div>getSelectionRange support added for Opera 11 with Windows to allow text masking to perform properly</div></li>
+                            <li><div>Corrected an issue with setStyleName() not rendering correctly if called after draw() on a Label</div></li>
+                            <li><div>Added functionality to allow cross-frame scripting without security exceptions</div></li>
+                            <li><div>Simplified event switching for offline support to be a single click service</div></li>
+                            <li><div>Fix to an issue where browsers complain about mixed security content with Flashlets and https is now automatically detected and managed</div></li>
+                            <li><div>Several <a href="http://code.google.com/p/smartgwt/issues/list?can=1&q=label%3ASmartGWT-2.5">additional enhancements and bug fixes</a> that were logged in tracker</div></li>
+                        </ul>
+                    </div>
+                </li>
+             </ul>
+
+<a name="2_4"></a>
+<h2>Release Notes for Smart GWT 2.4</h2>
+<ul>
+    <li><div>GWT 2.1.1 compatible</div></li>
+    <li><div>Added Smart GWT QuickStart Guide</div></li>
+    <li><div>Touch & Mobile support : Support for iPhone, iPad and iPod touch devices with no code changes required</div></li>
+    <li><div>Offline persistent storage support with seamless integration with DataSource's</div></li>
+    <li><div><a href="http://blog.isomorphic.com/?p=234">User Defined data highlighting</a></div></li>
+    <li><div><a href="http://blog.isomorphic.com/?p=248">Advanced Hover components</a> with built-in hover modes</div></li>
+    <li>New ultralight ‘Simplicity’ skin that is easily customizable and virtually image free</li>
+    <li>Significant performance improvements across the board</li>
+    <li><div>Several new <a href="http://www.smartclient.com/smartgwt/showcase/" target="_blank">Showcase</a> samples under the "New Samples" side nav</div></li>
+    <li>New HTML5 Charting engine (FacetChart) as an alternative to FusionCharts</li>
+    <li>
+        <div><b>Server Side related Features and Fixes</b>
+            <ul>
+                <li>Added Server-side dynamic DataSources feature : Register a DynamicDSGenerator to have the framework call your code first whenever it needs to instantiate a DataSource</li>
+                <li>Official support for DB2 for the IBM i5 server (aka iSeries or AS/400)</li>
+                <li>Added support for multi-column sorting to SQLServerDriver</li>
+                <li>Extended DataSourceField.sqlStorageStrategy to provide transparent mapping for dates/datetimes to and from underlying numeric or plain text columns, with flexible formatting</li>
+                <li>Fixed situation where editing a row with a server-side validator causes a server validation request AND the row save</li>
+                <li>Added setTextMatchStyle() to server side DSRequest</li>
+                <li>Fixed issue where DataSourceField.sqlStorageStrategy was not being correctly applied for boolean fields in criteria</li>
+                <li>Fix to make date and datetime comparisons in AdvancedCriteria mirror the behavior for simple criteria</li>
+                <li>Fix for SQLDriver types where the SQL limit query implementation requires an ORDER BY the column name was not quoted in the ORDER BY clause if quoteColumnNames was set</li>
+                <li>Improved support for Oracle 11gR2 (11.2.x series) JDBC drivers</li>
+                <li>Fixed issue where having an RPC queue containing a mixture of normal and clientOnly requests was failing due to the data returned from the server having fewer results
+                    in the response than requests in the transaction queue on the client side</li>
+                <li>Using simple class name in query according to JPA spcification. Possibility to use fully-qualified class name (to avoid class name collisions) by setting property 'jpa.useQualifiedClassName' to true in config</li>
+                <li>New server.props flag "sql.oracle.encloseEscapeClauseInBraces" to allow users to switch off the braces around the ESCAPE '\' clauses we generate - the very latest Oracle JDBC driver (11g rel 2) doesn't like them</li>
+                <li>Introduced a new sqlStorageStrategy, "singleChar", and supporting DataSourceField properties "sqlTrueValue" and "sqlFalseValue", so users can persist whatever characters they like rather than being limited to presets of T/F, Y/N or 1/0</li>
+                <li>If schemaBean results in a field of "unknownType", dropExtraFields should avoid serializing values from that field unless the field has been explicitly re-declared in &lt;fields&gt;</li>
+                <li>New properties DataSourceField.nullReplacementValue and DataSource nullXxxxxValue. These are used to replace null values on "update" requests when dataSource.noNullUpdates is true</li>
+                <li>Added support for $dsRequest Velocity context variable</li>
+                <li>Added DataSource property noNulUpdates that causes DynamicForm.saveData() to pull any explicit settings to null out of the update request</li>
+                <li>Added DataSourceField properties customUpdateExpression and customInsertExpression</li>
+                <li>Changed DataSource "sqlColumnType" property to "sqlStorageStrategy"</li>
+            </ul>
+        </div>
+    </li>
+    <li>
+        <div><b>ListGrid</b>
+            <ul>
+                <li><div>Per field autoFitWidthApproach now supported</div></li>
+                <li><div>Added ListGrid "Auto Fit All" menu option</div></li>
+                <li><div>Support for frozen fields and virtual scrolling with record components</div></li>
+                <li><div>Various fixes related to the display of cell components in a ListGrid</div></li>
+                <li><div>Support for Header Spans when printing</div></li>
+                <li><div>Print support for a ListGrid with more than one frozen fields</div></li>
+                <li><div>Improved support for printing ListGrid's with embedded components</div></li>
+                <li><div>ListGridField's ChangeHandler event is now cancellable</div></li>
+                <li><div>Significant performance optimizations to client side Advanced Filtering</div></li>
+                <li><div>Added support for LinkURLPrefix and LinkURLSuffix on ListGridField</div></li>
+                <li><div>Added support for handling large number of rows in IE 8 non-strict mode</div></li>
+                <li><div>Added ListGrid.getCellHoverComponent() to support ListGrid cell hover components</div></li>
+                <li><div>New ListGrid flag 'autoFitFieldsFillViewport' to enable / disable the autoFitExpandField behavior</div></li>
+                <li><div>Handle a double-click on the ListGrid header menu context button the same as a double click elsewhere on the header button.
+                    This means basically auto-fit on double click over the menu button</div></li>
+            </ul>
+        </div>
+    </li>
+    <li>
+        <div><b>TreeGrid</b>
+            <ul>
+                <li><div>Added TreeGrid.showOpener property to not show opener icons at all</div></li>
+                <li><div>Fixed TreeGrid.invalidateCache to handle loadDataOnDemand:false trees</div></li>
+                <li><div>Fixed gridSummaries for databound TreeGrids</div></li>
+                <li><div>Fixed TreeGrid.setViewState(..) not re-selecting nodes</div></li>
+                <li><div>Fixed TreeGrid.setSelectionType(MULTIPLE) selection behavior when selectionAppearance is "checkbox"</div></li>
+                <li><div>For a cascade selection, loadOnDemand TreeGrid, push a full selection from parent down to the children upon load</div></li>
+
+            </ul>
+        </div>
+    </li>
+    <li>
+        <div><b>Calendar</b>
+            <ul>
+                <li><div>Added support for 24h based Calendars</div></li>
+                <li><div>Calendar fix for issue where two overlapping events less than half an hour in length would be incorrectly rendered</div></li>
+                <li><div>Fixed issue where Calendar.scrollToToday scrolls too far</div></li>
+                <li><div>Handle the user selecting 0 hours (midnight) for the end date and ensuring the date doesn't end up incremented by more than one day</div></li>
+                <li><div>Fixed Calendar issue where events that start and end in the hour starting at 12am caused an error</div></li>
+            </ul>
+        </div>
+    </li>
+    <li>
+        <div><b>SectionStack</b>
+            <ul>
+                <li><div>Only show the 'pointer' cursor over canCollapse:true sections in a SectionStack</div></li>
+            </ul>
+        </div>
+    </li>
+    <li>
+        <div><b>TileGrid</b>
+            <ul>
+                <li><div>Fixed TileGrid printing to work properly for orientation:vertical</div></li>
+                <li><div>Fixed TileLayout issue where dragAppearance:'target' was breaking drag and drop</div></li>
+            </ul>
+        </div>
+    </li>
+    <li>
+        <div><b>DynamicForm</b>
+            <ul>
+                <li><div>Fix wrapping of multiple Form Item icons in strict mode</div></li>
+                <li><div>Added support for 'setRequired()' on a FormItem at runtime</div></li>
+                <li><div>Exposed broswerSpellCheck property on DynamicForm and FormItem for enabling / disabling native browser spell check feature on text boxes</div></li>
+                <li><div>Added DateItem.defaultDateChooserDate as a way to specify a default to show in the picker without specifying a default value for the item as a whole</div></li>
+                <li><div>Added DynamicForm.getChangedValues() / getOldValues() -- allows you to get at the values remembered by 'rememberValues()'</div></li>
+                <li><div>Added FormItem.canFocus property</div></li>
+                <li><div>Added TextItem.printFullText attribute - if true, expand the text box to fit content</div></li>
+                <li><div>Exposed textMatchStyle on SelectItem explicitly</div></li>
+                <li><div>Fixed a DateItem bug whereby everyone in the eastern hemisphere would get off-by-one errors in dateTime items when picking dates from the chooser</div></li>
+                <li><div>Fix for bug whereby entering dates into a DateTime item when the date crossed the Daylight Savings Time boundary would lead to the hours getting changed on blur</div></li>
+                <li><div>Added support for specifying DateItem.emptyDisplayValue when in text mode</div></li>
+                <li><div>Added support for specifying DateItem.showHintInField when in text mode</div></li>
+                <li><div>Fix IE specific "blinking" of ComboBoxes on initial select</div></li>
+                <li><div>SelectItem with multipleAppearance:"picklist" now supports comma separated formatted output (eg icons)</div></li>
+                <li><div>Fixed issue where tabbing into a DateItem in useTextField:true mode caused the value to be saved as null instead of left to default value</div></li>
+            </ul>
+        </div>
+    </li>
+    <li>
+        <div><b>DetailViewer</b>
+            <ul>
+                <li><div>Fixed issue if DetailViewer was given just a singular object as data</div></li>
+            </ul>
+        </div>
+    </li>
+
+    <li>
+        <div><b>TabSet</b>
+            <ul>
+                <li><div>Support for Tab title user editing (TabSet.canEditTabTitles and Tab.canEditTitle properties)</div></li>
+                <li><div>Added TabSet.paneMargin property</div></li>
+            </ul>
+        </div>
+    </li>
+    <li>
+        <div><b>Other</b>
+            <ul>
+                <li><div>i18n enhancements</div></li>
+                <li><div>Improved Selenium support</div></li>
+                <li><div>Added support for hover components on any Canvas using Canvas.showHoverComponents and overriding getHoverComponent()</div></li>
+                <li><div>Fixed bug where dates already in UTC would be applied a UTC offset</div></li>
+                <li><div>36 <a href="http://code.google.com/p/smartgwt/issues/list?can=1&q=label%3ASmartGWT-2.4">additional enhancements and bug fixes</a> that were logged in tracker</div></li>
+            </ul>
+        </div>
+    </li>
+ </ul>
+
+<a name="2_3"></a>
+<h2>Release Notes for v2.3</h2>
+In addition to new client-side features described
+<a href="http://www.jroller.com/sjivan/entry/smart_gwt_2_2_released">here</a>, this release
+includes several new server features.  Features are available with Pro, Power, or
+Enterprise Edition unless otherwise specified.
+
+<ul>
+<li><div><b>Automatic transactions for SQL & Hibernate</b> (Requires Power Edition or Enterprise Edition)</div>
+Batches of updates, such as a multi-row drag or mass editing of grid rows, are now
+automatically grouped into a transaction when using either the SQL or Hibernate connectors.
+APIs have been added to be notified of transaction success or failure, manually initiate
+transactions and include or exclude specific requests.</li>
+
+<li><div><b>True Excel (.xls) export</b></div>
+Goes beyond CSV (comma-separated-values) export by including hilites,
+and delivering dates and numbers with type information so Excel can sort and filter properly.
+See 
+<a href="http://www.smartclient.com/smartgwtee/javadoc/com/smartgwt/client/types/ExportFormat.html">
+com.smartgwt.client.types.ExportFormat</a> for more details.</li>
+
+<li><div><b>Client-driven export</b></div>
+An alternative mode for exporting, this export preserves all client-side
+formatting. LGPL users note: upgrading to Pro gets you this export mode without having to
+rework any of your databinding code.
+See <a href="http://www.smartclient.com/smartgwtee/javadoc/com/smartgwt/client/widgets/DataBoundComponent.html#exportClientData">
+DataBoundComponent.exportClientData()</a> for more details.
+</li>
+<li><div><b>New ultralight ‘Simplicity’ skin</b></div>
+The new “Simplicity” skin takes advantage of early CSS3 support in modern browsers like
+Firefox, Safari and Chrome to deliver look and feel similar to our classic skins (rounded
+elements, gradients, and other touches) while remaining almost image free. Appearance degrades
+gracefully in Internet Explorer to a more square / solid color appearance.</li>
+
+<li><div><b>(Preliminary) Touch & Mobile support</b></div>
+Support for iPhone, iPad and iPod touch devices and partial support for Android devices. No
+code changes required, and the full range of interactions is supported, including drag and drop
+and flick scrolling with momentum. SmartClient on mobile is a strong choice for long-session
+mobile & touch applications (like iWork for the iPad) and especially for offline mobile
+applications.</li>
+
+<li><div><b>JPA DataSource</b></div>
+Similar to the built-in SQL and Hibernate connectors, a connector has been added for JPA-based
+persistence. Runnable sample project included. Does not yet have a DataSource Wizard but
+support is planned. Supports simple Criteria for now. Support for Advanced Criteria will be
+available for Power edition in the future.</li>
+
+<li><div><b>Google App Engine support & GAE/JPA DataSource</b></div>
+A runnable sample project deployable to Google App Engine, demonstrating persistence to Google
+App Engine datastores via the JPA API, with no server code required.</li>
+
+<li><div><b>Annotation-based configuration in Hibernate</b></div>
+Support for Hibernate configuration via annotations rather than explicit mapping files, and
+support for looking up Hibernate configuration via Spring. Supported both the DataSource Wizard
+and via declarations in .ds.xml files. See
+<a href="http://www.smartclient.com/smartgwtee/javadoc/com/smartgwt/client/docs/HibernateIntegration.html">
+com.smartgwt.client.docs.HibernateIntegration</a>
+for more details.</li>
+
+<li><div><b>Deeper SQL customization</b></div>
+Customize the SQL used for select, insert and update for an individual field while retaining
+full support for automatic query generation, efficient data paging, multi-level sort and all
+other features of the SQLDataSource. See 
+<a href="http://www.smartclient.com/smartgwtee/javadoc/com/smartgwt/client/docs/serverds/DataSourceField.html#customSelectExpression">
+DataSourceField.customSelectExpression</a>,
+<a href="http://www.smartclient.com/smartgwtee/javadoc/com/smartgwt/client/docs/serverds/DataSourceField.html#customInsertExpression">
+DataSourceField.customInsertExpression</a>,
+<a href="http://www.smartclient.com/smartgwtee/javadoc/com/smartgwt/client/docs/serverds/DataSourceField.html#customUpdateExpression">
+DataSourceField.customUpdateExpression</a>, and
+<a href="http://www.smartclient.com/smartgwtee/javadoc/com/smartgwt/client/docs/serverds/DataSourceField.html#sqlStorageStrategy">
+DataSourceField.sqlStorageStrategy</a>.</li>
+
+<li><div><b>RESTConnector</b></div>
+A new built-in servlet exposes all of the operations defined in your .ds.xml files for access
+via REST - the same protocol as defined for the RestDataSource. This allows other client
+technologies and automated systems to re-use the same services you provide for your SmartClient
+front-end.</li>
+
+<li><div><b>New Validation samples</b></div>
+Demonstrate using the new isUnique and hasRelatedRecords validators, as well as using
+validateOnExit to dynamically contact the server during data entry so that server-based
+validation logic can be run.</li>
+
+<li><div><b>New Upload sample</b></div>
+Demonstrates SQL-based storage and display of uploaded files, with no server code required. See
+<a href="http://www.smartclient.com/smartgwtee/showcase/#upload_sql">
+"Java Data Integration -> SQL -> File Upload" in the Showcase</a>.
+</li>
+</ul>
+<a name="2_1"></a>
+      <h2>Release Notes for v2.1</h2>
+<ul>
+<li><div><b>New built-in server-side validators</b></div>
+<ul><li>"isUnique" makes it trivial to enforce common cases like having a unique user name.</li>
+<li>"hasRelatedRecords" can enforce that inter-record references are valid.</li></ul>
+</li><li>
+<div><b>Declarative custom server validation</div></b>
+<ul>
+<li>Concise Velocity expressions can make a complex validation rule that involves consulting
+related tables and comparing values into a trivial one-liner.</li>
+<li>With DMI validators, you can declare the Java class or Spring bean to invoke to perform
+validation.</li>
+</ul>
+</li><li>
+<div><b>Declarative security</b></div>
+Declaratively restrict access to certain DataSources or certain operations, on a per-role
+basis. Simply works automatically if you are using either JAAS or J2EE security, and
+provides simple integration points for other systems.
+</li><li>
+<div><b>Bulletproof setup guide with troubleshooting section</b></div>
+For those who had trouble copying settings from sample projects, a step-by-step guide
+explains all the necessary settings and provides troubleshooting steps for common errors.
+</li><li>
+<div><b>FormItem support for validateOnChange / validateOnExit</b></div>
+Finer-grained control for when validation is run, including dynamic trips to the server to
+run server-side validators if needed.
+</li><li>
+<div><b>FilterBuilder.fieldDataSource</b></div>
+For large sets of filterable fields, a ComboBox interface for selecting fieldName.
+</li><li>
+<div><b>New dialog for configuring multi-level sort</b></div>
+</li><li>
+An overview of several major new client-side features, which are also available in SmartGWT LGPL,
+is available <a href="http://www.jroller.com/sjivan/entry/smart_gwt_2_1_released">here</a>, 
+or in the Release Notes supplied with the SmartGWT LGPL Edition.
+</li></ul>
+<a name="2_0"></a>
+      <h2>Release Notes for v2.0</h2>
+<ul>
+<li><b>GWT 2.0 support</b></li>
+<li><b>New Enterprise Blue skin</b></li>
+<li><b>Multi-column sort</b> support in ListGrid</li>
+<li><b>New Enterprise Blue skin</b></li>
+<li><b>Expando Rows:</b> embed any component into an expanded ListGrid row</li>
+<li><b>New collection of icons</b></li>
+<li><b>Many other improvements and fixes</b></li>
+</ul>
+<a name="1_2_2"></a>
+      <h2>Release Notes for v1.2.2</h2>
+        <div>- Improved Introduction and Getting Started docs</div>
+        <div>- Improved Javadocs</div>
+        <div>- Various internal enhancements and fixes</div>
+
+    <hr/>
+<a name="1_2_1"></a>
+    <h2>Release Notes for v1.2.1</h2>
+      <div>- <b>GWT 1.7</b> support</div>
+      <div>- Significant improvement in integration with core GWT widgets</div>
+      <div>- Full implementation of ResultSet API</div>
+      <div>- ListGrid performance enhancements</div>
+      <div>- Safari 4.0 support</div>
+      <div>- Support for Grid editing with all editors shown</div>
+      <div>- Auto-loading of dependent XML schema for loadWSDL() and loadXMLSchema()</div>
+      <div>- Extended WebService APIs to allow simplified input data and allow setting SOAP headers</div>
+      <div>- enhancements to RPC Tab in Developer Console (shows component that initiated request, if applicable)</div>
+      <div>- minor fixes to Eclipse projects for samples</div>
+
+    <hr/>
+<a name="1_2"></a>
+      <h2>Release Notes for v1.2</h2>
+        <div>- Various New Samples including ORM DataSource</div>
+        <div>- new tools module : com.smartgwtee.tools.Tools for easy access to Visual Builder, DataSource Wizard and DataBase Console</div>
+        <div>- shipping Eclipse project files for each sample project</div>
+      
+<a name="1_1"></a>
+      <h2>Release Notes for v1.1</h2>
+        <div>- Production Release</div>
+        <div>- <b>GWT 1.6.4</b> (preferred) and <b>GWT 1.5.3</b> support</div>
+        <div>- Various New Samples</div>
+
+   </body></html>
+

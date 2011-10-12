@@ -1,0 +1,8 @@
+<DataSource
+    ID="cityOneToManyJPA"
+    serverConstructor="com.isomorphic.jpa.JPA2DataSource"
+    beanClassName="com.smartgwt.sample.showcase.server.CityOneToMany"
+    schemaBean="com.smartgwt.sample.showcase.server.CityOneToMany"
+>
+</DataSource>
+

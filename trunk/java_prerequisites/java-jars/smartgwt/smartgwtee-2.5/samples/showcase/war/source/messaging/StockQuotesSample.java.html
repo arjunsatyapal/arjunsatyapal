@@ -1,0 +1,252 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../js/sh/shCore.js'></script>
+<script src='../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Isomorphic SmartGWT web presentation layer
+ * Copyright (c) 2011 Isomorphic Software, Inc.
+ *
+ * OWNERSHIP NOTICE
+ * Isomorphic Software owns and reserves all rights not expressly granted in this source code,
+ * including all intellectual property rights to the structure, sequence, and format of this code
+ * and to all designs, interfaces, algorithms, schema, protocols, and inventions expressed herein.
+ *
+ *  If you have any questions, please email <sourcecode@isomorphic.com>.
+ *
+ *  This entire comment must accompany any portion of Isomorphic Software source code that is
+ *  copied or moved from this file.
+ */
+
+package com.smartgwt.sample.showcase.client.messaging;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.i18n.client.NumberFormat;
+import com.google.gwt.user.client.Timer;
+import com.smartgwt.client.data.DSRequest;
+import com.smartgwt.client.data.DSResponse;
+import com.smartgwt.client.data.Record;
+import com.smartgwt.client.rpc.Messaging;
+import com.smartgwt.client.rpc.MessagingCallback;
+import com.smartgwt.client.rpc.RPCManager;
+import com.smartgwt.client.rpc.RPCRequest;
+import com.smartgwt.client.types.DSOperationType;
+import com.smartgwt.client.types.VerticalAlignment;
+import com.smartgwt.client.util.JSOHelper;
+import com.smartgwt.client.util.SC;
+import com.smartgwt.client.widgets.Button;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.HTMLFlow;
+import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.Window;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.grid.CellFormatter;
+import com.smartgwt.client.widgets.grid.ListGrid;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
+import com.smartgwt.client.widgets.layout.VLayout;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class StockQuotesSample implements EntryPoint {
+
+    private ListGrid stockQuotesGrid;
+    
+    public void onModuleLoad() {
+        Canvas topCanvas=null;
+        if(SC.hasRealtimeMessaging()) {
+            final long startParameter = System.currentTimeMillis();
+    
+            // Grid and button below it
+            VLayout contentLayout = new VLayout();
+            contentLayout.setMembersMargin(10);
+            contentLayout.setPadding(10);
+            
+            stockQuotesGrid = new ListGrid() {
+                private int blinkPeriod = 2000;
+    
+                // Cell animation - go bright green or red on a change, then fades.
+                protected String getCellCSSText(ListGridRecord record, final int rowNum,
+                        final int colNum) {
+                    // changeValue column
+                    Date lastUpdated = record.getAttributeAsDate("lastUpdated");
+                    if (colNum == 2 && lastUpdated != null) {
+                        long delta = System.currentTimeMillis() - lastUpdated.getTime();
+                        if (delta < blinkPeriod) {
+                            // refresh 10x / second
+                            new Timer() {
+                                public void run() {
+                                    stockQuotesGrid.refreshCell(rowNum, colNum);
+                                }
+                            }.schedule(100);
+                            float changeValue = record.getAttributeAsFloat("changeValue");
+    
+                            float ratio = ((float) (blinkPeriod - delta)) / blinkPeriod;
+                            int color = 255 - Math.round(200 * ratio);
+    
+                            if (changeValue > 0) {
+                                return "background-color:#" + Integer.toHexString(color) + "FF"
+                                        + Integer.toHexString(color);
+                            } else if (changeValue < 0) {
+                                return "background-color:#FF" + Integer.toHexString(color)
+                                        + Integer.toHexString(color);
+                            }
+                        } else {
+                            record.setAttribute("lastUpdated", (Date) null);
+                        }
+                    }
+                    // no style override
+                    return null;
+                };
+            };
+            stockQuotesGrid.setWidth(600);
+            stockQuotesGrid.setHeight(300);
+            stockQuotesGrid.setShowAllRecords(true);
+            stockQuotesGrid.setDataSource(StockQuotesDS.getInstance());
+            stockQuotesGrid.setAutoFetchData(true);
+            stockQuotesGrid.setCellFormatter(getFloatValuesFormatter());
+            contentLayout.addMember(stockQuotesGrid);
+    
+            final Button generateUpdatesButton = new Button("Generate more updates");
+            generateUpdatesButton.setWidth(200);
+            generateUpdatesButton.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+                    generateUpdates(startParameter, generateUpdatesButton);
+                }
+            });
+            contentLayout.addMember(generateUpdatesButton);
+    
+            // receive messages from the stockQuotes channel and update data grid
+            Messaging.subscribe("stockQuotes" + startParameter, new MessagingCallback() {
+                @Override
+                public void execute(Object data) {
+                    updateStockQuotes(data);
+                }
+            });
+            
+            generateUpdates(startParameter, generateUpdatesButton);
+            
+            topCanvas = contentLayout;
+        } else {
+            HTMLFlow htmlFlow = new HTMLFlow("<div class='explorerCheckErrorMessage'><p>This example is disabled in this SDK because it requires the optional " +
+            "<a href=\"http://www.smartclient.com/product/index.jsp\" target=\"_blank\">Real Time Messaging module</a>.</p>");
+            htmlFlow.setWidth100();
+            topCanvas = htmlFlow;
+        }
+        topCanvas.draw();
+    }
+        
+    /**
+     * Float values should be formatted into human-readable text
+     * 
+     * @return
+     */
+    private CellFormatter getFloatValuesFormatter() {
+        return new CellFormatter() {
+            @Override
+            public String format(Object value, ListGridRecord record, int rowNum, int colNum) {
+                if (value == null)
+                    return null;
+
+                if (value instanceof Float) {
+                    NumberFormat nf = NumberFormat.getFormat("0.00");
+                    try {
+                        return nf.format(((Number) value).floatValue());
+                    } catch (Exception e) {
+                        return value.toString();
+                    }
+                }
+                return String.valueOf(value);
+            }
+        };
+    }
+
+    /**
+     * We get id and changeValue only from server - combine it with the record
+     * in the grid to get the rest of the fields
+     * 
+     * @param data
+     */
+    @SuppressWarnings("unchecked")
+    private void updateStockQuotes(Object data) {
+        List<List<?>> stockData = (List<List<?>>) JSOHelper
+                .convertToJava((JavaScriptObject) data);
+        List<Record> newStockData = new ArrayList<Record>();
+        // prepare data for grid manually using received data from servlet
+        // we receive only 'id' and 'change percent' data here
+        for (List<?> recordData : stockData) {
+            float change = ((Number) recordData.get(1)).floatValue();
+            if (change != 0) {
+                Integer id = (Integer) recordData.get(0);
+                Record record = stockQuotesGrid.getDataAsRecordList().find("id", id);
+                float lastValue = record.getAttributeAsFloat("lastValue");
+                float newChangeValue = change * lastValue / 100;
+                float newLastValue = newChangeValue + lastValue;
+                record.setAttribute("changeValue", newChangeValue);
+                record.setAttribute("lastValue", newLastValue);
+                record.setAttribute("dayHighValue",
+                        Math.max(record.getAttributeAsFloat("dayHighValue"), newLastValue));
+                record.setAttribute("dayLowValue",
+                        Math.min(record.getAttributeAsFloat("dayLowValue"), newLastValue));
+                record.setAttribute("lastUpdated", new Date());
+                newStockData.add(record);
+            }
+        }
+
+        DSResponse dsResponse = new DSResponse();
+        dsResponse.setData((Record[]) newStockData.toArray(new Record[newStockData.size()]));
+
+        DSRequest dsRequest = new DSRequest();
+        dsRequest.setOperationType(DSOperationType.UPDATE);
+        // broadcast the change - the grid will notice this automatically (and so would other
+        // components showing the same record)
+        StockQuotesDS.getInstance().updateCaches(dsResponse, dsRequest);
+    }
+
+    private void generateUpdates(final long startParameter, final Button generateUpdatesButton) {
+        generateUpdatesButton.disable();
+        RPCRequest request = new RPCRequest();
+        // we tells servlet which channel it should use for sending data
+        request.setActionURL("examples/StockQuotes/generate?sp=" + startParameter);
+        RPCManager.sendRequest(request);
+        // block button repeat click for 90 seconds - time while servlet
+        // will sends data to us
+        new Timer() {
+            public void run() {
+                generateUpdatesButton.enable();
+            }
+        }.schedule(90000);
+    }
+    
+    
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

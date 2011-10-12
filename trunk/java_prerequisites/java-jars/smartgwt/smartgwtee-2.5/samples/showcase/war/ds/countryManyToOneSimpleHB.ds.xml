@@ -1,0 +1,8 @@
+<DataSource
+    ID="countryManyToOneSimpleHB"
+    serverType="hibernate"
+    beanClassName="com.smartgwt.sample.showcase.server.CountryManyToOneSimple"
+    schemaBean="com.smartgwt.sample.showcase.server.CountryManyToOneSimple"
+>
+</DataSource>
+

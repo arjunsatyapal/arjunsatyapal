@@ -1,0 +1,11 @@
+<DataSource
+    ID="city_DataSource"
+    serverConstructor="com.isomorphic.jpa.GAEJPADataSource"
+    beanClassName="com.smartgwt.sample.server.City"
+    >
+    <fields>
+        <field name="cityId"    type="text" hidden="true"   primaryKey="true" />
+        <field name="cityName"  type="text" title="City"    required="true"   />
+        <field name="countryId" type="text" title="Country" canEdit="false"   />
+    </fields>
+</DataSource>

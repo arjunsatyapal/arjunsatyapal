@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Getting Started with SmartGWT Server DataSource Integration</title>
+</head>
+<body>
+<h3>Creating a DataSource</h3>
+<p>In SmartGWT EE, your DataSource definition provides visual components with a description of the
+business object you want to manipulate in the UI, <b>and</b> provides information to the
+server-side framework on how your objects will be fetched and persisted.  In some cases, a single
+declaration drives both client- and server-side behavior (such as validators).</p>
+<p>
+A DataSource is declared in an XML file with the suffix ".ds.xml".  If you have existing SQL tables, JPA
+/ Hibernate entities, or even Java POJOs (Plain Old Java Objects), you can derive a DataSource
+automatically using the <b>autoDeriveSchema</b> or <b>schemaBeam</b> settings.  With these properties, a
+one-line DataSource declaration provides all the information Smart GWT EE needs to build grids, forms and
+other components that are ready to display and edit your existing entities.  
+<P>
+Smart GWT will automatically choose editing controls for each field, derive user-visible titles
+(getFirstName() or FIRST_NAME becomes "First Name"), apply default formatting and validation rules, and
+apply other intelligent defaults based on Java annotations and SQL metadata.  You can then customize from
+there, adding fine-grained overrides to the default behaviors wherever necessary, and you never have to
+re-declare the automatically derived information.
+<P>
+For a new from-scratch application or for new entities added to an existing application, you can also 
+generate SQL tables or Hibernate persistence settings from your DataSource declaration instead of the
+other way around.
+<P>
+<h3>Loading DataSources</h3>
+<p>Once you have a DataSource definition, load the DataSource by including the following line in the body
+of your GWT host .html file.
+<pre>
+            &lt;script src='sc/DataSourceLoader?dataSource=employees,supplyItem'>&lt;/script&gt;</pre>
+Specify a comma separated list of DataSource ID's for the <code>dataSource</code> parameter. The above
+line would load the employees and supplyItem datasources from the server.
+<P>
+Smart GWT's data-aware components can then be configured to use these DataSources by just calling
+setDataSource().
+<P>
+<h3>Next Steps</h3>
+<P>
+Once you've looked through the samples in the Showcase, start with the <a
+href="http://www.smartclient.com/product/documentation.jsp">QuickStart Guide</a>.  In addition to setup
+instructions, the QuickStart Guide provides key need-to-know information about the major subsystems of
+Smart GWT, then provides links to deeper discussions.
+
+</body>
+</html>

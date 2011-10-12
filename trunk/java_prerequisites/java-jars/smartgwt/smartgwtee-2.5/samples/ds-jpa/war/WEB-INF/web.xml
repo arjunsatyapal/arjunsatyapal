@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    
+    <context-param>
+        <param-name>HSQLDB_CONFIG</param-name>
+        <param-value>/WEB-INF/hsqlserver.properties</param-value>
+    </context-param>
+    
+    <!--start hsql db on startup for ease of use. Actualy database is located under WEB-INF/db/hsqldb-->
+    <listener>
+        <listener-class>com.smartgwt.sample.server.listener.HSQLServletContextListener</listener-class>
+    </listener>
+    
+    <!-- ISC init: initializes ISC framework -->
+    <servlet>
+        <servlet-name>Init</servlet-name>
+        <servlet-class>com.isomorphic.base.Init</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <!-- The IDACall servlet handles all Built-in DataSource operations -->
+    <servlet>
+        <servlet-name>IDACall</servlet-name>
+        <servlet-class>com.isomorphic.servlet.IDACall</servlet-class>
+    </servlet>
+    <!-- RPCManager uses this URL by default for Built-in DataSource operations -->
+    <servlet-mapping>
+        <servlet-name>IDACall</servlet-name>
+        <url-pattern>/JPADS_js/sc/IDACall</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IDACall</servlet-name>
+        <url-pattern>/JPADS_js/sc/IDACall/*</url-pattern>
+    </servlet-mapping>
+    <!-- The DataSourceLoader servlet returns Javascript representations of the dataSources whose
+         ID's are passed to it - it is an alternative to using the <loadDS> JSP tag -->
+    <servlet>
+        <servlet-name>DataSourceLoader</servlet-name>
+        <servlet-class>com.isomorphic.servlet.DataSourceLoader</servlet-class>
+    </servlet>
+    <!-- DataSourceLoader requests -->
+    <servlet-mapping>
+        <servlet-name>DataSourceLoader</servlet-name>
+        <url-pattern>/JPADS_js/sc/DataSourceLoader</url-pattern>
+    </servlet-mapping>
+    
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>JPADS.html</welcome-file>
+    </welcome-file-list>
+    <jsp-config>
+        <!-- Isomorphic JSP tags -->
+        <taglib>
+            <taglib-uri>isomorphic</taglib-uri> 
+            <taglib-location>/WEB-INF/iscTaglib.xml</taglib-location> 
+        </taglib>        
+    </jsp-config>
+    <mime-mapping>
+        <extension>manifest</extension>
+        <mime-type>text/cache-manifest</mime-type>
+    </mime-mapping>
+</web-app>

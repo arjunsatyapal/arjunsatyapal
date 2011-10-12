@@ -1,0 +1,57 @@
+<html>
+<head>
+<link rel="stylesheet" href="../../../js/sh/SyntaxHighlighter.css" type="text/css" />
+<script src="../../../js/sh/shCore.js"></script>
+<script src="../../../js/sh/shBrushXml.js"></script>
+<style>
+
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name="code" class="xml:nogutter:nocontrols" rows="15" cols="120">
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence
+    xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+    version="2.0"
+>
+    <persistence-unit name="ds" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>com.isomorphic.examples.server.jpa.relations.CountryOneToMany</class>
+    <class>com.isomorphic.examples.server.jpa.relations.CityOneToMany</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+        <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
+        <property name="hibernate.connection.url" value="jdbc:hsqldb:hsql://localhost/isomorphic"/>
+        <property name="hibernate.connection.username" value="sa"/>
+        <property name="hibernate.connection.password" value=""/>
+        <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+        <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+        <property name="hibernate.show_sql" value="true"/>
+        <property name="hibernate.format_sql" value="true"/>
+    </properties>
+  </persistence-unit>
+</persistence>
+
+</textarea>
+<script class="javascript">
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<DataSource
+    ID="countryOneToManyJPA"
+    serverConstructor="com.isomorphic.jpa.JPA2DataSource"
+    beanClassName="com.smartgwt.sample.showcase.server.CountryOneToMany"
+    schemaBean="com.smartgwt.sample.showcase.server.CountryOneToMany"
+>
+    <fields>
+        <field name="cities"        hidden="true" multiple="true" type="cityOneToManyJPA"
+            foreignKey="cityOneToManyJPA.cityId"
+        />
+    </fields>
+</DataSource>
+
