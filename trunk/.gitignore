@@ -11,6 +11,7 @@ temp/
 
 # Ignoring the cache files
 *.cache.*
+gwt-unitCache/
 *.rpc
 
 # These directories will be always ignored.

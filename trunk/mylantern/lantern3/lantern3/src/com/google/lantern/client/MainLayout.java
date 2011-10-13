@@ -15,6 +15,8 @@
  */
 package com.google.lantern.client;
 
+import com.smartgwt.client.types.Overflow;
+
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
 
@@ -139,6 +141,7 @@ public class MainLayout extends Composite {
             setShowEdges(true);
             setMembersMargin(10);
             setLayoutMargin(10);
+            setWidth100();
             setCanAcceptDrop(true);
             setAnimateMembers(true);
             setDropLineThickness(4);
@@ -183,13 +186,13 @@ public class MainLayout extends Composite {
 
     private class DragRichTextEditor extends RichTextEditor {
         public DragRichTextEditor() {
-            setWidth(48);
-            setHeight(48);
+            setHeight(200);
             setShowEdges(true);
             setLayoutAlign(Alignment.CENTER);
             setCanDragReposition(true);
             setCanDrop(true);
             setDragAppearance(DragAppearance.TARGET);
+            setOverflow(Overflow.AUTO);
         }
 
         public DragRichTextEditor(String src, String dragType) {
