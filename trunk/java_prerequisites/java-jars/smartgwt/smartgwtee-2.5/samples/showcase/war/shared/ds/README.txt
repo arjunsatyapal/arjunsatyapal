@@ -1,1 +1,0 @@
-This is the directory where the SamrtGWT EE DataSource Generator writes out the generated datasource definitions.  

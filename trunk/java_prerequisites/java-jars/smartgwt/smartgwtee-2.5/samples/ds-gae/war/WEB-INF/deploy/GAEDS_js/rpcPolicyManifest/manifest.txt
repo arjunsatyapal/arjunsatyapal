@@ -1,2 +1,0 @@
-# Module GAEDS_js
-# RPC service class, partial path of RPC policy file

@@ -1,8 +1,0 @@
-<DataSource
-    ID="countryManyToOneSimpleJPA"
-    serverConstructor="com.isomorphic.jpa.JPA2DataSource"
-    beanClassName="com.smartgwt.sample.showcase.server.CountryManyToOneSimple"
-    schemaBean="com.smartgwt.sample.showcase.server.CountryManyToOneSimple"
->
-</DataSource>
-
