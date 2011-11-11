@@ -25,5 +25,8 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/guava-r09.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/guava-r09-gwt.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/jackson-all-1.8.6.jar"/>
+	<classpathentry excluding="**/*.java" kind="src" path="resources"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/xmlParserAPIs-2.6.2.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/xpp3-1.1.4c.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
