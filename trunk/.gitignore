@@ -8,6 +8,7 @@
 .DS_Store
 temp/
 *.nocache.js
+client_secrets.json
 
 # Ignoring the cache files
 *.cache.*
