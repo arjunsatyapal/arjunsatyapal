@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/appengine-java-sdk-1.5.5"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-1.6.0-beta-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-extensions-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-extensions-1.6.0-beta-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-extensions-android2-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-extensions-android2-1.6.0-beta-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-1.6.0-beta-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-extensions-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-extensions-1.6.0-beta-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-extensions-android2-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-extensions-android2-1.6.0-beta-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-extensions-android3-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-extensions-android3-1.6.0-beta-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-oauth-client-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-oauth-client-1.6.0-beta-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-oauth-client-extensions-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-oauth-client-extensions-1.6.0-beta-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/guava-r09.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/guava-r09-gwt.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jackson-all-1.8.6.jar"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>
