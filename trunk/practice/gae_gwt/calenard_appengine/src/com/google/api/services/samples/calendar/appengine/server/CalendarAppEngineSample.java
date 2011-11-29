@@ -76,7 +76,7 @@ public class CalendarAppEngineSample extends AbstractFlowUserServlet {
   @Override
   protected ThreeLeggedFlow newFlow(String userId) throws IOException {
     return new GoogleOAuth2ThreeLeggedFlow(userId, OAuth2ClientCredentials.getClientId(),
-        OAuth2ClientCredentials.getClientSecret(), CalendarUrl.ROOT_URL, Utils.getCallbackUrl());
+        OAuth2ClientCredentials.getClientSecret(), CalendarUrl.getRootUrl(), Utils.getCallbackUrl());
   }
 
   @Override

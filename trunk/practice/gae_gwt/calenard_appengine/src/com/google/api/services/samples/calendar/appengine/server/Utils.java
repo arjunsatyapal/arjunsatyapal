@@ -86,7 +86,7 @@ class Utils {
 
   private static ThreeLeggedFlow newFlow(String userId) throws IOException {
     return new GoogleOAuth2ThreeLeggedFlow(userId, OAuth2ClientCredentials.getClientId(),
-        OAuth2ClientCredentials.getClientSecret(), CalendarUrl.ROOT_URL, callbackUrl);
+        OAuth2ClientCredentials.getClientSecret(), CalendarUrl.getRootUrl(), callbackUrl);
   }
 
   private static Credential loadCredential() throws IOException {

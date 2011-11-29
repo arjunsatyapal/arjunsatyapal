@@ -93,7 +93,7 @@ public class CalendarGwtRpcSample extends RemoteServiceServlet implements Calend
   }
 
   private static CalendarUrl forRoot() {
-    return new CalendarUrl(CalendarUrl.ROOT_URL);
+    return new CalendarUrl(CalendarUrl.getRootUrl());
   }
 
   private static CalendarUrl forCalendarMetafeed() {

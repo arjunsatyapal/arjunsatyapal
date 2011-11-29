@@ -36,13 +36,13 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>denied</servlet-name>
+    <servlet-name>deniedAuth</servlet-name>
     <servlet-class>com.google.api.services.samples.calendar.appengine.server.DeniedAuth</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>denied</servlet-name>
-    <url-pattern>/denied</url-pattern>
+    <servlet-name>deniedAuth</servlet-name>
+    <url-pattern>/deniedAuth</url-pattern>
   </servlet-mapping>
 
   <security-constraint>
