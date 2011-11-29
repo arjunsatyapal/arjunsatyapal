@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="lib" path="lib/SitesDemo.jar"/>
+	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/trunk/java_prerequisites/java-jars/google-gdata-client/gdata-samples-1.4.6/java/lib/gdata-client-1.0.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/trunk/java_prerequisites/java-jars/google-gdata-client/gdata-samples-1.4.6/java/lib/gdata-client-meta-1.0.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/trunk/java_prerequisites/java-jars/google-gdata-client/gdata-samples-1.4.6/java/lib/gdata-core-1.0.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/trunk/java_prerequisites/java-jars/google-gdata-client/gdata-samples-1.4.6/java/lib/gdata-sites-2.0.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/opengitclients/arjunsatyapal/trunk/java_prerequisites/java-jars/google-gdata-client/gdata-samples-1.4.6/java/lib/gdata-sites-meta-2.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

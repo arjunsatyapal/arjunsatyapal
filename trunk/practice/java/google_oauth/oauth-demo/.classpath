@@ -8,7 +8,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-1.5.1-beta.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-extensions-1.5.1-beta.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-1.5.3-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-1.5.3-beta.jar" sourcepath="/usr/local/google/opengitclients/arjunsatyapal/trunk/java_prerequisites/java-jars/google-api-client/v1.5.1/src"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-extensions-1.5.3-beta.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/google-oauth-client-1.5.2-beta.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/google-oauth-client-extensions-1.5.2-beta.jar"/>

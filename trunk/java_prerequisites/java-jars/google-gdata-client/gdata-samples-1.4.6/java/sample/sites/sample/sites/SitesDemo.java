@@ -1,3 +1,4 @@
+package sample.sites;
 /* Copyright (c) 2008 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +15,7 @@
  */
 
 
-package sample.sites;
+
 
 import sample.util.SimpleCommandLineParser;
 import com.google.gdata.data.sites.AttachmentEntry;
