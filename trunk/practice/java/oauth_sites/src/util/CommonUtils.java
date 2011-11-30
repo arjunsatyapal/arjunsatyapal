@@ -14,7 +14,7 @@
  */
 
 
-package sample.util;
+package util;
 
 import com.google.gdata.data.BaseEntry;
 import com.google.gdata.data.BaseFeed;

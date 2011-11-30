@@ -14,6 +14,9 @@
 
 package com.google.api.services.samples.shared.gdata;
 
+import com.google.common.io.CharStreams;
+import java.io.InputStreamReader;
+
 import com.google.api.client.googleapis.GoogleUrl;
 import com.google.api.client.googleapis.MethodOverride;
 import com.google.api.client.http.AbstractHttpContent;
@@ -90,6 +93,9 @@ public abstract class GDataClient {
   protected final <T> T executeGet(GoogleUrl url, Class<T> parseAsType) throws IOException {
     prepareUrl(url, parseAsType);
     HttpRequest request = getRequestFactory().buildGetRequest(url);
+    HttpResponse response = execute(request);
+    String string = CharStreams.toString(new InputStreamReader(response.getContent(), "UTF-8"));
+    System.out.println(string);
     return execute(request).parseAs(parseAsType);
   }
 

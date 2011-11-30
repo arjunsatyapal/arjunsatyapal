@@ -14,7 +14,7 @@
  */
 
 
-package sample.sites;
+package sites;
 
 import com.google.gdata.client.http.HttpGDataRequest;
 import com.google.gdata.client.sites.SitesService;
@@ -218,7 +218,8 @@ public class SitesHelper {
     /**
      * Fetches and displays the user's site feed.
      */
-    public void getSiteFeed() throws IOException, ServiceException {
+    public void getSiteFeed(String token) throws IOException, ServiceException {
+        service.getRequestFactory().setHeader("Authorization", token);
       SiteFeed siteFeed = service.getFeed(
           new URL(getSiteFeedUrl()), SiteFeed.class);
       for (SiteEntry entry : siteFeed.getEntries()){
