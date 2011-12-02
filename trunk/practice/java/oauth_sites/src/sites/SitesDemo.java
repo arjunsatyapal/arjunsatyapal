@@ -14,17 +14,11 @@
  */
 package sites;
 
-import com.google.api.client.http.HttpHeaders;
-
 import com.google.api.client.auth.oauth2.draft10.AccessTokenResponse;
 import com.google.api.client.googleapis.auth.oauth2.draft10.GoogleAccessProtectedResource;
 import com.google.api.client.googleapis.auth.oauth2.draft10.GoogleAccessTokenRequest.GoogleAuthorizationCodeGrant;
 import com.google.api.client.googleapis.auth.oauth2.draft10.GoogleAuthorizationRequestUrl;
-import com.google.api.client.http.ByteArrayContent;
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
-import com.google.api.client.http.HttpResponse;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -410,6 +404,8 @@ public class SitesDemo {
         authRequest.useBasicAuthorization = false;
         AccessTokenResponse authResponse = authRequest.execute();
         String accessToken = authResponse.accessToken;
+        
+        // Generate a refresh token.
         GoogleAccessProtectedResource access = new GoogleAccessProtectedResource(accessToken,
                 TRANSPORT, JSON_FACTORY, CLIENT_ID, CLIENT_SECRET, authResponse.refreshToken);
         HttpRequestFactory rf = TRANSPORT.createRequestFactory(access);

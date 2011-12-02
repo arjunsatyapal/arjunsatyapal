@@ -18,8 +18,6 @@ package util;
 
 import com.google.gdata.data.BaseEntry;
 import com.google.gdata.data.BaseFeed;
-import com.google.gdata.data.Entry;
-import com.google.gdata.data.Feed;
 import com.google.gdata.data.ExtensionProfile;
 import com.google.gdata.util.common.xml.XmlWriter;
 
