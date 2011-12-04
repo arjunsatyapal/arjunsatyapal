@@ -25,3 +25,5 @@ params
 appengine
 filesystem
 apache
+credentials
+credential

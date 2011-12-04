@@ -14,6 +14,8 @@
  */
 package sites;
 
+import java.io.File;
+
 import com.google.api.client.auth.oauth2.draft10.AccessTokenResponse;
 import com.google.api.client.googleapis.auth.oauth2.draft10.GoogleAccessProtectedResource;
 import com.google.api.client.googleapis.auth.oauth2.draft10.GoogleAccessTokenRequest.GoogleAuthorizationCodeGrant;
@@ -122,13 +124,14 @@ public class SitesDemo {
      * @param authSubToken User's AuthSub session token.
      * @param enableLogging Whether to enable HTTP/XML logging.
      */
-    
+
     private String token;
+
     public SitesDemo(String appName, String domain, String siteName, String authSubToken,
             boolean enableLogging) {
         sitesHelper = new SitesHelper(appName, domain, siteName, enableLogging);
         this.token = authSubToken;
-//        sitesHelper.login(authSubToken);
+        // sitesHelper.login(authSubToken);
     }
 
     /**
@@ -367,14 +370,14 @@ public class SitesDemo {
         }
     }
 
-    private static final String SCOPE = "https://sites.google.com/feeds/";
-    private static final String CALLBACK_URL = "urn:ietf:wg:oauth:2.0:oob";
-    private static final HttpTransport TRANSPORT = new NetHttpTransport();
-    private static final JsonFactory JSON_FACTORY = new JacksonFactory();
-
-    // FILL THESE IN WITH YOUR VALUES FROM THE API CONSOLE
-    private static final String CLIENT_ID = "623685080366.apps.googleusercontent.com";
-    private static final String CLIENT_SECRET = "CP2nvtLuyM2g87P9KI0e9JgQ";
+//    private static final String SCOPE = "https://sites.google.com/feeds/";
+//    private static final String CALLBACK_URL = "urn:ietf:wg:oauth:2.0:oob";
+//    private static final HttpTransport TRANSPORT = new NetHttpTransport();
+//    private static final JsonFactory JSON_FACTORY = new JacksonFactory();
+//
+//    // FILL THESE IN WITH YOUR VALUES FROM THE API CONSOLE
+//    private static final String CLIENT_ID = "623685080366.apps.googleusercontent.com";
+//    private static final String CLIENT_SECRET = "ftIRKtAqELDPWPo1ES4ZXj2U";
 
     /**
      * Runs the demo.
@@ -386,81 +389,34 @@ public class SitesDemo {
      * @throws IOException
      */
     public static void main(String[] args) throws Exception {
-        SimpleCommandLineParser parser = new SimpleCommandLineParser(args);
-
-        // Generate the URL to which we will direct users
-        String authorizeUrl = new GoogleAuthorizationRequestUrl(CLIENT_ID,
-                CALLBACK_URL, SCOPE).build();
-        System.out.println("Paste this url in your browser: \n" + authorizeUrl);
-
-        // Wait for the authorization code
-        System.out.println("Type the code you received here: ");
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        String authorizationCode = in.readLine();
-
-        // Exchange for an access and refresh token
-        GoogleAuthorizationCodeGrant authRequest = new GoogleAuthorizationCodeGrant(TRANSPORT,
-                JSON_FACTORY, CLIENT_ID, CLIENT_SECRET, authorizationCode, CALLBACK_URL);
-        authRequest.useBasicAuthorization = false;
-        AccessTokenResponse authResponse = authRequest.execute();
-        String accessToken = authResponse.accessToken;
+         // String domain = parser.getValue("domain", "d");
+         String domain = "google.com";
         
-        // Generate a refresh token.
-        GoogleAccessProtectedResource access = new GoogleAccessProtectedResource(accessToken,
-                TRANSPORT, JSON_FACTORY, CLIENT_ID, CLIENT_SECRET, authResponse.refreshToken);
-        HttpRequestFactory rf = TRANSPORT.createRequestFactory(access);
-        System.out.println("Access token: " + authResponse.accessToken);
-
-        // Make an authenticated request
-//        GenericUrl shortenEndpoint =
-//                new GenericUrl("https://www.googleapis.com/urlshortener/v1/url");
-//        String requestBody =
-//                "{\"longUrl\":\"http://farm6.static.flickr.com/5281/5686001474_e06f1587ff_o.jpg\"}";
-//        HttpRequest request =
-//                rf.buildPostRequest(shortenEndpoint, new ByteArrayContent(requestBody));
-//        request.headers.contentType = "application/json";
-//        
-//        
-//        
-//        HttpResponse shortUrl = request.execute();
-//        BufferedReader output = new BufferedReader(new InputStreamReader(shortUrl.getContent()));
-//        System.out.println("Shorten Response: ");
-//        for (String line = output.readLine(); line != null; line = output.readLine()) {
-//            System.out.println(line);
-//        }
-
-        // Refresh a token (SHOULD ONLY BE DONE WHEN ACCESS TOKEN EXPIRES)
-//        access.refreshToken();
-        System.out.println("Original Token: " + accessToken + " New Token: "
-                + access.getAccessToken());
-
-        // String domain = parser.getValue("domain", "d");
-        String domain = "google.com";
-
-        // String siteName = parser.getValue("siteName", "site", "s");
-        String siteName = "arjun-satyapal";
-
-        boolean help = parser.containsKey("help", "h");
-        boolean logItUp = parser.containsKey("log", "l");
-
-        if (siteName == null || help) {
-            printMessage(USAGE_MESSAGE);
-            System.exit(1);
-        }
-
-        // If domain is set, use "site" for a non-Google Apps hosted Site.
-        if (domain == null) {
-            domain = "site";
-        }
-
-        String token = "Bearer " + accessToken;
-        SitesDemo demo = null;
-        if (token != null) {
-            demo = new SitesDemo(APP_NAME, domain, siteName, token, logItUp);
-        } else {
-            printMessage(USAGE_MESSAGE);
-            System.exit(1);
-        }
-        demo.run();
+         // String siteName = parser.getValue("siteName", "site", "s");
+         String siteName = "arjun-satyapal";
+        
+         SimpleCommandLineParser parser = new SimpleCommandLineParser(args);
+         boolean help = parser.containsKey("help", "h");
+         boolean logItUp = parser.containsKey("log", "l");
+        
+         if (siteName == null || help) {
+         printMessage(USAGE_MESSAGE);
+         System.exit(1);
+         }
+        
+         // If domain is set, use "site" for a non-Google Apps hosted Site.
+         if (domain == null) {
+         domain = "site";
+         }
+        
+         String token = "Bearer " + SitesConfigHelper.getAccessToken();
+         SitesDemo demo = null;
+         if (token != null) {
+         demo = new SitesDemo(APP_NAME, domain, siteName, token, logItUp);
+         } else {
+         printMessage(USAGE_MESSAGE);
+         System.exit(1);
+         }
+         demo.run();
     }
 }
