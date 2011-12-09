@@ -41,11 +41,9 @@ public class FTSServlet extends HttpServlet {
         Document searchDocument = toSearchDocument(documentText);
         outputBuilder.append("\n\n").append("Search Document = ").append(searchDocument);
         
-        
-        
 
         try {
-            getIndex().indexDocument(searchDocument);
+            getIndex().add(searchDocument);
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }

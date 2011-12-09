@@ -22,7 +22,7 @@ import com.google.api.client.util.Key;
  */
 public class CalendarUrl extends GoogleUrl {
 
-  private static final String ROOT_URL = "https://www.google.com/calendar/feeds";
+  private static final String ROOT_URL = "https://sites.google.com/feeds/";
   
   public static final String getRootUrl() {
       return ROOT_URL;
