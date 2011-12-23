@@ -1,0 +1,10 @@
+----------------------------------------------------------------
+Fri Dec 09 20:32:35 PST 2011:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-0134-263e-7785-00000a727d88 
+on database directory /tmp/WikiDB  with class loader sun.misc.Launcher$AppClassLoader@5ab8df17 
+Loaded from file:/usr/local/google/opengitclients/arjunsatyapal/trunk/java_prerequisites/java-jars/apache-derby/db-derby-10.8.2.2-bin/lib/derby.jar
+java.vendor=Google Inc.
+java.runtime.version=1.6.0-google-v4-55908-24403953
+user.dir=/usr/local/google/opengitclients/arjunsatyapal/trunk/practice/java/wikipedia
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
