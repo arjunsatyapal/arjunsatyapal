@@ -1,0 +1,25 @@
+<html>
+<head>
+<script type="text/javascript">
+	function addDebug(msg) {
+		var log = document.getElementById("debuglog");
+		
+		if (!log) {
+			log = document.createElement("div");
+			log.id = "debuglog";
+			log.innerHTML = "<h1> Debug Log</h1>";
+			document.body.appendChild(log);
+		}
+	}
+</script>
+</head>
+<body>
+
+	<h1>My First Web Page</h1>
+	<p id="demo">This is a paragraph.</p>
+
+	<button type="button" onclick="addDebug(Some message)">Display Date</button>
+
+</body>
+</html>
+
