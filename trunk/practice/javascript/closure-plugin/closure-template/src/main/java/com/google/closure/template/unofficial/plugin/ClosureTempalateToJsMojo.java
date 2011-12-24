@@ -67,8 +67,6 @@ public class ClosureTempalateToJsMojo extends AbstractMojo {
     
     
     private void compileSoy(String srcSoyPath, String destJsAbsPath) {
-        String soyFileName = FilenameUtils.getName(srcSoyPath); 
-        
         String soyDestDir = FilenameUtils.getPrefix(destJsAbsPath) + FilenameUtils.getPath(destJsAbsPath);
         File dir = new File(soyDestDir);
         

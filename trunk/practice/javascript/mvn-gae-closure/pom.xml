@@ -114,6 +114,17 @@
       <version>${gae.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <!--
+      Unoffical Google Closure Plugin.
+      In case it errors out, checkout and do mvn install for the Unoffical Plugin Project.
+    -->
+    <dependency>
+      <groupId>com.google</groupId>
+      <artifactId>closure.template.unofficial.plugin</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -131,23 +142,6 @@
         <version>2.0-alpha-4</version>
         <extensions>true</extensions>
       </plugin>
-
-      <!-- plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>2.1-beta-1</version>
-        <configuration>
-        <webResources>
-        <resource>
-        <directory>src/main/webapp</directory>
-        <filtering>true</filtering>
-        <includes>
-        <include>**/appengine-web.xml</include>
-        </includes>
-        </resource>
-        </webResources>
-        </configuration>
-        </plugin -->
 
       <!--
         The actual maven-gae-plugin. Type "mvn gae:run" to run project,
@@ -184,8 +178,32 @@
       </plugin>
 
       <!--
-        Plugin for handling Google Clousre library.
+        First compiling Soy to JS using Unoffical Closure Plugin.
       -->
+      <plugin>
+        <groupId>com.google</groupId>
+        <artifactId>closure.template.unofficial.plugin</artifactId>
+        <version>1.0-SNAPSHOT</version>
+
+        <executions>
+          <execution>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>closure-template</goal>
+            </goals>
+            <configuration>
+              <srcDir>src/main/webapp</srcDir>
+              <destDir>target/generated/</destDir>
+              <soyToJsSrcCompilerDir>${closure.template.compiler.dir}</soyToJsSrcCompilerDir>
+            </configuration>
+          </execution>
+        </executions>
+
+      </plugin>
+
+      <!-- 
+        Now handling all the JS for Closure.
+       -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
@@ -205,8 +223,8 @@
         <executions>
           <execution>
             <id>write-deps</id>
-            <phase>prepare-package</phase>
-            <goals>
+<!--             <phase>prepare-package</phase>
+ -->            <goals>
               <goal>war</goal>
             </goals>
             <configuration>
@@ -219,7 +237,8 @@
           </execution>
           <execution>
             <id>default-war</id>
-            <phase>package</phase>
+            <!-- <phase>package</phase>
+            -->
             <goals>
               <goal>war</goal>
             </goals>
@@ -249,13 +268,13 @@
               <!-- We aren't using Python anymore; if you've followed the instructions from Google,
                 gjslint should be runnable from the command line. -->
               <executable>gjslint</executable>
-              <workingDirectory>${project.build.directory}/${project.build.finalName}</workingDirectory>
+              <!-- <workingDirectory>${project.build.directory}/${project.build.finalName}</workingDirectory> -->
               <arguments>
                 <!-- Set your arguments here -->
                 <argument>--strict</argument>
                 <argument>-r</argument>
                 <!-- Each source file in this directory will be checked. -->
-                <argument>js/scottlogic</argument>
+                <argument>${js.dir}</argument>
               </arguments>
             </configuration>
           </execution>
@@ -284,7 +303,8 @@
                   including any dependencies that may have been pulled in.
                   Everything in this directory will be compiled. -->
                 <argument>--root=${closure.builder.dir}</argument>
-                <argument>--root=${basedir}/src/main/webapp/js</argument>
+                <argument>--root=${basedir}/src/main/webapp</argument>
+                <argument>--root=${generated.js.dir}</argument>
                 <argument>--namespace="goog.light"</argument>
                 <argument>--output_mode=compiled</argument>
                 <argument>--compiler_flags="--compilation_level=WHITESPACE_ONLY"</argument>
@@ -337,6 +357,9 @@
     -->
     <closure.builder.dir>/Users/arjuns/google-closure/closure-library/closure-library-20111110-r1376</closure.builder.dir>
     <closure.compiler.dir>/Users/arjuns/google-closure/closure-compiler/r1592/compiler-20111114</closure.compiler.dir>
+    <closure.template.compiler.dir>/Users/arjuns/google-closure/closure-templates/closure-templates-for-javascript-2011-22-12</closure.template.compiler.dir>
+    <js.dir>${basedir}/src/main/webapp/learnclosure/</js.dir>
+    <generated.js.dir>${basedir}/target/generated</generated.js.dir>
   </properties>
 
   <profiles>
