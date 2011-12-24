@@ -1,6 +1,7 @@
 package com.google.closure.template.unofficial.plugin;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Collection;
 
@@ -18,7 +19,7 @@ import com.google.common.io.CharStreams;
  * 
  * @goal closure-linter
  */
-public class ClosureTempalateToJsMojo extends AbstractMojo {
+public class ClosureLinterMojo extends AbstractMojo {
     /**
      * Source folder which will be traversed recursively for all JS for GJSLint
      * Checks.
@@ -49,15 +50,12 @@ public class ClosureTempalateToJsMojo extends AbstractMojo {
 
         getLog().info("Executing command = " + cmd);
         try {
-            Process process = Runtime.getRuntime().exec(cmd);
-            process.waitFor();
+            Process child = Runtime.getRuntime().exec(cmd);
+            child.waitFor();
 
-            int exitCode = process.exitValue();
+            int exitCode = child.exitValue();
             if (exitCode != 0) {
-                String exitString = CharStreams.toString(new InputStreamReader(
-                        process.getInputStream()));
-                getLog().info("Lint Checks failed : \n" + exitString);
-                System.exit(1);
+                handleUnsuccessfulExit(child);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -82,5 +80,11 @@ public class ClosureTempalateToJsMojo extends AbstractMojo {
         File path = new File(currDir.getAbsolutePath(), providedName);
 
         return FilenameUtils.normalize(path.getAbsolutePath());
+    }
+    
+    private void handleUnsuccessfulExit(Process child) throws IOException {
+      String errStream = CharStreams.toString(new InputStreamReader(child.getErrorStream()));
+      getLog().info("Failed with following error message : \n" + errStream);
+      System.exit(child.exitValue());
     }
 }
