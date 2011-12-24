@@ -2,6 +2,7 @@ package com.google.closure.template.unofficial.plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
@@ -11,6 +12,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.io.CharStreams;
 
 /**
  * Used for compile Soy Templates to JS source.
@@ -87,8 +89,13 @@ public class ClosureTempalateToJsMojo extends AbstractMojo {
 
         getLog().info("Executing command = " + cmd);
         try {
-            Runtime.getRuntime().exec(cmd);
-        } catch (IOException e) {
+            Process child = Runtime.getRuntime().exec(cmd);
+            child.waitFor();
+            
+            if (child.exitValue() != 0) {
+              handleUnsuccessfulExit(child);
+            }
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -129,5 +136,11 @@ public class ClosureTempalateToJsMojo extends AbstractMojo {
         String parentDirPath = parent + "/";
         
         return absoluteFileName.replaceFirst(parentDirPath, "");
+    }
+    
+    private void handleUnsuccessfulExit(Process child) throws IOException {
+      String errStream = CharStreams.toString(new InputStreamReader(child.getErrorStream()));
+      getLog().info("Failed with following error message : \n" + errStream);
+      System.exit(child.exitValue());
     }
 }
