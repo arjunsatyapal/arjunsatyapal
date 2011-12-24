@@ -1,7 +1,7 @@
 package com.google.closure.template.unofficial.plugin;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
@@ -11,6 +11,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.io.CharStreams;
 
 /**
  * Used for compile Soy Templates to JS source.
@@ -19,7 +20,8 @@ import com.google.common.base.Strings;
  */
 public class ClosureTempalateToJsMojo extends AbstractMojo {
     /**
-     * Source folder which will be traversed recursively for all JS for GJSLint Checks.
+     * Source folder which will be traversed recursively for all JS for GJSLint
+     * Checks.
      * 
      * @parameter
      */
@@ -31,8 +33,6 @@ public class ClosureTempalateToJsMojo extends AbstractMojo {
 
         String srcPath = getFileName(srcDir);
 
-        StringBuilder stringBuilder = new StringBuilder();
-
         String[] extensions = { "js" };
         Collection<File> fileList = FileUtils.listFiles(new File(srcPath),
                 extensions, true);
@@ -41,16 +41,25 @@ public class ClosureTempalateToJsMojo extends AbstractMojo {
             gjsLint(currFile.getAbsolutePath());
         }
 
-        getLog().info(stringBuilder.toString());
+        getLog().info("All lint checks passed.");
     }
 
     private void gjsLint(String srcDir) {
-        String cmd = "gjslint -r --strict " + srcDir;
+        String cmd = "/usr/local/bin/gjslint -r --strict " + srcDir;
 
         getLog().info("Executing command = " + cmd);
         try {
-            Runtime.getRuntime().exec(cmd);
-        } catch (IOException e) {
+            Process process = Runtime.getRuntime().exec(cmd);
+            process.waitFor();
+
+            int exitCode = process.exitValue();
+            if (exitCode != 0) {
+                String exitString = CharStreams.toString(new InputStreamReader(
+                        process.getInputStream()));
+                getLog().info("Lint Checks failed : \n" + exitString);
+                System.exit(1);
+            }
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
