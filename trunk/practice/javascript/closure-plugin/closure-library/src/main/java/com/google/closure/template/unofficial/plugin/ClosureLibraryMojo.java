@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -13,6 +14,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.google.common.io.CharStreams;
 
 /**
@@ -50,6 +52,13 @@ public class ClosureLibraryMojo extends AbstractMojo {
   private String closureLibrary;
 
   /**
+   * Location of closure templates.
+   * 
+   * @parameter
+   */
+  private String closureTemplatesLibrary;
+
+  /**
    * Ouput mode
    * 
    * @parameter
@@ -64,10 +73,10 @@ public class ClosureLibraryMojo extends AbstractMojo {
   private String namespace;
 
   // Class variables.
+  private List<String> rootList = null;
   private String cwd;
   private String closureLibDir;
-  private String destClosureJsDir;
-  private String destGeneratedJsDir;
+  private String closureTemplatesLibDir = null;
 
   public void execute() throws MojoExecutionException {
     cwd = FilenameUtils.normalizeNoEndSeparator(System.getProperty("user.dir")) + "/";
@@ -75,15 +84,27 @@ public class ClosureLibraryMojo extends AbstractMojo {
     checkArgument(!Strings.isNullOrEmpty(closureLibrary), "closureLibrary is not set.");
     closureLibDir = getAbsoluteFilePath(closureLibrary);
 
+    if (!Strings.isNullOrEmpty(closureTemplatesLibrary)) {
+      checkArgument(closureTemplatesLibrary.startsWith("/"));
+      closureTemplatesLibDir = getAbsoluteFilePath(closureTemplatesLibrary);
+    }
+
     OutputMode oMode = OutputMode.getOutputModeByMode(outputMode);
 
-    checkArgument(roots.length >= 2, "closureLibrary and root path needs to be present");
+    checkArgument(roots.length >= 1, "closureLibrary and root path needs to be present");
     for (String currRoot : roots) {
       checkArgument(currRoot.startsWith("/"), "All roots should be absolute path.");
 
-      if (!getAbsoluteFilePath(currRoot).startsWith(closureLibDir)) {
-        checkArgument(currRoot.startsWith(cwd), "all roots should be child of Current working dir.");
+      String normalizedRoot = getAbsoluteFilePath(currRoot);
+
+      if (normalizedRoot.startsWith(closureLibDir)
+          || (closureTemplatesLibDir != null && normalizedRoot.startsWith(closureTemplatesLibDir))
+          || normalizedRoot.startsWith(cwd)) {
+        continue;
       }
+
+      throw new IllegalArgumentException(
+          "all roots should be child of Current working dir. Invalid root : " + currRoot);
     }
 
     checkArgument(!Strings.isNullOrEmpty(destDir), "destDir is not set.");
@@ -98,6 +119,13 @@ public class ClosureLibraryMojo extends AbstractMojo {
 
     checkArgument(!Strings.isNullOrEmpty(namespace), "namespace is not set.");
 
+    
+    rootList = Lists.newArrayList(roots);
+    rootList.add(closureLibDir);
+    if(closureTemplatesLibDir != null) {
+      rootList.add(closureTemplatesLibDir);
+    }
+    
     calculateDependency(oMode);
   }
 
@@ -109,7 +137,7 @@ public class ClosureLibraryMojo extends AbstractMojo {
 
     StringBuilder stringBuilder = new StringBuilder(closureBuilderPath);
 
-    for (String currRoot : roots) {
+    for (String currRoot : rootList) {
       stringBuilder.append(" --root=").append(getAbsoluteFilePath(currRoot));
     }
 
@@ -175,7 +203,7 @@ public class ClosureLibraryMojo extends AbstractMojo {
   }
 
   private String getDestPath(String currFilePath, String destDirPath) {
-    for (String currRoot : roots) {
+    for (String currRoot : rootList) {
       String normalizedRoot = getAbsoluteFilePath(currRoot);
 
       if (currFilePath.startsWith(normalizedRoot)) {
