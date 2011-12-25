@@ -70,7 +70,7 @@ public class ClosureLibraryMojo extends AbstractMojo {
    * 
    * @parameter
    */
-  private String namespace;
+  private String[] namespaces;
 
   // Class variables.
   private List<String> rootList = null;
@@ -117,15 +117,17 @@ public class ClosureLibraryMojo extends AbstractMojo {
           "For OutputMode=Script/Compile, destFileName should be set.");
     }
 
-    checkArgument(!Strings.isNullOrEmpty(namespace), "namespace is not set.");
+    checkArgument(namespaces != null, "namespace is not set.");
+    for (String currNameSpace : namespaces) {
+      checkArgument(!Strings.isNullOrEmpty(currNameSpace), "nameSpace cannot be null.");
+    }
 
-    
     rootList = Lists.newArrayList(roots);
     rootList.add(closureLibDir);
-    if(closureTemplatesLibDir != null) {
+    if (closureTemplatesLibDir != null) {
       rootList.add(closureTemplatesLibDir);
     }
-    
+
     calculateDependency(oMode);
   }
 
@@ -141,8 +143,13 @@ public class ClosureLibraryMojo extends AbstractMojo {
       stringBuilder.append(" --root=").append(getAbsoluteFilePath(currRoot));
     }
 
-    stringBuilder.append("  --namespace=").append(namespace).append(" --output_mode=")
-        .append(oMode.get());
+    
+    
+    for (String currNameSpace : namespaces) {
+      stringBuilder.append(" --namespace=").append(currNameSpace);
+    }
+    
+    stringBuilder.append(" --output_mode=").append(oMode.get());
 
     switch (oMode) {
       case List:
@@ -187,6 +194,10 @@ public class ClosureLibraryMojo extends AbstractMojo {
 
       for (String currFilePath : files) {
         String destAbsolutePath = getDestPath(currFilePath, destDirPath);
+        
+        if (currFilePath.equals(destAbsolutePath)) {
+          continue;
+        }
         getLog().info("Copying [" + currFilePath + "] to [" + destAbsolutePath + "]");
         FileUtils.copyFile(new File(currFilePath), new File(destAbsolutePath), true);
       }
@@ -205,10 +216,10 @@ public class ClosureLibraryMojo extends AbstractMojo {
   private String getDestPath(String currFilePath, String destDirPath) {
     for (String currRoot : rootList) {
       String normalizedRoot = getAbsoluteFilePath(currRoot);
-
+     
       if (currFilePath.startsWith(normalizedRoot)) {
         File tempFile = new File(destDirPath, currFilePath.replaceFirst(normalizedRoot, ""));
-
+//        getLog().info("\nnormalizedRoot = " + normalizedRoot + "\ncurrFilePath = " + currFilePath + "\ndestDirPath = " + destDirPath);
         return tempFile.getAbsolutePath();
       }
     }
@@ -240,12 +251,6 @@ public class ClosureLibraryMojo extends AbstractMojo {
     File path = new File(currDir.getAbsolutePath(), providedName);
 
     return FilenameUtils.normalizeNoEndSeparator(path.getAbsolutePath());
-  }
-
-  private String getRelativeFilePath(String parent, String absoluteFileName) {
-    String parentDirPath = parent + "/";
-
-    return absoluteFileName.replaceFirst(parentDirPath, "");
   }
 
   private static enum OutputMode {

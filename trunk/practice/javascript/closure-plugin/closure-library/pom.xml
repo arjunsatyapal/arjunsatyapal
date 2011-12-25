@@ -75,12 +75,14 @@
             <param>${basedir}/src/main/scripts</param>
             <param>${basedir}/target/generated/soy</param>
           </roots>
-          <destDir>target/generated/soy/</destDir>
+          <destDir>target/generated/js/</destDir>
           <closureLibrary>${closure.lib.dir}</closureLibrary>
           <closureTemplatesLibrary>${closure.templates.lib.dir}</closureTemplatesLibrary>
           <outputMode>list</outputMode>
-
-          <namespace>goog.light</namespace>
+          <namespaces>
+            <param>goog.light</param>
+            <param>goog.light.templates</param>
+          </namespaces>
         </configuration>
       </plugin>
     </plugins>
