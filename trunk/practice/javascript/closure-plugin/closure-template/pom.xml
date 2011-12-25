@@ -51,7 +51,7 @@
         <artifactId>closure.templates.unofficial.plugin</artifactId>
         <version>1.0-SNAPSHOT</version>
         <configuration>
-          <srcDir>src/main/webapp</srcDir>
+          <srcDir>src/main/scripts</srcDir>
           <destDir>target/generated/</destDir>
           <soyToJsSrcCompilerDir>${soyJsCompiler.dir}</soyToJsSrcCompilerDir>
         </configuration>

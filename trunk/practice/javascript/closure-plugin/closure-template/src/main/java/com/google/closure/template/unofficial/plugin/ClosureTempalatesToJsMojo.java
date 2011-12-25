@@ -79,7 +79,7 @@ public class ClosureTempalatesToJsMojo extends AbstractMojo {
         
         String cmd = new StringBuilder("java -jar ")
                 .append(FilenameUtils.normalizeNoEndSeparator(soyToJsSrcCompilerDir))
-                .append("/closure-templates/SoyToJsSrcCompiler.jar")
+                .append("/SoyToJsSrcCompiler.jar")
                 .append(" --outputPathFormat ")
                 .append(destJsAbsPath)
                 .append(".js")
