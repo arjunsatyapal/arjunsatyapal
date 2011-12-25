@@ -83,7 +83,8 @@ public class ClosureLinterMojo extends AbstractMojo {
     }
     
     private void handleUnsuccessfulExit(Process child) throws IOException {
-      String errStream = CharStreams.toString(new InputStreamReader(child.getErrorStream()));
+      // Stragely, lint does not redirect stream to error.
+      String errStream = CharStreams.toString(new InputStreamReader(child.getInputStream()));
       getLog().info("Failed with following error message : \n" + errStream);
       System.exit(child.exitValue());
     }

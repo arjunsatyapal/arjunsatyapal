@@ -48,7 +48,7 @@
         <artifactId>closure.linter.unofficial.plugin</artifactId>
         <version>1.0-SNAPSHOT</version>
         <configuration>
-          <srcDir>src/main/webapp</srcDir>
+          <srcDir>src/main/scripts</srcDir>
         </configuration>
       </plugin>
     </plugins>
