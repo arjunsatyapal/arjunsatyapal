@@ -1,0 +1,22 @@
+<html>
+<head>
+<title>Example: Hello World</title>
+</head>
+<body>
+  <div id="hello"></div>
+    <script type="text/javascript">
+/*         var CLOSURE_NO_DEPS = true; */
+        var CLOSURE_BASE_PATH = "../../../closure/"; //this is the directory where I ran calcdeps.py
+    </script>
+  
+  <script src="../../../closure/goog/base.js"></script>
+  <script src="../../../closure/soyutils_usegoog.js"></script>
+  
+  <script src="../soy/hello.soy.js"></script>
+  <script src="../js/hello.js"></script>
+  <script>
+        goog.light.sayHello('Hello World!');
+    </script>
+</body>
+</html>
+

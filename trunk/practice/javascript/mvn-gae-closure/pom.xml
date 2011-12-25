@@ -116,15 +116,26 @@
     </dependency>
 
     <!--
-      Unoffical Google Closure Plugin.
-      In case it errors out, checkout and do mvn install for the Unoffical Plugin Project.
+      Unoffical Google Closure Plugins.
+      In case it errors out, checkout and do mvn install for the Unoffical Plugins.
     -->
     <dependency>
       <groupId>com.google</groupId>
-      <artifactId>closure.template.unofficial.plugin</artifactId>
+      <artifactId>closure.linter.unofficial.plugin</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.google</groupId>
+      <artifactId>closure.templates.unofficial.plugin</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google</groupId>
+      <artifactId>closure.library.unofficial.plugin</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -178,32 +189,84 @@
       </plugin>
 
       <!--
-        First compiling Soy to JS using Unoffical Closure Plugin.
+        First performing Lint checks using Unoffical Closure-Linter Plugin.
+        At present we are doing lint checks only for User Generated Scripts.
       -->
       <plugin>
         <groupId>com.google</groupId>
-        <artifactId>closure.template.unofficial.plugin</artifactId>
+        <artifactId>closure.linter.unofficial.plugin</artifactId>
         <version>1.0-SNAPSHOT</version>
 
         <executions>
           <execution>
             <phase>prepare-package</phase>
             <goals>
-              <goal>closure-template</goal>
+              <goal>closure-linter</goal>
             </goals>
             <configuration>
-              <srcDir>src/main/webapp</srcDir>
-              <destDir>target/generated/</destDir>
-              <soyToJsSrcCompilerDir>${closure.template.compiler.dir}</soyToJsSrcCompilerDir>
+              <srcDir>src/main/scripts</srcDir>
             </configuration>
           </execution>
         </executions>
-
       </plugin>
 
-      <!-- 
+      <!--
+        Then compiling Soy to JS using Unoffical Closure-Templates Plugin.
+        Output is sent to destDir which in this case is target/generated.
+      -->
+      <plugin>
+        <groupId>com.google</groupId>
+        <artifactId>closure.templates.unofficial.plugin</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>closure-templates</goal>
+            </goals>
+            <configuration>
+              <srcDir>src/main/scripts</srcDir>
+              <destDir>target/generated/soy</destDir>
+              <soyToJsSrcCompilerDir>${closure.templates.lib.dir}</soyToJsSrcCompilerDir>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!--
+        Now calculating dependencey for all JS.
+      -->
+      <plugin>
+        <groupId>com.google</groupId>
+        <artifactId>closure.library.unofficial.plugin</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <executions>
+          <execution>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>closure-library</goal>
+            </goals>
+            <configuration>
+              <roots>
+                <param>${basedir}/src/main/scripts</param>
+                <param>${basedir}/target/generated/soy</param>
+              </roots>
+              <destDir>target/generated/js/</destDir>
+              <closureLibrary>${closure.lib.dir}</closureLibrary>
+              <closureTemplatesLibrary>${closure.templates.lib.dir}</closureTemplatesLibrary>
+              <outputMode>list</outputMode>
+              <namespaces>
+                <param>goog.light</param>
+                <param>goog.light.templates</param>
+              </namespaces>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!--
         Now handling all the JS for Closure.
-       -->
+      -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
@@ -217,14 +280,21 @@
                 <include>**/appengine-web.xml</include>
               </includes>
             </resource>
+
+            <resource>
+              <directory>target/generated/js</directory>
+            </resource>
+            <resource>
+              <directory>target/generated/soy</directory>
+            </resource>
           </webResources>
           <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
         </configuration>
         <executions>
           <execution>
             <id>write-deps</id>
-<!--             <phase>prepare-package</phase>
- -->            <goals>
+            <phase>prepare-package</phase>
+            <goals>
               <goal>war</goal>
             </goals>
             <configuration>
@@ -232,88 +302,7 @@
               <warSourceIncludes>**/*.js</warSourceIncludes>
               <dependencyWarIncludes>**/*.js</dependencyWarIncludes>
               <!-- Exclude everything from the final WAR file, as we won't use it -->
-              <packagingExcludes>**/*</packagingExcludes>
-            </configuration>
-          </execution>
-          <execution>
-            <id>default-war</id>
-            <!-- <phase>package</phase>
-            -->
-            <goals>
-              <goal>war</goal>
-            </goals>
-            <configuration>
-              <!-- This is the final WAR package.
-                Exclude all the JavaScript sources except the compiled file -->
-              <packagingExcludes>js/*/**/*.js</packagingExcludes>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.1.1</version>
-        <executions>
-          <!--
-            first passing js through gjslint.
-          -->
-          <execution>
-            <id>check-style</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <!-- We aren't using Python anymore; if you've followed the instructions from Google,
-                gjslint should be runnable from the command line. -->
-              <executable>gjslint</executable>
-              <!-- <workingDirectory>${project.build.directory}/${project.build.finalName}</workingDirectory> -->
-              <arguments>
-                <!-- Set your arguments here -->
-                <argument>--strict</argument>
-                <argument>-r</argument>
-                <!-- Each source file in this directory will be checked. -->
-                <argument>${js.dir}</argument>
-              </arguments>
-            </configuration>
-          </execution>
-          <!--
-            Now compiling the files.
-          -->
-          <execution>
-            <id>resolve-and-compile-js</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <!-- We're running a python script, so the executable is python. -->
-              <executable>python</executable>
-              <workingDirectory>${project.build.directory}/${project.build.finalName}</workingDirectory>
-              <!-- Here we define the arguments to the Python execution.
-                This includes the location of closure-builder,
-                and any other arguments to the Python script -->
-              <arguments>
-                <!-- Remember that you're in the BUILD directory.
-                  Make sure this points to the correct place. -->
-                <argument>${closure.builder.dir}/closure/bin/build/closurebuilder.py</argument>
-
-                <!-- Ensure this points to the root of all your JS files,
-                  including any dependencies that may have been pulled in.
-                  Everything in this directory will be compiled. -->
-                <argument>--root=${closure.builder.dir}</argument>
-                <argument>--root=${basedir}/src/main/webapp</argument>
-                <argument>--root=${generated.js.dir}</argument>
-                <argument>--namespace="goog.light"</argument>
-                <argument>--output_mode=compiled</argument>
-                <argument>--compiler_flags="--compilation_level=WHITESPACE_ONLY"</argument>
-
-                <!-- As with closure-builder, ensure that this points to
-                  the Compiler .jar file from the build directory. -->
-                <argument>--compiler_jar=${closure.compiler.dir}/compiler.jar</argument>
-                <argument>--output_file=compiled.js</argument>
-              </arguments>
+              <!-- <packagingExcludes>**/*</packagingExcludes> -->
             </configuration>
           </execution>
         </executions>
@@ -357,7 +346,8 @@
     -->
     <closure.builder.dir>/Users/arjuns/google-closure/closure-library/closure-library-20111110-r1376</closure.builder.dir>
     <closure.compiler.dir>/Users/arjuns/google-closure/closure-compiler/r1592/compiler-20111114</closure.compiler.dir>
-    <closure.template.compiler.dir>/Users/arjuns/google-closure/closure-templates/closure-templates-for-javascript-2011-22-12</closure.template.compiler.dir>
+    <closure.templates.lib.dir>/Users/arjuns/google-closure/closure-templates/closure-templates-for-javascript-2011-22-12</closure.templates.lib.dir>
+    <closure.lib.dir>/Users/arjuns/google-closure/closure-library/closure-library-20111110-r1376</closure.lib.dir>
     <js.dir>${basedir}/src/main/webapp/learnclosure/</js.dir>
     <generated.js.dir>${basedir}/target/generated</generated.js.dir>
   </properties>
