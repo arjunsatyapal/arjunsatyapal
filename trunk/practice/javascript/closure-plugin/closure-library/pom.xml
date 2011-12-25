@@ -32,7 +32,7 @@
     -->
     <dependency>
       <groupId>com.google</groupId>
-      <artifactId>closure.template.unofficial.plugin</artifactId>
+      <artifactId>closure.templates.unofficial.plugin</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
@@ -57,7 +57,7 @@
       -->
       <plugin>
         <groupId>com.google</groupId>
-        <artifactId>closure.template.unofficial.plugin</artifactId>
+        <artifactId>closure.templates.unofficial.plugin</artifactId>
         <version>1.0-SNAPSHOT</version>
         <configuration>
           <srcDir>src/main/scripts</srcDir>
