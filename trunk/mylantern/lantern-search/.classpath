@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="credentials"/>
+	<classpathentry kind="src" path="resources"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/guava-gwt-10.0.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-oauth-client-extensions-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-oauth-client-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-extensions-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-http-client-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-extensions-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/google-api-client-1.6.0-beta.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdata-client-1.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdata-client-meta-1.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdata-sites-2.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdata-sites-meta-2.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdata-spreadsheet-3.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdata-spreadsheet-meta-3.0.jar"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdata-media-1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="war/WEB-INF/lib/guava-10.0.1.jar" sourcepath="/usr/local/google/opengitclients/arjunsatyapal/trunk/java_prerequisites/java-jars/guava/guava-10.0.1/guava-10.0.1-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gdata-core-1.0.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/smartgwt.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/smartgwt-skins.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/objectify-3.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jdom-1.1.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/softwares/appengine/appengine-java-sdk-1.6.1-prerelease/lib/impl/appengine-api.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/softwares/appengine/appengine-java-sdk-1.6.1-prerelease/lib/impl/appengine-api-labs.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/softwares/appengine/appengine-java-sdk-1.6.1-prerelease/lib/impl/appengine-api-stubs.jar"/>
+	<classpathentry kind="lib" path="/usr/local/google/softwares/appengine/appengine-java-sdk-1.6.1-prerelease/lib/testing/appengine-testing.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jackson-all-1.8.6.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jsr305.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/serializer.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/xml-apis.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/resolver.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/xalan-2.7.1.jar"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>
