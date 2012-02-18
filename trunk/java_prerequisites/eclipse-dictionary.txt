@@ -27,3 +27,4 @@ filesystem
 apache
 credentials
 credential
+injectable
