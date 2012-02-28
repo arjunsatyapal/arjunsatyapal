@@ -24,8 +24,11 @@ public class IndexServlet extends HttpServlet {
       builder.append("<br> Email = " + user.getEmail());
       builder.append("<br> FederatedIdentity = " + user.getFederatedIdentity());
       builder.append("<br> NickName = " + user.getNickname());
-      builder.append("<br> UserId = " + user.getUserId() + "<br>");
+      builder.append("<br> UserId = " + user.getUserId());
+      builder.append("<br>");
       
+      String logoutURL = userService.createLogoutURL(req.getRequestURI());
+      builder.append("<a href=\"" + logoutURL + "\"> Sign Out</a>"); 
       resp.setContentType("text/html");
       resp.getWriter().println(builder.toString());
     } else {
