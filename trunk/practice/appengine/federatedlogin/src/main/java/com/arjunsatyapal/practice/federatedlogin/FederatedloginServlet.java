@@ -44,11 +44,13 @@ public class FederatedloginServlet extends HttpServlet {
     PrintWriter out = resp.getWriter();
 
     if (user != null) {
-      stringBuilder.append("<br>UserId = " + user.getUserId());
-      stringBuilder.append("<br>Email = " + user.getEmail());
+      
       stringBuilder.append("<br>AuthDomain = " + user.getAuthDomain());
+      stringBuilder.append("<br>Email = " + user.getEmail());
       stringBuilder.append("<br>FederatedIdentity = " + user.getFederatedIdentity());
-      stringBuilder.append("<br>NickName = " + user.getNickname() + "<br>");
+      stringBuilder.append("<br>NickName = " + user.getNickname());
+      stringBuilder.append("<br>UserId = " + user.getUserId());
+      stringBuilder.append("<br>");
 
       out.println(stringBuilder.toString());
       out
@@ -67,7 +69,7 @@ public class FederatedloginServlet extends HttpServlet {
         builder.append(", requestURI : ").append(req.getRequestURI());
         builder.append(", attributes : ").append(attributes);
         builder.append(", loginUrl : ").append(loginUrl);
-        log.severe("Hello : " + builder.toString());
+        log.info("Hello : " + builder.toString());
         out.println("[<a href=\"" + loginUrl + "\">" + providerName + "</a>] ");
       }
     }
