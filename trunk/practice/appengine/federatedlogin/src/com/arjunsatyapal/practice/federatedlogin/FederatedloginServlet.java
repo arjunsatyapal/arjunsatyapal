@@ -19,7 +19,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 @SuppressWarnings("serial")
 public class FederatedloginServlet extends HttpServlet {
   private static Logger log = Logger.getLogger(FederatedloginServlet.class
-    .getName());
+      .getName());
 
   private static final Map<String, String> openIdProviders;
   static {
@@ -33,27 +33,35 @@ public class FederatedloginServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp)
-    throws IOException {
+      throws IOException {
     UserService userService = UserServiceFactory.getUserService();
     User user = userService.getCurrentUser(); // or req.getUserPrincipal()
     Set<String> attributes = new HashSet<String>();
 
     resp.setContentType("text/html");
+    
+    StringBuilder stringBuilder = new StringBuilder();
     PrintWriter out = resp.getWriter();
 
     if (user != null) {
-      out.println("Hello <i>" + user.getNickname() + "</i>!");
+      stringBuilder.append("<br>UserId = " + user.getUserId());
+      stringBuilder.append("<br>Email = " + user.getEmail());
+      stringBuilder.append("<br>AuthDomain = " + user.getAuthDomain());
+      stringBuilder.append("<br>FederatedIdentity = " + user.getFederatedIdentity());
+      stringBuilder.append("<br>NickName = " + user.getNickname() + "<br>");
+
+      out.println(stringBuilder.toString());
       out
-        .println("[<a href=\""
-          + userService.createLogoutURL(req.getRequestURI())
-          + "\">sign out</a>]");
+          .println("[<a href=\""
+              + userService.createLogoutURL(req.getRequestURI())
+              + "\">sign out</a>]");
     } else {
       out.println("Hello world123! Sign in at: ");
       for (String providerName : openIdProviders.keySet()) {
         String providerUrl = openIdProviders.get(providerName);
         String loginUrl =
-          userService.createLoginURL(req.getRequestURI(), null, providerUrl,
-            attributes);
+            userService.createLoginURL(req.getRequestURI(), null, providerUrl,
+                attributes);
         StringBuilder builder = new StringBuilder();
         builder.append("providerUrl : ").append(openIdProviders.get(providerName));
         builder.append(", requestURI : ").append(req.getRequestURI());
