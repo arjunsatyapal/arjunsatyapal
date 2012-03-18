@@ -7,7 +7,7 @@
         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   version="2.5">
 
- <servlet>
+  <servlet>
     <servlet-name>OAuthLoginServlet</servlet-name>
     <servlet-class>com.arjunsatyapal.oauth2.login.OAuthLoginServlet</servlet-class>
   </servlet>
@@ -18,11 +18,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>OAuthServlet</servlet-name>
-    <servlet-class>com.arjunsatyapal.oauth2.OAuthServlet</servlet-class>
-  </servlet>
-  
-    <servlet>
     <servlet-name>OAuthLoginCallbackServlet</servlet-name>
     <servlet-class>com.arjunsatyapal.oauth2.login.OAuthLoginCallbackServlet</servlet-class>
   </servlet>
@@ -31,19 +26,4 @@
     <servlet-name>OAuthLoginCallbackServlet</servlet-name>
     <url-pattern>/oauthLoginCallback</url-pattern>
   </servlet-mapping>
-
-<!--   <servlet-mapping>
-    <servlet-name>OAuthServlet</servlet-name>
-    <url-pattern>/oauth</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>OAuthCallbackServlet</servlet-name>
-    <servlet-class>com.arjunsatyapal.oauth2.OAuthCallbackServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>OAuthCallbackServlet</servlet-name>
-    <url-pattern>/oauthCallback</url-pattern>
-  </servlet-mapping> -->
 </web-app>

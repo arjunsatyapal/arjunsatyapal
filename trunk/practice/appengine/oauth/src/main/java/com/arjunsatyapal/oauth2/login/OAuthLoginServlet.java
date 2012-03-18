@@ -42,8 +42,8 @@ public class OAuthLoginServlet extends HttpServlet {
   public static final String TOKEN_SERVER_URL = "https://accounts.google.com/o/oauth2/token";
   public static final String AUTHORIZATION_SERVER_URL =
       "https://accounts.google.com/o/oauth2/auth";
-  public static final String CLIENT_ID = "client.id";
-  public static final String CLIENT_SECRET = "client.secret";
+  public static final String CLIENT_ID = "clientid";
+  public static final String CLIENT_SECRET = "clientsecret";
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
