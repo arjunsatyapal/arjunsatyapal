@@ -6,24 +6,4 @@
         http://java.sun.com/xml/ns/javaee
         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   version="2.5">
-
-  <servlet>
-    <servlet-name>OAuthLoginServlet</servlet-name>
-    <servlet-class>com.arjunsatyapal.oauth2.login.OAuthLoginServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>OAuthLoginServlet</servlet-name>
-    <url-pattern>/oauthLogin</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>OAuthLoginCallbackServlet</servlet-name>
-    <servlet-class>com.arjunsatyapal.oauth2.login.OAuthLoginCallbackServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>OAuthLoginCallbackServlet</servlet-name>
-    <url-pattern>/oauthLoginCallback</url-pattern>
-  </servlet-mapping>
 </web-app>
