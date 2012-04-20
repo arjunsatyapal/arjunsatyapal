@@ -1,28 +1,25 @@
 package com.arjunsatyapal.jersey;
 
-import javax.ws.rs.Produces;
-
-import javax.ws.rs.GET;
-
-import com.google.inject.Injector;
-
 import java.util.logging.Logger;
-
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-
-//Import statements ommited
-//........
-//...........
+import javax.ws.rs.Produces;
 
 @Path("/module")
 public class ModuleResource {
   Logger log = Logger.getLogger(ModuleResource.class.getName());
-  private Injector injector;
 
   @GET
   @Path("/xml")
   @Produces({"application/json", "text/xml"})
-  public Foo getPlayerByNameInXML() {
+  public String getPlayerByNameInXML() {
+    return "hello";
+  }
+  
+  @GET
+  @Path("/json")
+  @Produces({"application/json", "text/xml"})
+  public Foo getFoo() {
     return new Foo();
   }
 }

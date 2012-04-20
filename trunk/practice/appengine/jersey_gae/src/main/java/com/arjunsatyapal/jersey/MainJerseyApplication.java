@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.ws.rs.core.Application;
 
 public class MainJerseyApplication extends Application {
+  @Override
   public Set<Class<?>> getClasses() {
     Set<Class<?>> set = new HashSet<Class<?>>();
     set.add(ModuleResource.class);

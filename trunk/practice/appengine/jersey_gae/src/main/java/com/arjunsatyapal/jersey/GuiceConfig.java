@@ -13,6 +13,7 @@ import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 public class GuiceConfig extends GuiceServletContextListener {
   Logger log = Logger.getLogger(GuiceConfig.class.getName());
 
+  @Override
   protected Injector getInjector() {
 
     final Map<String, String> params = new HashMap<String, String>();
@@ -25,6 +26,7 @@ public class GuiceConfig extends GuiceServletContextListener {
      * The following line will use MainJerseyApplication.java to define Jersey resources
      */
     params.put("javax.ws.rs.Application", "com.arjunsatyapal.jersey.MainJerseyApplication");
+    params.put("com.sun.jersey.config.feature.DisableWADL", "true");
 
     return Guice.createInjector(
         new ServletModule() {

@@ -8,10 +8,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Foo {
-  /**
-   * 
-   */
-  private static final long serialVersionUID = 1L;
   @XmlAttribute
   int x = 2;
 
