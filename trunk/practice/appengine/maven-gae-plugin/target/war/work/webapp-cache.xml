@@ -8,12 +8,12 @@
           <string>index.jsp</string>
           <string>META-INF/MANIFEST.MF</string>
           <string>WEB-INF/web.xml</string>
-          <string>WEB-INF/classes/log4j.properties</string>
-          <string>WEB-INF/classes/logging.properties</string>
-          <string>WEB-INF/classes/model/Message.class</string>
-          <string>WEB-INF/classes/server/MessageRepository.class</string>
-          <string>WEB-INF/classes/web/ContextInitializer.class</string>
           <string>WEB-INF/classes/web/IndexServlet.class</string>
+          <string>WEB-INF/classes/web/ContextInitializer.class</string>
+          <string>WEB-INF/classes/model/Message.class</string>
+          <string>WEB-INF/classes/logging.properties</string>
+          <string>WEB-INF/classes/server/MessageRepository.class</string>
+          <string>WEB-INF/classes/log4j.properties</string>
           <string>WEB-INF/lib/persistence-api-1.0.jar</string>
           <string>WEB-INF/lib/appengine-api-1.0-sdk-1.6.1.jar</string>
           <string>WEB-INF/lib/objectify-2.2.2.jar</string>
@@ -42,7 +42,7 @@
               <columnNumber>21</columnNumber>
               <source>
                 <modelId>com.google.light:lightapp:1.0-SNAPSHOT</modelId>
-                <location>/Users/arjuns/mvn-gae/lightapp/pom.xml</location>
+                <location>/usr/local/google/opengitclients/arjunsatyapal/trunk/practice/appengine/maven-gae-plugin/pom.xml</location>
               </source>
             </org.apache.maven.model.InputLocation>
           </entry>

@@ -6,8 +6,10 @@ import javax.ws.rs.core.Application;
 
 public class MainJerseyApplication extends Application {
   public Set<Class<?>> getClasses() {
-    Set<Class<?>> s = new HashSet<Class<?>>();
-    s.add(PlayersResource.class);
-    return s;
+    Set<Class<?>> set = new HashSet<Class<?>>();
+    set.add(ModuleResource.class);
+    set.add(JAXBJsonContextResolver.class);
+
+    return set;
   }
 }
