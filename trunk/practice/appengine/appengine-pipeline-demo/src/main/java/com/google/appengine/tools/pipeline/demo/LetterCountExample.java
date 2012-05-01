@@ -29,8 +29,10 @@ import java.util.Map.Entry;
  * @author rudominer@google.com (Mitch Rudominer)
  * 
  */
+@SuppressWarnings({"synthetic-access", "serial"})
 public class LetterCountExample {
 
+  
   public static class LetterCounter extends Job1<SortedMap<Character, Integer>, String> {
     @Override
     public Value<SortedMap<Character, Integer>> run(String text) {

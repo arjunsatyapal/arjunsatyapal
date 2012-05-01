@@ -16,7 +16,7 @@ import com.google.appengine.tools.pipeline.Value;
  * @author rudominer@google.com (Mitch Rudominer)
  */
 public class UserGuideExamples {
-
+  @SuppressWarnings({"serial"})
   public static class ComplexJob extends Job3<Integer, Integer, Integer, Integer> {
     @Override
     public Value<Integer> run(Integer x, Integer y, Integer z) {
@@ -29,21 +29,21 @@ public class UserGuideExamples {
       return u;
     }
   }
-
+  @SuppressWarnings({"serial"})
   public static class DiffJob extends Job2<Integer, Integer, Integer> {
     @Override
     public Value<Integer> run(Integer a, Integer b) {
       return immediate(a - b);
     }
   }
-
+  @SuppressWarnings({"serial"})
   public static class MultJob extends Job2<Integer, Integer, Integer> {
     @Override
     public Value<Integer> run(Integer a, Integer b) {
       return immediate(a * b);
     }
   }
-  
+  @SuppressWarnings({"serial"})
   public static class ExternalAgentJob extends Job1<Integer, String> {
     @Override
     public Value<Integer> run(String userEmail) {
@@ -66,6 +66,7 @@ public class UserGuideExamples {
       return futureCall(new MultJob(), intermediate, oneMoreInt);
     }
 
+    @SuppressWarnings("unused")
     public static void getIntFromUser(String prompt, String userEmail, 
                                                      String promiseHandle) {
       // 1. Send the user an e-mail containing the prompt.
@@ -74,7 +75,7 @@ public class UserGuideExamples {
       // 4. Handler for submit invokes submitPromisedValue(promiseHandle, value)
     }
   }
-
+  @SuppressWarnings({"serial"})
   public static class PromptJob extends Job2<Integer, Integer, String> {
     @Override
     public Value<Integer> run(Integer intermediate, String userEmail) {
@@ -86,7 +87,7 @@ public class UserGuideExamples {
       return oneMoreInt;
     }
   }
-  
+  @SuppressWarnings({"serial"})
   public static class ExampleWaitForJob extends Job0<Void> {
     @Override
     public Value<Void> run() {
@@ -95,7 +96,7 @@ public class UserGuideExamples {
       return null;
     }
   }
-  
+  @SuppressWarnings({"serial"})
   public static class JobA extends Job0<Void> {
     @Override
     public Value<Void> run() {
@@ -104,6 +105,7 @@ public class UserGuideExamples {
     }
   }
   
+  @SuppressWarnings("serial")
   public static class JobB extends Job0<Void> {
     @Override
     public Value<Void> run() {

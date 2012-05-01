@@ -30,6 +30,7 @@ public class GCDExample {
    * Performs the Euclidean algorithm on a pair of non-negative integers (a,b).
    * Returns GCD(a,b)
    */
+  @SuppressWarnings({ "serial" })
   public static class GCDJob extends Job2<Integer, Integer, Integer> {
     @Override
     public Value<Integer> run(Integer a, Integer b) {
@@ -50,12 +51,12 @@ public class GCDExample {
     }
   }
 
-
   /**
    * Performs the Euclidean algorithm on a pair of non-negative integers (a,b)
    * assuming the work has already been done to assure that a<=b Returns the GCD
    * of (a,b)
    */
+  @SuppressWarnings({ "serial" })
   public static class EuclAlgJob extends Job1<Integer, Pair<Integer, Integer>> {
     @Override
     public Value<Integer> run(Pair<Integer, Integer> intPair) {
@@ -77,11 +78,11 @@ public class GCDExample {
     }
   }
 
-
   /**
    * Given two integers a and b returns the pair (a,b) if a<=b else returns the
    * pair (b,a).
    */
+  @SuppressWarnings({ "serial", "unused" })
   public static class OrderIntsJob extends Job2<Pair<Integer, Integer>, Integer, Integer> {
 
     @Override
@@ -98,6 +99,7 @@ public class GCDExample {
   /**
    * Given two integers b and a returns b - a.
    */
+  @SuppressWarnings({ "serial" })
   public static class DiffJob extends Job2<Integer, Integer, Integer> {
     @Override
     public Value<Integer> run(Integer b, Integer a) {
